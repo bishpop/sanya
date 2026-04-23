@@ -8,28 +8,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="./assets/bears_hand.png">
     <style>
-        /* --- CATPPUCCIN MOCHA THEME VARIABLES --- */
+        /* --- ELEGANT FOREST THEME VARIABLES --- */
         :root {
             /* Core Palette */
-            --ctp-base: #1e1e2e;
-            --ctp-mantle: #181825;
-            --ctp-surface0: #313244;
-            --ctp-surface1: #45475a;
-            --ctp-text: #cdd6f4;
-            --ctp-subtext1: #bac2de;
-            --ctp-blue: #89b4fa;
-            --ctp-mauve: #cba6f7;
-            --ctp-green: #a6e3a1;
-            --ctp-red: #f38ba8;
+            --ef-crust: #0a110d;
+            --ef-base: #0f1a14;
+            --ef-mantle: #14251D;
+            --ef-surface0: #192E24;
+            --ef-surface1: #244032;
+            --ef-text: #FDFBF7;
+            --ef-subtext: #8c9e95;
+            --ef-accent: #D4A373;
+            --ef-accent-light: #e8c39e;
+            
+            --ef-red: #a84032;
+            --ef-green: #32a852;
+            --ef-blue: #4c90e6;
 
             /* Mappings */
-            --bg-main: var(--ctp-base);
-            --card-bg: rgba(49, 50, 68, 0.6);
-            --card-border: rgba(108, 112, 134, 0.2);
-            --primary-gradient: linear-gradient(135deg, var(--ctp-blue), var(--ctp-mauve));
-            --text-main: var(--ctp-text);
-            --text-muted: var(--ctp-subtext1);
-            --glow: 0 0 30px rgba(203, 166, 247, 0.25);
+            --bg-main: var(--ef-base);
+            --card-bg: rgba(20, 37, 29, 0.7); /* EF-Mantle mit Transparenz */
+            --card-border: var(--ef-surface1);
+            --primary-gradient: linear-gradient(135deg, var(--ef-accent), var(--ef-accent-light));
+            --text-main: var(--ef-text);
+            --text-muted: var(--ef-subtext);
+            --glow: 0 0 30px rgba(212, 163, 115, 0.25);
         }
 
         /* --- BASIC SETUP --- */
@@ -37,7 +40,7 @@
             margin: 0;
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-main);
-            background-image: radial-gradient(circle at 50% 0%, var(--ctp-mantle) 0%, var(--bg-main) 75%);
+            background-image: radial-gradient(circle at 50% 0%, var(--ef-mantle) 0%, var(--bg-main) 75%);
             color: var(--text-main);
             line-height: 1.6;
             min-height: 100vh;
@@ -73,7 +76,7 @@
         /* Kleine Sterne */
         #stars1 {
             width: 1px; height: 1px; background: transparent;
-            box-shadow: 1744px 322px var(--ctp-subtext1), 1353px 908px var(--ctp-subtext1), 953px 1516px var(--ctp-subtext1), 1657px 1394px var(--ctp-subtext1), 167px 829px var(--ctp-subtext1), 196px 1118px var(--ctp-subtext1), 1703px 1472px var(--ctp-subtext1), 553px 1368px var(--ctp-subtext1), 1203px 1038px var(--ctp-subtext1), 567px 1205px var(--ctp-subtext1), 1506px 40px var(--ctp-subtext1), 1369px 1171px var(--ctp-subtext1), 1344px 231px var(--ctp-subtext1), 313px 1596px var(--ctp-subtext1), 1277px 331px var(--ctp-subtext1), 527px 1422px var(--ctp-subtext1), 1337px 921px var(--ctp-subtext1), 1015px 1362px var(--ctp-subtext1), 81px 1357px var(--ctp-subtext1), 1494px 1504px var(--ctp-subtext1), 1405px 1748px var(--ctp-subtext1), 139px 1425px var(--ctp-subtext1), 341px 1285px var(--ctp-subtext1), 1468px 818px var(--ctp-subtext1), 866px 90px var(--ctp-subtext1), 1707px 1015px var(--ctp-subtext1), 1679px 1002px var(--ctp-subtext1), 246px 1785px var(--ctp-subtext1), 1904px 1212px var(--ctp-subtext1), 669px 1904px var(--ctp-subtext1), 1732px 1100px var(--ctp-subtext1), 189px 818px var(--ctp-subtext1), 1288px 1716px var(--ctp-subtext1), 193px 131px var(--ctp-subtext1), 794px 1475px var(--ctp-subtext1), 1817px 536px var(--ctp-subtext1), 1957px 834px var(--ctp-subtext1), 383px 1313px var(--ctp-subtext1), 417px 535px var(--ctp-subtext1), 1070px 671px var(--ctp-subtext1), 1351px 1152px var(--ctp-subtext1), 1219px 1606px var(--ctp-subtext1), 1654px 276px var(--ctp-subtext1), 1517px 1132px var(--ctp-subtext1), 865px 469px var(--ctp-subtext1), 554px 1631px var(--ctp-subtext1), 56px 1516px var(--ctp-subtext1), 1364px 1700px var(--ctp-subtext1), 431px 840px var(--ctp-subtext1), 392px 1735px var(--ctp-subtext1), 874px 1486px var(--ctp-subtext1), 944px 1513px var(--ctp-subtext1), 1195px 1240px var(--ctp-subtext1), 496px 826px var(--ctp-subtext1), 1004px 22px var(--ctp-subtext1), 885px 134px var(--ctp-subtext1), 1506px 592px var(--ctp-subtext1), 1529px 1838px var(--ctp-subtext1), 869px 1149px var(--ctp-subtext1), 870px 717px var(--ctp-subtext1);
+            box-shadow: 1744px 322px var(--ef-subtext), 1353px 908px var(--ef-subtext), 953px 1516px var(--ef-subtext), 1657px 1394px var(--ef-subtext), 167px 829px var(--ef-subtext), 196px 1118px var(--ef-subtext), 1703px 1472px var(--ef-subtext), 553px 1368px var(--ef-subtext), 1203px 1038px var(--ef-subtext), 567px 1205px var(--ef-subtext), 1506px 40px var(--ef-subtext), 1369px 1171px var(--ef-subtext), 1344px 231px var(--ef-subtext), 313px 1596px var(--ef-subtext), 1277px 331px var(--ef-subtext), 527px 1422px var(--ef-subtext), 1337px 921px var(--ef-subtext), 1015px 1362px var(--ef-subtext), 81px 1357px var(--ef-subtext), 1494px 1504px var(--ef-subtext), 1405px 1748px var(--ef-subtext), 139px 1425px var(--ef-subtext), 341px 1285px var(--ef-subtext), 1468px 818px var(--ef-subtext), 866px 90px var(--ef-subtext), 1707px 1015px var(--ef-subtext), 1679px 1002px var(--ef-subtext), 246px 1785px var(--ef-subtext), 1904px 1212px var(--ef-subtext), 669px 1904px var(--ef-subtext), 1732px 1100px var(--ef-subtext), 189px 818px var(--ef-subtext), 1288px 1716px var(--ef-subtext), 193px 131px var(--ef-subtext), 794px 1475px var(--ef-subtext), 1817px 536px var(--ef-subtext), 1957px 834px var(--ef-subtext), 383px 1313px var(--ef-subtext), 417px 535px var(--ef-subtext), 1070px 671px var(--ef-subtext), 1351px 1152px var(--ef-subtext), 1219px 1606px var(--ef-subtext), 1654px 276px var(--ef-subtext), 1517px 1132px var(--ef-subtext), 865px 469px var(--ef-subtext), 554px 1631px var(--ef-subtext), 56px 1516px var(--ef-subtext), 1364px 1700px var(--ef-subtext), 431px 840px var(--ef-subtext), 392px 1735px var(--ef-subtext), 874px 1486px var(--ef-subtext), 944px 1513px var(--ef-subtext), 1195px 1240px var(--ef-subtext), 496px 826px var(--ef-subtext), 1004px 22px var(--ef-subtext), 885px 134px var(--ef-subtext), 1506px 592px var(--ef-subtext), 1529px 1838px var(--ef-subtext), 869px 1149px var(--ef-subtext), 870px 717px var(--ef-subtext);
             animation: animStar 100s linear infinite;
         }
         #stars1::after {
@@ -83,7 +86,7 @@
         /* Mittlere Sterne */
         #stars2 {
             width: 2px; height: 2px; background: transparent;
-            box-shadow: 1758px 1627px var(--ctp-subtext1), 1643px 1188px var(--ctp-subtext1), 657px 1733px var(--ctp-subtext1), 358px 1002px var(--ctp-subtext1), 683px 1112px var(--ctp-subtext1), 1808px 837px var(--ctp-subtext1), 1303px 879px var(--ctp-subtext1), 925px 1856px var(--ctp-subtext1), 1142px 1545px var(--ctp-subtext1), 148px 992px var(--ctp-subtext1), 63px 884px var(--ctp-subtext1), 1791px 1127px var(--ctp-subtext1), 200px 1773px var(--ctp-subtext1), 1434px 539px var(--ctp-subtext1), 1207px 987px var(--ctp-subtext1), 46px 1183px var(--ctp-subtext1), 810px 627px var(--ctp-subtext1), 1623px 1599px var(--ctp-subtext1), 1278px 219px var(--ctp-subtext1), 891px 1494px var(--ctp-subtext1), 1939px 1598px var(--ctp-subtext1), 1931px 370px var(--ctp-subtext1), 339px 143px var(--ctp-subtext1), 1039px 727px var(--ctp-subtext1), 1337px 49px var(--ctp-subtext1);
+            box-shadow: 1758px 1627px var(--ef-subtext), 1643px 1188px var(--ef-subtext), 657px 1733px var(--ef-subtext), 358px 1002px var(--ef-subtext), 683px 1112px var(--ef-subtext), 1808px 837px var(--ef-subtext), 1303px 879px var(--ef-subtext), 925px 1856px var(--ef-subtext), 1142px 1545px var(--ef-subtext), 148px 992px var(--ef-subtext), 63px 884px var(--ef-subtext), 1791px 1127px var(--ef-subtext), 200px 1773px var(--ef-subtext), 1434px 539px var(--ef-subtext), 1207px 987px var(--ef-subtext), 46px 1183px var(--ef-subtext), 810px 627px var(--ef-subtext), 1623px 1599px var(--ef-subtext), 1278px 219px var(--ef-subtext), 891px 1494px var(--ef-subtext), 1939px 1598px var(--ef-subtext), 1931px 370px var(--ef-subtext), 339px 143px var(--ef-subtext), 1039px 727px var(--ef-subtext), 1337px 49px var(--ef-subtext);
             animation: animStar 75s linear infinite;
         }
         #stars2::after {
@@ -93,7 +96,7 @@
         /* Große Sterne */
         #stars3 {
             width: 3px; height: 3px; background: transparent;
-            box-shadow: 1943px 663px var(--ctp-subtext1), 1987px 940px var(--ctp-subtext1), 1781px 1065px var(--ctp-subtext1), 1837px 1471px var(--ctp-subtext1), 1457px 1419px var(--ctp-subtext1), 1196px 524px var(--ctp-subtext1), 1654px 511px var(--ctp-subtext1);
+            box-shadow: 1943px 663px var(--ef-subtext), 1987px 940px var(--ef-subtext), 1781px 1065px var(--ef-subtext), 1837px 1471px var(--ef-subtext), 1457px 1419px var(--ef-subtext), 1196px 524px var(--ef-subtext), 1654px 511px var(--ef-subtext);
             animation: animStar 50s linear infinite;
         }
         #stars3::after {
@@ -103,15 +106,15 @@
         /* --- NAVIGATION --- */
         .nav-bar { padding: 20px 0; }
         .back-link {
-            display: inline-flex; align-items: center; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: 0.2s; padding: 8px 16px; border-radius: 20px; background: var(--ctp-surface0); border: 1px solid transparent;
+            display: inline-flex; align-items: center; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: 0.2s; padding: 8px 16px; border-radius: 20px; background: var(--ef-surface0); border: 1px solid transparent;
         }
-        .back-link:hover { color: var(--text-main); background: var(--ctp-surface1); border-color: var(--card-border); }
+        .back-link:hover { color: var(--text-main); background: var(--ef-surface1); border-color: var(--card-border); }
 
         /* --- HEADER & HERO --- */
         .hero { text-align: center; padding: 40px 0; animation: fadeIn 1s ease-out; }
         h1 {
             font-size: 3rem; margin: 0;
-            background: linear-gradient(90deg, var(--ctp-text), var(--ctp-subtext1));
+            background: linear-gradient(90deg, var(--ef-accent), var(--ef-accent-light));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             font-weight: 800;
         }
@@ -119,36 +122,36 @@
         .badges { display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
         
         .btn-download {
-            display: inline-flex; align-items: center; background: var(--primary-gradient); color: var(--ctp-base); padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: var(--glow); border: 1px solid rgba(255,255,255,0.1); margin-top: 30px;
+            display: inline-flex; align-items: center; background: var(--primary-gradient); color: var(--ef-crust); padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: var(--glow); border: 1px solid rgba(255,255,255,0.1); margin-top: 30px;
         }
-        .btn-download:hover { transform: translateY(-3px); box-shadow: 0 0 45px rgba(203, 166, 247, 0.5); }
+        .btn-download:hover { transform: translateY(-3px); box-shadow: 0 0 45px rgba(212, 163, 115, 0.4); color: var(--ef-crust); }
 
         /* --- CONTENT CARDS --- */
         .card {
             background: var(--card-bg); border: 1px solid var(--card-border); backdrop-filter: blur(12px); border-radius: 16px; padding: 30px; margin-bottom: 30px;
         }
 
-        h2 { margin-top: 0; border-bottom: 1px solid var(--card-border); padding-bottom: 15px; font-size: 1.8rem; color: var(--ctp-text); }
-        h3 { color: var(--ctp-text); margin-top: 30px; margin-bottom: 15px; font-size: 1.2rem; border-left: 3px solid var(--ctp-mauve); padding-left: 10px; }
+        h2 { margin-top: 0; border-bottom: 1px solid var(--card-border); padding-bottom: 15px; font-size: 1.8rem; color: var(--ef-text); }
+        h3 { color: var(--ef-text); margin-top: 30px; margin-bottom: 15px; font-size: 1.2rem; border-left: 3px solid var(--ef-accent); padding-left: 10px; }
 
-        .preview-img { width: 100%; border-radius: 10px; border: 1px solid var(--card-border); margin: 20px 0; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .preview-img { width: 100%; border-radius: 10px; border: 1px solid var(--card-border); margin: 20px 0; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
 
         /* --- TABLES --- */
         .table-wrapper { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-bottom: 10px; }
         th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--card-border); }
-        th { color: var(--ctp-blue); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; background: rgba(49, 50, 68, 0.4); }
+        th { color: var(--ef-accent); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; background: rgba(25, 46, 36, 0.6); }
         tr:last-child td { border-bottom: none; }
-        tr:hover td { background: rgba(49, 50, 68, 0.6); }
+        tr:hover td { background: rgba(25, 46, 36, 0.4); }
 
         /* --- LISTS & TEXT --- */
         .note-list { margin: 10px 0; padding-left: 20px; color: var(--text-muted); font-size: 0.9rem; }
         .note-list li { margin-bottom: 5px; }
-        code { background: var(--ctp-mantle); padding: 2px 6px; border-radius: 4px; font-family: monospace; color: var(--ctp-mauve); border: 1px solid var(--card-border); }
+        code { background: var(--ef-crust); padding: 2px 6px; border-radius: 4px; font-family: monospace; color: var(--ef-accent); border: 1px solid var(--card-border); }
 
-        .disclaimer { border-left: 3px solid var(--ctp-red); background: rgba(243, 139, 168, 0.1); }
-        .disclaimer h3 { border-left: none; padding-left: 0; color: var(--ctp-red); }
-        .alert-text { color: var(--ctp-red); }
+        .disclaimer { border-left: 3px solid var(--ef-red); background: rgba(168, 64, 50, 0.1); }
+        .disclaimer h3 { border-left: none; padding-left: 0; color: var(--ef-red); }
+        .alert-text { color: var(--ef-red); }
 
         footer { text-align: center; color: var(--text-muted); padding: 40px; font-size: 0.8rem; border-top: 1px solid var(--card-border); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -171,9 +174,9 @@
         <header class="hero">
             <h1>SanConverter</h1>
             <div class="badges">
-                <img src="https://img.shields.io/badge/version-2.0-blue?style=flat-square&color=89b4fa" alt="v2.0">
-                <img src="https://img.shields.io/badge/platform-Windows-0078D6?style=flat-square&logo=windows&logoColor=white&color=89b4fa" alt="Windows">
-                <img src="https://img.shields.io/badge/framework-.NET_4.8-512BD4?style=flat-square&logo=dotnet&logoColor=white&color=cba6f7" alt=".NET 4.8">
+                <img src="https://img.shields.io/badge/version-2.0-D4A373?style=flat-square&logoColor=white" alt="v2.0">
+                <img src="https://img.shields.io/badge/platform-Windows-244032?style=flat-square&logo=windows&logoColor=white" alt="Windows">
+                <img src="https://img.shields.io/badge/framework-.NET_4.8-192E24?style=flat-square&logo=dotnet&logoColor=white" alt=".NET 4.8">
             </div>
             
             <a href="https://github.com/bishpop/SanConverter-Release/releases/download/0.2/SanConverter.exe" class="btn-download">
@@ -181,8 +184,8 @@
             </a>
             <br><br>
             <div style="font-size: 0.9rem;">
-                <a href="https://drive.google.com/file/d/1WPG8JNApXb5hm2z1aH_Or6Bbe0liBLtV/view" target="_blank" style="color:var(--text-muted); margin-right: 15px; text-decoration: none;" onmouseover="this.style.color='var(--ctp-blue)'" onmouseout="this.style.color='var(--text-muted)'">📄 PDF Guide</a>
-                <a href="https://www.youtube.com/watch?v=B5WxZ9Asc3M" target="_blank" style="color:var(--text-muted); text-decoration: none;" onmouseover="this.style.color='var(--ctp-mauve)'" onmouseout="this.style.color='var(--text-muted)'">🎥 YouTube Tutorial</a>
+                <a href="https://drive.google.com/file/d/1WPG8JNApXb5hm2z1aH_Or6Bbe0liBLtV/view" target="_blank" style="color:var(--text-muted); margin-right: 15px; text-decoration: none;" onmouseover="this.style.color='var(--ef-accent)'" onmouseout="this.style.color='var(--text-muted)'">📄 PDF Guide</a>
+                <a href="https://www.youtube.com/watch?v=B5WxZ9Asc3M" target="_blank" style="color:var(--text-muted); text-decoration: none;" onmouseover="this.style.color='var(--ef-accent)'" onmouseout="this.style.color='var(--text-muted)'">🎥 YouTube Tutorial</a>
             </div>
         </header>
 
@@ -194,7 +197,7 @@
                 <li>Public Version directly downloadable</li>
                 <li>HWID-Restricted License System (for One-Two Party)</li>
                 <li>Installation through <code>SanInstallerGUI.exe (for HWID Restricted version)</code></li>
-                <i>Download the HWID Restricted client here: <a href="https://github.com/bishpop/SanConverter-Release/releases/download/v0.1/SanInstaller.exe" class="link">SanInstaller.exe</a></i>
+                <i>Download the HWID Restricted client here: <a href="https://github.com/bishpop/SanConverter-Release/releases/download/v0.1/SanInstaller.exe" class="link" style="color: var(--ef-accent);">SanInstaller.exe</a></i>
                 <li>Convert <code>.SM</code> and <code>.SSC</code> to <code>.SLK</code> (Beat Up and One-Two Party)</li>
             </ul>
         </section>
@@ -313,7 +316,7 @@
                     </tbody>
                 </table>
             </div>
-            <p class="note-list" style="border-left: 2px solid var(--ctp-green); padding-left: 10px;">
+            <p class="note-list" style="border-left: 2px solid var(--ef-green); padding-left: 10px;">
                 One-Two Party is a very sensitive gamemode, this converter supports all rules from charting lvl 1 to lvl 9.
             </p>
 
@@ -349,7 +352,7 @@
         </section>
 
         <footer>
-            <img src="./assets/logo.png" alt="Sanya Logo" width="60" style="opacity:0.7">
+            <img src="./assets/logo.png" alt="Sanya Logo" width="60" style="opacity:0.7" onerror="this.style.display='none'">
             <br><br>
             &copy; 2026 Sanya<br>
             Created with ❤️
