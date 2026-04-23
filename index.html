@@ -10,21 +10,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* --- CATPPUCCIN MOCHA THEME --- */
+        /* --- ELEGANT FOREST THEME --- */
         :root {
-            --ctp-base: #1e1e2e;
-            --ctp-mantle: #181825;
-            --ctp-text: #cdd6f4;
-            --ctp-subtext1: #bac2de;
-            --ctp-blue: #89b4fa;
-            --ctp-mauve: #cba6f7;
-            --ctp-surface0: #313244;
-            --ctp-surface1: #45475a;
+            --ef-crust: #0a110d;
+            --ef-base: #0f1a14;
+            --ef-mantle: #14251D;
+            --ef-surface0: #192E24;
+            --ef-surface1: #244032;
+            --ef-text: #FDFBF7;
+            --ef-subtext: #8c9e95;
+            --ef-accent: #D4A373;
+            --ef-accent-light: #e8c39e; /* Etwas helleres Gold für Verläufe */
             
-            --bg-main: var(--ctp-base);
-            --glass-border: rgba(108, 112, 134, 0.2);
-            --primary-gradient: linear-gradient(135deg, var(--ctp-blue), var(--ctp-mauve));
-            --glow: 0 0 30px rgba(137, 180, 250, 0.15);
+            --bg-main: var(--ef-base);
+            --glass-border: rgba(36, 64, 50, 0.5); /* Halbtransparentes surface1 */
+            --primary-gradient: linear-gradient(135deg, var(--ef-accent), var(--ef-accent-light));
+            --glow: 0 0 30px rgba(212, 163, 115, 0.15); /* Goldener Glow */
         }
 
         body {
@@ -32,12 +33,12 @@
             padding: 0;
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-main);
-            background-image: radial-gradient(circle at 50% 50%, var(--ctp-mantle) 0%, var(--bg-main) 100%);
+            background-image: radial-gradient(circle at 50% 50%, var(--ef-mantle) 0%, var(--bg-main) 100%);
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--ctp-text);
+            color: var(--ef-text);
             overflow: hidden;
             position: relative;
             /* Wichtig für die Seiten-Übergangsanimation */
@@ -60,13 +61,14 @@
 
         @keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-2000px); } }
 
-        #stars1 { width: 1px; height: 1px; background: transparent; box-shadow: 1744px 322px var(--ctp-subtext1), 1353px 908px var(--ctp-subtext1), 953px 1516px var(--ctp-subtext1), 1657px 1394px var(--ctp-subtext1), 167px 829px var(--ctp-subtext1), 196px 1118px var(--ctp-subtext1), 1703px 1472px var(--ctp-subtext1), 553px 1368px var(--ctp-subtext1), 1203px 1038px var(--ctp-subtext1), 567px 1205px var(--ctp-subtext1), 1506px 40px var(--ctp-subtext1), 1369px 1171px var(--ctp-subtext1), 1344px 231px var(--ctp-subtext1), 313px 1596px var(--ctp-subtext1), 1277px 331px var(--ctp-subtext1), 527px 1422px var(--ctp-subtext1), 1337px 921px var(--ctp-subtext1), 1015px 1362px var(--ctp-subtext1), 81px 1357px var(--ctp-subtext1), 1494px 1504px var(--ctp-subtext1), 1405px 1748px var(--ctp-subtext1), 139px 1425px var(--ctp-subtext1), 341px 1285px var(--ctp-subtext1), 1468px 818px var(--ctp-subtext1), 866px 90px var(--ctp-subtext1), 1707px 1015px var(--ctp-subtext1), 1679px 1002px var(--ctp-subtext1), 246px 1785px var(--ctp-subtext1), 1904px 1212px var(--ctp-subtext1), 669px 1904px var(--ctp-subtext1), 1732px 1100px var(--ctp-subtext1), 189px 818px var(--ctp-subtext1), 1288px 1716px var(--ctp-subtext1), 193px 131px var(--ctp-subtext1), 794px 1475px var(--ctp-subtext1), 1817px 536px var(--ctp-subtext1), 1957px 834px var(--ctp-subtext1), 383px 1313px var(--ctp-subtext1), 417px 535px var(--ctp-subtext1), 1070px 671px var(--ctp-subtext1), 1351px 1152px var(--ctp-subtext1), 1219px 1606px var(--ctp-subtext1), 1654px 276px var(--ctp-subtext1), 1517px 1132px var(--ctp-subtext1), 865px 469px var(--ctp-subtext1), 554px 1631px var(--ctp-subtext1), 56px 1516px var(--ctp-subtext1), 1364px 1700px var(--ctp-subtext1), 431px 840px var(--ctp-subtext1), 392px 1735px var(--ctp-subtext1), 874px 1486px var(--ctp-subtext1), 944px 1513px var(--ctp-subtext1), 1195px 1240px var(--ctp-subtext1), 496px 826px var(--ctp-subtext1), 1004px 22px var(--ctp-subtext1), 885px 134px var(--ctp-subtext1), 1506px 592px var(--ctp-subtext1), 1529px 1838px var(--ctp-subtext1), 869px 1149px var(--ctp-subtext1), 870px 717px var(--ctp-subtext1); animation: animStar 100s linear infinite; }
+        /* Sterne nutzen jetzt das ef-subtext Grün-Grau für einen sanften Look */
+        #stars1 { width: 1px; height: 1px; background: transparent; box-shadow: 1744px 322px var(--ef-subtext), 1353px 908px var(--ef-subtext), 953px 1516px var(--ef-subtext), 1657px 1394px var(--ef-subtext), 167px 829px var(--ef-subtext), 196px 1118px var(--ef-subtext), 1703px 1472px var(--ef-subtext), 553px 1368px var(--ef-subtext), 1203px 1038px var(--ef-subtext), 567px 1205px var(--ef-subtext), 1506px 40px var(--ef-subtext), 1369px 1171px var(--ef-subtext), 1344px 231px var(--ef-subtext), 313px 1596px var(--ef-subtext), 1277px 331px var(--ef-subtext), 527px 1422px var(--ef-subtext), 1337px 921px var(--ef-subtext), 1015px 1362px var(--ef-subtext), 81px 1357px var(--ef-subtext), 1494px 1504px var(--ef-subtext), 1405px 1748px var(--ef-subtext), 139px 1425px var(--ef-subtext), 341px 1285px var(--ef-subtext), 1468px 818px var(--ef-subtext), 866px 90px var(--ef-subtext), 1707px 1015px var(--ef-subtext), 1679px 1002px var(--ef-subtext), 246px 1785px var(--ef-subtext), 1904px 1212px var(--ef-subtext), 669px 1904px var(--ef-subtext), 1732px 1100px var(--ef-subtext), 189px 818px var(--ef-subtext), 1288px 1716px var(--ef-subtext), 193px 131px var(--ef-subtext), 794px 1475px var(--ef-subtext), 1817px 536px var(--ef-subtext), 1957px 834px var(--ef-subtext), 383px 1313px var(--ef-subtext), 417px 535px var(--ef-subtext), 1070px 671px var(--ef-subtext), 1351px 1152px var(--ef-subtext), 1219px 1606px var(--ef-subtext), 1654px 276px var(--ef-subtext), 1517px 1132px var(--ef-subtext), 865px 469px var(--ef-subtext), 554px 1631px var(--ef-subtext), 56px 1516px var(--ef-subtext), 1364px 1700px var(--ef-subtext), 431px 840px var(--ef-subtext), 392px 1735px var(--ef-subtext), 874px 1486px var(--ef-subtext), 944px 1513px var(--ef-subtext), 1195px 1240px var(--ef-subtext), 496px 826px var(--ef-subtext), 1004px 22px var(--ef-subtext), 885px 134px var(--ef-subtext), 1506px 592px var(--ef-subtext), 1529px 1838px var(--ef-subtext), 869px 1149px var(--ef-subtext), 870px 717px var(--ef-subtext); animation: animStar 100s linear infinite; }
         #stars1::after { content: " "; position: absolute; top: 2000px; width: 1px; height: 1px; background: transparent; box-shadow: inherit; }
 
-        #stars2 { width: 2px; height: 2px; background: transparent; box-shadow: 1758px 1627px var(--ctp-subtext1), 1643px 1188px var(--ctp-subtext1), 657px 1733px var(--ctp-subtext1), 358px 1002px var(--ctp-subtext1), 683px 1112px var(--ctp-subtext1), 1808px 837px var(--ctp-subtext1), 1303px 879px var(--ctp-subtext1), 925px 1856px var(--ctp-subtext1), 1142px 1545px var(--ctp-subtext1), 148px 992px var(--ctp-subtext1), 63px 884px var(--ctp-subtext1), 1791px 1127px var(--ctp-subtext1), 200px 1773px var(--ctp-subtext1), 1434px 539px var(--ctp-subtext1), 1207px 987px var(--ctp-subtext1), 46px 1183px var(--ctp-subtext1), 810px 627px var(--ctp-subtext1), 1623px 1599px var(--ctp-subtext1), 1278px 219px var(--ctp-subtext1), 891px 1494px var(--ctp-subtext1), 1939px 1598px var(--ctp-subtext1), 1931px 370px var(--ctp-subtext1), 339px 143px var(--ctp-subtext1), 1039px 727px var(--ctp-subtext1), 1337px 49px var(--ctp-subtext1); animation: animStar 75s linear infinite; }
+        #stars2 { width: 2px; height: 2px; background: transparent; box-shadow: 1758px 1627px var(--ef-subtext), 1643px 1188px var(--ef-subtext), 657px 1733px var(--ef-subtext), 358px 1002px var(--ef-subtext), 683px 1112px var(--ef-subtext), 1808px 837px var(--ef-subtext), 1303px 879px var(--ef-subtext), 925px 1856px var(--ef-subtext), 1142px 1545px var(--ef-subtext), 148px 992px var(--ef-subtext), 63px 884px var(--ef-subtext), 1791px 1127px var(--ef-subtext), 200px 1773px var(--ef-subtext), 1434px 539px var(--ef-subtext), 1207px 987px var(--ef-subtext), 46px 1183px var(--ef-subtext), 810px 627px var(--ef-subtext), 1623px 1599px var(--ef-subtext), 1278px 219px var(--ef-subtext), 891px 1494px var(--ef-subtext), 1939px 1598px var(--ef-subtext), 1931px 370px var(--ef-subtext), 339px 143px var(--ef-subtext), 1039px 727px var(--ef-subtext), 1337px 49px var(--ef-subtext); animation: animStar 75s linear infinite; }
         #stars2::after { content: " "; position: absolute; top: 2000px; width: 2px; height: 2px; background: transparent; box-shadow: inherit; }
 
-        #stars3 { width: 3px; height: 3px; background: transparent; box-shadow: 1943px 663px var(--ctp-subtext1), 1987px 940px var(--ctp-subtext1), 1781px 1065px var(--ctp-subtext1), 1837px 1471px var(--ctp-subtext1), 1457px 1419px var(--ctp-subtext1), 1196px 524px var(--ctp-subtext1), 1654px 511px var(--ctp-subtext1); animation: animStar 50s linear infinite; }
+        #stars3 { width: 3px; height: 3px; background: transparent; box-shadow: 1943px 663px var(--ef-subtext), 1987px 940px var(--ef-subtext), 1781px 1065px var(--ef-subtext), 1837px 1471px var(--ef-subtext), 1457px 1419px var(--ef-subtext), 1196px 524px var(--ef-subtext), 1654px 511px var(--ef-subtext); animation: animStar 50s linear infinite; }
         #stars3::after { content: " "; position: absolute; top: 2000px; width: 3px; height: 3px; background: transparent; box-shadow: inherit; }
 
         /* --- CONTENT STYLING --- */
@@ -77,22 +79,22 @@
         @keyframes wiggle { 0% { transform: rotate(0deg); } 25% { transform: rotate(-10deg); } 50% { transform: rotate(10deg); } 75% { transform: rotate(-5deg); } 100% { transform: rotate(0deg); } }
 
         .logo-main {
-            width: 120px; height: 120px; object-fit: contain; border-radius: 50%; margin-bottom: 25px; border: 2px solid var(--glass-border); box-shadow: var(--glow); background: var(--ctp-mantle); padding: 5px;
+            width: 120px; height: 120px; object-fit: contain; border-radius: 50%; margin-bottom: 25px; border: 2px solid var(--glass-border); box-shadow: var(--glow); background: var(--ef-mantle); padding: 5px;
             animation: float 6s ease-in-out infinite; transition: box-shadow 0.3s ease;
         }
-        .logo-main:hover { box-shadow: 0 0 60px rgba(203, 166, 247, 0.4); border-color: var(--ctp-mauve); }
+        .logo-main:hover { box-shadow: 0 0 60px rgba(212, 163, 115, 0.4); border-color: var(--ef-accent); }
 
         h1 {
-            font-size: 2.5rem; margin: 0 0 10px 0; font-weight: 800; background: linear-gradient(90deg, var(--ctp-blue), var(--ctp-mauve)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: 2.5rem; margin: 0 0 10px 0; font-weight: 800; background: linear-gradient(90deg, var(--ef-accent), var(--ef-accent-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             opacity: 0; animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.1s;
         }
         p {
-            color: var(--ctp-subtext1); margin-bottom: 40px; font-size: 1.1rem;
+            color: var(--ef-subtext); margin-bottom: 40px; font-size: 1.1rem;
             opacity: 0; animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.2s;
         }
         .button-grid { display: flex; flex-direction: column; gap: 15px; }
         .hub-btn {
-            display: flex; align-items: center; justify-content: center; padding: 18px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 1.05rem; border: 1px solid var(--glass-border); position: relative; overflow: hidden; color: var(--ctp-text); background: var(--ctp-surface0); cursor: pointer;
+            display: flex; align-items: center; justify-content: center; padding: 18px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 1.05rem; border: 1px solid var(--glass-border); position: relative; overflow: hidden; color: var(--ef-text); background: var(--ef-surface0); cursor: pointer;
             opacity: 0; animation: fadeInUp 0.6s ease-out forwards; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         .hub-btn:nth-child(1) { animation-delay: 0.3s; }
@@ -100,11 +102,11 @@
         .hub-btn:nth-child(3) { animation-delay: 0.5s; }
         .btn-icon { width: 28px; height: 28px; object-fit: contain; margin-right: 12px; transition: transform 0.3s ease; }
         
-        .hub-btn:hover { transform: translateY(-5px) scale(1.02); border-color: var(--ctp-blue); background: var(--ctp-surface1); color: #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .hub-btn:hover { transform: translateY(-5px) scale(1.02); border-color: var(--ef-accent); background: var(--ef-surface1); color: var(--ef-text); box-shadow: 0 10px 20px rgba(10, 17, 13, 0.5); }
         .hub-btn:hover .btn-icon { animation: wiggle 0.5s ease-in-out; }
         
-        .btn-san { background: var(--primary-gradient); color: var(--ctp-base); border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-        .btn-san:hover { box-shadow: 0 0 40px rgba(137, 180, 250, 0.5); background: linear-gradient(135deg, #89b4fa, #cba6f7); color: var(--ctp-base); }
+        .btn-san { background: var(--primary-gradient); color: var(--ef-crust); border: none; box-shadow: 0 4px 20px rgba(10, 17, 13, 0.5); }
+        .btn-san:hover { box-shadow: 0 0 40px rgba(212, 163, 115, 0.4); background: linear-gradient(135deg, var(--ef-accent-light), var(--ef-accent)); color: var(--ef-crust); }
 
     </style>
 </head>
