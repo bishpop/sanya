@@ -8,30 +8,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="./assets/bears_hand.png">
     <style>
-        /* --- CATPPUCCIN MOCHA THEME --- */
+        /* --- ELEGANT FOREST THEME --- */
         :root {
-            --ctp-base: #1e1e2e;
-            --ctp-mantle: #181825;
-            --ctp-surface0: #313244;
-            --ctp-text: #cdd6f4;
-            --ctp-subtext1: #bac2de;
-            --ctp-blue: #89b4fa;
-            --ctp-mauve: #cba6f7;
-            --ctp-green: #a6e3a1;
-            --ctp-peach: #fab387;
+            /* Core Palette */
+            --ef-crust: #0a110d;
+            --ef-base: #0f1a14;
+            --ef-mantle: #14251D;
+            --ef-surface0: #192E24;
+            --ef-surface1: #244032;
+            --ef-text: #FDFBF7;
+            --ef-subtext: #8c9e95;
+            --ef-accent: #D4A373;
+            --ef-accent-light: #e8c39e;
             
-            --bg-main: var(--ctp-base);
-            --card-bg: rgba(49, 50, 68, 0.6);
-            --card-border: rgba(108, 112, 134, 0.2);
-            --primary-gradient: linear-gradient(135deg, var(--ctp-blue), var(--ctp-mauve));
+            --ef-green: #32a852;
+            
+            /* Mappings */
+            --bg-main: var(--ef-base);
+            --card-bg: rgba(20, 37, 29, 0.7); /* EF-Mantle mit Transparenz */
+            --card-border: var(--ef-surface1);
+            --primary-gradient: linear-gradient(135deg, var(--ef-accent), var(--ef-accent-light));
         }
 
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-main);
-            background-image: radial-gradient(circle at 50% 0%, var(--ctp-mantle) 0%, var(--bg-main) 75%);
-            color: var(--ctp-text);
+            background-image: radial-gradient(circle at 50% 0%, var(--ef-mantle) 0%, var(--bg-main) 75%);
+            color: var(--ef-text);
             line-height: 1.6;
             min-height: 100vh;
             position: relative;
@@ -67,7 +71,7 @@
         /* Kleine Sterne */
         #stars1 {
             width: 1px; height: 1px; background: transparent;
-            box-shadow: 1744px 322px var(--ctp-subtext1), 1353px 908px var(--ctp-subtext1), 953px 1516px var(--ctp-subtext1), 1657px 1394px var(--ctp-subtext1), 167px 829px var(--ctp-subtext1), 196px 1118px var(--ctp-subtext1), 1703px 1472px var(--ctp-subtext1), 553px 1368px var(--ctp-subtext1), 1203px 1038px var(--ctp-subtext1), 567px 1205px var(--ctp-subtext1), 1506px 40px var(--ctp-subtext1), 1369px 1171px var(--ctp-subtext1), 1344px 231px var(--ctp-subtext1), 313px 1596px var(--ctp-subtext1), 1277px 331px var(--ctp-subtext1), 527px 1422px var(--ctp-subtext1), 1337px 921px var(--ctp-subtext1), 1015px 1362px var(--ctp-subtext1), 81px 1357px var(--ctp-subtext1), 1494px 1504px var(--ctp-subtext1), 1405px 1748px var(--ctp-subtext1), 139px 1425px var(--ctp-subtext1), 341px 1285px var(--ctp-subtext1), 1468px 818px var(--ctp-subtext1), 866px 90px var(--ctp-subtext1), 1707px 1015px var(--ctp-subtext1), 1679px 1002px var(--ctp-subtext1), 246px 1785px var(--ctp-subtext1), 1904px 1212px var(--ctp-subtext1), 669px 1904px var(--ctp-subtext1), 1732px 1100px var(--ctp-subtext1), 189px 818px var(--ctp-subtext1), 1288px 1716px var(--ctp-subtext1), 193px 131px var(--ctp-subtext1), 794px 1475px var(--ctp-subtext1), 1817px 536px var(--ctp-subtext1), 1957px 834px var(--ctp-subtext1), 383px 1313px var(--ctp-subtext1), 417px 535px var(--ctp-subtext1), 1070px 671px var(--ctp-subtext1), 1351px 1152px var(--ctp-subtext1), 1219px 1606px var(--ctp-subtext1), 1654px 276px var(--ctp-subtext1), 1517px 1132px var(--ctp-subtext1), 865px 469px var(--ctp-subtext1), 554px 1631px var(--ctp-subtext1), 56px 1516px var(--ctp-subtext1), 1364px 1700px var(--ctp-subtext1), 431px 840px var(--ctp-subtext1), 392px 1735px var(--ctp-subtext1), 874px 1486px var(--ctp-subtext1), 944px 1513px var(--ctp-subtext1), 1195px 1240px var(--ctp-subtext1), 496px 826px var(--ctp-subtext1), 1004px 22px var(--ctp-subtext1), 885px 134px var(--ctp-subtext1), 1506px 592px var(--ctp-subtext1), 1529px 1838px var(--ctp-subtext1), 869px 1149px var(--ctp-subtext1), 870px 717px var(--ctp-subtext1);
+            box-shadow: 1744px 322px var(--ef-subtext), 1353px 908px var(--ef-subtext), 953px 1516px var(--ef-subtext), 1657px 1394px var(--ef-subtext), 167px 829px var(--ef-subtext), 196px 1118px var(--ef-subtext), 1703px 1472px var(--ef-subtext), 553px 1368px var(--ef-subtext), 1203px 1038px var(--ef-subtext), 567px 1205px var(--ef-subtext), 1506px 40px var(--ef-subtext), 1369px 1171px var(--ef-subtext), 1344px 231px var(--ef-subtext), 313px 1596px var(--ef-subtext), 1277px 331px var(--ef-subtext), 527px 1422px var(--ef-subtext), 1337px 921px var(--ef-subtext), 1015px 1362px var(--ef-subtext), 81px 1357px var(--ef-subtext), 1494px 1504px var(--ef-subtext), 1405px 1748px var(--ef-subtext), 139px 1425px var(--ef-subtext), 341px 1285px var(--ef-subtext), 1468px 818px var(--ef-subtext), 866px 90px var(--ef-subtext), 1707px 1015px var(--ef-subtext), 1679px 1002px var(--ef-subtext), 246px 1785px var(--ef-subtext), 1904px 1212px var(--ef-subtext), 669px 1904px var(--ef-subtext), 1732px 1100px var(--ef-subtext), 189px 818px var(--ef-subtext), 1288px 1716px var(--ef-subtext), 193px 131px var(--ef-subtext), 794px 1475px var(--ef-subtext), 1817px 536px var(--ef-subtext), 1957px 834px var(--ef-subtext), 383px 1313px var(--ef-subtext), 417px 535px var(--ef-subtext), 1070px 671px var(--ef-subtext), 1351px 1152px var(--ef-subtext), 1219px 1606px var(--ef-subtext), 1654px 276px var(--ef-subtext), 1517px 1132px var(--ef-subtext), 865px 469px var(--ef-subtext), 554px 1631px var(--ef-subtext), 56px 1516px var(--ef-subtext), 1364px 1700px var(--ef-subtext), 431px 840px var(--ef-subtext), 392px 1735px var(--ef-subtext), 874px 1486px var(--ef-subtext), 944px 1513px var(--ef-subtext), 1195px 1240px var(--ef-subtext), 496px 826px var(--ef-subtext), 1004px 22px var(--ef-subtext), 885px 134px var(--ef-subtext), 1506px 592px var(--ef-subtext), 1529px 1838px var(--ef-subtext), 869px 1149px var(--ef-subtext), 870px 717px var(--ef-subtext);
             animation: animStar 100s linear infinite;
         }
         #stars1::after { content: " "; position: absolute; top: 2000px; width: 1px; height: 1px; background: transparent; box-shadow: inherit; }
@@ -75,7 +79,7 @@
         /* Mittlere Sterne */
         #stars2 {
             width: 2px; height: 2px; background: transparent;
-            box-shadow: 1758px 1627px var(--ctp-subtext1), 1643px 1188px var(--ctp-subtext1), 657px 1733px var(--ctp-subtext1), 358px 1002px var(--ctp-subtext1), 683px 1112px var(--ctp-subtext1), 1808px 837px var(--ctp-subtext1), 1303px 879px var(--ctp-subtext1), 925px 1856px var(--ctp-subtext1), 1142px 1545px var(--ctp-subtext1), 148px 992px var(--ctp-subtext1), 63px 884px var(--ctp-subtext1), 1791px 1127px var(--ctp-subtext1), 200px 1773px var(--ctp-subtext1), 1434px 539px var(--ctp-subtext1), 1207px 987px var(--ctp-subtext1), 46px 1183px var(--ctp-subtext1), 810px 627px var(--ctp-subtext1), 1623px 1599px var(--ctp-subtext1), 1278px 219px var(--ctp-subtext1), 891px 1494px var(--ctp-subtext1), 1939px 1598px var(--ctp-subtext1), 1931px 370px var(--ctp-subtext1), 339px 143px var(--ctp-subtext1), 1039px 727px var(--ctp-subtext1), 1337px 49px var(--ctp-subtext1);
+            box-shadow: 1758px 1627px var(--ef-subtext), 1643px 1188px var(--ef-subtext), 657px 1733px var(--ef-subtext), 358px 1002px var(--ef-subtext), 683px 1112px var(--ef-subtext), 1808px 837px var(--ef-subtext), 1303px 879px var(--ef-subtext), 925px 1856px var(--ef-subtext), 1142px 1545px var(--ef-subtext), 148px 992px var(--ef-subtext), 63px 884px var(--ef-subtext), 1791px 1127px var(--ef-subtext), 200px 1773px var(--ef-subtext), 1434px 539px var(--ef-subtext), 1207px 987px var(--ef-subtext), 46px 1183px var(--ef-subtext), 810px 627px var(--ef-subtext), 1623px 1599px var(--ef-subtext), 1278px 219px var(--ef-subtext), 891px 1494px var(--ef-subtext), 1939px 1598px var(--ef-subtext), 1931px 370px var(--ef-subtext), 339px 143px var(--ef-subtext), 1039px 727px var(--ef-subtext), 1337px 49px var(--ef-subtext);
             animation: animStar 75s linear infinite;
         }
         #stars2::after { content: " "; position: absolute; top: 2000px; width: 2px; height: 2px; background: transparent; box-shadow: inherit; }
@@ -83,7 +87,7 @@
         /* Große Sterne */
         #stars3 {
             width: 3px; height: 3px; background: transparent;
-            box-shadow: 1943px 663px var(--ctp-subtext1), 1987px 940px var(--ctp-subtext1), 1781px 1065px var(--ctp-subtext1), 1837px 1471px var(--ctp-subtext1), 1457px 1419px var(--ctp-subtext1), 1196px 524px var(--ctp-subtext1), 1654px 511px var(--ctp-subtext1);
+            box-shadow: 1943px 663px var(--ef-subtext), 1987px 940px var(--ef-subtext), 1781px 1065px var(--ef-subtext), 1837px 1471px var(--ef-subtext), 1457px 1419px var(--ef-subtext), 1196px 524px var(--ef-subtext), 1654px 511px var(--ef-subtext);
             animation: animStar 50s linear infinite;
         }
         #stars3::after { content: " "; position: absolute; top: 2000px; width: 3px; height: 3px; background: transparent; box-shadow: inherit; }
@@ -92,21 +96,21 @@
         /* --- NAV & HERO --- */
         .nav-bar { padding: 20px 0; }
         .back-link {
-            display: inline-flex; align-items: center; color: var(--ctp-subtext1);
+            display: inline-flex; align-items: center; color: var(--ef-subtext);
             text-decoration: none; font-size: 0.95rem; transition: 0.2s;
             padding: 8px 16px; border-radius: 20px;
-            background: var(--ctp-surface0); border: 1px solid transparent;
+            background: var(--ef-surface0); border: 1px solid transparent;
         }
-        .back-link:hover { color: var(--ctp-text); background: rgba(69, 71, 90, 1); border-color: var(--card-border); }
+        .back-link:hover { color: var(--ef-text); background: var(--ef-surface1); border-color: var(--card-border); }
 
         .header-section { text-align: center; margin-bottom: 50px; animation: fadeIn 0.8s ease-out; }
         h1 {
             font-size: 3rem; margin: 0;
-            background: linear-gradient(90deg, var(--ctp-blue), var(--ctp-mauve));
+            background: linear-gradient(90deg, var(--ef-accent), var(--ef-accent-light));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             font-weight: 800;
         }
-        .subtitle { color: var(--ctp-subtext1); margin-top: 10px; }
+        .subtitle { color: var(--ef-subtext); margin-top: 10px; }
 
         /* --- GRID SYSTEM --- */
         .projects-grid {
@@ -132,8 +136,8 @@
 
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border-color: var(--ctp-blue);
+            box-shadow: 0 10px 30px rgba(10, 17, 13, 0.5);
+            border-color: var(--ef-accent);
         }
 
         /* Status Badge */
@@ -147,9 +151,8 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-        .status.active { background: rgba(166, 227, 161, 0.2); color: var(--ctp-green); border: 1px solid var(--ctp-green); }
-        .status.beta { background: rgba(250, 179, 135, 0.2); color: var(--ctp-peach); border: 1px solid var(--ctp-peach); }
-        .status.v1 { background: rgba(137, 180, 250, 0.2); color: var(--ctp-blue); border: 1px solid var(--ctp-blue); }
+        .status.active { background: rgba(50, 168, 82, 0.2); color: var(--ef-green); border: 1px solid var(--ef-green); }
+        .status.beta, .status.v1 { background: rgba(212, 163, 115, 0.2); color: var(--ef-accent); border: 1px solid var(--ef-accent); }
 
         .card-icon {
             font-size: 2.5rem;
@@ -159,12 +162,12 @@
         .card-title {
             font-size: 1.4rem;
             margin: 0 0 10px 0;
-            color: var(--ctp-text);
+            color: var(--ef-text);
         }
 
         .card-desc {
             font-size: 0.95rem;
-            color: var(--ctp-subtext1);
+            color: var(--ef-subtext);
             margin-bottom: 25px;
             flex-grow: 1; 
         }
@@ -172,8 +175,8 @@
         .card-btn {
             display: inline-block;
             text-align: center;
-            background: var(--ctp-surface0);
-            color: var(--ctp-text);
+            background: var(--ef-surface0);
+            color: var(--ef-text);
             text-decoration: none;
             padding: 12px;
             border-radius: 8px;
@@ -183,12 +186,12 @@
         }
 
         .card-btn:hover {
-            background: var(--ctp-blue);
-            color: var(--ctp-base);
-            border-color: var(--ctp-blue);
+            background: var(--ef-accent);
+            color: var(--ef-crust);
+            border-color: var(--ef-accent);
         }
 
-        footer { text-align: center; color: var(--ctp-subtext1); padding: 50px 0; font-size: 0.8rem; margin-top: 50px; }
+        footer { text-align: center; color: var(--ef-subtext); padding: 50px 0; font-size: 0.8rem; margin-top: 50px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
