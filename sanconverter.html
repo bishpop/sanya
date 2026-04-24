@@ -241,6 +241,74 @@
                 <li>* <b>M:</b> Mine.</li>
             </ul>
 
+            <h3>Beat Up 8 — Hold &amp; Roll Logic</h3>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">
+                Lane 7 (index 6) acts as a <b>Hold/Roll marker</b> in Arrow Vortex. When a Hold or Roll is active on lane 7,
+                the converter applies special key-assignment rules to every note inside that Hold/Roll region.
+            </p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Lane 7 Value</th>
+                            <th>Active Note Lane</th>
+                            <th>Key Assignment</th>
+                            <th>Jack Rule</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>2</code> (Hold Start)</td>
+                            <td>Lane 1 · <code>10000000</code></td>
+                            <td>Random from <code>{7, 4, 1}</code> (Left)</td>
+                            <td>No key used twice in same Hold</td>
+                        </tr>
+                        <tr>
+                            <td><code>2</code> (Hold Start)</td>
+                            <td>Lane 2 · <code>01000000</code></td>
+                            <td>Random from <code>{9, 6, 3}</code> (Right)</td>
+                            <td>No key used twice in same Hold</td>
+                        </tr>
+                        <tr>
+                            <td><code>2</code> (Hold Start)</td>
+                            <td>Any other lane · e.g. <code>00100000</code></td>
+                            <td>Random from all keys <code>{7,4,1,9,6,3}</code></td>
+                            <td>No key used twice in same Hold</td>
+                        </tr>
+                        <tr>
+                            <td><code>4</code> (Roll Start)</td>
+                            <td>Lane 1 · <code>10000000</code></td>
+                            <td>Random from <code>{7, 4, 1}</code> (Left)</td>
+                            <td>No direct repeat (no Jacks)</td>
+                        </tr>
+                        <tr>
+                            <td><code>4</code> (Roll Start)</td>
+                            <td>Lane 2 · <code>01000000</code></td>
+                            <td>Random from <code>{9, 6, 3}</code> (Right)</td>
+                            <td>No direct repeat (no Jacks)</td>
+                        </tr>
+                        <tr>
+                            <td><code>4</code> (Roll Start)</td>
+                            <td>Any other lane · e.g. <code>00100000</code></td>
+                            <td>Random from all keys <code>{7,4,1,9,6,3}</code></td>
+                            <td>Jacks <b>allowed</b> (free repeat)</td>
+                        </tr>
+                        <tr>
+                            <td><code>3</code> (Hold/Roll End)</td>
+                            <td>—</td>
+                            <td>Resets to standard BU8 logic</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ul class="note-list">
+                <li><b>Hold (<code>2</code>):</b> Every note inside the hold gets a unique key — no key is repeated anywhere within the same hold region, regardless of side.</li>
+                <li><b>Roll (<code>4</code>):</b> Lane 1 and Lane 2 notes avoid a direct repeat of the previous key (no Jacks). Notes on all other lanes are fully free and may Jack intentionally.</li>
+                <li><b>Side pinning:</b> Lane 1 (<code>10000000</code>) is always pinned to the <b>Left</b> array {7,4,1}; Lane 2 (<code>01000000</code>) is always pinned to the <b>Right</b> array {9,6,3} — for both Hold and Roll.</li>
+                <li>Outside of any Hold/Roll region the standard BU8 random-key logic applies unchanged.</li>
+            </ul>
+
             <br>
 
             <h3>Beat Up 4 Structure</h3>
