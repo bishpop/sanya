@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeatUp Engine v0.3 — Sanya</title>
+    <title>BeatUp Engine v0.4 — Sanya</title>
     <link rel="icon" type="image/png" href="./assets/bears_hand.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -44,9 +44,9 @@
         <div class="hero-content container">
             <div class="hero-meta">
                 <span class="tag" data-i18n="patcher.badge.status">Early Access</span>
-                <span class="tag outline">v0.3</span>
+                <span class="tag outline">v0.4</span>
                 <span class="tag outline">Windows x64</span>
-                <span class="version-pill">v0.3</span>
+                <span class="version-pill">v0.4</span>
             </div>
             
             <h1 class="hero-title" data-i18n="patcher.title">BeatUp Engine</h1>
@@ -95,7 +95,7 @@
                     <div class="feature-box">
                         <div class="feature-icon-wrapper">🎯</div>
                         <h4>1:1 Timing Engine</h4>
-                        <p>Beat detection ported directly from the original VB6 codebase. Perfect ±0.3, Great ±0.4, Cool ±0.5 windows.</p>
+                        <p>Graphics and hit logic now share a single time base, so pressing on the beat lands a true Perfect. Tight, adjustable Perfect window.</p>
                     </div>
                     <div class="feature-box">
                         <div class="feature-icon-wrapper">🎹</div>
@@ -103,9 +103,19 @@
                         <p>Numpad 9/6/3 (Right), 7/4/1 (Left), Space, and Numpad 5 for Finish Moves. Includes Mirror & AutoPlay.</p>
                     </div>
                     <div class="feature-box">
+                        <div class="feature-icon-wrapper">🎞️</div>
+                        <h4>Animated Arrows</h4>
+                        <p>Moving arrows cycle through per-beat frames just like the original game, with a full-size receptor explosion on hit.</p>
+                    </div>
+                    <div class="feature-box">
                         <div class="feature-icon-wrapper">🎼</div>
                         <h4>Chart Editor</h4>
-                        <p>Built-in timeline canvas with 1/4, 1/8, 1/16 snapping, and live split-view for real-time AutoPlay review.</p>
+                        <p>Timeline canvas with 1/4, 1/8, 1/16 snapping and a color-coded snap grid. Live split-view for real-time AutoPlay review.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper">💾</div>
+                        <h4>.bu Project Files</h4>
+                        <p>Save your whole session — audio, notes, position and BPM — and reopen it with a single double-click.</p>
                     </div>
                     <div class="feature-box">
                         <div class="feature-icon-wrapper">🎲</div>
@@ -136,8 +146,9 @@
                 <div class="data-group">
                     <h3 class="data-group-title">Global Hotkeys</h3>
                     <div class="data-table">
-                        <div class="data-row"><div class="data-key"><kbd>Esc</kbd></div><div class="data-val">Back / Menu / Exit (Hold 3s in-game)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + S</kbd></div><div class="data-val">Open Sound Settings</div></div>
+                        <div class="data-row"><div class="data-key"><kbd>Esc</kbd></div><div class="data-val">Back / Menu / Exit (Hold 3s in-game) • also closes Settings</div></div>
+                        <div class="data-row"><div class="data-key"><kbd>Ctrl + S</kbd></div><div class="data-val">Open / close Sound Settings</div></div>
+                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Shift + S</kbd></div><div class="data-val">Save project (.bu) next to the music file</div></div>
                     </div>
                 </div>
 
@@ -170,12 +181,24 @@
                 </div>
 
                 <div class="data-group" style="margin-top: 24px;">
+                    <h3 class="data-group-title">Import / Export</h3>
+                    <div class="data-table">
+                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Shift + E</kbd></div><div class="data-val">Export .slk (next to the audio file, no dialog)</div></div>
+                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Shift + V</kbd></div><div class="data-val">Export .ssc (writes BPM & music filename)</div></div>
+                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Alt + A</kbd></div><div class="data-val">Import audio (.ogg / .wav)</div></div>
+                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Alt + E</kbd></div><div class="data-val">Import .slk</div></div>
+                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Alt + V</kbd></div><div class="data-val">Import .ssc</div></div>
+                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Alt + B</kbd></div><div class="data-val">Open project (.bu)</div></div>
+                    </div>
+                </div>
+
+                <div class="data-group" style="margin-top: 24px;">
                     <h3 class="data-group-title">Editor & Playback</h3>
                     <div class="data-table">
                         <div class="data-row"><div class="data-key"><kbd>F1</kbd> / <kbd>F2</kbd> / <kbd>F3</kbd></div><div class="data-val">Game Mode / Editor / Split View</div></div>
                         <div class="data-row"><div class="data-key"><kbd>F4</kbd></div><div class="data-val">Toggle Metronome</div></div>
                         <div class="data-row"><div class="data-key"><kbd>F5</kbd> / <kbd>Space</kbd></div><div class="data-val">Audio Play / Pause (Toggle)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>F6</kbd></div><div class="data-val">Toggle AutoPlay</div></div>
+                        <div class="data-row"><div class="data-key"><kbd>F6</kbd></div><div class="data-val">Toggle AutoPlay (ON by default)</div></div>
                         <div class="data-row"><div class="data-key"><kbd>F7</kbd></div><div class="data-val">Stop playback & reset completely</div></div>
                         <div class="data-row"><div class="data-key"><kbd>K</kbd></div><div class="data-val">Stop & Rewind to Editor position</div></div>
                         <div class="data-row"><div class="data-key"><kbd>Ctrl + ⬅ / ➡</kbd></div><div class="data-val">Adjust Playback Speed (±5%)</div></div>
@@ -199,42 +222,60 @@
                     </div>
                 </div>
             </section>
+
             <section id="patch-notes" class="content-section">
-                <h2 class="section-title">Patch Notes (v0.3 Stable)</h2>
+                <h2 class="section-title">Patch Notes (v0.4 Stable)</h2>
+
+                <div class="about-text">
+                    <p>Existing charts, saves and encrypted patcher files from v0.3 remain fully compatible. The <code>0.7</code> timing offset default is unchanged and can still be overridden in <code>master.slk</code>.</p>
+                </div>
 
                 <div class="data-group">
-                    <h3 class="data-group-title">Patcher Game Modes</h3>
+                    <h3 class="data-group-title">Timing & Gameplay</h3>
                     <ul class="asset-list" style="margin-top: 10px;">
-                        <li><strong>Rapid Chance:</strong> Arrows approach at 2× speed and return to normal speed during the final quarter beat.</li>
-                        <li><strong>Vanishing Chance:</strong> Arrows smoothly fade out and fade back in with a heartbeat-like pulse.</li>
-                        <li><strong>Wave Chance:</strong> Arrows enter with a subtle wave motion.</li>
-                        <li><strong>Inverted Chance:</strong> Lanes are inverted (1↔9, 2↔8, 3↔7), including matching inverted input.</li>
-                        <li><strong>Speed Up Chance:</strong> Arrows start at normal speed and continuously accelerate during their approach.</li>
-                        <li><strong>Halfway Chance:</strong> Arrows only become visible halfway through their normal approach.</li>
-                        <li><strong>Default Chance:</strong> Preserves the original gameplay behaviour.</li>
+                        <li><strong>Unified Time Base:</strong> Graphics and hit logic now share the same time base. A note pressed while it sits on the receptor registers as a true Perfect — presses no longer feel late.</li>
+                        <li><strong>Full-Precision Offset:</strong> Removed sub-millisecond drift caused by rounding the offset. The <code>0.7</code> default is preserved as the single tuning value.</li>
+                        <li><strong>Adjustable Windows:</strong> Tight Perfect window with wider early Great/Cool/Bad windows so hits open earlier on approach; late windows are shorter as notes fly out after the receptor.</li>
+                        <li><strong>Smoother Tails:</strong> Missed / unpressed notes fly out noticeably longer before fading.</li>
                     </ul>
                 </div>
 
                 <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Editor Improvements</h3>
+                    <h3 class="data-group-title">Visuals</h3>
                     <ul class="asset-list" style="margin-top: 10px;">
-                        <li><strong>Live Duplicate Detection:</strong> Same-beat notes are highlighted in red, including <code>N + S</code>. <code>S + F</code> and <code>N + F</code> remain valid exceptions.</li>
-                        <li><strong>About Window:</strong> Added program information and a complete English hotkey reference.</li>
-                        <li><strong>Silencer Integration:</strong> The Editor can launch the external Silencer tool directly.</li>
-                        <li><strong>Update Check:</strong> Loading now checks GitHub releases and can direct users to the official download page when a newer version is available.</li>
+                        <li><strong>Receptor Beams:</strong> MP/RP beams reworked to cover the full lane box per key, aligned to the real receptor rows and mirrored per side.</li>
+                        <li><strong>Animated Arrows:</strong> Moving arrows cycle per-beat frames instead of a single static sprite.</li>
+                        <li><strong>Explosion:</strong> <code>arrow_explode</code> now renders at full original size and opacity, matching the Audition BeatUp explosion.</li>
                     </ul>
                 </div>
 
                 <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Patcher UI & Assets</h3>
+                    <h3 class="data-group-title">Editor</h3>
                     <ul class="asset-list" style="margin-top: 10px;">
-                        <li><strong>Chance Selector:</strong> Added a gear menu in the Patcher for selecting the active chance.</li>
-                        <li><strong>Session-only Settings:</strong> Chance selection lasts for the current session and resets to Default when the program restarts.</li>
-                        <li><strong>Chance Assets:</strong> Added dedicated visual assets for all Patcher chance modes.</li>
+                        <li><strong>.bu Project Files:</strong> Save the entire editor state (audio, BPM, offset, position, all notes) and double-click a <code>.bu</code> file to reopen it with everything restored.</li>
+                        <li><strong>Colored Snap Grid:</strong> White for MADI lines, red for 1/4, blue for 1/8, yellow for 1/16 — desaturated for long sessions.</li>
+                        <li><strong>Toast Notifications:</strong> On-screen confirmations for Save / Load / Export actions.</li>
+                        <li><strong>Import / Export Hotkeys:</strong> Direct <code>.slk</code> / <code>.ssc</code> exports next to the audio file; imports open a file browser. The <code>.ssc</code> export now writes BPM and the music filename.</li>
+                        <li><strong>Auto Enter-Chance:</strong> New setting to press Enter automatically once the countdown ends. New default judgment volumes (Perfect 120%, Great 70%, Cool 60%, Bad 55%).</li>
+                        <li><strong>Quality of Life:</strong> AutoPlay is ON by default; the redundant top-right score is gone; the scoreboard card is more compact and hidden in Split View so the third arrow stays visible.</li>
+                        <li><strong>Timeline &amp; Transport:</strong> Redesigned timeline slider and restyled Play / Pause / Stop buttons.</li>
                     </ul>
                 </div>
 
-                <a href="https://github.com/bishpop/beatupengine/releases/tag/v0.3" target="_blank" class="btn-secondary-large" style="margin-top: 24px; display: inline-flex;">
+                <div class="data-group" style="margin-top: 24px;">
+                    <h3 class="data-group-title">Fixes</h3>
+                    <ul class="asset-list" style="margin-top: 10px;">
+                        <li>Fixed inconsistent offset handling that caused an off-beat feel.</li>
+                        <li>Fixed MP/RP beams rendering as an oversized block, in the wrong position, or on the wrong side.</li>
+                        <li>Fixed the receptor-beam overshoot past the lane box and the right-side gap.</li>
+                        <li>Fixed <code>arrow_explode</code> scaling and coverage.</li>
+                        <li>Fixed the timeline slider rendering artifacts.</li>
+                        <li>Fixed the settings overlay that could not be closed.</li>
+                        <li>Fixed the score showing in Split View and covering the third arrow.</li>
+                    </ul>
+                </div>
+
+                <a href="https://github.com/bishpop/beatupengine/releases/tag/v0.4" target="_blank" class="btn-secondary-large" style="margin-top: 24px; display: inline-flex;">
                     View Release on GitHub ↗
                 </a>
             </section>
@@ -304,7 +345,7 @@
                 
                 <div class="widget-actions" style="display: flex; flex-direction: column; gap: 10px;">
     <!-- Oberer Button (Grün) -->
-    <a href="https://github.com/bishpop/beatupengine/releases/download/v0.3/BeatUpEngine-v0.3-Windows-x64.zip" class="btn-install btn-green" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/bishpop/beatupengine/releases/download/v0.4/BeatUpEngine-v0.4-Windows-x64.zip" class="btn-install btn-green" target="_blank" rel="noopener noreferrer">
         <span>Download Here</span>
         <span class="size">~15 MB</span>
     </a>
@@ -324,7 +365,7 @@
                 
                 <div class="widget-meta">
                     <div><span>OS</span> Windows 10/11 x64</div>
-                    <div><span>Version</span> v0.2 Stable</div>
+                    <div><span>Version</span> v0.4 Stable</div>
                 </div>
             </div>
             
@@ -335,8 +376,9 @@
                     <li>Keep <code>assets/</code> in the same folder as the <code>.exe</code>.</li>
                     <li>Launch <code>BeatUpEngine.exe</code>.</li>
                     <li>Use the Patcher gear menu to select an optional gameplay chance.</li>
-                    <li><strong>File → Import .ogg</strong> to load music.</li>
-                    <li><strong>File → Import .slk</strong> to load the chart.</li>
+                    <li><strong>File → Import Audio</strong> (or <kbd>Ctrl+Alt+A</kbd>) to load music.</li>
+                    <li><strong>File → Import .slk</strong> (or <kbd>Ctrl+Alt+E</kbd>) to load the chart.</li>
+                    <li>Save your work as a project with <kbd>Ctrl+Shift+S</kbd> (.bu).</li>
                 </ol>
             </div>
 
