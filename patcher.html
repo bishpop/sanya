@@ -3,456 +3,1111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BeatUp Engine — a cinematic showcase and download page.">
     <title>BeatUp Engine v0.5.1 — Sanya</title>
     <link rel="icon" type="image/png" href="./assets/bears_hand.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="modern-launcher">
 
-<nav class="navbar">
-    <div class="nav-left">
-        <a href="index.html" class="nav-brand">
-            <img src="./assets/logo.png" alt="Sanya" onerror="this.style.display='none'">
+    <style>
+
+        :root {
+            --bg: #05070b;
+            --bg-2: #090d14;
+            --surface: rgba(13, 18, 27, 0.68);
+            --surface-strong: rgba(15, 20, 30, 0.9);
+            --text: #f5f7fb;
+            --muted: rgba(224, 231, 243, 0.66);
+            --line: rgba(255,255,255,0.10);
+            --line-strong: rgba(255,255,255,0.17);
+            --blue: #3e8dff;
+            --blue-2: #55d6ff;
+            --pink: #ef55ff;
+            --green: #21dfa6;
+            --purple: #cba6f7;
+            --shadow: 0 32px 90px rgba(0,0,0,0.48);
+            --nav-h: 68px;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: auto; scrollbar-width: none; }
+        html::-webkit-scrollbar { width: 0; height: 0; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.55;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; }
+
+        .cin-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-h);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            background: linear-gradient(180deg, rgba(3,5,8,0.8), rgba(3,5,8,0.28));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            transition: background .3s ease, border-color .3s ease;
+        }
+        .cin-brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-size: 0.93rem;
+            font-weight: 700;
+            letter-spacing: .4px;
+        }
+        .cin-brand img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            object-fit: contain;
+            background: rgba(255,255,255,.07);
+        }
+        .cin-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+        .cin-nav-links a,
+        .cin-nav-link-button {
+            color: rgba(245,247,251,.65);
+            border: 0;
+            background: none;
+            cursor: pointer;
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: .3px;
+            padding: 4px 0;
+            transition: color .2s ease;
+        }
+        .cin-nav-links a:hover,
+        .cin-nav-link-button:hover { color: #fff; }
+        .nav-separator {
+            width: 1px;
+            height: 22px;
+            background: var(--line);
+        }
+
+        /* Custom theme scrollbar: native browser scrollbar is hidden. */
+        .custom-scrollbar {
+            --scrollbar-color: #cba6f7;
+            position: fixed;
+            top: 76px;
+            right: 14px;
+            bottom: 18px;
+            width: 8px;
+            z-index: 160;
+            pointer-events: auto;
+        }
+        .custom-scrollbar-track {
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 999px;
+            background: rgba(255,255,255,.035);
+            backdrop-filter: blur(10px);
+        }
+        .custom-scrollbar-thumb {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            min-height: 54px;
+            border-radius: 999px;
+            border: 1px solid color-mix(in srgb, var(--scrollbar-color) 68%, white 20%);
+            background: var(--scrollbar-color);
+            box-shadow: none;
+            cursor: grab;
+            touch-action: none;
+            transition: background .32s ease, border-color .32s ease, filter .18s ease;
+        }
+        .custom-scrollbar-thumb:hover { filter: brightness(1.12); }
+        .custom-scrollbar.dragging .custom-scrollbar-thumb {
+            cursor: grabbing;
+            filter: brightness(1.18);
+        }
+        @media (max-width: 720px) {
+            .custom-scrollbar { right: 8px; width: 6px; }
+        }
+
+        .scene {
+            position: relative;
+            min-height: 210vh;
+        }
+        .scene.short { min-height: 145vh; }
+        .scene.tall { min-height: 165vh; }
+        .scene-sticky {
+            position: sticky;
+            top: 0;
+            height: 100svh;
+            min-height: 640px;
+            overflow: hidden;
+        }
+        .scene-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            isolation: isolate;
+        }
+
+        /* Hero */
+        .hero .scene-inner { background: #04060a; }
+        .hero-pbg,
+        .hero-glow,
+        .hero-vignette { position: absolute; inset: 0; pointer-events: none; }
+        .hero-pbg {
+            background: url('./assets/menu_background.png') center center / cover no-repeat;
+            transform: scale(1.04);
+            will-change: transform, filter;
+        }
+        .hero-vignette {
+            background:
+                radial-gradient(circle at 73% 45%, transparent 0 17%, rgba(2,4,7,.22) 44%, rgba(2,4,7,.83) 100%),
+                linear-gradient(90deg, rgba(2,4,7,.88) 0%, rgba(2,4,7,.5) 30%, rgba(2,4,7,.12) 62%, rgba(2,4,7,.62) 100%);
+        }
+        .hero-glow {
+            background:
+                radial-gradient(circle at 75% 49%, rgba(45,150,255,.13), transparent 27%),
+                radial-gradient(circle at 81% 60%, rgba(237,78,255,.10), transparent 24%);
+            filter: blur(18px);
+            transform: scale(1.16);
+            mix-blend-mode: screen;
+            opacity: .72;
+        }
+        .hero-copy {
+            position: absolute;
+            z-index: 3;
+            left: clamp(24px, 8vw, 140px);
+            top: 50%;
+            width: min(640px, 50vw);
+            transform: translateY(-50%);
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 11px;
+            border: 1px solid rgba(255,255,255,.13);
+            border-radius: 999px;
+            background: rgba(5,8,12,.36);
+            color: rgba(245,247,251,.78);
+            font-size: .73rem;
+            font-weight: 700;
+            letter-spacing: .9px;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+        }
+        .eyebrow::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 12px rgba(33,223,166,.9);
+        }
+        .hero-copy h1 {
+            margin: 18px 0 14px;
+            font-size: clamp(3rem, 6.2vw, 5.8rem);
+            line-height: .95;
+            letter-spacing: -.055em;
+            font-weight: 800;
+        }
+        .hero-copy h1 span {
+            display: block;
+            color: #cbb9ff;
+        }
+        .hero-copy p {
+            max-width: 560px;
+            margin: 0;
+            color: var(--muted);
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
+            line-height: 1.78;
+        }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 26px;
+        }
+        .cin-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,.14);
+            background: rgba(255,255,255,.055);
+            color: #fff;
+            font-size: .84rem;
+            font-weight: 700;
+            transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        }
+        .cin-btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.24); background: rgba(255,255,255,.08); }
+        .cin-btn.primary {
+            border-color: rgba(203,166,247,.45);
+            color: #f7f1ff;
+            background: rgba(203,166,247,.16);
+        }
+        .cin-btn.primary:hover { background: rgba(203,166,247,.23); border-color: rgba(203,166,247,.65); box-shadow: none; }
+        .cin-btn.mauve {
+            border-color: rgba(33,223,166,.36);
+            background: rgba(33,223,166,.13);
+            color: #eafff7;
+        }
+        .cin-btn.mauve:hover { background: rgba(33,223,166,.2); border-color: rgba(33,223,166,.58); box-shadow: none; }
+        .hero-meta-line {
+            position: absolute;
+            left: clamp(24px, 8vw, 140px);
+            bottom: 8vh;
+            z-index: 3;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            color: rgba(255,255,255,.57);
+            font-size: .72rem;
+            letter-spacing: .6px;
+            text-transform: uppercase;
+        }
+        .meta-pill { padding: 5px 9px; border: 1px solid rgba(255,255,255,.1); border-radius: 7px; background: rgba(4,7,11,.28); }
+        .scroll-hint {
+            position: absolute;
+            right: clamp(28px, 4vw, 70px);
+            bottom: 7vh;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,.6);
+            font-size: .7rem;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+        .scroll-hint .mouse {
+            width: 22px;
+            height: 34px;
+            border: 1px solid rgba(255,255,255,.34);
+            border-radius: 12px;
+            position: relative;
+        }
+        .scroll-hint .mouse::after {
+            content: "";
+            position: absolute;
+            width: 3px;
+            height: 7px;
+            border-radius: 3px;
+            background: #fff;
+            left: 50%;
+            top: 6px;
+            transform: translateX(-50%);
+            opacity: .75;
+            animation: wheel 1.7s ease-in-out infinite;
+        }
+        @keyframes wheel { 0%,100% { transform: translate(-50%,0); opacity:.1; } 35% { opacity:.8; } 70% { transform: translate(-50%,9px); opacity:0; } }
+
+        /* Cinematic image scenes */
+        .image-scene .scene-inner { background: #060910; }
+        .scene-bg {
+            position: absolute;
+            inset: -8%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            will-change: transform, filter;
+        }
+        .scene-darken {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(4,7,12,.94) 0%, rgba(4,7,12,.6) 33%, rgba(4,7,12,.2) 64%, rgba(4,7,12,.72) 100%),
+                linear-gradient(0deg, rgba(4,7,12,.72), transparent 30%, transparent 70%, rgba(4,7,12,.4));
+        }
+        .image-scene.menu .scene-bg { background-image: url('./assets/menu_background.png'); }
+        .scene-content {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+        }
+        .scene-copy {
+            position: absolute;
+            left: clamp(26px, 8vw, 140px);
+            top: 50%;
+            transform: translateY(-50%);
+            width: min(420px, 31vw);
+        }
+        .scene-index {
+            color: rgba(255,255,255,.42);
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: 1.7px;
+            text-transform: uppercase;
+            margin-bottom: 11px;
+        }
+        .scene-copy h2 {
+            margin: 0 0 13px;
+            font-size: clamp(2.3rem, 4.7vw, 4.8rem);
+            line-height: .98;
+            letter-spacing: -.045em;
+        }
+        .scene-copy p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.75; }
+        .scene-caption {
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: rgba(255,255,255,.75);
+            font-size: .76rem;
+            font-weight: 600;
+        }
+        .scene-caption::before { content: ""; width: 24px; height: 1px; background: rgba(255,255,255,.35); }
+
+        .shot-card {
+            position: absolute;
+            z-index: 4;
+            right: clamp(28px, 6vw, 110px);
+            top: 50%;
+            width: min(61vw, 850px);
+            aspect-ratio: 4 / 3;
+            transform: translateY(-50%) rotate(0deg) scale(.84);
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,.13);
+            background: rgba(3,6,10,.38);
+            box-shadow: 0 24px 70px rgba(0,0,0,.42), 0 0 0 1px rgba(255,255,255,.025) inset;
+            overflow: hidden;
+            will-change: transform, opacity, filter;
+        }
+        .shot-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background: linear-gradient(135deg, rgba(255,255,255,.05), transparent 24%, transparent 76%, rgba(104,209,255,.04));
+        }
+        .shot-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .shot-frame-lines::after {
+            content: "";
+            position: absolute;
+            inset: 12px;
+            border: 1px solid rgba(255,255,255,.06);
+            border-radius: 14px;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .scene-light .scene-inner { background: radial-gradient(circle at 74% 38%, rgba(120,94,191,.12), transparent 34%), #06080d; }
+        .scene-light .scene-bg { display:none; }
+        .scene-light .scene-copy { width: min(500px, 39vw); }
+        .scene-light .shot-card { right: clamp(22px, 5vw, 90px); width: min(68vw, 940px); }
+
+        .two-shot .scene-inner { background: #05070b; }
+        .two-shot .shot-left,
+        .two-shot .shot-right {
+            position: absolute;
+            top: 50%;
+            width: min(42vw, 600px);
+            aspect-ratio: 4 / 3;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,.14);
+            box-shadow: var(--shadow);
+            will-change: transform, opacity, filter;
+        }
+        .two-shot .shot-left { left: 8vw; transform: translateY(-50%) rotate(-4deg) scale(.77); }
+        .two-shot .shot-right { right: 7vw; transform: translateY(-50%) rotate(4deg) scale(.77); }
+        .two-shot .shot-left img,
+        .two-shot .shot-right img { width: 100%; height: 100%; object-fit: cover; }
+        .two-shot .scene-copy {
+            top: 21%;
+            left: 50%;
+            width: min(520px, 58vw);
+            text-align: center;
+            transform: translateX(-50%);
+        }
+        .two-shot .scene-copy p { max-width: 520px; margin: 0 auto; }
+        .two-shot .scene-copy .scene-caption { justify-content: center; }
+
+        /* Content sections */
+        .content-block {
+            position: relative;
+            padding: 150px clamp(24px, 7vw, 110px);
+            background:
+                radial-gradient(circle at 50% 0%, rgba(78,139,255,.1), transparent 35%),
+                linear-gradient(180deg, #060910 0%, #05070b 100%);
+        }
+        .content-shell { max-width: 1180px; margin: 0 auto; }
+        .section-heading { max-width: 760px; margin-bottom: 54px; }
+        .section-heading .scene-index { margin-bottom: 15px; }
+        .section-heading h2 { margin: 0 0 14px; font-size: clamp(2.2rem, 5vw, 4.2rem); letter-spacing: -.05em; line-height: .98; }
+        .section-heading p { margin: 0; color: var(--muted); font-size: 1rem; max-width: 700px; line-height: 1.8; }
+        .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .feature-card {
+            padding: 24px;
+            min-height: 190px;
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 16px;
+            background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+            transform: translateY(28px);
+            opacity: 0;
+            transition: transform .7s cubic-bezier(.2,.75,.2,1), opacity .7s ease, border-color .25s ease;
+        }
+        .feature-card:nth-child(2) { transition-delay: .05s; }
+        .feature-card:nth-child(3) { transition-delay: .1s; }
+        .feature-card:nth-child(4) { transition-delay: .15s; }
+        .feature-card:nth-child(5) { transition-delay: .2s; }
+        .feature-card:nth-child(6) { transition-delay: .25s; }
+        .feature-card.visible { transform: translateY(0); opacity: 1; }
+        .feature-card:hover { border-color: rgba(255,255,255,.18); }
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: rgba(92,174,255,.09);
+            border: 1px solid rgba(105,192,255,.18);
+            margin-bottom: 18px;
+            color: #c9ecff;
+            font-size: 1rem;
+        }
+        .feature-card h3 { margin: 0 0 8px; font-size: 1rem; }
+        .feature-card p { margin: 0; color: var(--muted); font-size: .86rem; line-height: 1.65; }
+
+        .download-block {
+            padding: 150px 24px 130px;
+            background:
+                radial-gradient(circle at 50% 40%, rgba(33,223,166,.08), transparent 27%),
+                radial-gradient(circle at 70% 20%, rgba(203,166,247,.08), transparent 25%),
+                #05070b;
+            text-align: center;
+        }
+        .download-card {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: clamp(34px, 6vw, 60px);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,.10);
+            background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+            box-shadow: 0 30px 100px rgba(0,0,0,.35);
+        }
+        .download-card h2 { margin: 0 0 10px; font-size: clamp(2.2rem, 5vw, 4rem); letter-spacing: -.05em; }
+        .download-card p { margin: 0 auto; max-width: 610px; color: var(--muted); }
+        .download-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+        .download-meta { margin-top: 18px; color: rgba(255,255,255,.42); font-size: .72rem; letter-spacing: .7px; text-transform: uppercase; }
+        .back-to-top-wrap {
+            padding: 32px 24px 18px;
+            text-align: center;
+            background: #05070b;
+        }
+        .back-to-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 15px;
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 999px;
+            background: rgba(255,255,255,.025);
+            color: rgba(245,247,251,.62);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .9px;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            transition: border-color .2s ease, color .2s ease, background .2s ease, transform .2s ease;
+        }
+        .back-to-top:hover {
+            color: #fff;
+            border-color: rgba(203,166,247,.34);
+            background: rgba(203,166,247,.08);
+            transform: translateY(-1px);
+        }
+        .back-to-top::before { content: "↑"; font-size: .9rem; }
+        footer { padding: 18px 24px 38px; border-top: 1px solid rgba(255,255,255,.07); text-align: center; color: rgba(255,255,255,.35); font-size: .75rem; }
+
+        /* Small keybind / patch notes blocks */
+        .mini-sections { padding-top: 20px; }
+        .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .mini-card { border: 1px solid rgba(255,255,255,.09); border-radius: 16px; padding: 24px; background: rgba(255,255,255,.025); }
+        .mini-card h3 { margin: 0 0 13px; font-size: 1rem; }
+        .mini-card p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.7; }
+        .mini-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .86rem; line-height: 1.7; }
+        .mini-card li + li { margin-top: 7px; }
+        kbd { display: inline-flex; align-items: center; border: 1px solid rgba(255,255,255,.16); padding: 2px 6px; border-radius: 6px; font-size: .72rem; color: #fff; background: rgba(255,255,255,.06); }
+        code { color: #d9c7ff; }
+
+        @media (max-width: 980px) {
+            .scene { min-height: 145vh; }
+            .scene.tall { min-height: 155vh; }
+            .hero-copy { width: min(600px, 58vw); }
+            .scene-copy { width: min(460px, 42vw); }
+            .shot-card { width: min(66vw, 780px); right: 3vw; }
+            .feature-grid { grid-template-columns: 1fr 1fr; }
+            .two-shot .shot-left,
+            .two-shot .shot-right { width: min(48vw, 620px); }
+        }
+
+        @media (max-width: 720px) {
+            :root { --nav-h: 60px; }
+            .cin-nav { padding: 0 16px; }
+            .cin-nav-links a[href*="github"], .nav-separator { display: none; }
+            .cin-nav-links { gap: 13px; }
+            .scroll-progress { right: 8px; }
+            .scene, .scene.short, .scene.tall { min-height: 145vh; }
+            .scene-sticky { min-height: 620px; }
+            .hero-pbg { background-position: center; }
+            .hero-vignette { background: linear-gradient(90deg, rgba(2,4,7,.94), rgba(2,4,7,.42)), linear-gradient(0deg, rgba(2,4,7,.83), transparent 52%, rgba(2,4,7,.3)); }
+            .hero-copy { left: 20px; right: 20px; width: auto; top: 48%; }
+            .hero-copy h1 { font-size: clamp(3rem, 14vw, 5.1rem); }
+            .hero-copy p { font-size: .9rem; max-width: 510px; }
+            .hero-actions { margin-top: 20px; }
+            .scroll-hint { right: 20px; bottom: 5vh; }
+            .hero-meta-line { left: 20px; bottom: 7vh; max-width: 60vw; }
+
+            .scene-darken { background: linear-gradient(180deg, rgba(4,7,12,.72), rgba(4,7,12,.35) 42%, rgba(4,7,12,.94) 86%); }
+            .scene-copy, .scene-light .scene-copy { left: 20px; right: 20px; width: auto; top: 16vh; transform: none; }
+            .scene-copy h2 { font-size: clamp(2.2rem, 12vw, 4rem); }
+            .scene-copy p { max-width: 520px; font-size: .88rem; }
+            .shot-card, .scene-light .shot-card { top: 58%; right: 20px; left: 20px; width: auto; aspect-ratio: 4 / 3; }
+            .scene-light .shot-card:nth-of-type(2) { top: 70%; right: 10%; }
+            .two-shot .scene-copy { top: 13vh; left: 20px; right: 20px; width: auto; transform: none; }
+            .two-shot .shot-left { left: 20px; width: calc(100vw - 40px); top: 55%; transform: translateY(-50%) rotate(-2.5deg) scale(.94); }
+            .two-shot .shot-right { left: 40px; right: auto; width: calc(100vw - 40px); top: 66%; transform: translateY(-50%) rotate(2.5deg) scale(.88); }
+            .feature-grid { grid-template-columns: 1fr; }
+            .content-block { padding: 110px 20px; }
+            .mini-grid { grid-template-columns: 1fr; }
+            .download-block { padding: 110px 20px 90px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+        }
+    
+    </style>
+</head>
+
+<body id="page" class="cinematic-page">
+    <nav class="cin-nav">
+        <a class="cin-brand" href="index.html">
+            <img src="./assets/logo.png" alt="Sanya">
             <span>Sanya</span>
         </a>
-        <div class="nav-links">
-            <a href="index.html" data-i18n="nav.home">Home</a>
-            <a href="tools.html" class="active" data-i18n="nav.projects">Projects</a>
+        <div class="cin-nav-links">
+            <a href="index.html">Home</a>
+            <a href="tools.html">Projects</a>
+            <a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub ↗</a>
+            <span class="nav-separator"></span>
+            <a href="#download" data-smooth-target="#download">Download</a>
         </div>
-    </div>
-    
-    <div class="nav-right">
-        <a href="https://github.com/bishpop" target="_blank" class="nav-social">GitHub ↗</a>
-        <div class="divider"></div>
-        <button id="themeToggle" class="theme-toggle" title="Toggle Theme">☀️</button>
-        <div class="lang-switcher">
-            <button class="lang-btn active" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="zh">简</button>
-        </div>
-    </div>
-</nav>
-
-<main class="page-content">
-    
-    <section class="store-hero fade-in">
-        <div class="hero-backdrop"></div>
-        
-        <div class="hero-cover"></div> 
-
-        <div class="hero-content container">
-            <div class="hero-meta">
-                <span class="tag" data-i18n="patcher.badge.status">Early Access</span>
-                <span class="tag outline">v0.5.1</span>
-                <span class="tag outline">Windows x64</span>
-                <span class="version-pill">v0.5.1</span>
-            </div>
-            
-            <h1 class="hero-title" data-i18n="patcher.title">BeatUp Engine</h1>
-            <p class="hero-desc" data-i18n="patcher.subtitle">A high-fidelity, open-source BeatUp rhythm game engine built from scratch in C++ with SDL2. Designed to replicate authentic Audition Online / CDIU gameplay mechanics with sub-millisecond timing precision.</p>
-            
-            <div class="hero-actions">
-                <a href="#download" class="btn-primary-large" data-i18n="patcher.btn.download">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                    Download Release
-                </a>
-                <a href="https://github.com/bishpop" target="_blank" class="btn-secondary-large">Github</a>
-                <a href="#patch-notes" class="btn-secondary-large">Patch Notes</a>
+    </nav>
+        <div class="custom-scrollbar" id="customScrollbar" aria-label="Page scroll position">
+            <div class="custom-scrollbar-track" id="scrollTrack">
+                <div class="custom-scrollbar-thumb" id="scrollThumb" role="scrollbar" aria-controls="page"></div>
             </div>
         </div>
-    </section>
+<main id="top">
+        <section class="scene tall hero" data-scene="Hero">
+            <div class="scene-sticky">
+                <div class="scene-inner">
+                    <div class="hero-pbg" data-parallax="hero-bg"></div>
+                    <div class="hero-glow" data-parallax="hero-glow"></div>
+                    <div class="hero-vignette"></div>
 
-    <div class="container layout-grid fade-in" style="animation-delay: 0.1s;">
-        
-        <div class="main-column">
-            
-            <section class="content-section">
-                <h2 class="section-title">Media</h2>
-                <div class="media-scroller">
-                    <div class="media-item">
-                        <img src="./assets/MainMenu.png" alt="Editor Mode (With Split View)" class="gallery-preview-img" onerror="this.src='https://via.placeholder.com/600x338/171d24/21dfa6?text=Split+View'">
-                        <div class="media-caption">Main Menu</div>
+                    <div class="hero-copy" data-hero-copy>
+                        <div class="eyebrow">Early Access · v0.5.1 · Windows x64</div>
+                        <h1>BeatUp <span>Engine</span></h1>
+                        <p>
+                            A high-fidelity, open-source BeatUp rhythm game engine built from scratch in C++ with SDL2 — designed around authentic Audition Online / CDIU gameplay and precise timing.
+                        </p>
+                        <div class="hero-actions">
+                            <a class="cin-btn primary" href="#download" data-smooth-target="#download">Download Release</a>
+                            <a class="cin-btn" href="https://github.com/bishpop/beatupengine" target="_blank" rel="noopener">View on GitHub ↗</a>
+                        </div>
                     </div>
-                    <div class="media-item">
-                        <img src="./assets/BuEditor.png" alt="Chart Editor" class="gallery-preview-img" onerror="this.src='https://via.placeholder.com/600x338/171d24/21dfa6?text=Chart+Editor'">
-                        <div class="media-caption">Chart Editor</div>
+
+                    <div class="hero-meta-line">
+                        <span class="meta-pill">1:1 Timing</span>
+                        <span class="meta-pill">Animated Arrows</span>
+                        <span class="meta-pill">Chart Editor</span>
+                        <span class="meta-pill">Offline Patcher</span>
                     </div>
-                    <div class="media-item">
-                        <img src="./assets/BuPatcher.png" alt="Gameplay" class="gallery-preview-img" onerror="this.src='https://via.placeholder.com/600x338/171d24/21dfa6?text=Gameplay'">
-                        <div class="media-caption">Offline Patcher</div>
-                    </div>
+                    <div class="scroll-hint"><span>Scroll to explore</span><span class="mouse"></span></div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="content-section">
-                <h2 class="section-title" data-i18n="patcher.features.title">About This Engine</h2>
-                <div class="about-text">
-                    <p>The BeatUp Engine is engineered for absolute precision, delivering an authentic rhythm game experience natively on modern Windows systems without the overhead of heavy commercial game engines.</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🎯</div>
-                        <h4>1:1 Timing Engine</h4>
-                        <p>Graphics and hit logic now share a single time base, so pressing on the beat lands a true Perfect. Tight, adjustable Perfect window.</p>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🎹</div>
-                        <h4>Authentic Layout</h4>
-                        <p>Numpad 9/6/3 (Right), 7/4/1 (Left), Space, and Numpad 5 for Finish Moves. Includes Mirror & AutoPlay.</p>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🎞️</div>
-                        <h4>Animated Arrows</h4>
-                        <p>Moving arrows cycle through per-beat frames just like the original game, with a full-size receptor explosion on hit.</p>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🎼</div>
-                        <h4>Chart Editor</h4>
-                        <p>Timeline canvas with 1/4, 1/8, 1/16 snapping and a color-coded snap grid. Live split-view for real-time AutoPlay review.</p>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">💾</div>
-                        <h4>.bu Project Files</h4>
-                        <p>Save your whole session — audio, notes, position and BPM — and reopen it with a single double-click.</p>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🎲</div>
-                        <h4>Patcher Chances</h4>
-                        <p>Six optional Patcher-only gameplay modifiers: Rapid, Vanishing, Wave, Inverted, Speed Up, and Halfway, with Default remaining unchanged.</p>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🔍</div>
-                        <h4>Live Duplicate Detection</h4>
-                        <p>Same-beat note conflicts are highlighted immediately while editing, with valid finish-note exceptions preserved.</p>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🧰</div>
-                        <h4>Integrated Tools</h4>
-                        <p>Direct Silencer launching and a loading-time GitHub release check improve the overall workflow.</p>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🔊</div>
-                        <h4>miniaudio Engine</h4>
-                        <p>.ogg and .wav support with precise seekMs, adjustable playback speeds, and per-SFX volume control.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="content-section">
-                <h2 class="section-title" data-i18n="patcher.keys.title">Controls & Keybinds</h2>
-                
-                <div class="data-group">
-                    <h3 class="data-group-title">Global Hotkeys</h3>
-                    <div class="data-table">
-                        <div class="data-row"><div class="data-key"><kbd>Esc</kbd></div><div class="data-val">Back / Menu / Exit (Hold 3s in-game) • also closes Settings</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + S</kbd></div><div class="data-val">Open / close Sound Settings</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Shift + S</kbd></div><div class="data-val">Save project (.bu) next to the music file</div></div>
-                    </div>
-                </div>
-
-                <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Menu & Patcher</h3>
-                    <div class="data-table">
-                        <div class="data-row"><div class="data-key"><kbd>Up</kbd> / <kbd>Down</kbd></div><div class="data-val">Navigate song list</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Enter</kbd></div><div class="data-val">Start selected song</div></div>
-                    </div>
-                </div>
-                
-                <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Gameplay (Numpad)</h3>
-                    <div class="data-table">
-                        <div class="data-row"><div class="data-key"><kbd>Num 9 / 6 / 3</kbd></div><div class="data-val">Right Lane (Top / Mid / Bottom)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Num 7 / 4 / 1</kbd></div><div class="data-val">Left Lane (Top / Mid / Bottom)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Space</kbd> / <kbd>Num 0</kbd> / <kbd>Ins</kbd></div><div class="data-val">Space Note</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Num 5</kbd></div><div class="data-val">Finish Move</div></div>
-                    </div>
-                </div>
-
-                <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Gameplay (Standard)</h3>
-                    <div class="data-table">
-                        <div class="data-row"><div class="data-key"><kbd>4 / 5 / 6</kbd></div><div class="data-val">Right Lane (Top / Mid / Bottom)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>1 / 2 / 3</kbd></div><div class="data-val">Left Lane (Top / Mid / Bottom)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>S</kbd></div><div class="data-val">Space Note</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>F</kbd></div><div class="data-val">Finish Move</div></div>
-                    </div>
-                </div>
-
-                <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Import / Export</h3>
-                    <div class="data-table">
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Shift + E</kbd></div><div class="data-val">Export .slk (next to the audio file, no dialog)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Shift + V</kbd></div><div class="data-val">Export .ssc (writes BPM & music filename)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Alt + A</kbd></div><div class="data-val">Import audio (.ogg / .wav)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Alt + E</kbd></div><div class="data-val">Import .slk</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Alt + V</kbd></div><div class="data-val">Import .ssc</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Alt + B</kbd></div><div class="data-val">Open project (.bu)</div></div>
-                    </div>
-                </div>
-
-                <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Editor & Playback</h3>
-                    <div class="data-table">
-                        <div class="data-row"><div class="data-key"><kbd>F1</kbd> / <kbd>F2</kbd> / <kbd>F3</kbd></div><div class="data-val">Game Mode / Editor / Split View</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>F4</kbd></div><div class="data-val">Toggle Metronome</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>F5</kbd> / <kbd>Space</kbd></div><div class="data-val">Audio Play / Pause (Toggle)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>F6</kbd></div><div class="data-val">Toggle AutoPlay (ON by default)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>F7</kbd></div><div class="data-val">Stop playback & reset completely</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>K</kbd></div><div class="data-val">Stop & Rewind to Editor position</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + ⬅ / ➡</kbd></div><div class="data-val">Adjust Playback Speed (±5%)</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + 0</kbd></div><div class="data-val">Reset Speed to 100%</div></div>
-                    </div>
-                </div>
-
-                <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Chart Editing</h3>
-                    <div class="data-table">
-                        <div class="data-row"><div class="data-key"><kbd>Up</kbd> / <kbd>Down</kbd></div><div class="data-val">Seek timeline</div></div>
-                        <div class="data-row"><div class="data-key">Left Click</div><div class="data-val">Place / Remove note</div></div>
-                        <div class="data-row"><div class="data-key">Right Click</div><div class="data-val">Context Menu (Snap settings etc.)</div></div>
-                        <div class="data-row"><div class="data-key">Ctrl + Drag</div><div class="data-val">Select multiple notes</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + A</kbd></div><div class="data-val">Select all notes</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + C</kbd> / <kbd>V</kbd></div><div class="data-val">Copy / Paste selection</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + Z</kbd> / <kbd>Y</kbd></div><div class="data-val">Undo / Redo</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Ctrl + W</kbd> / <kbd>E</kbd></div><div class="data-val">Mirror Horizontally / Vertically</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Del</kbd></div><div class="data-val">Delete selection</div></div>
-                        <div class="data-row"><div class="data-key"><kbd>Tab</kbd></div><div class="data-val">Toggle tab selection</div></div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="patch-notes" class="content-section">
-                <h2 class="section-title">Patch Notes (v0.5.1 Stable)</h2>
-
-                <div class="about-text">
-                    <p>Existing charts, saves and encrypted patcher files from v0.4 remain fully compatible. The <code>0.7</code> timing offset default is unchanged and can still be overridden in <code>master.slk</code>.</p>
-                </div>
-
-                <div class="data-group">
-                    <h3 class="data-group-title">Timing & Gameplay</h3>
-                    <ul class="asset-list" style="margin-top: 10px;">
-                        <li><strong>Unified Time Base:</strong> Graphics and hit logic now share the same time base. A note pressed while it sits on the receptor registers as a true Perfect — presses no longer feel late.</li>
-                        <li><strong>Full-Precision Offset:</strong> Removed sub-millisecond drift caused by rounding the offset. The <code>0.7</code> default is preserved as the single tuning value.</li>
-                        <li><strong>Adjustable Windows:</strong> Tight Perfect window with wider early Great/Cool/Bad windows so hits open earlier on approach; late windows are shorter as notes fly out after the receptor.</li>
-                        <li><strong>Smoother Tails:</strong> Missed / unpressed notes fly out noticeably longer before fading.</li>
-                    </ul>
-                </div>
-
-                <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Visuals</h3>
-                    <ul class="asset-list" style="margin-top: 10px;">
-                        <li><strong>Receptor Beams:</strong> MP/RP beams reworked to cover the full lane box per key, aligned to the real receptor rows and mirrored per side.</li>
-                        <li><strong>Animated Arrows:</strong> Moving arrows cycle per-beat frames instead of a single static sprite.</li>
-                        <li><strong>Explosion:</strong> <code>arrow_explode</code> now renders at full original size and opacity, matching the Audition BeatUp explosion.</li>
-                    </ul>
-                </div>
-
-                <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Editor</h3>
-                    <ul class="asset-list" style="margin-top: 10px;">
-                        <li><strong>.bu Project Files:</strong> Save the entire editor state (audio, BPM, offset, position, all notes) and double-click a <code>.bu</code> file to reopen it with everything restored.</li>
-                        <li><strong>Colored Snap Grid:</strong> White for MADI lines, red for 1/4, blue for 1/8, yellow for 1/16 — desaturated for long sessions.</li>
-                        <li><strong>Toast Notifications:</strong> On-screen confirmations for Save / Load / Export actions.</li>
-                        <li><strong>Import / Export Hotkeys:</strong> Direct <code>.slk</code> / <code>.ssc</code> exports next to the audio file; imports open a file browser. The <code>.ssc</code> export now writes BPM and the music filename.</li>
-                        <li><strong>Auto Enter-Chance:</strong> New setting to press Enter automatically once the countdown ends. New default judgment volumes (Perfect 120%, Great 70%, Cool 60%, Bad 55%).</li>
-                        <li><strong>Quality of Life:</strong> AutoPlay is ON by default; the redundant top-right score is gone; the scoreboard card is more compact and hidden in Split View so the third arrow stays visible.</li>
-                        <li><strong>Timeline &amp; Transport:</strong> Redesigned timeline slider and restyled Play / Pause / Stop buttons.</li>
-                    </ul>
-                </div>
-
-                <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Fixes</h3>
-                    <ul class="asset-list" style="margin-top: 10px;">
-                        <li>Fixed inconsistent offset handling that caused an off-beat feel.</li>
-                        <li>Fixed MP/RP beams rendering as an oversized block, in the wrong position, or on the wrong side.</li>
-                        <li>Fixed the receptor-beam overshoot past the lane box and the right-side gap.</li>
-                        <li>Fixed <code>arrow_explode</code> scaling and coverage.</li>
-                        <li>Fixed the timeline slider rendering artifacts.</li>
-                        <li>Fixed the settings overlay that could not be closed.</li>
-                        <li>Fixed the score showing in Split View and covering the third arrow.</li>
-                    </ul>
-                </div>
-
-                <a href="https://github.com/bishpop/beatupengine/releases/tag/v0.5.1" target="_blank" class="btn-secondary-large" style="margin-top: 24px; display: inline-flex;">
-                    View Release on GitHub ↗
-                </a>
-            </section>
-
-            <section class="content-section">
-                <h2 class="section-title">Roadmap</h2>
-                <div class="about-text">
-                    <p>Future development for the BeatUp Engine and its supporting tools.</p>
-                </div>
-
-                <div class="features-grid">
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🎵</div>
-                        <h4>Timing & Audio Tools</h4>
-                        <p>Further improvements to timing analysis, audio handling, BPM detection, and precise offset workflows.</p>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🛠️</div>
-                        <h4>Editor Quality of Life</h4>
-                        <p>More diagnostics, visual helpers, and workflow improvements for chart creation and review.</p>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🎮</div>
-                        <h4>Patcher Expansion</h4>
-                        <p>More optional gameplay modifiers while keeping Default behaviour unchanged.</p>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">🔄</div>
-                        <h4>Distribution & Updates</h4>
-                        <p>Further improvements to release packaging, version checks, and update workflows.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="content-section">
-                <h2 class="section-title">System & Development</h2>
-                
-                <div class="data-group">
-                    <h3 class="data-group-title">System Requirements</h3>
-                    <div class="data-table">
-                        <div class="data-row">
-                            <div class="data-key">Operating System</div>
-                            <div class="data-val"><strong>Windows 10 / 11</strong> (64-bit recommended)</div>
+        <section class="scene image-scene scene-light" data-scene="First launch">
+            <div class="scene-sticky">
+                <div class="scene-inner">
+                    <div class="scene-bg" data-bg></div>
+                    <div class="scene-darken"></div>
+                    <div class="scene-content">
+                        <div class="scene-copy">
+                            <div class="scene-index">01 · First Launch</div>
+                            <h2>Onboarding — once.</h2>
+                            <p>
+                                A short first-run introduction explains the basics, then stays out of the way.
+                            </p>
+                            <div class="scene-caption">Shown on first start only.</div>
+                        </div>
+                        <div class="shot-card shot-frame-lines" data-shot data-from="onboarding">
+                            <img src="./assets/onboarding.png" alt="BeatUp Engine onboarding screen">
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="data-group" style="margin-top: 24px;">
-                    <h3 class="data-group-title">Build Dependencies (For Developers)</h3>
-                    <ul class="asset-list" style="margin-top: 10px;">
-                        <li><strong>CMake</strong> (Version 3.15 or higher)</li>
-                        <li><strong>Visual Studio</strong> with C++ desktop development workload (MSVC)</li>
-                        <li><strong>SDL2</strong> and <strong>SDL2_image</strong> development libraries</li>
-                        <li><strong>miniaudio</strong> (integrated for audio playback)</li>
-                        <li><strong>Dear ImGui</strong> (integrated for graphical user interface rendering)</li>
-                    </ul>
+        <section class="scene tall image-scene menu" data-scene="Main menu">
+            <div class="scene-sticky">
+                <div class="scene-inner">
+                    <div class="scene-bg" data-bg></div>
+                    <div class="scene-darken"></div>
+                    <div class="scene-content">
+                        <div class="scene-copy" data-scene-copy>
+                            <div class="scene-index">02 · Select Mode</div>
+                            <h2>Choose a mode.</h2>
+                            <p>
+                                Editor or patcher — the main menu keeps the two workflows one step apart.
+                            </p>
+                            <div class="scene-caption">Select what you want to do.</div>
+                        </div>
+                        <div class="shot-card shot-frame-lines" data-shot data-from="menu">
+                            <img src="./assets/menustate.png" alt="BeatUp Engine select mode screen">
+                        </div>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
+
+        <section class="scene tall image-scene" data-scene="Editor">
+            <div class="scene-sticky">
+                <div class="scene-inner">
+                    <div class="scene-bg" data-bg style="background-image:url('./assets/pbg.png'); opacity:.33;"></div>
+                    <div class="scene-darken"></div>
+                    <div class="scene-content">
+                        <div class="scene-copy">
+                            <div class="scene-index">03 · Chart Editor</div>
+                            <h2>Create the chart.<br>Preview it live.</h2>
+                            <p>
+                                Place notes, use snapping and check the result immediately with split view and playback.
+                            </p>
+                            <div class="scene-caption">Edit. Play. Adjust.</div>
+                        </div>
+                        <div class="shot-card shot-frame-lines" data-shot data-from="editor">
+                            <img src="./assets/chart_editor.png" alt="BeatUp Engine chart editor">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="scene tall two-shot" data-scene="Gameplay">
+            <div class="scene-sticky">
+                <div class="scene-inner">
+                    <div class="scene-content">
+                        <div class="scene-copy">
+                            <div class="scene-index">04 · Gameplay</div>
+                            <h2>From chart to play.</h2>
+                            <p>
+                                The chart becomes the game: notes, timing, effects and the patcher all come together here.
+                            </p>
+                            <div class="scene-caption">One project, different ways to play.</div>
+                        </div>
+                        <div class="shot-left" data-two-shot="left">
+                            <img src="./assets/gameplay.png" alt="BeatUp Engine gameplay">
+                        </div>
+                        <div class="shot-right" data-two-shot="right">
+                            <img src="./assets/BuPatcher.png" alt="BeatUp Engine patcher" onerror="this.onerror=null;this.src='./assets/bupatcher.png';">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block" data-content-section>
+            <div class="content-shell">
+                <div class="section-heading">
+                    <div class="scene-index">05 · Why it feels different</div>
+                    <h2>Built like a rhythm engine, presented like a game.</h2>
+                    <p>
+                        The content from the existing page remains available, but the visual story can now lead the visitor instead of making them parse a wall of cards first.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <article class="feature-card reveal"><div class="feature-icon">01</div><h3>1:1 Timing Engine</h3><p>Graphics and hit logic share a single time base, with a tight, adjustable Perfect window.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">02</div><h3>Authentic Layout</h3><p>Numpad 9/6/3, 7/4/1, Space and Finish Move controls with Mirror and AutoPlay support.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">03</div><h3>Animated Arrows</h3><p>Moving arrows cycle through per-beat frames with a full-size receptor explosion.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">04</div><h3>Chart Editor</h3><p>Timeline canvas with 1/4, 1/8 and 1/16 snapping plus split-view playback.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">05</div><h3>.bu Project Files</h3><p>Save audio, BPM, position and notes and reopen the whole editing session later.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">06</div><h3>Patcher Chances</h3><p>Rapid, Vanishing, Wave, Inverted, Speed Up and Halfway — with Default unchanged.</p></article>
+                </div>
+
+                <div class="mini-sections" style="margin-top:32px;">
+                    <div class="mini-grid">
+                        <div class="mini-card reveal">
+                            <h3>Patch Notes · v0.5.1 Stable</h3>
+                            <ul>
+                                <li>Unified time base for graphics and hit logic.</li>
+                                <li>Full-precision offset handling.</li>
+                                <li>Smoother missed-note tails.</li>
+                                <li>Reworked MP/RP receptor beams.</li>
+                                <li>Animated arrow frames and full-size explosion.</li>
+                            </ul>
+                        </div>
+                        <div class="mini-card reveal">
+                            <h3>Controls</h3>
+                            <p>
+                                <kbd>F1</kbd> Game Mode · <kbd>F2</kbd> Editor · <kbd>F3</kbd> Split View · <kbd>F4</kbd> Metronome · <kbd>F5</kbd>/<kbd>Space</kbd> Play/Pause · <kbd>F6</kbd> AutoPlay · <kbd>F7</kbd> Stop/Reset.
+                            </p>
+                            <p style="margin-top:12px;">
+                                <kbd>Ctrl+Shift+S</kbd> Save .bu · <kbd>Ctrl+Shift+E</kbd> Export .slk · <kbd>Ctrl+Shift+V</kbd> Export .ssc.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="download-block">
+            <div class="download-card">
+                <div class="scene-index">06 · Ready when you are</div>
+                <h2>Play BeatUp Engine.</h2>
+                <p>
+                    Windows 10/11 x64 · v0.5.1 Stable · Portable build. Keep the <code>assets/</code> folder beside the executable.
+                </p>
+                <div class="download-actions">
+                    <a class="cin-btn primary" href="https://github.com/bishpop/beatupengine/releases/download/v0.5.1/BeatUpEngine-v0.5.1-Windows-x64.zip" target="_blank" rel="noopener">Download Release · ~25 MB</a>
+                    <a class="cin-btn mauve" href="https://drive.google.com/uc?export=download&id=1b4bldL6xGjY1i6EPoLN0TGhU6JYqCBwh" target="_blank" rel="noopener">Patcher · ~150 MB</a>
+                    <a class="cin-btn" href="./assets/manual.pdf" target="_blank" rel="noopener">Show User Manual · PDF</a>
+                </div>
+                <div class="download-meta">Free to play · Portable build · Offline patcher</div>
+            </div>
+        </section>
+
+        <div class="back-to-top-wrap">
+            <a href="#top" class="back-to-top" data-smooth-target="#top">Back to top</a>
         </div>
+    </main>
 
-        <aside class="sidebar">
-            
-            <div id="download" class="widget download-widget">
-                <img src="./assets/bear.png" alt="Icon" class="widget-icon" onerror="this.style.display='none'">
-                <h3>Play BeatUp Engine</h3>
-                <p class="widget-sub">Free to play • Portable Build</p>
-                
-                <div class="widget-actions" style="display: flex; flex-direction: column; gap: 10px;">
-    <!-- Oberer Button (Grün) -->
-    <a href="https://github.com/bishpop/beatupengine/releases/download/v0.5.1/BeatUpEngine-v0.5.1-Windows-x64.zip" class="btn-install btn-green" target="_blank" rel="noopener noreferrer">
-        <span>Download Here</span>
-        <span class="size">~25 MB</span>
-    </a>
-    
-    <!-- Untere Buttons (Mauve) -->
-    <a href="https://drive.google.com/uc?export=download&id=1b4bldL6xGjY1i6EPoLN0TGhU6JYqCBwh" class="btn-install btn-mauve" target="_blank" rel="noopener noreferrer">
-        <span>Patcher</span>
-        <span class="size">~150 MB</span>
-    </a>
+    <footer>© 2026 Sanya. All rights reserved.</footer>
 
-    <!-- PDF Manual Link (Mauve) -->
-    <a href="./assets/manual.pdf" class="btn-install btn-mauve" target="_blank" rel="noopener noreferrer">
-        <span>📖 Show User Manual</span>
-        <span class="size">PDF</span>
-    </a>
-</div>
-                
-                <div class="widget-meta">
-                    <div><span>OS</span> Windows 10/11 x64</div>
-                    <div><span>Version</span> v0.5.1 Stable</div>
-                </div>
-            </div>
-            
-            <div class="widget info-widget">
-                <h3 class="widget-title">Installation Guide</h3>
-                <ol class="clean-steps">
-                    <li>Extract the downloaded <code>.zip</code> file.</li>
-                    <li>Keep <code>assets/</code> in the same folder as the <code>.exe</code>.</li>
-                    <li>Launch <code>BeatUpEngine.exe</code>.</li>
-                    <li>Use the Patcher gear menu to select an optional gameplay chance.</li>
-                    <li><strong>File → Import Audio</strong> (or <kbd>Ctrl+Alt+A</kbd>) to load music.</li>
-                    <li><strong>File → Import .slk</strong> (or <kbd>Ctrl+Alt+E</kbd>) to load the chart.</li>
-                    <li>Save your work as a project with <kbd>Ctrl+Shift+S</kbd> (.bu).</li>
-                </ol>
-            </div>
+    <script>
+        (() => {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const scenes = [...document.querySelectorAll('[data-scene]')];
+            const contentSection = document.querySelector('[data-content-section]');
+            const downloadSection = document.querySelector('#download');
+            const progressBar = document.getElementById('scrollProgress');
+            const animatedSceneProgress = new Map(scenes.map(scene => [scene, 0]));
 
-            <div class="widget info-widget">
-                <h3 class="widget-title">Asset Structure</h3>
-                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -5px; margin-bottom: 12px; line-height: 1.5;">Drop files into these folders to replace textures/sounds.</p>
-                <ul class="asset-list">
-                    <li><strong>/arrows/</strong> Sprites, lasers</li>
-                    <li><strong>/bars/</strong> Lane backgrounds & chance indicators</li>
-                    <li><strong>/space/</strong> Spacebar UI elements</li>
-                    <li><strong>/combo/</strong> Combo & Score digits</li>
-                    <li><strong>/sounds/</strong> beat.wav, miss.ogg, etc.</li>
-                </ul>
-            </div>
-            
-        </aside>
+            const clamp = (n, a = 0, b = 1) => Math.min(b, Math.max(a, n));
+            const lerp = (a, b, t) => a + (b - a) * t;
+            const ease = (t) => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+            const easeInOutCubic = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-    </div>
-</main>
+            function sceneProgress(scene) {
+                const rect = scene.getBoundingClientRect();
+                const travel = Math.max(1, scene.offsetHeight - window.innerHeight);
+                return clamp(-rect.top / travel);
+            }
 
-<footer class="app-footer">
-    <div class="container">
-        <p>&copy; 2026 Sanya. All rights reserved.</p>
-    </div>
-</footer>
+            function animateScene(scene, p) {
+                const bg = scene.querySelector('[data-bg]');
+                const shots = scene.querySelectorAll('[data-shot]');
+                const e = ease(p);
 
-<div class="lightbox-overlay" id="lightbox">
-    <span class="lightbox-close" id="lightboxClose">×</span>
-    <img class="lightbox-img" id="lightboxImg" src="" alt="">
-</div>
+                if (bg) {
+                    const shift = (p - .5) * -6;
+                    bg.style.transform = `translate3d(0, ${shift}%, 0) scale(${lerp(1.03, 1.08, p)})`;
+                }
 
-<script src="i18n.js"></script>
-<script>
-// Lightbox Logic
-document.querySelectorAll('.gallery-preview-img').forEach(img => {
-    img.addEventListener('click', () => {
-        document.getElementById('lightboxImg').src = img.src;
-        document.getElementById('lightbox').classList.add('active');
-    });
-});
-document.getElementById('lightboxClose').addEventListener('click', () =>
-    document.getElementById('lightbox').classList.remove('active'));
-document.getElementById('lightbox').addEventListener('click', e => {
-    if (e.target === e.currentTarget) e.currentTarget.classList.remove('active');
-});
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('active');
-});
-</script>
-<script>
-// Smooth Scroll & Highlight für ALLE internen Links (z.B. #download, #patch-notes)
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href');
-        
-        // Ignoriere leere Links
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-            e.preventDefault(); // Verhindert das harte Springen
-            
-            // Sanft zur Sektion scrollen
-            targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // Animationsklasse entfernen und neu hinzufügen
-            targetElement.classList.remove('highlight-pulse');
-            setTimeout(() => {
-                targetElement.classList.add('highlight-pulse');
-            }, 10);
-        }
-    });
-});
-</script>
+                shots.forEach((shot) => {
+                    const kind = shot.dataset.from || '';
+                    let x = 0, y = 0, r = 0, s = 1, o = 1;
+
+                    if (kind === 'menu') {
+                        const q = clamp((p - .08) / .78);
+                        x = lerp(150, 0, ease(q));
+                        y = lerp(55, -8, ease(q));
+                        r = lerp(-5, 0, ease(q));
+                        s = lerp(.84, 1, ease(q));
+                        o = clamp(q * 1.4);
+                    } else if (kind === 'onboarding') {
+                        const q = clamp((p - .06) / .78);
+                        x = lerp(170, 0, ease(q));
+                        y = lerp(60, -8, ease(q));
+                        r = lerp(4, 0, ease(q));
+                        s = lerp(.82, 1.03, ease(q));
+                        o = clamp(q * 1.35);
+                    } else if (kind === 'editor') {
+                        const q = clamp((p - .06) / .78);
+                        x = lerp(180, 0, ease(q));
+                        y = lerp(45, -18, ease(q));
+                        r = lerp(3.5, 0, ease(q));
+                        s = lerp(.83, 1, ease(q));
+                        o = clamp(q * 1.35);
+                    }
+
+                    shot.style.transform =
+                        `translate3d(${x}px, calc(-50% + ${y}px), 0) rotate(${r}deg) scale(${s})`;
+                    shot.style.opacity = o;
+                });
+
+                if (scene.classList.contains('hero')) {
+                    const pbg = scene.querySelector('.hero-pbg');
+                    const glow = scene.querySelector('.hero-glow');
+                    const logo = scene.querySelector('[data-hero-logo]');
+                    const copy = scene.querySelector('[data-hero-copy]');
+
+                    if (pbg) {
+                        pbg.style.transform =
+                            `scale(${lerp(1.03, 1.12, p)}) translate3d(0, ${lerp(0, -2.2, p)}%, 0)`;
+                    }
+                    if (glow) {
+                        glow.style.transform =
+                            `scale(${lerp(1.05, 1.24, p)}) translate3d(${lerp(0, 2, p)}%, ${lerp(0, -2, p)}%, 0)`;
+                    }
+                    if (logo) {
+                        logo.style.transform =
+                            `translate3d(${lerp(0, 9, e)}%, ${lerp(0, -10, e)}%, 0) scale(${lerp(1, 1.14, e)})`;
+                        logo.style.opacity = clamp(1 - Math.max(0, p - .22) * 1.8);
+                        logo.style.filter =
+                            `drop-shadow(0 ${lerp(18, 32, p)}px ${lerp(36, 54, p)}px rgba(0,0,0,.55))`;
+                    }
+                    if (copy) {
+                        copy.style.transform =
+                            `translate3d(${lerp(0, -7, e)}%, calc(-50% + ${lerp(0, -4, e)}px), 0)`;
+                        copy.style.opacity = clamp(1 - Math.max(0, p - .16) * 2.4);
+                    }
+                }
+
+                if (scene.classList.contains('two-shot')) {
+                    const left = scene.querySelector('[data-two-shot="left"]');
+                    const right = scene.querySelector('[data-two-shot="right"]');
+
+                    const q1 = clamp((p - .03) / .72);
+                    const q2 = clamp((p - .15) / .70);
+
+                    if (left) {
+                        left.style.transform =
+                            `translate3d(${lerp(-130, 0, ease(q1))}px, calc(-50% + ${lerp(38, 0, ease(q1))}px), 0) rotate(${lerp(-7, -3, ease(q1))}deg) scale(${lerp(.78, .92, ease(q1))})`;
+                        left.style.opacity = clamp(q1 * 1.4);
+                    }
+                    if (right) {
+                        right.style.transform =
+                            `translate3d(${lerp(130, 0, ease(q2))}px, calc(-50% + ${lerp(55, 10, ease(q2))}px), 0) rotate(${lerp(7, 3, ease(q2))}deg) scale(${lerp(.76, .88, ease(q2))})`;
+                        right.style.opacity = clamp(q2 * 1.45);
+                    }
+                }
+            }
+
+            let ticking = false;
+            let scrollbarDragging = false;
+            let dragOffset = 0;
+
+            const customScrollbar = document.getElementById('customScrollbar');
+            const scrollTrack = document.getElementById('scrollTrack');
+            const scrollThumb = document.getElementById('scrollThumb');
+
+            function updateCustomScrollbar() {
+                if (!customScrollbar || !scrollTrack || !scrollThumb) return;
+
+                const viewport = window.innerHeight;
+                const docHeight = document.documentElement.scrollHeight;
+                const maxScroll = Math.max(1, docHeight - viewport);
+                const trackHeight = scrollTrack.clientHeight;
+                const thumbHeight = Math.max(54, Math.min(trackHeight, trackHeight * viewport / docHeight));
+                const maxThumbTravel = Math.max(0, trackHeight - thumbHeight);
+                const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+
+                // The scrollbar follows the current part of the site instead of staying one color.
+                const stops = [
+                    [0.00, [203,166,247]],
+                    [0.22, [116,164,255]],
+                    [0.46, [157,125,250]],
+                    [0.72, [33,223,166]],
+                    [1.00, [203,166,247]]
+                ];
+                function colorAt(t) {
+                    for (let i = 0; i < stops.length - 1; i++) {
+                        const a = stops[i], b = stops[i + 1];
+                        if (t <= b[0]) {
+                            const q = (t - a[0]) / (b[0] - a[0]);
+                            const rgb = a[1].map((v, j) => Math.round(lerp(v, b[1][j], q)));
+                            return `rgb(${rgb[0]} ${rgb[1]} ${rgb[2]})`;
+                        }
+                    }
+                    const last = stops[stops.length - 1][1];
+                    return `rgb(${last[0]} ${last[1]} ${last[2]})`;
+                }
+                customScrollbar.style.setProperty('--scrollbar-color', colorAt(progress));
+
+                scrollThumb.style.height = `${thumbHeight}px`;
+                scrollThumb.style.transform = `translateY(${maxThumbTravel * progress}px)`;
+                scrollThumb.setAttribute('aria-valuemin', '0');
+                scrollThumb.setAttribute('aria-valuemax', '100');
+                scrollThumb.setAttribute('aria-valuenow', String(Math.round(progress * 100)));
+            }
+
+            function update() {
+                scenes.forEach(scene => {
+                    const target = sceneProgress(scene);
+                    const current = animatedSceneProgress.get(scene) ?? target;
+                    // The page remains freely scrollable. The artwork itself eases toward
+                    // the scroll position, so each gesture naturally finishes its motion.
+                    const next = reduceMotion ? target : lerp(current, target, 0.115);
+                    animatedSceneProgress.set(scene, next);
+                    animateScene(scene, next);
+                });
+                updateCustomScrollbar();
+                if (!reduceMotion && scenes.some(scene => Math.abs(animatedSceneProgress.get(scene) - sceneProgress(scene)) > 0.001)) {
+                    requestAnimationFrame(update);
+                }
+                ticking = false;
+            }
+
+            function requestUpdate() {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(update);
+                }
+            }
+
+            function scrollFromPointer(clientY) {
+                if (!scrollTrack || !scrollThumb) return;
+                const rect = scrollTrack.getBoundingClientRect();
+                const trackHeight = rect.height;
+                const thumbHeight = scrollThumb.offsetHeight;
+                const maxThumbTravel = Math.max(0, trackHeight - thumbHeight);
+                const y = clientY - rect.top - dragOffset;
+                const progress = maxThumbTravel > 0 ? Math.min(1, Math.max(0, y / maxThumbTravel)) : 0;
+                const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+                window.scrollTo(0, progress * maxScroll);
+            }
+
+            scrollThumb?.addEventListener('pointerdown', (event) => {
+                event.preventDefault();
+                scrollbarDragging = true;
+                customScrollbar?.classList.add('dragging');
+                dragOffset = event.clientY - scrollThumb.getBoundingClientRect().top;
+                scrollThumb.setPointerCapture?.(event.pointerId);
+            });
+
+            scrollThumb?.addEventListener('pointermove', (event) => {
+                if (!scrollbarDragging) return;
+                scrollFromPointer(event.clientY);
+            });
+
+            function stopScrollbarDrag(event) {
+                if (!scrollbarDragging) return;
+                scrollbarDragging = false;
+                customScrollbar?.classList.remove('dragging');
+                try { scrollThumb.releasePointerCapture?.(event.pointerId); } catch (_) {}
+            }
+
+            scrollThumb?.addEventListener('pointerup', stopScrollbarDrag);
+            scrollThumb?.addEventListener('pointercancel', stopScrollbarDrag);
+            scrollThumb?.addEventListener('lostpointercapture', () => {
+                scrollbarDragging = false;
+                customScrollbar?.classList.remove('dragging');
+            });
+
+            scrollTrack?.addEventListener('pointerdown', (event) => {
+                if (event.target === scrollThumb) return;
+                dragOffset = scrollThumb?.offsetHeight ? scrollThumb.offsetHeight / 2 : 0;
+                scrollFromPointer(event.clientY);
+            });
+
+            scrollThumb?.addEventListener('keydown', (event) => {
+                const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+                const step = Math.max(80, window.innerHeight * 0.12);
+                if (event.key === 'ArrowDown') window.scrollBy(0, step);
+                else if (event.key === 'ArrowUp') window.scrollBy(0, -step);
+                else if (event.key === 'PageDown') window.scrollBy(0, window.innerHeight * .9);
+                else if (event.key === 'PageUp') window.scrollBy(0, -window.innerHeight * .9);
+                else if (event.key === 'Home') window.scrollTo(0, 0);
+                else if (event.key === 'End') window.scrollTo(0, maxScroll);
+                else return;
+                event.preventDefault();
+            });
+
+            if (!reduceMotion) {
+                window.addEventListener('scroll', requestUpdate, { passive: true });
+                window.addEventListener('resize', requestUpdate);
+                update();
+            } else {
+                update();
+            }
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.16 });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            function smoothScrollToElement(target, duration = 1100) {
+                if (!target) return;
+                const startY = window.scrollY;
+                const rawTarget = target.id === 'top' ? 0 : target.getBoundingClientRect().top + window.scrollY;
+                const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+                const endY = Math.min(maxScroll, Math.max(0, rawTarget));
+                const distance = endY - startY;
+                if (Math.abs(distance) < 2) return;
+
+                const startTime = performance.now();
+                const easeScroll = t => 1 - Math.pow(1 - t, 4);
+                function frame(now) {
+                    const p = clamp((now - startTime) / duration);
+                    window.scrollTo(0, startY + distance * easeScroll(p));
+                    if (p < 1) requestAnimationFrame(frame);
+                }
+                requestAnimationFrame(frame);
+            }
+
+            document.querySelectorAll('[data-smooth-target]').forEach(anchor => {
+                anchor.addEventListener('click', (event) => {
+                    const selector = anchor.getAttribute('data-smooth-target');
+                    const target = selector ? document.querySelector(selector) : null;
+                    if (!target) return;
+                    event.preventDefault();
+                    smoothScrollToElement(target);
+                });
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                if (anchor.hasAttribute('data-smooth-target')) return;
+                anchor.addEventListener('click', (event) => {
+                    const id = anchor.getAttribute('href');
+                    if (!id || id === '#') return;
+                    const target = document.querySelector(id);
+                    if (!target) return;
+                    event.preventDefault();
+                    smoothScrollToElement(target);
+                });
+            });
+        })();
+
+    </script>
 </body>
 </html>
