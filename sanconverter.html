@@ -3,342 +3,904 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SanConverter Docs | 0x53616E</title>
+    <meta name="description" content="SanConverter — documentation, conversion logic and downloads.">
+    <title>SanConverter v1.4.4 — Sanya</title>
     <link rel="icon" type="image/png" href="./assets/bears_hand.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #05070b;
+            --bg-2: #090d14;
+            --surface: rgba(13, 18, 27, 0.68);
+            --surface-strong: rgba(15, 20, 30, 0.9);
+            --text: #f5f7fb;
+            --muted: rgba(224, 231, 243, 0.66);
+            --muted-2: rgba(224, 231, 243, 0.46);
+            --line: rgba(255,255,255,0.10);
+            --line-strong: rgba(255,255,255,0.17);
+            --blue: #55b9ff;
+            --mint: #21dfa6;
+            --purple: #cba6f7;
+            --purple-2: #aa8cff;
+            --shadow: 0 32px 90px rgba(0,0,0,0.48);
+            --nav-h: 68px;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: auto; scrollbar-width: none; }
+        html::-webkit-scrollbar { width: 0; height: 0; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.55;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::selection { background: rgba(203,166,247,.30); color: #fff; }
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; }
+        code, kbd { font-family: "Cascadia Code", Consolas, monospace; }
+
+        /* Navigation */
+        .cin-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-h);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            background: linear-gradient(180deg, rgba(3,5,8,0.84), rgba(3,5,8,0.30));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .cin-brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-size: .93rem;
+            font-weight: 700;
+            letter-spacing: .4px;
+        }
+        .cin-brand img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            object-fit: contain;
+            background: rgba(255,255,255,.07);
+        }
+        .cin-nav-links { display:flex; align-items:center; gap:22px; }
+        .cin-nav-links a {
+            color: rgba(245,247,251,.65);
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: .3px;
+            padding: 4px 0;
+            transition: color .2s ease;
+        }
+        .cin-nav-links a:hover { color: #fff; }
+        .nav-separator { width:1px; height:22px; background:var(--line); }
+
+
+        /* Custom scrollbar */
+        .custom-scrollbar {
+            --scrollbar-color: #cba6f7;
+            position: fixed;
+            top: 76px;
+            right: 14px;
+            bottom: 18px;
+            width: 8px;
+            z-index: 160;
+            pointer-events: auto;
+        }
+        .custom-scrollbar-track {
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 999px;
+            background: rgba(255,255,255,.025);
+            backdrop-filter: blur(8px);
+        }
+        .custom-scrollbar-thumb {
+            position: absolute;
+            left: 1px;
+            top: 0;
+            width: 4px;
+            min-height: 54px;
+            border-radius: 999px;
+            background: var(--scrollbar-color);
+            box-shadow: 0 0 0 1px rgba(255,255,255,.09), 0 0 18px color-mix(in srgb, var(--scrollbar-color) 26%, transparent);
+            cursor: grab;
+            transition: background .22s ease, box-shadow .22s ease, filter .18s ease;
+        }
+        .custom-scrollbar-thumb:hover { filter: brightness(1.10); }
+        .custom-scrollbar.dragging .custom-scrollbar-thumb { cursor: grabbing; filter: brightness(1.15); }
+
+        /* Cinematic scenes */
+        .scene { position:relative; min-height:150vh; }
+        .scene.tall { min-height:165vh; }
+        .scene-sticky { position: sticky; top: 0; height: 100vh; overflow:hidden; }
+        .scene-inner { position:relative; width:100%; height:100%; overflow:hidden; }
+
+        /* Hero */
+        .hero .scene-inner { background:#04060a; }
+        .hero-bg,
+        .hero-glow,
+        .hero-vignette { position:absolute; inset:0; pointer-events:none; }
+        .hero-bg {
+            background-image: url('./assets/sanconverter.png');
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.03);
+            filter: saturate(.92) brightness(.45) blur(1px);
+            opacity:.78;
+        }
+        .hero-glow {
+            background:
+                radial-gradient(circle at 78% 34%, rgba(203,166,247,.18), transparent 31%),
+                radial-gradient(circle at 26% 72%, rgba(33,223,166,.07), transparent 34%);
+            opacity:.8;
+        }
+        .hero-vignette {
+            background:
+                linear-gradient(90deg, rgba(4,6,10,.92) 0%, rgba(4,6,10,.64) 45%, rgba(4,6,10,.28) 100%),
+                linear-gradient(180deg, rgba(4,6,10,.22), rgba(4,6,10,.86) 93%);
+        }
+        .hero-copy {
+            position:absolute;
+            left:clamp(42px,8vw,118px);
+            top:50%;
+            transform:translateY(-50%);
+            width:min(610px,44vw);
+            z-index:2;
+        }
+        .eyebrow,
+        .scene-index {
+            text-transform:uppercase;
+            letter-spacing:1.2px;
+            font-size:.72rem;
+            font-weight:700;
+            color:rgba(245,247,251,.54);
+        }
+        .eyebrow {
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            padding:7px 11px;
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:999px;
+            background:rgba(4,7,11,.28);
+            backdrop-filter:blur(10px);
+            margin-bottom:22px;
+        }
+        .eyebrow::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--purple); }
+        .hero-copy h1 {
+            margin:0 0 20px;
+            font-size:clamp(3.8rem, 7.5vw, 7.4rem);
+            line-height:.92;
+            letter-spacing:-.065em;
+            font-weight:800;
+        }
+        .hero-copy h1 span { color:var(--purple); }
+        .hero-copy p { margin:0; max-width:610px; color:var(--muted); font-size:1.04rem; line-height:1.75; }
+        .hero-actions { display:flex; gap:10px; margin-top:30px; flex-wrap:wrap; }
+
+        /* Buttons */
+        .cin-btn {
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            min-height:44px;
+            padding:10px 18px;
+            border-radius:10px;
+            border:1px solid rgba(255,255,255,.13);
+            background:rgba(255,255,255,.045);
+            color:rgba(245,247,251,.9);
+            backdrop-filter:blur(12px);
+            -webkit-backdrop-filter:blur(12px);
+            font-size:.84rem;
+            font-weight:700;
+            transition:transform .2s ease, background .2s ease, border-color .2s ease;
+        }
+        .cin-btn:hover { transform:translateY(-2px); border-color:rgba(255,255,255,.24); background:rgba(255,255,255,.08); }
+        .cin-btn.primary { background:rgba(203,166,247,.14); border-color:rgba(203,166,247,.56); color:#eee5fb; }
+        .cin-btn.primary:hover { background:rgba(203,166,247,.23); border-color:rgba(203,166,247,.72); box-shadow:none; }
+        .cin-btn.mint { background:rgba(33,223,166,.11); border-color:rgba(33,223,166,.50); color:#dffcf4; }
+        .cin-btn.mint:hover { background:rgba(33,223,166,.19); border-color:rgba(33,223,166,.68); }
+
+        .hero-meta-line {
+            position:absolute;
+            left:clamp(42px,8vw,118px);
+            bottom:7vh;
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            z-index:2;
+        }
+        .meta-pill { padding:5px 9px; border:1px solid rgba(255,255,255,.1); border-radius:7px; background:rgba(4,7,11,.28); color:rgba(245,247,251,.54); font-size:.68rem; letter-spacing:.55px; text-transform:uppercase; backdrop-filter:blur(8px); }
+        .scroll-hint { position:absolute; right:22px; bottom:7vh; display:flex; align-items:center; gap:11px; color:rgba(245,247,251,.45); text-transform:uppercase; letter-spacing:1.2px; font-size:.66rem; z-index:2; }
+        .scroll-hint .mouse { width:22px; height:34px; border:1px solid rgba(255,255,255,.25); border-radius:999px; position:relative; }
+        .scroll-hint .mouse::after { content:""; position:absolute; left:50%; top:6px; width:3px; height:7px; border-radius:3px; transform:translateX(-50%); background:rgba(255,255,255,.46); }
+
+        /* Image scenes */
+        .image-scene .scene-inner { background:#060910; }
+        .scene-bg { position:absolute; inset:-5%; background-size:cover; background-position:center; opacity:.22; transform:scale(1.03); }
+        .scene-darken { position:absolute; inset:0; background:linear-gradient(180deg, rgba(4,7,12,.78), rgba(4,7,12,.30) 44%, rgba(4,7,12,.94) 92%); }
+        .scene-content { position:relative; width:100%; height:100%; max-width:1400px; margin:0 auto; }
+        .scene-copy { position:absolute; left:clamp(28px,5vw,82px); top:50%; transform:translateY(-50%); width:min(420px,33vw); z-index:4; }
+        .scene-index { margin-bottom:15px; }
+        .scene-copy h2 { margin:0 0 14px; font-size:clamp(2.8rem,5.7vw,5.7rem); line-height:.96; letter-spacing:-.06em; }
+        .scene-copy p { margin:0; color:var(--muted); font-size:1rem; line-height:1.78; }
+        .scene-caption { display:flex; align-items:center; gap:9px; margin-top:24px; color:rgba(245,247,251,.54); font-size:.72rem; font-weight:600; letter-spacing:.55px; }
+        .scene-caption::before { content:""; width:24px; height:1px; background:rgba(255,255,255,.35); }
+        .shot-card {
+            position:absolute;
+            left:43%;
+            right:auto;
+            top:50%;
+            width:min(53vw,820px);
+            aspect-ratio:16/10;
+            border:1px solid rgba(255,255,255,.15);
+            border-radius:20px;
+            overflow:hidden;
+            background:#070a10;
+            box-shadow:var(--shadow);
+            opacity:0;
+            z-index:2;
+        }
+        @media (min-width: 821px) {
+            .image-scene.overview .scene-copy {
+                max-width: 410px;
+            }
+            .image-scene.overview .shot-card {
+                min-width: 520px;
+            }
+        }
+
+        .shot-card::before { content:""; position:absolute; inset:0; background:linear-gradient(135deg, rgba(255,255,255,.08), transparent 24%, transparent 74%, rgba(203,166,247,.08)); pointer-events:none; z-index:2; }
+        .shot-card img { width:100%; height:100%; object-fit:cover; display:block; }
+        .image-scene.overview .scene-bg { background-image:url('./assets/sanconverter.png'); opacity:.18; filter:blur(2px) saturate(.8); }
+        .image-scene.update .scene-bg { background:radial-gradient(circle at 76% 40%, rgba(203,166,247,.13), transparent 30%), #060910; }
+
+        /* Text/content sections */
+        .content-block { padding:150px clamp(24px,6vw,90px) 100px; background:linear-gradient(180deg,#060910,#05070b 35%,#06080d); }
+        .content-shell { max-width:1180px; margin:0 auto; }
+        .section-heading { max-width:790px; margin-bottom:48px; }
+        .section-heading .scene-index { margin-bottom:15px; }
+        .section-heading h2 { margin:0 0 14px; font-size:clamp(2.4rem,5.1vw,4.8rem); letter-spacing:-.055em; line-height:.98; }
+        .section-heading p { margin:0; color:var(--muted); font-size:1rem; line-height:1.8; max-width:720px; }
+
+        .update-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+        .feature-card {
+            min-height:220px;
+            padding:23px;
+            border:1px solid rgba(255,255,255,.09);
+            border-radius:16px;
+            background:rgba(255,255,255,.025);
+            backdrop-filter:blur(12px);
+            transform:translateY(24px);
+            opacity:0;
+            transition:transform .7s cubic-bezier(.2,.7,.2,1), opacity .7s ease, border-color .25s ease;
+        }
+        .feature-card.visible { transform:translateY(0); opacity:1; }
+        .feature-card:hover { border-color:rgba(255,255,255,.18); }
+        .feature-icon { width:30px; height:30px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; border:1px solid rgba(203,166,247,.30); border-radius:8px; background:rgba(203,166,247,.08); color:var(--purple); font-size:.72rem; font-weight:800; }
+        .feature-card h3 { margin:0 0 8px; font-size:1rem; }
+        .feature-card p { margin:0; color:var(--muted); font-size:.86rem; line-height:1.68; }
+
+        /* Documentation / tables */
+        .doc-panel {
+            margin-top:28px;
+            padding:28px;
+            border:1px solid rgba(255,255,255,.09);
+            border-radius:18px;
+            background:rgba(255,255,255,.025);
+            backdrop-filter:blur(14px);
+        }
+        .doc-panel h3 { margin:0 0 15px; font-size:1.15rem; }
+        .doc-panel p { color:var(--muted); margin:0 0 20px; line-height:1.75; }
+        .tab-controls { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+        .tab-btn {
+            appearance:none;
+            cursor:pointer;
+            padding:9px 13px;
+            border-radius:9px;
+            border:1px solid rgba(255,255,255,.10);
+            background:rgba(255,255,255,.035);
+            color:rgba(245,247,251,.55);
+            font-size:.76rem;
+            font-weight:700;
+            transition:.2s ease;
+        }
+        .tab-btn:hover { color:#fff; border-color:rgba(255,255,255,.18); }
+        .tab-btn.active { color:#efe6fa; border-color:rgba(203,166,247,.52); background:rgba(203,166,247,.12); }
+        .tab-content { display:none; }
+        .tab-content.active { display:block; animation:tabIn .35s ease; }
+        @keyframes tabIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+        .table-wrapper { overflow:auto; border:1px solid rgba(255,255,255,.08); border-radius:12px; background:rgba(0,0,0,.16); }
+        table { width:100%; min-width:700px; border-collapse:collapse; font-size:.87rem; }
+        th, td { padding:12px 14px; text-align:left; border-bottom:1px solid rgba(255,255,255,.06); }
+        th { color:rgba(245,247,251,.45); text-transform:uppercase; letter-spacing:.7px; font-size:.68rem; font-weight:700; background:rgba(255,255,255,.025); }
+        td { color:rgba(245,247,251,.72); }
+        tr:last-child td { border-bottom:none; }
+        tr:hover td { background:rgba(255,255,255,.018); }
+        .clean-list { margin:18px 0 0; padding-left:18px; color:var(--muted); font-size:.88rem; line-height:1.75; }
+        .clean-list li + li { margin-top:5px; }
+        code { color:var(--purple); background:rgba(203,166,247,.08); border:1px solid rgba(203,166,247,.14); border-radius:5px; padding:2px 5px; }
+        kbd { background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.13); padding:2px 6px; border-radius:5px; font-size:.78em; }
+
+        .mini-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:28px; }
+        .mini-card { padding:24px; border:1px solid rgba(255,255,255,.09); border-radius:16px; background:rgba(255,255,255,.025); }
+        .mini-card h3 { margin:0 0 12px; font-size:1rem; }
+        .mini-card p { margin:0; color:var(--muted); font-size:.88rem; line-height:1.7; }
+        .mini-card .clean-list { margin-top:0; }
+
+        /* Download */
+        .download-block { padding:130px 24px 100px; background:linear-gradient(180deg,#05070b,#060910); }
+        .download-card {
+            max-width:1080px;
+            margin:0 auto;
+            padding:64px 32px;
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:24px;
+            background:linear-gradient(180deg, rgba(19,24,35,.74), rgba(7,10,15,.78));
+            box-shadow:var(--shadow);
+            text-align:center;
+            backdrop-filter:blur(18px);
+        }
+        .download-card h2 { margin:0 0 10px; font-size:clamp(2.4rem,5vw,4.5rem); letter-spacing:-.06em; }
+        .download-card p { margin:0 auto; max-width:680px; color:var(--muted); line-height:1.78; }
+        .download-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-top:28px; }
+        .download-meta { margin-top:18px; color:rgba(255,255,255,.42); font-size:.72rem; letter-spacing:.7px; text-transform:uppercase; }
+
+        .back-to-top-wrap { display:flex; justify-content:center; padding:22px 20px 90px; background:#060910; }
+        .back-to-top {
+            display:inline-flex; align-items:center; gap:9px; padding:10px 15px; border-radius:9px;
+            border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.025); color:rgba(245,247,251,.58);
+            font-size:.74rem; font-weight:700; text-transform:uppercase; letter-spacing:.9px; transition:.2s ease;
+        }
+        .back-to-top:hover { color:#fff; border-color:rgba(203,166,247,.40); background:rgba(203,166,247,.08); transform:translateY(-2px); }
+        footer { padding:34px 20px 44px; text-align:center; border-top:1px solid rgba(255,255,255,.06); color:rgba(245,247,251,.33); font-size:.78rem; background:#060910; }
+
+        @media (max-width: 1050px) {
+            .hero-copy { width:min(650px,62vw); }
+            .scene-copy { left:5vw; width:min(410px,35vw); }
+            .shot-card { left:42%; right:auto; width:min(56vw,800px); }
+            .update-grid { grid-template-columns:1fr 1fr; }
+        }
+        @media (max-width: 820px) {
+            .cin-nav { padding:0 17px; }
+            .cin-nav-links { gap:14px; }
+            .cin-nav-links a:nth-child(2) { display:none; }
+            .scene { min-height:135vh; }
+            .scene.tall { min-height:150vh; }
+            .hero-copy { left:28px; width:calc(100vw - 70px); }
+            .hero-copy h1 { font-size:clamp(3.4rem,14vw,5.2rem); }
+            .hero-copy p { font-size:.92rem; }
+            .hero-meta-line { left:28px; right:28px; bottom:5vh; }
+            .scroll-hint { right:12px; bottom:5vh; }
+            .scene-copy { left:28px; right:28px; width:auto; top:15vh; transform:none; }
+            .scene-copy h2 { font-size:clamp(2.7rem,12vw,4.2rem); }
+            .shot-card { top:61%; left:28px; right:28px; width:auto; aspect-ratio:16/10; }
+            .content-block { padding:110px 20px 80px; }
+            .update-grid, .mini-grid { grid-template-columns:1fr; }
+            .download-block { padding:105px 18px 85px; }
+            .custom-scrollbar { right:7px; width:6px; }
+            .custom-scrollbar-thumb { left:1px; width:4px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+        }
+    </style>
 </head>
-<body>
 
-    <div class="bg-animation">
-        <div id="stars1"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
-    </div>
-
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand">
-            <img src="./assets/logo.png" alt="Sanya Logo" onerror="this.style.display='none'">
-            Sanya
+<body id="page" class="cinematic-page">
+    <nav class="cin-nav">
+        <a class="cin-brand" href="index.html">
+            <img src="./assets/logo.png" alt="Sanya">
+            <span>Sanya</span>
         </a>
-        
-        <div class="nav-center">
-            <a href="index.html" data-i18n="nav.home">Home</a>
-            <a href="tools.html" data-i18n="nav.projects">Projects</a>
-            <a href="https://github.com/bishpop" target="_blank">GitHub ↗</a>
-        </div>
-
-        <div class="controls-wrapper">
-            <button id="themeToggle" class="theme-toggle" title="Toggle Theme">☀️</button>
-            <div class="lang-switcher">
-                <button class="lang-btn active" data-lang="en">EN</button>
-                <span class="lang-divider">|</span>
-                <button class="lang-btn" data-lang="zh">简</button>
-            </div>
+        <div class="cin-nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub ↗</a>
+            <span class="nav-separator"></span>
+            <a href="#download" data-smooth-target="#download">Download</a>
         </div>
     </nav>
 
-    <div class="page-wrapper fade-in">
-        <div class="container-narrow">
-            
-            <div class="doc-header">
-                <h1 style="text-align: center;">SanConverter</h1>
-                <p style="text-align: center;" data-i18n="san.subtitle">Official documentation and logic structure for the BeatUp Converter.</p>
-                
-                <div class="doc-meta">
-                    <span class="badge active">v1.4.4</span>
-                    <span class="badge version" style="border-color: var(--glass-border); color: var(--ef-text); background: transparent;">Windows</span>
-                    <span class="badge version" style="border-color: var(--glass-border); color: var(--ef-text); background: transparent;">.NET 4.8</span>
-                    <a href="https://drive.google.com/file/d/1WPG8JNApXb5hm2z1aH_Or6Bbe0liBLtV/view" target="_blank" style="margin-left: auto;" data-i18n="san.pdf">📄 PDF Guide</a>
-                    <a href="https://www.youtube.com/watch?v=B5WxZ9Asc3M" target="_blank" data-i18n="san.tutorial">🎥 Tutorial</a>
-                </div>
-
-                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 40px; margin-bottom: 20px;">
-                    <a href="https://github.com/bishpop/san-converter-storage/releases/download/v0.0.1/SanInstaller.exe" class="btn-glow" style="display: inline-flex; align-items: center; gap: 12px; padding: 18px 45px; font-size: 1.25rem;">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        <span data-i18n="san.download">Download SanInstaller</span>
-                    </a>
-
-                    <span style="color: var(--ef-accent); font-weight: 600; font-size: 0.8rem; margin-top: 12px; letter-spacing: 1px; text-transform: uppercase;" data-i18n="san.windows64">
-                        Windows 64-bit Setup
-                    </span>
-
-                    <p style="color: var(--ef-subtext); font-size: 0.9rem; max-width: 550px; text-align: center; margin-top: 15px; line-height: 1.6;" data-i18n="san.install.desc">
-                        To get started, download the SanInstaller to your preferred directory and execute it. The installer will automatically retrieve and safely unpack the latest SanConverter deployment directly from GitHub.
-                    </p>
-                </div>
-            </div>
-
-            <div class="panel">
-                <h2 data-i18n="san.overview.title">Overview</h2>
-                <img src="./assets/sanconverter.png" alt="SanConverter Interface" class="preview-img" onerror="this.style.display='none'">
-                <ul class="clean-list">
-                    <li data-i18n="san.overview.li1">Modern, standalone UI (No installation required but recommended)</li>
-                    <li data-i18n="san.overview.li2">Supports conversion of <code>.SM</code> and <code>.SSC</code> files to <code>.SLK</code></li>
-                    <li data-i18n="san.overview.li3">Full logic support for Beat Up and One-Two Party modes</li>
-                </ul>
-            </div>
-
-            <div class="panel">
-                <h2>🚀 Latest Update: v1.4.4</h2>
-                <p style="color: var(--ef-subtext); margin-top: -10px; margin-bottom: 25px;">The biggest update yet, featuring an overhauled level calculator, new eye-care themes, and powerful SLK utilities.</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
-                    
-                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border, rgba(255,255,255,0.1)); padding: 20px; border-radius: 12px;">
-                        <h3 style="margin-top: 0; margin-bottom: 12px; font-size: 1.1rem; color: var(--ef-text);">🧮 Level Calculation Overhaul</h3>
-                        <ul class="clean-list" style="margin-bottom: 0; font-size: 0.9rem;">
-                            <li>Fair scaling with <b>Math.Min</b> caps for extreme charts</li>
-                            <li><b>TotalMadi</b> integration for structural speed logic</li>
-                            <li>Incremental <b>+0.4 bonus</b> for every 10% of Stair patterns</li>
-                        </ul>
-                    </div>
-
-                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border, rgba(255,255,255,0.1)); padding: 20px; border-radius: 12px;">
-                        <h3 style="margin-top: 0; margin-bottom: 12px; font-size: 1.1rem; color: var(--ef-text);">🎨 10+ New Designs</h3>
-                        <ul class="clean-list" style="margin-bottom: 0; font-size: 0.9rem;">
-                            <li><b>Exclusive:</b> Cherry Blossom, Cobalt Sky, Cool Revival</li>
-                            <li><b>Eye-Care:</b> Nord, Gruvbox, Solarized Dark & Zen Matcha</li>
-                            <li>Reorganized UI menu with dynamic hover borders</li>
-                        </ul>
-                    </div>
-
-                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border, rgba(255,255,255,0.1)); padding: 20px; border-radius: 12px;">
-                        <h3 style="margin-top: 0; margin-bottom: 12px; font-size: 1.1rem; color: var(--ef-text);">✨ SLK Duplicate Remover</h3>
-                        <ul class="clean-list" style="margin-bottom: 0; font-size: 0.9rem;">
-                            <li>One-click cleanup for overlapping <code>n</code> notes</li>
-                            <li>Automatically shifts notes up to prevent empty SLK rows</li>
-                            <li>Safely outputs to a new <code>_fixed.slk</code> file</li>
-                        </ul>
-                    </div>
-
-                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border, rgba(255,255,255,0.1)); padding: 20px; border-radius: 12px;">
-                        <h3 style="margin-top: 0; margin-bottom: 12px; font-size: 1.1rem; color: var(--ef-text);">📊 Analyzer & Bug Fixes</h3>
-                        <ul class="clean-list" style="margin-bottom: 0; font-size: 0.9rem;">
-                            <li>Added accurate <b>Total Keys</b> metric (n + s + s,f + n,f)</li>
-                            <li>Fixed sidebar layout overlap with <b>UniformGrid</b></li>
-                            <li>Pattern ratios correctly balance long vs short songs</li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="panel">
-                <h2 style="border-bottom: none; padding-bottom: 0;" data-i18n="san.charting.title">✨ Charting Logic</h2>
-                
-                <div class="tab-controls">
-                    <button class="tab-btn active" data-target="tab-bu8" data-i18n="tab.bu8">Beat Up 8</button>
-                    <button class="tab-btn" data-target="tab-bu4" data-i18n="tab.bu4">Beat Up 4</button>
-                    <button class="tab-btn" data-target="tab-otp4" data-i18n="tab.otp4">OTP 4</button>
-                    <button class="tab-btn" data-target="tab-otp8" data-i18n="tab.otp8">OTP 8</button>
-                    <button class="tab-btn" data-target="tab-revert" data-i18n="tab.revert">Revert Logic</button>
-                </div>
-
-                <div class="tab-content active" id="tab-bu8">
-                    <h3 data-i18n="san.bu8.title">Beat Up 8 Structure</h3>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th data-i18n="col.av">Arrow Vortex Key</th>
-                                    <th data-i18n="col.slk">Beat Up .SLK Key</th>
-                                    <th data-i18n="col.comment">Comment</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>1, 2, 3</td><td>7, 4, 1</td><td data-i18n="bu8.spec_note">Specific Note assignment</td></tr>
-                                <tr><td>4, 5, 6</td><td>9, 6, 3</td><td data-i18n="bu8.spec_note">Specific Note assignment</td></tr>
-                                <tr><td>8</td><td>s</td><td data-i18n="bu8.space">Space</td></tr>
-                                <tr><td>M*</td><td data-i18n="bu8.fm">Finish Move</td><td data-i18n="bu8.shift8">Shift + 8 (Mine on 8th Lane)</td></tr>
-                                <tr><td>7 + 8</td><td>f</td><td data-i18n="bu8.fm_no_space">Finish Move without Space</td></tr>
-                                <tr><td>n* + 7 + 8</td><td data-i18n="bu8.note_fm">Note + Finish</td><td data-i18n="bu8.note_arr">Note Array {1,3,4,6,7,9}</td></tr>
-                                <tr><td>n + M</td><td data-i18n="bu8.double_h">Double Note (hidden)</td><td data-i18n="bu8.m_lane7">M on lane 7</td></tr>
-                                <tr><td>n + M + M</td><td data-i18n="bu8.triple_h">Triple Note (hidden)</td><td data-i18n="bu8.m_lane78">M on lane 7 & 8</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <ul class="clean-list">
-                        <li data-i18n="san.bu8.n_rand">* <b>Random Key:</b> A note stated as <code>n</code> in the .slk which Audition can read, randomly generated using a no Jack-Logic.</li>
-                        <li data-i18n="san.bu8.n_m">* <b>M:</b> Mine.</li>
-                    </ul>
-
-                    <h3 style="margin-top: 40px;" data-i18n="san.hold.title">Hold & Roll Logic (Lane 7)</h3>
-                    <p data-i18n="san.bu8.note1">Lane 7 (index 6) acts as a state marker. If a hold/roll is active here, standard key assignments are overridden.</p>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th data-i18n="col.state">State</th>
-                                    <th data-i18n="col.active_lane">Active Lane</th>
-                                    <th data-i18n="col.key_pool">Key Pool</th>
-                                    <th data-i18n="col.constraint">Constraint</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td data-i18n="bu4.hold"><code>2</code> (Hold)</td><td data-i18n="bu8.lane1_l">Lane 1 (Left)</td><td><code>{7, 4, 1}</code></td><td data-i18n="bu8.max2_jacks">Max 2 jacks in a row</td></tr>
-                                <tr><td data-i18n="bu4.hold"><code>2</code> (Hold)</td><td data-i18n="bu8.lane2_r">Lane 2 (Right)</td><td><code>{9, 6, 3}</code></td><td data-i18n="bu8.max2_jacks">Max 2 jacks in a row</td></tr>
-                                <tr><td data-i18n="bu4.hold"><code>2</code> (Hold)</td><td data-i18n="bu8.lane1_2">Lane 1 + 2</td><td><code>{7,4,1,9,6,3}</code></td><td data-i18n="bu8.max2_jacks">Max 2 jacks in a row</td></tr>
-                                <tr><td data-i18n="bu4.roll"><code>4</code> (Roll)</td><td data-i18n="bu8.lane1_l">Lane 1 (Left)</td><td><code>{7, 4, 1}</code></td><td data-i18n="bu8.no_repeat">No direct repeat (no Jacks)</td></tr>
-                                <tr><td data-i18n="bu4.roll"><code>4</code> (Roll)</td><td data-i18n="bu8.lane2_r">Lane 2 (Right)</td><td><code>{9, 6, 3}</code></td><td data-i18n="bu8.no_repeat">No direct repeat (no Jacks)</td></tr>
-                                <tr><td><code>3</code> (End)</td><td>—</td><td data-i18n="bu8.reset_bu8">Resets to BU8</td><td>—</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="tab-bu4">
-                    <h3 data-i18n="san.bu4.title">Beat Up 4 Structure</h3>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th data-i18n="col.av">Arrow Vortex Key</th>
-                                    <th data-i18n="col.slk">Beat Up .SLK Key</th>
-                                    <th data-i18n="col.comment">Comment</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>1</td><td>n</td><td data-i18n="bu4.rand_note">Random Generated Note</td></tr>
-                                <tr><td>2</td><td>s</td><td data-i18n="bu8.space">Space</td></tr>
-                                <tr><td>3</td><td data-i18n="bu4.rand_l">Random Left</td><td data-i18n="bu4.hold_star">Hold*</td></tr>
-                                <tr><td>3</td><td data-i18n="bu4.rand_l_noj">Random Left no Jacks</td><td data-i18n="bu4.roll_star">Roll*</td></tr>
-                                <tr><td>4</td><td data-i18n="bu4.rand_r">Random Right</td><td data-i18n="bu4.hold">Hold</td></tr>
-                                <tr><td>4</td><td data-i18n="bu4.rand_r_noj">Random Right no Jacks</td><td data-i18n="bu4.roll">Roll</td></tr>
-                                <tr><td>3 + 4</td><td data-i18n="bu4.rand_lr">Random Left-Right</td><td data-i18n="bu4.hold_34">Hold 3+4 (Random Left-Right Pattern)</td></tr>
-                                <tr><td>3 + 4</td><td data-i18n="bu4.rand_nr">Random No Repeat</td><td data-i18n="bu4.roll_34">Roll 3+4 (Random no repeat Pattern)</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <ul class="clean-list">
-                        <li data-i18n="san.bu4.n_hold">* <b>Hold:</b> Holding the key for the amount of arrows you want on a specific side.</li>
-                        <li data-i18n="san.bu4.n_roll">* <b>Roll:</b> A rolled Hold.</li>
-                    </ul>
-                </div>
-
-                <div class="tab-content" id="tab-otp4">
-                    <h3 data-i18n="san.otp4.title">One Two Party 4 Logic</h3>
-                    <p data-i18n="san.otp4.desc">One-Two Party is a very sensitive gamemode, this converter supports all rules from charting lvl 1 to lvl 9.</p>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th data-i18n="col.av">Arrow Vortex Key</th>
-                                    <th data-i18n="col.otp">OTP .SLK Key</th>
-                                    <th data-i18n="col.comment">Comment</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>1</td><td>n</td><td data-i18n="otp.note">Note</td></tr>
-                                <tr><td>2</td><td>c</td><td data-i18n="otp.change">Change</td></tr>
-                                <tr><td>3</td><td>d</td><td data-i18n="otp.dance">Dance</td></tr>
-                                <tr><td>4</td><td>s</td><td data-i18n="otp.space">Space</td></tr>
-                                <tr><td>1 + 2 + 3 + 4</td><td>r</td><td data-i18n="otp.rotation">Rotation</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="tab-otp8">
-                    <h3 data-i18n="san.otp8.title">One Two Party 8 Logic</h3>
-                    <p data-i18n="san.otp8.desc">Fully supports all rules from charting lvl 1 to lvl 9.</p>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th data-i18n="col.av">Arrow Vortex Key</th>
-                                    <th data-i18n="col.otp">OTP .SLK Key</th>
-                                    <th data-i18n="col.comment">Comment</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>1</td><td>n</td><td data-i18n="otp.note">Note</td></tr>
-                                <tr><td>2</td><td>c</td><td data-i18n="otp.change">Change</td></tr>
-                                <tr><td>3</td><td>s</td><td data-i18n="otp.space">Space</td></tr>
-                                <tr><td>4</td><td>n</td><td data-i18n="otp.note">Note</td></tr>
-                                <tr><td>5</td><td>c</td><td data-i18n="otp.change">Change</td></tr>
-                                <tr><td>6</td><td>s</td><td data-i18n="otp.space">Space</td></tr>
-                                <tr><td>7</td><td>d</td><td data-i18n="otp.dance">Dance</td></tr>
-                                <tr><td>8</td><td>r</td><td data-i18n="otp.rotate">Rotate</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="tab-revert">
-                    <h3 data-i18n="san.revert.title">Revert Logic</h3>
-                    <p style="color: var(--ef-subtext); margin-top: 15px;" data-i18n="san.revert.desc">
-                        The Converter features a powerful revert function. It accurately reverts all Audition BeatUp <code>.slk</code> and all Audition One-Two Party <code>.slk</code> files back into a clean Stepmania <code>.SSC</code> file, preserving patterns and BPM data.
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="panel">
-                <h2>Legacy Conversion</h2>
-                <p style="color: var(--ef-subtext); margin-top: -10px; margin-bottom: 20px;">
-                    This optional mode detects specific Arrow Vortex combinations to generate highly controlled random patterns.
-                </p>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Arrow Vortex Key</th>
-                                <th>Beat Up .SLK Key</th>
-                                <th>Pattern Logic (Muster)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td><code>7</code></td><td>n</td><td>Random key — max. 2 Jacks</td></tr>
-                            <tr><td><code>7 + 1</code></td><td>n</td><td>Random LEFT (7,4,1) — max. 3 Jacks</td></tr>
-                            <tr><td><code>7 + 2</code></td><td>n</td><td>Random RIGHT (9,6,3) — max. 3 Jacks</td></tr>
-                            <tr><td><code>7 + 3</code></td><td>n</td><td>Random — no repeat (No Jacks)</td></tr>
-                            <tr><td><code>7 + 4</code></td><td>n</td><td>Only Jacks — same random key spam max. 6</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p style="color: var(--ef-subtext); font-size: 0.9rem; font-style: italic; margin-top: 15px;">
-                    All other pattern will be processed normally.
-                </p>
-            </div>
-
-            <div class="panel" style="border-left: 3px solid var(--ef-red);">
-                <h2 style="border-bottom: none; color: var(--ef-red); margin-bottom: 10px;" data-i18n="san.disclaimer.title">Disclaimer</h2>
-                <p style="margin: 0;" data-i18n="san.disclaimer.text">This tool is free to download and use. Reverse engineering, decompiling, or redistributing modified versions of the executable is strictly prohibited.</p>
-            </div>
-
+    <div class="custom-scrollbar" id="customScrollbar" aria-label="Page scroll position">
+        <div class="custom-scrollbar-track" id="scrollTrack">
+            <div class="custom-scrollbar-thumb" id="scrollThumb" role="scrollbar" aria-controls="page" tabindex="0"></div>
         </div>
     </div>
 
-    <footer>
-        <div class="container" data-i18n="tools.footer">
-            &copy; 2026 Sanya. All rights reserved.
+    <main id="top">
+        <!-- HERO -->
+        <section class="scene tall hero" data-scene="Hero">
+            <div class="scene-sticky">
+                <div class="scene-inner">
+                    <div class="hero-bg" data-hero-bg></div>
+                    <div class="hero-glow" data-hero-glow></div>
+                    <div class="hero-vignette"></div>
+
+                    <div class="hero-copy" data-hero-copy>
+                        <div class="eyebrow">SanConverter · v1.4.4 · Windows x64</div>
+                        <h1>SanConverter <span>Docs</span></h1>
+                        <p>
+                            Official documentation and logic structure for the BeatUp Converter — conversion rules, charting behaviour, utilities and the latest release information in one place.
+                        </p>
+                        <div class="hero-actions">
+                            <a class="cin-btn primary" href="#download" data-smooth-target="#download">Download SanInstaller</a>
+                            <a class="cin-btn" href="https://github.com/bishpop/san-converter-storage" target="_blank" rel="noopener">View on GitHub ↗</a>
+                        </div>
+                    </div>
+
+                    <div class="hero-meta-line">
+                        <span class="meta-pill">SM → SLK</span>
+                        <span class="meta-pill">SSC → SLK</span>
+                        <span class="meta-pill">Beat Up</span>
+                        <span class="meta-pill">One-Two Party</span>
+                    </div>
+                    <div class="scroll-hint"><span>Scroll to explore</span><span class="mouse"></span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OVERVIEW -->
+        <section class="scene tall image-scene overview" data-scene="Overview">
+            <div class="scene-sticky">
+                <div class="scene-inner">
+                    <div class="scene-bg" data-bg></div>
+                    <div class="scene-darken"></div>
+                    <div class="scene-content">
+                        <div class="scene-copy">
+                            <div class="scene-index">01 · Overview</div>
+                            <h2>A converter built around the chart.</h2>
+                            <p>
+                                SanConverter provides a standalone workflow for converting <code>.SM</code> and <code>.SSC</code> files into <code>.SLK</code>, with dedicated logic for Beat Up and One-Two Party modes.
+                            </p>
+                            <div class="scene-caption">Conversion first. Details when you need them.</div>
+                        </div>
+                        <div class="shot-card" data-shot data-from="overview">
+                            <img src="./assets/sanconverter.png" alt="SanConverter interface">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPDATE -->
+        <section class="scene tall image-scene update" data-scene="Latest Update">
+            <div class="scene-sticky">
+                <div class="scene-inner">
+                    <div class="scene-bg" data-bg></div>
+                    <div class="scene-darken"></div>
+                    <div class="scene-content">
+                        <div class="scene-copy">
+                            <div class="scene-index">02 · v1.4.4</div>
+                            <h2>The latest update, without the noise.</h2>
+                            <p>
+                                v1.4.4 introduces the overhauled level calculator, new eye-care themes, SLK utilities and analyzer fixes while keeping the converter workflow familiar.
+                            </p>
+                            <div class="scene-caption">A release overview before the deeper logic.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block" data-content-section>
+            <div class="content-shell">
+                <div class="section-heading">
+                    <div class="scene-index">03 · What's new</div>
+                    <h2>v1.4.4, explained in the useful parts.</h2>
+                    <p>
+                        The existing release notes are kept intact here, but presented as focused panels so the page stays readable while you move through it.
+                    </p>
+                </div>
+
+                <div class="update-grid">
+                    <article class="feature-card reveal"><div class="feature-icon">01</div><h3>Level Calculation Overhaul</h3><p>Fair scaling with Math.Min caps, TotalMadi integration for structural speed logic and an incremental +0.4 bonus for every 10% of Stair patterns.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">02</div><h3>10+ New Designs</h3><p>Cherry Blossom, Cobalt Sky, Cool Revival plus eye-care themes such as Nord, Gruvbox, Solarized Dark and Zen Matcha.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">03</div><h3>SLK Duplicate Remover</h3><p>One-click cleanup for overlapping <code>n</code> notes, automatic row shifting and safe <code>_fixed.slk</code> output.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">04</div><h3>Analyzer & Bug Fixes</h3><p>Accurate Total Keys metrics, corrected UniformGrid overlap and better balance between long and short song pattern ratios.</p></article>
+                </div>
+
+                <div class="mini-grid">
+                    <div class="mini-card reveal">
+                        <h3>Installation</h3>
+                        <p>Download the SanInstaller, run it, and let the installer retrieve the latest SanConverter deployment from GitHub.</p>
+                        <ul class="clean-list">
+                            <li>Windows 64-bit setup</li>
+                            <li>Latest deployment pulled automatically</li>
+                            <li>Standalone workflow</li>
+                        </ul>
+                    </div>
+                    <div class="mini-card reveal">
+                        <h3>Supported Formats</h3>
+                        <p><code>.SM</code> and <code>.SSC</code> can be converted to <code>.SLK</code>. The converter also supports reverting Audition Beat Up and One-Two Party <code>.slk</code> back into clean Stepmania <code>.SSC</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHARTING LOGIC -->
+        <section class="content-block" id="logic" style="padding-top:80px;">
+            <div class="content-shell">
+                <div class="section-heading">
+                    <div class="scene-index">04 · Charting Logic</div>
+                    <h2>Know exactly what the converter writes.</h2>
+                    <p>Switch between the original logic groups without leaving the page.</p>
+                </div>
+
+                <div class="doc-panel">
+                    <div class="tab-controls">
+                        <button class="tab-btn active" data-target="tab-bu8">Beat Up 8</button>
+                        <button class="tab-btn" data-target="tab-bu4">Beat Up 4</button>
+                        <button class="tab-btn" data-target="tab-otp4">OTP 4</button>
+                        <button class="tab-btn" data-target="tab-otp8">OTP 8</button>
+                        <button class="tab-btn" data-target="tab-revert">Revert Logic</button>
+                    </div>
+
+                    <div class="tab-content active" id="tab-bu8">
+                        <h3>Beat Up 8 Structure</h3>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead><tr><th>Arrow Vortex Key</th><th>Beat Up .SLK Key</th><th>Comment</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1, 2, 3</td><td>7, 4, 1</td><td>Specific Note assignment</td></tr>
+                                    <tr><td>4, 5, 6</td><td>9, 6, 3</td><td>Specific Note assignment</td></tr>
+                                    <tr><td>8</td><td>s</td><td>Space</td></tr>
+                                    <tr><td>M*</td><td>Finish Move</td><td>Shift + 8 (Mine on 8th Lane)</td></tr>
+                                    <tr><td>7 + 8</td><td>f</td><td>Finish Move without Space</td></tr>
+                                    <tr><td>n* + 7 + 8</td><td>Note + Finish</td><td>Note Array {1,3,4,6,7,9}</td></tr>
+                                    <tr><td>n + M</td><td>Double Note (hidden)</td><td>M on lane 7</td></tr>
+                                    <tr><td>n + M + M</td><td>Triple Note (hidden)</td><td>M on lane 7 & 8</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ul class="clean-list">
+                            <li><b>Random Key:</b> A note stated as <code>n</code> in the .slk which Audition can read, randomly generated using a no Jack-Logic.</li>
+                            <li><b>M:</b> Mine.</li>
+                        </ul>
+
+                        <h3 style="margin-top:40px;">Hold & Roll Logic (Lane 7)</h3>
+                        <p>Lane 7 (index 6) acts as a state marker. If a hold/roll is active here, standard key assignments are overridden.</p>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead><tr><th>State</th><th>Active Lane</th><th>Key Pool</th><th>Constraint</th></tr></thead>
+                                <tbody>
+                                    <tr><td><code>2</code> (Hold)</td><td>Lane 1 (Left)</td><td><code>{7, 4, 1}</code></td><td>Max 2 jacks in a row</td></tr>
+                                    <tr><td><code>2</code> (Hold)</td><td>Lane 2 (Right)</td><td><code>{9, 6, 3}</code></td><td>Max 2 jacks in a row</td></tr>
+                                    <tr><td><code>2</code> (Hold)</td><td>Lane 1 + 2</td><td><code>{7,4,1,9,6,3}</code></td><td>Max 2 jacks in a row</td></tr>
+                                    <tr><td><code>4</code> (Roll)</td><td>Lane 1 (Left)</td><td><code>{7, 4, 1}</code></td><td>No direct repeat (no Jacks)</td></tr>
+                                    <tr><td><code>4</code> (Roll)</td><td>Lane 2 (Right)</td><td><code>{9, 6, 3}</code></td><td>No direct repeat (no Jacks)</td></tr>
+                                    <tr><td><code>3</code> (End)</td><td>—</td><td>Resets to BU8</td><td>—</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-bu4">
+                        <h3>Beat Up 4 Structure</h3>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead><tr><th>Arrow Vortex Key</th><th>Beat Up .SLK Key</th><th>Comment</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>n</td><td>Random Generated Note</td></tr>
+                                    <tr><td>2</td><td>s</td><td>Space</td></tr>
+                                    <tr><td>3</td><td>Random Left</td><td>Hold*</td></tr>
+                                    <tr><td>3</td><td>Random Left no Jacks</td><td>Roll*</td></tr>
+                                    <tr><td>4</td><td>Random Right</td><td>Hold</td></tr>
+                                    <tr><td>4</td><td>Random Right no Jacks</td><td>Roll</td></tr>
+                                    <tr><td>3 + 4</td><td>Random Left-Right</td><td>Hold 3+4 (Random Left-Right Pattern)</td></tr>
+                                    <tr><td>3 + 4</td><td>Random No Repeat</td><td>Roll 3+4 (Random no repeat Pattern)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ul class="clean-list">
+                            <li><b>Hold:</b> Holding the key for the amount of arrows you want on a specific side.</li>
+                            <li><b>Roll:</b> A rolled Hold.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-content" id="tab-otp4">
+                        <h3>One Two Party 4 Logic</h3>
+                        <p>One-Two Party is a very sensitive gamemode; this converter supports all rules from charting lvl 1 to lvl 9.</p>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead><tr><th>Arrow Vortex Key</th><th>OTP .SLK Key</th><th>Comment</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>n</td><td>Note</td></tr>
+                                    <tr><td>2</td><td>c</td><td>Change</td></tr>
+                                    <tr><td>3</td><td>d</td><td>Dance</td></tr>
+                                    <tr><td>4</td><td>s</td><td>Space</td></tr>
+                                    <tr><td>1 + 2 + 3 + 4</td><td>r</td><td>Rotation</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-otp8">
+                        <h3>One Two Party 8 Logic</h3>
+                        <p>Fully supports all rules from charting lvl 1 to lvl 9.</p>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead><tr><th>Arrow Vortex Key</th><th>OTP .SLK Key</th><th>Comment</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>n</td><td>Note</td></tr>
+                                    <tr><td>2</td><td>c</td><td>Change</td></tr>
+                                    <tr><td>3</td><td>s</td><td>Space</td></tr>
+                                    <tr><td>4</td><td>n</td><td>Note</td></tr>
+                                    <tr><td>5</td><td>c</td><td>Change</td></tr>
+                                    <tr><td>6</td><td>s</td><td>Space</td></tr>
+                                    <tr><td>7</td><td>d</td><td>Dance</td></tr>
+                                    <tr><td>8</td><td>r</td><td>Rotate</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-revert">
+                        <h3>Revert Logic</h3>
+                        <p>
+                            The Converter features a powerful revert function. It accurately reverts all Audition BeatUp <code>.slk</code> and all Audition One-Two Party <code>.slk</code> files back into a clean Stepmania <code>.SSC</code> file, preserving patterns and BPM data.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEGACY -->
+        <section class="content-block" style="padding-top:60px;">
+            <div class="content-shell">
+                <div class="section-heading">
+                    <div class="scene-index">05 · Legacy Conversion</div>
+                    <h2>Controlled random patterns, kept explicit.</h2>
+                    <p>This optional mode detects specific Arrow Vortex combinations to generate highly controlled random patterns.</p>
+                </div>
+                <div class="doc-panel">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>Arrow Vortex Key</th><th>Beat Up .SLK Key</th><th>Pattern Logic (Muster)</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>7</code></td><td>n</td><td>Random key — max. 2 Jacks</td></tr>
+                                <tr><td><code>7 + 1</code></td><td>n</td><td>Random LEFT (7,4,1) — max. 3 Jacks</td></tr>
+                                <tr><td><code>7 + 2</code></td><td>n</td><td>Random RIGHT (9,6,3) — max. 3 Jacks</td></tr>
+                                <tr><td><code>7 + 3</code></td><td>n</td><td>Random — no repeat (No Jacks)</td></tr>
+                                <tr><td><code>7 + 4</code></td><td>n</td><td>Only Jacks — same random key spam max. 6</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="margin-top:15px; margin-bottom:0; font-size:.88rem; font-style:italic;">All other patterns will be processed normally.</p>
+                </div>
+
+                <div class="mini-grid">
+                    <div class="mini-card">
+                        <h3>References</h3>
+                        <p>Open the official PDF guide or tutorial without breaking the page flow.</p>
+                        <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:17px;">
+                            <a class="cin-btn mint" href="https://drive.google.com/file/d/1WPG8JNApXb5hm2z1aH_Or6Bbe0liBLtV/view" target="_blank" rel="noopener">PDF Guide ↗</a>
+                            <a class="cin-btn" href="https://www.youtube.com/watch?v=B5WxZ9Asc3M" target="_blank" rel="noopener">Tutorial ↗</a>
+                        </div>
+                    </div>
+                    <div class="mini-card" style="border-left:3px solid rgba(255,90,104,.70);">
+                        <h3 style="color:#ff8f9a;">Disclaimer</h3>
+                        <p>This tool is free to download and use. Reverse engineering, decompiling, or redistributing modified versions of the executable is strictly prohibited.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOWNLOAD -->
+        <section id="download" class="download-block">
+            <div class="download-card">
+                <div class="scene-index">06 · Ready when you are</div>
+                <h2>Download SanConverter.</h2>
+                <p>Windows 64-bit setup · v1.4.4. Download the SanInstaller and let it retrieve the latest SanConverter deployment directly from GitHub.</p>
+                <div class="download-actions">
+                    <a class="cin-btn primary" href="https://github.com/bishpop/san-converter-storage/releases/download/v0.0.1/SanInstaller.exe" target="_blank" rel="noopener">Download SanInstaller</a>
+                    <a class="cin-btn mint" href="https://drive.google.com/file/d/1WPG8JNApXb5hm2z1aH_Or6Bbe0liBLtV/view" target="_blank" rel="noopener">PDF Guide ↗</a>
+                    <a class="cin-btn" href="https://www.youtube.com/watch?v=B5WxZ9Asc3M" target="_blank" rel="noopener">Tutorial ↗</a>
+                </div>
+                <div class="download-meta">Windows 64-bit · .NET 4.8 · SanConverter v1.4.4</div>
+            </div>
+        </section>
+
+        <div class="back-to-top-wrap">
+            <a href="#top" class="back-to-top" data-smooth-target="#top">Back to top</a>
         </div>
-    </footer>
+    </main>
 
-    <script src="i18n.js"></script>
+    <footer>© 2026 Sanya. All rights reserved.</footer>
+
+    
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const tabContents = document.querySelectorAll('.tab-content');
+        (() => {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const scenes = [...document.querySelectorAll('[data-scene]')];
+            const animatedSceneProgress = new Map(scenes.map(scene => [scene, 0]));
+            const lerp = (a,b,t) => a + (b-a)*t;
+            const clamp = (n,a=0,b=1) => Math.min(b, Math.max(a,n));
+            const ease = (t) => t < .5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2;
 
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    tabBtns.forEach(b => b.classList.remove('active'));
-                    tabContents.forEach(c => c.classList.remove('active'));
+            function sceneProgress(scene) {
+                const rect = scene.getBoundingClientRect();
+                const travel = Math.max(1, scene.offsetHeight - window.innerHeight);
+                return clamp(-rect.top / travel);
+            }
 
-                    btn.classList.add('active');
+            function animateScene(scene, p) {
+                const e = ease(p);
+                const bg = scene.querySelector('[data-bg]');
+                const shot = scene.querySelector('[data-shot]');
 
-                    const targetId = btn.getAttribute('data-target');
-                    document.getElementById(targetId).classList.add('active');
+                if (bg) {
+                    bg.style.transform = `translate3d(0, ${(p-.5)*-7}%, 0) scale(${lerp(1.03,1.09,p)})`;
+                }
+
+                if (shot) {
+                    const q = clamp((p-.07)/.76);
+                    const x = lerp(170,0,ease(q));
+                    const y = lerp(55,-10,ease(q));
+                    const r = lerp(-3.5,0,ease(q));
+                    const s = lerp(.84,1,ease(q));
+                    const o = clamp(q*1.38);
+                    shot.style.transform = `translate3d(${x}px, calc(-50% + ${y}px), 0) rotate(${r}deg) scale(${s})`;
+                    shot.style.opacity = o;
+                }
+
+                if (scene.classList.contains('hero')) {
+                    const heroBg = scene.querySelector('[data-hero-bg]');
+                    const heroGlow = scene.querySelector('[data-hero-glow]');
+                    const copy = scene.querySelector('[data-hero-copy]');
+                    if (heroBg) heroBg.style.transform = `scale(${lerp(1.03,1.12,p)}) translate3d(0,${lerp(0,-2.3,p)}%,0)`;
+                    if (heroGlow) heroGlow.style.transform = `scale(${lerp(1.04,1.2,p)}) translate3d(${lerp(0,1.5,p)}%,${lerp(0,-1.5,p)}%,0)`;
+                    if (copy) {
+                        copy.style.transform = `translate3d(${lerp(0,-7,e)}%,calc(-50% + ${lerp(0,-4,e)}px),0)`;
+                        copy.style.opacity = clamp(1 - Math.max(0,p-.16)*2.25);
+                    }
+                }
+            }
+
+            let ticking = false;
+            function updateScenes() {
+                scenes.forEach(scene => {
+                    const target = sceneProgress(scene);
+                    const current = animatedSceneProgress.get(scene) ?? target;
+                    const next = reduceMotion ? target : lerp(current,target,.115);
+                    animatedSceneProgress.set(scene,next);
+                    animateScene(scene,next);
                 });
+                updateCustomScrollbar();
+                if (!reduceMotion && scenes.some(scene => Math.abs(animatedSceneProgress.get(scene)-sceneProgress(scene))>.001)) requestAnimationFrame(updateScenes);
+                ticking = false;
+            }
+            function requestUpdate(){ if(!ticking){ ticking=true; requestAnimationFrame(updateScenes); } }
+
+            /* Dynamic custom scrollbar colours */
+            const customScrollbar = document.getElementById('customScrollbar');
+            const scrollTrack = document.getElementById('scrollTrack');
+            const scrollThumb = document.getElementById('scrollThumb');
+            let dragging=false, dragOffset=0;
+            const stops = [
+                [0.00,[203,166,247]],
+                [0.24,[116,164,255]],
+                [0.48,[170,140,255]],
+                [0.70,[33,223,166]],
+                [1.00,[203,166,247]]
+            ];
+            function colorAt(t){
+                for(let i=0;i<stops.length-1;i++){
+                    const a=stops[i], b=stops[i+1];
+                    if(t<=b[0]){
+                        const q=(t-a[0])/(b[0]-a[0]);
+                        const rgb=a[1].map((v,j)=>Math.round(lerp(v,b[1][j],q)));
+                        return `rgb(${rgb[0]} ${rgb[1]} ${rgb[2]})`;
+                    }
+                }
+                const last=stops[stops.length-1][1];
+                return `rgb(${last[0]} ${last[1]} ${last[2]})`;
+            }
+            function updateCustomScrollbar(){
+                if(!customScrollbar||!scrollTrack||!scrollThumb)return;
+                const viewport=window.innerHeight, docHeight=document.documentElement.scrollHeight;
+                const maxScroll=Math.max(1,docHeight-viewport);
+                const trackHeight=scrollTrack.clientHeight;
+                const thumbHeight=Math.max(54,Math.min(trackHeight,trackHeight*viewport/docHeight));
+                const maxTravel=Math.max(0,trackHeight-thumbHeight);
+                const progress=clamp(window.scrollY/maxScroll);
+                customScrollbar.style.setProperty('--scrollbar-color',colorAt(progress));
+                scrollThumb.style.height=`${thumbHeight}px`;
+                scrollThumb.style.transform=`translateY(${maxTravel*progress}px)`;
+                scrollThumb.setAttribute('aria-valuenow',String(Math.round(progress*100)));
+            }
+            function scrollFromPointer(clientY){
+                const rect=scrollTrack.getBoundingClientRect();
+                const maxTravel=Math.max(0,rect.height-scrollThumb.offsetHeight);
+                const y=clientY-rect.top-dragOffset;
+                const progress=maxTravel>0?clamp(y/maxTravel):0;
+                const maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+                window.scrollTo(0,progress*maxScroll);
+            }
+            scrollThumb.addEventListener('pointerdown',e=>{
+                e.preventDefault(); dragging=true; customScrollbar.classList.add('dragging');
+                dragOffset=e.clientY-scrollThumb.getBoundingClientRect().top;
+                scrollThumb.setPointerCapture?.(e.pointerId);
             });
-        });
+            scrollThumb.addEventListener('pointermove',e=>{ if(dragging) scrollFromPointer(e.clientY); });
+            const stopDrag=e=>{ if(!dragging)return; dragging=false; customScrollbar.classList.remove('dragging'); try{scrollThumb.releasePointerCapture?.(e.pointerId);}catch(_){} };
+            scrollThumb.addEventListener('pointerup',stopDrag);
+            scrollThumb.addEventListener('pointercancel',stopDrag);
+            scrollThumb.addEventListener('lostpointercapture',()=>{dragging=false;customScrollbar.classList.remove('dragging');});
+            scrollTrack.addEventListener('pointerdown',e=>{
+                if(e.target===scrollThumb)return;
+                dragOffset=scrollThumb.offsetHeight/2; scrollFromPointer(e.clientY);
+            });
+            scrollThumb.addEventListener('keydown',e=>{
+                const step=Math.max(80,window.innerHeight*.12), maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+                if(e.key==='ArrowDown')window.scrollBy(0,step);
+                else if(e.key==='ArrowUp')window.scrollBy(0,-step);
+                else if(e.key==='PageDown')window.scrollBy(0,window.innerHeight*.9);
+                else if(e.key==='PageUp')window.scrollBy(0,-window.innerHeight*.9);
+                else if(e.key==='Home')window.scrollTo(0,0);
+                else if(e.key==='End')window.scrollTo(0,maxScroll);
+                else return;
+                e.preventDefault();
+            });
+
+            /* Reveal cards */
+            const revealObserver = new IntersectionObserver(entries=>{
+                entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add('visible'); });
+            },{threshold:.14});
+            document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+            /* Tabs */
+            const tabBtns=[...document.querySelectorAll('.tab-btn')];
+            const tabContents=[...document.querySelectorAll('.tab-content')];
+            tabBtns.forEach(btn=>btn.addEventListener('click',()=>{
+                const target=btn.getAttribute('data-target');
+                tabBtns.forEach(b=>b.classList.toggle('active',b===btn));
+                tabContents.forEach(c=>c.classList.toggle('active',c.id===target));
+            }));
+
+            /* Animated anchor navigation */
+            function smoothScrollToElement(target,duration=1100){
+                if(!target)return;
+                const startY=window.scrollY;
+                const endY=target.id==='top'?0:Math.min(Math.max(0,target.getBoundingClientRect().top+window.scrollY),Math.max(0,document.documentElement.scrollHeight-window.innerHeight));
+                const distance=endY-startY;
+                if(Math.abs(distance)<2)return;
+                const startTime=performance.now();
+                const easeScroll=t=>1-Math.pow(1-t,4);
+                function frame(now){
+                    const p=clamp((now-startTime)/duration);
+                    window.scrollTo(0,startY+distance*easeScroll(p));
+                    if(p<1)requestAnimationFrame(frame);
+                }
+                requestAnimationFrame(frame);
+            }
+            document.querySelectorAll('[data-smooth-target]').forEach(anchor=>anchor.addEventListener('click',e=>{
+                const target=document.querySelector(anchor.getAttribute('data-smooth-target'));
+                if(!target)return;
+                e.preventDefault(); smoothScrollToElement(target,1250);
+            }));
+
+            window.addEventListener('scroll',requestUpdate,{passive:true});
+            window.addEventListener('resize',requestUpdate);
+            window.addEventListener('load',requestUpdate);
+            requestUpdate();
+        })();
     </script>
 
 </body>

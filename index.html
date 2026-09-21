@@ -7,48 +7,860 @@
     <link rel="icon" type="image/png" href="./assets/bears_hand.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root{
+            --bg:#05070b;
+            --surface:rgba(13,17,24,.74);
+            --surface2:rgba(17,22,30,.88);
+            --border:rgba(255,255,255,.10);
+            --border-strong:rgba(255,255,255,.17);
+            --text:#f4f6fa;
+            --muted:#9ba4b0;
+            --soft:#707987;
+            --violet:#c9adff;
+            --mint:#76e7c0;
+            --max:1180px;
+        }
+
+        *{box-sizing:border-box}
+        html{scroll-behavior:auto}
+        html,body{scrollbar-width:none}
+        html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0}
+        body{
+            margin:0;
+            min-height:100vh;
+            overflow-x:hidden;
+            color:var(--text);
+            background:var(--bg);
+            font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+            -webkit-font-smoothing:antialiased;
+        }
+
+        a{text-decoration:none;color:inherit}
+        button{font:inherit}
+
+        .background{
+            position:fixed;
+            inset:0;
+            z-index:-10;
+            overflow:hidden;
+            background:
+                radial-gradient(circle at 16% 16%,rgba(201,173,255,.11),transparent 27%),
+                radial-gradient(circle at 82% 32%,rgba(118,231,192,.06),transparent 25%),
+                linear-gradient(180deg,#05070b 0%,#070b11 52%,#05070b 100%);
+        }
+
+        .background::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:
+                linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),
+                linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);
+            background-size:54px 54px;
+            mask-image:linear-gradient(to bottom,black 0%,rgba(0,0,0,.7) 38%,transparent 86%);
+        }
+
+        .background::after{
+            content:"";
+            position:absolute;
+            width:55vw;
+            height:55vw;
+            right:-22vw;
+            top:-25vw;
+            border-radius:50%;
+            border:1px solid rgba(255,255,255,.04);
+            box-shadow:
+                0 0 0 100px rgba(255,255,255,.012),
+                0 0 0 200px rgba(255,255,255,.008);
+        }
+
+        /* Navigation */
+        .navbar{
+            position:fixed;
+            inset:0 0 auto 0;
+            height:68px;
+            z-index:500;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 28px;
+            background:rgba(5,7,11,.57);
+            border-bottom:1px solid rgba(255,255,255,.08);
+            backdrop-filter:blur(18px);
+            -webkit-backdrop-filter:blur(18px);
+        }
+
+        .nav-left,.nav-center,.nav-right,.controls-wrapper{
+            display:flex;
+            align-items:center;
+        }
+
+        .nav-left{gap:26px}
+        .nav-center{gap:22px}
+        .nav-right{gap:14px}
+
+        .nav-brand{
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            font-weight:700;
+            letter-spacing:.35px;
+        }
+
+        .nav-brand img{
+            width:30px;
+            height:30px;
+            object-fit:contain;
+            border-radius:7px;
+            background:rgba(255,255,255,.04);
+        }
+
+        .nav-center a,.nav-social{
+            color:var(--muted);
+            font-size:.88rem;
+            font-weight:500;
+            transition:color .2s ease;
+        }
+
+        .nav-center a{
+            position:relative;
+        }
+
+        .nav-center a::after{
+            content:"";
+            position:absolute;
+            left:0;
+            right:100%;
+            bottom:-7px;
+            height:1px;
+            background:currentColor;
+            transition:right .24s ease;
+        }
+
+        .nav-center a:hover,.nav-center a.active,.nav-social:hover{color:var(--text)}
+        .nav-center a:hover::after,.nav-center a.active::after{right:0}
+
+        .divider{
+            width:1px;
+            height:20px;
+            background:rgba(255,255,255,.10);
+        }
+
+        .scroll-track{
+            position:relative;
+            width:3px;
+            height:100%;
+            border-radius:99px;
+            background:rgba(255,255,255,.08);
+        }
+
+        .scroll-fill{
+            position:absolute;
+            left:0;
+            top:0;
+            width:100%;
+            height:0;
+            border-radius:99px;
+            background:linear-gradient(180deg,var(--violet),#8f8aff 58%,var(--mint));
+        }
+
+        .scroll-thumb{
+            position:absolute;
+            left:50%;
+            top:0;
+            width:9px;
+            height:58px;
+            transform:translateX(-50%);
+            border-radius:999px;
+            border:1px solid rgba(255,255,255,.34);
+            background:linear-gradient(180deg,#f0e9ff,#c9adff);
+            box-shadow:0 2px 14px rgba(0,0,0,.34);
+            cursor:grab;
+        }
+
+        .scroll-thumb.dragging{cursor:grabbing}
+
+        .wrap{
+            width:min(var(--max),calc(100% - 48px));
+            margin:0 auto;
+        }
+
+        /* Hero */
+
+        .hero-wrap{
+            display:grid;
+            grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);
+            align-items:center;
+            gap:44px;
+            width:min(var(--max),calc(100% - 48px));
+            max-width:var(--max);
+            margin:0 auto;
+        }
+
+        .hero{
+            min-height:100vh;
+            padding:150px 0 120px;
+            position:relative;
+        }
+
+        .hero-copy{position:relative;z-index:2;max-width:720px}
+
+        .eyebrow{
+            display:inline-flex;
+            align-items:center;
+            gap:9px;
+            padding:8px 12px;
+            border:1px solid var(--border);
+            border-radius:999px;
+            background:rgba(255,255,255,.035);
+            color:#b5bdc8;
+            font-size:.72rem;
+            font-weight:700;
+            letter-spacing:1.25px;
+            text-transform:uppercase;
+            backdrop-filter:blur(10px);
+        }
+
+        .eyebrow::before{
+            content:"";
+            width:6px;
+            height:6px;
+            border-radius:50%;
+            background:var(--mint);
+        }
+
+        .hero h1{
+            margin:24px 0 18px;
+            font-size:clamp(4rem,8vw,7rem);
+            line-height:.92;
+            letter-spacing:-.067em;
+        }
+
+        .hero h1 .accent{color:var(--violet)}
+        .hero-copy p{
+            max-width:670px;
+            color:var(--muted);
+            font-size:1.08rem;
+            line-height:1.82;
+            margin:0;
+        }
+
+        .hero-actions{
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+            margin-top:30px;
+        }
+
+        .glass-btn{
+            min-height:47px;
+            padding:0 17px;
+            border-radius:10px;
+            border:1px solid rgba(255,255,255,.13);
+            background:rgba(255,255,255,.055);
+            color:var(--text);
+            font-size:.86rem;
+            font-weight:700;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:9px;
+            backdrop-filter:blur(12px);
+            -webkit-backdrop-filter:blur(12px);
+            box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+            transition:transform .22s ease,background .22s ease,border-color .22s ease;
+        }
+
+        .glass-btn:hover{
+            transform:translateY(-2px);
+            background:rgba(255,255,255,.085);
+            border-color:rgba(255,255,255,.22);
+        }
+
+        .glass-btn.violet{
+            color:#efe8ff;
+            background:rgba(201,173,255,.12);
+            border-color:rgba(201,173,255,.34);
+        }
+
+        .glass-btn.mint{
+            color:#dffbf2;
+            background:rgba(118,231,192,.10);
+            border-color:rgba(118,231,192,.28);
+        }
+
+        .hero-meta{
+            margin-top:24px;
+            display:flex;
+            flex-wrap:wrap;
+            gap:9px;
+        }
+
+        .hero-meta span{
+            border:1px solid var(--border);
+            border-radius:999px;
+            padding:7px 11px;
+            color:#9da7b5;
+            font-size:.75rem;
+            background:rgba(255,255,255,.02);
+        }
+
+        .hero-art{
+            min-height:570px;
+            position:relative;
+        }
+
+        .hero-card{
+            position:absolute;
+            inset:14px 10px 28px 10px;
+            border:1px solid var(--border);
+            border-radius:22px;
+            overflow:hidden;
+            background:
+                linear-gradient(180deg,rgba(15,19,27,.70),rgba(6,9,13,.82));
+            box-shadow:0 30px 90px rgba(0,0,0,.34);
+            transform:rotate(1.2deg);
+            backdrop-filter:blur(12px);
+        }
+
+        .hero-card::after{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:linear-gradient(135deg,rgba(255,255,255,.075),transparent 35%);
+            pointer-events:none;
+        }
+
+        .hero-card img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+            opacity:.9;
+        }
+
+        .hero-card .caption{
+            position:absolute;
+            left:16px;
+            right:16px;
+            bottom:16px;
+            padding:12px 14px;
+            border:1px solid rgba(255,255,255,.10);
+            border-radius:11px;
+            background:rgba(5,7,11,.70);
+            backdrop-filter:blur(10px);
+            color:#c8ced7;
+            font-size:.74rem;
+        }
+
+        .floating-note{
+            position:absolute;
+            right:4px;
+            top:34px;
+            padding:10px 12px;
+            border:1px solid var(--border);
+            border-radius:10px;
+            background:rgba(9,12,17,.72);
+            color:#bdc5d0;
+            font-size:.72rem;
+            backdrop-filter:blur(12px);
+        }
+
+        /* Intro / philosophy */
+        .statement{
+            min-height:72vh;
+            display:flex;
+            align-items:center;
+            padding:100px 0;
+        }
+
+        .statement-inner{
+            max-width:950px;
+        }
+
+        .statement h2{
+            margin:16px 0 20px;
+            font-size:clamp(3rem,6vw,6rem);
+            line-height:.96;
+            letter-spacing:-.06em;
+        }
+
+        .statement h2 .accent{color:var(--violet)}
+        .statement p{
+            max-width:760px;
+            color:var(--muted);
+            line-height:1.85;
+            font-size:1rem;
+        }
+
+        .rule{
+            margin-top:25px;
+            display:flex;
+            align-items:center;
+            gap:12px;
+            color:#bcc4ce;
+            font-size:.78rem;
+            font-weight:600;
+        }
+
+        .rule::before{
+            content:"";
+            width:28px;
+            height:1px;
+            background:rgba(255,255,255,.27);
+        }
+
+        /* Projects preview */
+        .projects{
+            padding:100px 0 120px;
+        }
+
+        .section-head{
+            margin-bottom:38px;
+        }
+
+        .section-head h2{
+            margin:11px 0 10px;
+            font-size:clamp(2.8rem,5vw,5rem);
+            line-height:.97;
+            letter-spacing:-.055em;
+        }
+
+        .section-head p{
+            margin:0;
+            color:var(--muted);
+            max-width:670px;
+            line-height:1.75;
+        }
+
+        .project-grid{
+            display:grid;
+            grid-template-columns:repeat(2,minmax(0,1fr));
+            gap:22px;
+        }
+
+        .project{
+            position:relative;
+            min-height:520px;
+            border:1px solid var(--border);
+            border-radius:20px;
+            overflow:hidden;
+            background:linear-gradient(180deg,rgba(15,19,27,.84),rgba(7,10,15,.90));
+            box-shadow:0 28px 80px rgba(0,0,0,.26);
+        }
+
+        .project-image{
+            width:100%;
+            height:300px;
+            object-fit:cover;
+            display:block;
+            opacity:.88;
+            border-bottom:1px solid var(--border);
+        }
+
+        .project-body{
+            padding:25px 25px 27px;
+        }
+
+        .project-label{
+            text-transform:uppercase;
+            letter-spacing:1.4px;
+            font-size:.7rem;
+            font-weight:700;
+            margin-bottom:10px;
+        }
+
+        .project:nth-child(1) .project-label{color:var(--mint)}
+        .project:nth-child(2) .project-label{color:var(--violet)}
+
+        .project h3{
+            margin:0 0 12px;
+            font-size:2.2rem;
+            line-height:1;
+            letter-spacing:-.045em;
+        }
+
+        .project p{
+            margin:0;
+            color:var(--muted);
+            font-size:.92rem;
+            line-height:1.75;
+        }
+
+        .project .project-button{
+            margin-top:22px;
+        }
+
+        .facts{
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:17px;
+        }
+
+        .fact{
+            padding:7px 10px;
+            border:1px solid var(--border);
+            border-radius:7px;
+            color:#c0c8d2;
+            background:rgba(255,255,255,.02);
+            font-size:.72rem;
+        }
+
+        /* Bottom */
+        .end{
+            padding:40px 0 110px;
+        }
+
+        .end-card{
+            padding:66px 30px;
+            text-align:center;
+            border:1px solid var(--border);
+            border-radius:22px;
+            background:linear-gradient(180deg,rgba(16,21,29,.78),rgba(8,11,16,.86));
+            box-shadow:0 30px 90px rgba(0,0,0,.28);
+            backdrop-filter:blur(16px);
+        }
+
+        .end-card h2{
+            margin:14px 0 13px;
+            font-size:clamp(2.8rem,5vw,4.8rem);
+            line-height:.96;
+            letter-spacing:-.055em;
+        }
+
+        .end-card h2 .accent{color:var(--violet)}
+        .end-card p{
+            max-width:660px;
+            margin:0 auto;
+            color:var(--muted);
+            line-height:1.8;
+        }
+
+        .back-top{
+            margin-top:25px;
+            display:inline-flex;
+            padding:10px 13px;
+            border:1px solid var(--border);
+            border-radius:999px;
+            color:#c5cdd7;
+            background:rgba(255,255,255,.024);
+            font-size:.76rem;
+            font-weight:700;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            transition:transform .2s ease,border-color .2s ease;
+        }
+
+        .back-top:hover{
+            transform:translateY(-2px);
+            border-color:var(--border-strong);
+        }
+
+        footer{
+            padding:28px 0 48px;
+            border-top:1px solid var(--border);
+            color:#69727f;
+            text-align:center;
+            font-size:.78rem;
+        }
+
+        /* Reveal animation */
+        .reveal{
+            opacity:0;
+            transform:translateY(30px);
+            transition:
+                opacity .8s cubic-bezier(.2,.7,.2,1),
+                transform .8s cubic-bezier(.2,.7,.2,1);
+        }
+
+        .reveal.visible{
+            opacity:1;
+            transform:translateY(0);
+        }
+
+        .delay-1{transition-delay:.08s}
+        .delay-2{transition-delay:.16s}
+        .delay-3{transition-delay:.24s}
+
+        @media(max-width:900px){
+            .navbar{padding:0 17px}
+            .nav-center{display:none}
+            .hero-wrap{
+                grid-template-columns:1fr;
+                gap:34px;
+            }
+            .hero{
+                padding-top:125px;
+            }
+            .hero-art{min-height:430px}
+            .project-grid{grid-template-columns:1fr}
+        }
+
+        @media(max-width:580px){
+            .wrap{width:min(var(--max),calc(100% - 30px))}
+            .nav-social,.divider{display:none}
+            .hero h1{font-size:clamp(3.6rem,16vw,6rem)}
+            .hero-card{inset:8px 0 18px 0}
+            .hero-art{min-height:320px}
+            .project-image{height:220px}
+            .scroll-rail{right:7px}
+        }
+    </style>
 </head>
+
 <body>
-<div class="bg-animation"></div>
+<div class="background"></div>
 
 <nav class="navbar">
-    <a href="index.html" class="nav-brand">
-        <img src="./assets/logo.png" alt="Sanya" onerror="this.style.display='none'">
-        Sanya
-    </a>
-    <div class="nav-center">
-        <a href="index.html" class="active" data-i18n="nav.home">Home</a>
-        <a href="tools.html" data-i18n="nav.projects">Projects</a>
-        <a href="https://github.com/bishpop" target="_blank">GitHub ↗</a>
-    </div>
-    <div class="controls-wrapper">
-        <button id="themeToggle" class="theme-toggle" title="Toggle Theme">☀️</button>
-        <div class="lang-switcher">
-            <button class="lang-btn active" data-lang="en">EN</button>
-            <span class="lang-divider">|</span>
-            <button class="lang-btn" data-lang="zh">简</button>
+    <div class="nav-left">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/logo.png" alt="Sanya" onerror="this.style.display='none'">
+            <span>Sanya</span>
+        </a>
+        <div class="nav-center">
+            <a href="index.html" class="active">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
+    </div>
     </div>
 </nav>
 
-<div class="page-wrapper fade-in">
-    <div class="container hero-section">
-        <div class="hero-content">
-            <span class="accent-text" data-i18n="index.accent">Software & Tools</span>
-            <h1 data-i18n="index.h1">Building custom solutions & rhythm game tools.</h1>
-            <p data-i18n="index.desc">Welcome to my portfolio. I specialize in C++ and C#, UI/UX customization, and developing specialized tools for rhythm game charting — including the BeatUp Engine and SanConverter.</p>
-            <div class="hero-actions">
-                <a href="patcher.html" class="btn-glow" data-i18n="index.btn.patcher">BeatUp Engine</a>
-                <a href="tools.html" class="btn btn-secondary" style="border-radius:50px;padding:14px 30px;" data-i18n="index.btn.projects">Explore Projects</a>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <img src="./assets/logo.png" alt="Sanya" onerror="this.style.display='none'">
-        </div>
+<div class="scroll-rail" aria-hidden="true">
+    <div class="scroll-track" id="scrollTrack">
+        <div class="scroll-fill" id="scrollFill"></div>
+        <div class="scroll-thumb" id="scrollThumb"></div>
     </div>
 </div>
 
-<script src="i18n.js"></script>
+<main id="top">
+    <section class="hero">
+        <div class="wrap hero-wrap">
+            <div class="hero-copy">
+                <div class="eyebrow reveal">Software &amp; Tools</div>
+                <h1 class="reveal delay-1">
+                    Building things<br>
+                    that <span class="accent">feel right.</span>
+                </h1>
+                <p class="reveal delay-2">
+                    A focused portfolio for custom software, UI work, and rhythm-game tooling —
+                    built around the two projects that are actively maintained today.
+                </p>
+
+                <div class="hero-actions reveal delay-3">
+                    <a href="patcher.html" class="glass-btn violet">BeatUp Engine →</a>
+                    <a href="index.html#projects" class="glass-btn">Explore Projects →</a>
+                </div>
+
+                <div class="hero-meta reveal delay-3">
+                    <span>C++ / C#</span>
+                    <span>Windows</span>
+                    <span>UI / UX</span>
+                    <span>Rhythm game tooling</span>
+                </div>
+            </div>
+
+            <div class="hero-art reveal delay-1">
+                <div class="floating-note">currently building · refining · shipping</div>
+                <div class="hero-card">
+                    <img src="./assets/menu_background.png"
+                         alt="BeatUp Engine visual"
+                         onerror="this.onerror=null; this.src='./assets/pbg.png';">
+                    <div class="caption">A small portfolio, built around software that is still moving forward.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="statement">
+        <div class="wrap">
+            <div class="statement-inner">
+                <div class="scene-label reveal">What this site is about</div>
+                <h2 class="reveal delay-1">
+                    Less catalogue.<br>
+                    <span class="accent">More craft.</span>
+                </h2>
+                <p class="reveal delay-2">
+                    The portfolio is intentionally simple: show the work, explain what it does,
+                    and get out of the way. BeatUp Engine and SanConverter are the current focus,
+                    with project pages that go deeper into the actual software.
+                </p>
+                <div class="rule reveal delay-3">Two active projects. One consistent visual language.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="wrap">
+            <div class="section-head">
+                <div class="scene-label reveal">Current projects</div>
+                <h2 class="reveal delay-1">Built to be used.</h2>
+                <p class="reveal delay-2">
+                    Two desktop tools, each focused on a specific workflow rather than trying to do everything.
+                </p>
+            </div>
+
+            <div class="project-grid">
+                <article class="project reveal">
+                    <img class="project-image"
+                         src="./assets/menustate.png"
+                         alt="BeatUp Engine"
+                         onerror="this.onerror=null; this.src='./assets/MainMenu.png';">
+                    <div class="project-body">
+                        <div class="project-label">01 · rhythm engine</div>
+                        <h3>BeatUp Engine.</h3>
+                        <p>
+                            An open-source BeatUp rhythm game engine built in C++ with SDL2,
+                            with precise timing, integrated chart editing, and authentic gameplay input.
+                        </p>
+                        <div class="facts">
+                            <span class="fact">C++ / SDL2</span>
+                            <span class="fact">Chart Editor</span>
+                            <span class="fact">1:1 Timing</span>
+                        </div>
+                        <a href="patcher.html" class="glass-btn violet project-button">Open project →</a>
+                    </div>
+                </article>
+
+                <article class="project reveal delay-1">
+                    <img class="project-image"
+                         src="./assets/sanconverter.png"
+                         alt="SanConverter">
+                    <div class="project-body">
+                        <div class="project-label">02 · chart conversion</div>
+                        <h3>SanConverter.</h3>
+                        <p>
+                            A dedicated converter for rhythm-game chart formats, with Beat Up and
+                            One-Two Party logic, analysis tools, and utilities for SLK workflows.
+                        </p>
+                        <div class="facts">
+                            <span class="fact">.NET 4.8</span>
+                            <span class="fact">SM / SSC → SLK</span>
+                            <span class="fact">Charting Logic</span>
+                        </div>
+                        <a href="sanconverter.html" class="glass-btn mint project-button">Open project →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="end">
+        <div class="wrap">
+            <div class="end-card reveal">
+                <div class="scene-label">End of the tour</div>
+                <h2>See the work.<br><span class="accent">Then use it.</span></h2>
+                <p>
+                    Explore either project for the full details, downloads, documentation,
+                    screenshots, and current feature set.
+                </p>
+                <a class="back-top" href="#top" id="backTop">Back to top ↑</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="wrap">&copy; 2026 Sanya. All rights reserved.</div>
+</footer>
+
+
+<script>
+(() => {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener("click", e => {
+            const id = link.getAttribute("href");
+            if (!id || id === "#") return;
+            const target = document.querySelector(id);
+            if (!target) return;
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+    });
+})();
+</script>
+
+<script>
+(() => {
+    const track = document.getElementById("scrollTrack");
+    const thumb = document.getElementById("scrollThumb");
+    const fill = document.getElementById("scrollFill");
+    const backTop = document.getElementById("backTop");
+
+    let dragging = false;
+    let raf = 0;
+
+    const maxScroll = () =>
+        Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+
+    function updateScrollbar() {
+        const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll()));
+        const maxTop = Math.max(0, track.clientHeight - thumb.offsetHeight);
+
+        thumb.style.top = `${progress * maxTop}px`;
+        fill.style.height = `${progress * 100}%`;
+
+        const hue = 269 + progress * 110;
+        thumb.style.background =
+            `linear-gradient(180deg,hsl(${hue} 100% 94%),hsl(${Math.min(hue + 8,360)} 92% 82%))`;
+    }
+
+    function requestUpdate() {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+            raf = 0;
+            updateScrollbar();
+        });
+    }
+
+    function setScrollFromPointer(clientY) {
+        const rect = track.getBoundingClientRect();
+        const thumbHeight = thumb.offsetHeight;
+        const maxTop = Math.max(0, rect.height - thumbHeight);
+        const top = Math.max(0, Math.min(maxTop, clientY - rect.top - thumbHeight / 2));
+        const progress = maxTop === 0 ? 0 : top / maxTop;
+        window.scrollTo(0, progress * maxScroll());
+    }
+
+    thumb.addEventListener("pointerdown", e => {
+        dragging = true;
+        thumb.classList.add("dragging");
+        thumb.setPointerCapture(e.pointerId);
+    });
+
+    thumb.addEventListener("pointermove", e => {
+        if (dragging) setScrollFromPointer(e.clientY);
+    });
+
+    thumb.addEventListener("pointerup", () => {
+        dragging = false;
+        thumb.classList.remove("dragging");
+    });
+
+    track.addEventListener("pointerdown", e => {
+        if (e.target !== thumb) setScrollFromPointer(e.clientY);
+    });
+
+    window.addEventListener("scroll", requestUpdate, {passive:true});
+    window.addEventListener("resize", requestUpdate);
+
+    backTop.addEventListener("click", e => {
+        e.preventDefault();
+        window.scrollTo({top:0,behavior:"smooth"});
+    });
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+    }, {threshold:.14});
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    updateScrollbar();
+})();
+</script>
 </body>
 </html>
