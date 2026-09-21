@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BeatUp Engine — a cinematic showcase and download page.">
-    <title>BeatUp Engine v0.5.1 — Sanya</title>
+    <title>BeatUp Engine v0.6 — Sanya</title>
     <link rel="icon" type="image/png" href="./assets/bears_hand.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -631,7 +631,7 @@
                     <div class="hero-vignette"></div>
 
                     <div class="hero-copy" data-hero-copy>
-                        <div class="eyebrow">Early Access · v0.5.1 · Windows x64</div>
+                        <div class="eyebrow">Early Access · v0.6 · Windows x64</div>
                         <h1>BeatUp <span>Engine</span></h1>
                         <p>
                             A high-fidelity, open-source BeatUp rhythm game engine built from scratch in C++ with SDL2 — designed around authentic Audition Online / CDIU gameplay and precise timing.
@@ -663,7 +663,7 @@
                             <div class="scene-index">01 · First Launch</div>
                             <h2>Onboarding — once.</h2>
                             <p>
-                                A short first-run introduction explains the basics, then stays out of the way.
+                                A short first-run introduction shows the key hotkeys and asks for your creditor name — it is added to every chart you export.
                             </p>
                             <div class="scene-caption">Shown on first start only.</div>
                         </div>
@@ -685,7 +685,7 @@
                             <div class="scene-index">02 · Select Mode</div>
                             <h2>Choose a mode.</h2>
                             <p>
-                                Editor or patcher — the main menu keeps the two workflows one step apart.
+                                Editor or patcher — an animated menu with a personal welcome keeps both workflows one step apart.
                             </p>
                             <div class="scene-caption">Select what you want to do.</div>
                         </div>
@@ -707,7 +707,7 @@
                             <div class="scene-index">03 · Chart Editor</div>
                             <h2>Create the chart.<br>Preview it live.</h2>
                             <p>
-                                Place notes, use snapping and check the result immediately with split view and playback.
+                                Place notes, use snapping and check the result immediately — drag the split view to give the chart or the game more room.
                             </p>
                             <div class="scene-caption">Edit. Play. Adjust.</div>
                         </div>
@@ -748,30 +748,35 @@
                     <div class="scene-index">05 · Why it feels different</div>
                     <h2>Built like a rhythm engine, presented like a game.</h2>
                     <p>
-                        The content from the existing page remains available, but the visual story can now lead the visitor instead of making them parse a wall of cards first.
+                        Precise timing underneath, a clean and customisable interface on top — every screen from the first launch to the last menu.
                     </p>
                 </div>
 
                 <div class="feature-grid">
-                    <article class="feature-card reveal"><div class="feature-icon">01</div><h3>1:1 Timing Engine</h3><p>Graphics and hit logic share a single time base, with a tight, adjustable Perfect window.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">01</div><h3>1:1 Timing Engine</h3><p>Graphics and hit logic share one time base. Judgment follows the original — no note snapping, every window reachable.</p></article>
                     <article class="feature-card reveal"><div class="feature-icon">02</div><h3>Authentic Layout</h3><p>Numpad 9/6/3, 7/4/1, Space and Finish Move controls with Mirror and AutoPlay support.</p></article>
-                    <article class="feature-card reveal"><div class="feature-icon">03</div><h3>Animated Arrows</h3><p>Moving arrows cycle through per-beat frames with a full-size receptor explosion.</p></article>
-                    <article class="feature-card reveal"><div class="feature-icon">04</div><h3>Chart Editor</h3><p>Timeline canvas with 1/4, 1/8 and 1/16 snapping plus split-view playback.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">03</div><h3>Theme Editor</h3><p>Six base colors style the whole app, with a live preview and your own themes saved to theme.ini.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">04</div><h3>Chart Editor</h3><p>1/4, 1/8 and 1/16 snapping, a resizable split view, waveform and beat-by-beat navigation.</p></article>
                     <article class="feature-card reveal"><div class="feature-icon">05</div><h3>.bu Project Files</h3><p>Save audio, BPM, position and notes and reopen the whole editing session later.</p></article>
-                    <article class="feature-card reveal"><div class="feature-icon">06</div><h3>Patcher Chances</h3><p>Rapid, Vanishing, Wave, Inverted, Speed Up and Halfway — with Default unchanged.</p></article>
+                    <article class="feature-card reveal"><div class="feature-icon">06</div><h3>Patcher Chances</h3><p>Rapid, Vanishing, Wave, Inverted, Speed Up and Halfway — plus Challenger Mode, Enter Lock and Instant Play.</p></article>
                 </div>
 
                 <div class="mini-sections" style="margin-top:32px;">
                     <div class="mini-grid">
                         <div class="mini-card reveal">
-                            <h3>Patch Notes · v0.5.1 Stable</h3>
+                            <h3>Patch Notes · v0.6</h3>
                             <ul>
-                                <li>Unified time base for graphics and hit logic.</li>
-                                <li>Full-precision offset handling.</li>
-                                <li>Smoother missed-note tails.</li>
-                                <li>Reworked MP/RP receptor beams.</li>
-                                <li>Animated arrow frames and full-size explosion.</li>
+                                <li>Reworked hit judgment — no note snapping, Great reliably hittable.</li>
+                                <li>Theme Editor with live preview and saved themes.</li>
+                                <li>Resizable split view that zooms the game to fit.</li>
+                                <li>New onboarding, animated main menu and categorised Options.</li>
+                                <li>Enter Lock, Instant Play and a Shadows setting.</li>
+                                <li>New player with hover time preview; arrow keys jump by beat.</li>
+                                <li>.bu projects resume the music at the saved position.</li>
                             </ul>
+                            <p style="margin-top:12px;">
+                                <a href="https://github.com/bishpop/beatupengine/releases/tag/v0.6" target="_blank" rel="noopener">Full release notes on GitHub →</a>
+                            </p>
                         </div>
                         <div class="mini-card reveal">
                             <h3>Controls</h3>
@@ -779,7 +784,10 @@
                                 <kbd>F1</kbd> Game Mode · <kbd>F2</kbd> Editor · <kbd>F3</kbd> Split View · <kbd>F4</kbd> Metronome · <kbd>F5</kbd>/<kbd>Space</kbd> Play/Pause · <kbd>F6</kbd> AutoPlay · <kbd>F7</kbd> Stop/Reset.
                             </p>
                             <p style="margin-top:12px;">
-                                <kbd>Ctrl+Shift+S</kbd> Save .bu · <kbd>Ctrl+Shift+E</kbd> Export .slk · <kbd>Ctrl+Shift+V</kbd> Export .ssc.
+                                <kbd>Ctrl+Shift+S</kbd> Save .bu · <kbd>Ctrl+Shift+E</kbd> Export .slk · <kbd>Ctrl+Shift+V</kbd> Export .ssc · <kbd>Ctrl+S</kbd> Sound settings · <kbd>F11</kbd> Fullscreen.
+                            </p>
+                            <p style="margin-top:12px;">
+                                Chart: <kbd>1</kbd>–<kbd>8</kbd> place notes (7 4 1 9 6 3 SP F) · <kbd>↑</kbd>/<kbd>↓</kbd> one beat · <kbd>Shift</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd> one MADI.
                             </p>
                         </div>
                     </div>
@@ -792,10 +800,10 @@
                 <div class="scene-index">06 · Ready when you are</div>
                 <h2>Play BeatUp Engine.</h2>
                 <p>
-                    Windows 10/11 x64 · v0.5.1 Stable · Portable build. Keep the <code>assets/</code> folder beside the executable.
+                    Windows 10/11 x64 · v0.6 · Portable build. Keep the <code>assets/</code> folder beside the executable.
                 </p>
                 <div class="download-actions">
-                    <a class="cin-btn primary" href="https://github.com/bishpop/beatupengine/releases/download/v0.5.1/BeatUpEngine-v0.5.1-Windows-x64.zip" target="_blank" rel="noopener">Download Release · ~25 MB</a>
+                    <a class="cin-btn primary" href="https://github.com/bishpop/beatupengine/releases/download/v0.6/BeatUpEngine-v0.6-Windows-x64.zip" target="_blank" rel="noopener">Download Release · ~25 MB</a>
                     <a class="cin-btn mauve" href="https://drive.google.com/uc?export=download&id=1b4bldL6xGjY1i6EPoLN0TGhU6JYqCBwh" target="_blank" rel="noopener">Patcher · ~150 MB</a>
                     <a class="cin-btn" href="./assets/manual.pdf" target="_blank" rel="noopener">Show User Manual · PDF</a>
                 </div>
