@@ -204,7 +204,7 @@ tr:last-child td { border-bottom: none; }
 tr:nth-child(even) { background: rgba(255,255,255,0.02); }
 
 /* =========================================================
-   5. NEW LAUNCHER COMPONENTS (patcher.html)
+   5. NEW LAUNCHER COMPONENTS (bue.html)
    ========================================================= */
 .store-hero {
     position: relative; padding: 60px 0 60px; margin-top: -16px;
