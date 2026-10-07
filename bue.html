@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BeatUp Engine — a lightweight C++ rhythm game engine, chart editor and patcher.">
-    <title>BeatUp Engine v0.6.1 — Sanya</title>
+    <title>BeatUp Engine v1.0 — Sanya</title>
     <link rel="icon" type="image/png" href="./assets/bears_hand.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1021,6 +1021,113 @@
             .download-card.dl-glow,
             .cin-btn.primary.dl-pulse { animation: none; }
         }
+
+        /* ── SHOWCASE (YouTube, datenschutzfreundlich) ─────────────────────
+           Das Video wird erst nach einem Klick geladen: vorher keine
+           Verbindung zu YouTube, keine Cookies. Eingebettet wird ueber
+           youtube-nocookie.com. Video-ID im data-youtube-id eintragen. */
+        .showcase-block {
+            padding: 130px clamp(24px, 7vw, 110px) 40px;
+            background: radial-gradient(circle at 50% 30%, rgba(203,166,247,.08), transparent 40%), #05070b;
+        }
+        .showcase-frame {
+            position: relative;
+            max-width: 1080px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,.10);
+            background:
+                radial-gradient(circle at 30% 30%, rgba(203,166,247,.18), transparent 45%),
+                radial-gradient(circle at 75% 70%, rgba(111,168,255,.14), transparent 45%),
+                #0b0e16;
+            box-shadow: 0 30px 100px rgba(0,0,0,.35);
+        }
+        .showcase-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .showcase-play {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+            width: 100%; border: 0; cursor: pointer; color: var(--text); background: transparent;
+            font: inherit;
+        }
+        .showcase-play .play-dot {
+            width: 84px; height: 84px; border-radius: 50%;
+            display: grid; place-items: center;
+            background: rgba(203,166,247,.18);
+            border: 1px solid rgba(203,166,247,.55);
+            box-shadow: 0 0 40px rgba(203,166,247,.25);
+            transition: transform .25s ease, background .25s ease;
+        }
+        .showcase-play .play-dot::before {
+            content: ""; margin-left: 6px;
+            border-left: 22px solid #fff; border-top: 14px solid transparent; border-bottom: 14px solid transparent;
+        }
+        .showcase-play:hover .play-dot { transform: scale(1.06); background: rgba(203,166,247,.30); }
+        .showcase-play small { color: var(--muted); font-size: .74rem; max-width: 420px; text-align: center; line-height: 1.5; }
+        .showcase-frame.is-pending .play-dot { opacity: .45; }
+        .showcase-frame.is-pending .showcase-play { cursor: default; }
+
+        /* ── Sicherheitshinweis (SmartScreen / Antivirus) ────────────────── */
+        .safety-note {
+            max-width: 760px;
+            margin: 28px auto 0;
+            text-align: left;
+            border-radius: 16px;
+            border: 1px solid rgba(203,166,247,.28);
+            background: rgba(203,166,247,.06);
+        }
+        .safety-note summary {
+            cursor: pointer; list-style: none;
+            padding: 16px 20px;
+            display: flex; align-items: center; gap: 12px;
+            color: var(--text); font-weight: 600; font-size: .9rem;
+        }
+        .safety-note summary::-webkit-details-marker { display: none; }
+        .safety-note summary::before {
+            content: "i"; flex: 0 0 22px; height: 22px; border-radius: 50%;
+            display: grid; place-items: center;
+            font-size: .75rem; font-weight: 700; color: #120c1e; background: var(--violet);
+        }
+        .safety-note summary::after { content: "+"; margin-left: auto; color: var(--muted); font-size: 1.1rem; }
+        .safety-note[open] summary::after { content: "\2212"; }
+        .safety-body { padding: 0 20px 18px 54px; color: var(--muted); font-size: .84rem; line-height: 1.65; }
+        .safety-body p { margin: 0 0 10px; }
+        .safety-body ol { margin: 0 0 10px; padding-left: 18px; }
+        .safety-body strong { color: var(--text); }
+
+        /* ── Community / Mitwirkende ─────────────────────────────────────── */
+        .community-block {
+            padding: 120px clamp(24px, 7vw, 110px) 110px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, rgba(203,166,247,.07), transparent 45%), #05070b;
+        }
+        .community-quote {
+            max-width: 760px; margin: 0 auto 60px;
+            font-size: clamp(1.35rem, 2.6vw, 2rem); line-height: 1.35; font-weight: 600;
+            color: var(--text);
+        }
+        .community-quote span { color: var(--violet); }
+        .community-quote small { display: block; margin-top: 14px; font-size: .9rem; font-weight: 400; color: var(--muted); }
+        .contrib-grid {
+            max-width: 1080px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;
+            text-align: left;
+        }
+        .contrib-card {
+            padding: 24px 26px; border-radius: 18px;
+            border: 1px solid rgba(255,255,255,.10);
+            background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.018));
+        }
+        .contrib-card h3 {
+            margin: 0 0 14px; font-size: .74rem; letter-spacing: 1.4px; text-transform: uppercase; color: var(--violet);
+        }
+        .contrib-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+        .contrib-card li {
+            padding: 6px 12px; border-radius: 999px; font-size: .84rem; color: var(--text);
+            background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08);
+        }
+        .contrib-thanks { margin: 34px auto 0; max-width: 620px; color: var(--muted); font-size: .86rem; line-height: 1.6; }
     </style>
 </head>
 
@@ -1059,7 +1166,7 @@
                     <div class="hero-vignette"></div>
 
                     <div class="hero-copy" data-hero-copy>
-                        <div class="eyebrow">Latest Release · v0.6.1 · Windows x64</div>
+                        <div class="eyebrow">Latest Release · v1.0 · Windows x64</div>
 
                         <h1>BeatUp <span>Engine</span></h1>
 
@@ -1289,13 +1396,14 @@
                             <p>
                                 <strong style="color:#fff;">7 · 4 · 1 · 9 · 6 · 3 · SP · F</strong>
                                 <br><br>
-                                Number keys <kbd>1–8</kbd> follow the editor columns. The editor can show the
-                                Receptor Bar or the classic position line, and the bar scales with the resizable
-                                Split View.
+                                Number keys <kbd>1–8</kbd> follow the editor columns — or switch on
+                                <strong style="color:#fff;">Numpad Charting</strong> and place notes with the same
+                                keys you play with. Duplicate notes are marked in bold red, and bookmarks travel
+                                inside your <code>.bu</code> project.
                             </p>
                             <p style="margin-top:12px;">
-                                <a href="https://github.com/bishpop/beatupengine/releases/tag/v0.6.1"
-                                   target="_blank" rel="noopener">Read the full v0.6.1 release notes →</a>
+                                <a href="https://github.com/bishpop/beatupengine/releases/tag/v1.0"
+                                   target="_blank" rel="noopener">Read the full v1.0 release notes →</a>
                             </p>
                         </div>
 
@@ -1313,6 +1421,11 @@
                                 <kbd>Ctrl+S</kbd> Sound Settings ·
                                 <kbd>F11</kbd> Fullscreen.
                             </p>
+                            <p style="margin-top:12px;">
+                                <kbd>Alt+←/→</kbd> Change snap (1/4 · 1/8 · 1/16) ·
+                                <kbd>↑/↓</kbd> Jump one beat · <kbd>Shift+↑/↓</kbd> Jump one MADI ·
+                                <kbd>Ctrl+←/→</kbd> Playback speed · <kbd>Ctrl+B</kbd> Bookmark.
+                            </p>
                         </div>
 
                     </div>
@@ -1320,50 +1433,75 @@
             </div>
         </section>
 
+        <!-- SHOWCASE -->
+        <!--
+            YouTube-Video eintragen: die Video-ID in data-youtube-id setzen.
+            Beispiel: https://www.youtube.com/watch?v=AbCdEfGhIjK  ->  data-youtube-id="AbCdEfGhIjK"
+            Solange das Feld leer ist, erscheint "Showcase coming soon".
+            Das Video laedt erst nach einem Klick (keine Cookies/Verbindung zu
+            YouTube vorher) und nutzt youtube-nocookie.com.
+        -->
+        <section id="showcase" class="showcase-block">
+            <div class="section-heading" style="max-width:1080px;margin:0 auto 34px;">
+                <div class="scene-index">06 · Showcase</div>
+                <h2>See v1.0 in action.</h2>
+                <p>A walkthrough of the editor, the Patcher and everything new in the first stable release.</p>
+                <p>YouTube video coming soon.</p>
+            </div>
+            <div class="showcase-frame" data-youtube-id="" data-video-title="BeatUp Engine v1.0 Showcase">
+                <button type="button" class="showcase-play" aria-label="Play the BeatUp Engine v1.0 showcase video">
+                    <span class="play-dot"></span>
+                    <span class="showcase-label">Watch the v1.0 Showcase</span>
+                    <small>The video loads from YouTube when you press play.</small>
+                </button>
+            </div>
+        </section>
+
         <!-- RELEASE -->
         <section class="release-block">
             <div class="section-heading" style="max-width:1180px;margin:0 auto 34px;">
-                <div class="scene-index">06 · Release</div>
-                <h2>v0.6.1 is focused on editor/game parity.</h2>
+                <div class="scene-index">07 · Release</div>
+                <h2>v1.0 — the first stable release.</h2>
                 <p>
-                    The latest release adds the in-game Receptor Bar to the Chart Editor and makes the Patcher use
-                    each song's own timing offset, while keeping v0.6 projects, charts, themes and content compatible.
+                    A new scoring and ranking system, a cleaner game screen, faster charting and a lot of polish.
+                    Charts, <code>.bu</code> projects, themes and Patcher content from v0.6.1 keep working.
                 </p>
             </div>
 
             <div class="release-layout">
 
                 <div class="release-card">
-                    <h3>BeatUp Engine v0.6.1</h3>
+                    <h3>What's new since v0.6.1</h3>
 
-                    <p class="release-copy">
-                        A focused chart-editor and Patcher timing update.
-                    </p>
-
+                    <p class="release-copy">Scoring &amp; results</p>
                     <div class="release-list">
-                        <div class="release-item">
-                            Receptor Bar in the Chart Editor with six arrow receptors, Space and Finish Move.
-                        </div>
-                        <div class="release-item">
-                            The same game assets are used so editor and gameplay receptor sizing stay aligned.
-                        </div>
-                        <div class="release-item">
-                            Receptor Bar scales with column width and the resizable Split View in both layouts.
-                        </div>
-                        <div class="release-item">
-                            Theme Editor adds Line/Receptor Bar selection plus Band, Icons and Edges colors.
-                        </div>
-                        <div class="release-item">
-                            Patcher timing now reads the offset of each song instead of one fixed value.
-                        </div>
-                        <div class="release-item">
-                            Receptor visuals were refined, Space/Finish Move assets use their full size,
-                            and arrow consistency was fixed.
-                        </div>
+                        <div class="release-item">New ranks from <strong style="color:#fff;">S+</strong> down to <strong style="color:#fff;">F</strong>, based on your Perfect share. Miss, Bad and Cool lower it, Great stays neutral, a Full Combo adds a bonus.</div>
+                        <div class="release-item">Redesigned result card with rank badge, judgment breakdown and a line that shows exactly how your rank was calculated.</div>
+                        <div class="release-item">Compact score bar during play that follows your theme, with a single distribution bar instead of five thick lines.</div>
+                        <div class="release-item">A failed Challenger run is always ranked F — on the result card and in the leaderboard.</div>
+                    </div>
+
+                    <p class="release-copy" style="margin-top:22px;">Chart Editor</p>
+                    <div class="release-list">
+                        <div class="release-item"><kbd>Alt+←/→</kbd> cycles the snap (1/4 · 1/8 · 1/16). The current snap is always shown in the menu bar, in every view.</div>
+                        <div class="release-item">Optional <strong style="color:#fff;">Numpad Charting</strong>: place notes with Num 7 4 1 9 6 3, Space with Num 0 / 5, Finish with Num +.</div>
+                        <div class="release-item"><kbd>Ctrl+B</kbd> adds a bookmark with your own text, shown as a clickable label in the chart — and saved inside <code>.bu</code> projects, so it travels with your project.</div>
+                        <div class="release-item">Duplicate notes are marked with a bold red band and a warning sign next to the beat.</div>
+                    </div>
+
+                    <p class="release-copy" style="margin-top:22px;">Improvements &amp; fixes</p>
+                    <div class="release-list">
+                        <div class="release-item"><kbd>Ctrl+Shift+S</kbd> no longer places a Space note while saving.</div>
+                        <div class="release-item">Settings are kept even when the game is installed in a protected folder such as Program Files.</div>
+                        <div class="release-item">The playback bar in chart view adapts to the window and never overlaps other controls.</div>
+                        <div class="release-item">Per-song offsets are fully active in the Patcher; the time display stays correct without a song loaded.</div>
+                        <div class="release-item">Score and combo are recalculated when jumping through the chart with Auto-Play — and no more burst of Perfect sounds.</div>
+                        <div class="release-item">Editor playback speed no longer carries over to the Patcher, and color changes are kept after a restart.</div>
+                        <div class="release-item">New app icon, website and GitHub links in the main menu, and an updated user manual.</div>
                     </div>
 
                     <p style="margin:22px 0 0;">
-                        <a href="https://github.com/bishpop/beatupengine/releases/tag/v0.6.1"
+                        <a href="https://github.com/bishpop/beatupengine/releases/tag/v1.0"
                            target="_blank" rel="noopener">Open release on GitHub ↗</a>
                     </p>
                 </div>
@@ -1372,6 +1510,13 @@
                     <h3>Version History</h3>
 
                     <div class="version-list">
+                        <!-- Datum von v1.0 beim Veroeffentlichen anpassen -->
+                        <div class="version-row">
+                            <strong>v1.0</strong>
+                            <span>2026</span>
+                            <p>First stable release: new ranks and result card, compact score bar, snap hotkeys, Numpad Charting, bookmarks in projects.</p>
+                        </div>
+
                         <div class="version-row">
                             <strong>v0.6.1</strong>
                             <span>24 Sep 2026</span>
@@ -1422,20 +1567,20 @@
         <!-- DOWNLOAD -->
         <section id="download" class="download-block">
             <div class="download-card">
-                <div class="scene-index">07 · Download</div>
+                <div class="scene-index">08 · Download</div>
 
                 <h2>Play BeatUp Engine.</h2>
 
                 <p>
-                    Windows 10/11 x64 · v0.6.1 · Portable build.<br>
+                    Windows 10/11 x64 · v1.0 · Portable build.<br>
                     Keep the <code>assets/</code> folder beside the executable.
                 </p>
 
                 <div class="download-actions">
                     <a class="cin-btn primary"
-                       href="https://github.com/bishpop/beatupengine/releases/download/v0.6.1/BeatUpEngine-v0.6.1-Windows-x64.zip"
+                       href="https://github.com/bishpop/beatupengine/releases/download/v1.0/BeatUpEngine-v1.0-Windows-x64.zip"
                        target="_blank" rel="noopener">
-                        Download v0.6.1
+                        Download v1.0
                     </a>
 
                     <a class="cin-btn green"
@@ -1452,9 +1597,89 @@
                 </div>
 
                 <div class="download-meta">
-                    Free to play · Portable build · Offline patcher · Open source
+                    Free to play · Portable build · Offline patcher · Community driven
+                </div>
+
+                <details class="safety-note">
+                    <summary>Windows or your antivirus shows a warning? Here's why.</summary>
+                    <div class="safety-body">
+                        <p>
+                            <strong>This is a false positive.</strong> BeatUp Engine is a small, independent,
+                            free project. The program is not code-signed — signing certificates are expensive —
+                            and new programs that only few people have downloaded yet are often flagged by
+                            Windows and by some antivirus scanners simply because they are unknown, not because
+                            they do anything harmful.
+                        </p>
+                        <p><strong>Windows SmartScreen</strong> (&ldquo;Windows protected your PC&rdquo;):</p>
+                        <ol>
+                            <li>Click <strong>More info</strong>.</li>
+                            <li>Click <strong>Run anyway</strong>.</li>
+                        </ol>
+                        <p>
+                            <strong>Antivirus:</strong> If the file was moved to quarantine, restore it and add an
+                            exception for your BeatUp Engine folder only. There is no need to switch your
+                            antivirus off. You can also report the file to your antivirus vendor as a false
+                            positive — this helps everyone.
+                        </p>
+                        <p>
+                            Only download BeatUp Engine from this page or the official GitHub release.
+                            Never run copies from other websites or re-uploads.
+                        </p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+
+        <!-- COMMUNITY -->
+        <!--
+            Namen eintragen: pro Person eine Zeile <li>Name</li> in der
+            passenden Karte. Nicht benoetigte Karten koennen geloescht werden,
+            weitere Karten einfach nach demselben Muster ergaenzen.
+        -->
+        <section id="community" class="community-block">
+            <div class="scene-index" style="margin-bottom:18px;">09 · Community</div>
+            <p class="community-quote">
+                Made by <span>BeatUp charters</span>, for <span>BeatUp charters</span>.
+                <small>A community-driven project, shaped by the players, testers and charters of the BeatUp community.</small>
+            </p>
+
+            <h2 style="margin:0 0 30px;">Contributors</h2>
+
+            <div class="contrib-grid">
+                <div class="contrib-card">
+                    <h3>Testing</h3>
+                    <ul>
+                        <li>Wonderful93</li>
+                        <li>nvme</li>
+                        <li>SCrispy</li>
+                        <li>miki</li>
+                    </ul>
+                </div>
+                <div class="contrib-card">
+                    <h3>Feedback &amp; Ideas</h3>
+                    <ul>
+                        <li>Wonderful93</li>
+                        <li>nvme</li>
+                        <li>SCrispy</li>
+                        <li>miki</li>
+                        <li>nongginga</li>
+                    </ul>
+                </div>
+                <div class="contrib-card">
+                    <h3>Special Thanks</h3>
+                    <ul>
+                        <li>Wonderful93</li>
+                        <li>nvme</li>
+                        <li>SCrispy</li>
+                    </ul>
                 </div>
             </div>
+
+            <p class="contrib-thanks">
+                Thank you to everyone who tested builds, reported bugs, shared charts and ideas.
+                BeatUp Engine would not be what it is without you.
+            </p>
         </section>
 
         <div class="back-to-top-wrap">
@@ -2033,6 +2258,38 @@
                     if (t) smoothScrollToElement(t, undefined, highlightDownload);
                 }, { once: true });
             }
+        })();
+    </script>
+    <script>
+        // ── Showcase: YouTube erst nach Klick laden (datenschutzfreundlich) ──
+        (() => {
+            document.querySelectorAll('.showcase-frame').forEach(frame => {
+                const id  = (frame.dataset.youtubeId || '').trim();
+                const btn = frame.querySelector('.showcase-play');
+                const lbl = frame.querySelector('.showcase-label');
+                const sub = frame.querySelector('small');
+                if (!btn) return;
+
+                // Noch keine Video-ID eingetragen -> Platzhalter
+                if (!/^[A-Za-z0-9_-]{6,20}$/.test(id)) {
+                    frame.classList.add('is-pending');
+                    btn.disabled = true;
+                    if (lbl) lbl.textContent = 'Showcase coming soon';
+                    if (sub) sub.textContent = 'The v1.0 showcase video will appear here.';
+                    return;
+                }
+
+                btn.addEventListener('click', () => {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
+                                 '?autoplay=1&rel=0&modestbranding=1';
+                    iframe.title = frame.dataset.videoTitle || 'Video';
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+                    iframe.allowFullscreen = true;
+                    frame.replaceChildren(iframe);
+                }, { once: true });
+            });
         })();
     </script>
 </body>
