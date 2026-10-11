@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BeatUp Engine — a lightweight C++ rhythm game engine, chart editor and patcher.">
-    <title>BeatUp Engine v1.0 — Sanya</title>
+    <title>BeatUp Engine v1.0.1 — Sanya</title>
     <link rel="icon" type="image/png" href="./assets/bears_hand.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -716,19 +716,19 @@
         }
 
         .release-item {
-            display: flex;
-            gap: 11px;
-            align-items: flex-start;
+            position: relative;
+            padding-left: 17px;
             color: var(--muted);
             font-size: .86rem;
         }
 
         .release-item::before {
             content: "";
+            position: absolute;
+            left: 0;
+            top: .6em;
             width: 6px;
             height: 6px;
-            flex: 0 0 6px;
-            margin-top: .6em;
             border-radius: 50%;
             background: var(--violet);
         }
@@ -1166,7 +1166,7 @@
                     <div class="hero-vignette"></div>
 
                     <div class="hero-copy" data-hero-copy>
-                        <div class="eyebrow">Latest Release · v1.0 · Windows x64</div>
+                        <div class="eyebrow">Latest Release · v1.0.1 · Windows x64</div>
 
                         <h1>BeatUp <span>Engine</span></h1>
 
@@ -1190,7 +1190,7 @@
                         <span class="meta-pill">C++ / SDL2</span>
                         <span class="meta-pill">6K + Space</span>
                         <span class="meta-pill">Chart Editor</span>
-                        <span class="meta-pill">Offline Patcher</span>
+                        <span class="meta-pill">Play your chart</span>
                     </div>
 
                     <div class="scroll-hint">
@@ -1446,9 +1446,8 @@
                 <div class="scene-index">06 · Showcase</div>
                 <h2>See v1.0 in action.</h2>
                 <p>A walkthrough of the editor, the Patcher and everything new in the first stable release.</p>
-                <p>YouTube video coming soon.</p>
             </div>
-            <div class="showcase-frame" data-youtube-id="" data-video-title="BeatUp Engine v1.0 Showcase">
+            <div class="showcase-frame" data-youtube-id="lAqaEBDMB2Q" data-video-title="BeatUp Engine v1.0 Showcase">
                 <button type="button" class="showcase-play" aria-label="Play the BeatUp Engine v1.0 showcase video">
                     <span class="play-dot"></span>
                     <span class="showcase-label">Watch the v1.0 Showcase</span>
@@ -1461,17 +1460,64 @@
         <section class="release-block">
             <div class="section-heading" style="max-width:1180px;margin:0 auto 34px;">
                 <div class="scene-index">07 · Release</div>
-                <h2>v1.0 — the first stable release.</h2>
+                <h2>v1.0.1 — leaner, calmer, yours.</h2>
                 <p>
-                    A new scoring and ranking system, a cleaner game screen, faster charting and a lot of polish.
-                    Charts, <code>.bu</code> projects, themes and Patcher content from v0.6.1 keep working.
+                    Play your own charts straight from a folder, one clean Options window, an optional Patcher,
+                    and a quieter, easier-to-read interface — now in a single, self-contained <code>.exe</code>.
+                    Everything from v1.0 keeps working.
                 </p>
             </div>
 
             <div class="release-layout">
 
+                <div class="release-card" style="grid-column:1 / -1;">
+                    <h3>What's new in v1.0.1</h3>
+
+                    <div class="release-layout" style="max-width:none;gap:0 34px;">
+                        <div>
+                            <p class="release-copy">Play your chart</p>
+                            <div class="release-list">
+                                <div class="release-item">New mode in the main menu: drop your <code>.bu</code> projects into the <code>charts</code> folder and play them — sub-folders per song are fine.</div>
+                                <div class="release-item">Music is now saved <strong style="color:#fff;">inside</strong> the <code>.bu</code> project, so one file is all you need to share a chart. Older projects still open.</div>
+                                <div class="release-item">Type to search, <kbd>Tab</kbd> to sort by name, level or BPM, and a short music preview when you stay on a song.</div>
+                                <div class="release-item">Every level has its own accent color — from calm blue at level 1 to indigo at level 10.</div>
+                            </div>
+
+                            <p class="release-copy" style="margin-top:22px;">Optional Patcher</p>
+                            <div class="release-list">
+                                <div class="release-item">The Patcher is now off by default. Turn it on in <strong style="color:#fff;">Options › General</strong> and it appears in the main menu right away.</div>
+                                <div class="release-item">Same clean look as Play your chart: your best rank per song, last attempt, rankings and patch download in one screen.</div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="release-copy">One Options window</p>
+                            <div class="release-list">
+                                <div class="release-item">Sorted by what things do: <strong style="color:#fff;">Display</strong>, <strong style="color:#fff;">Gameplay</strong>, <strong style="color:#fff;">Audio</strong> and <strong style="color:#fff;">General</strong>.</div>
+                                <div class="release-item">The same window opens from the main menu, the Editor and the Patcher (<kbd>Ctrl+S</kbd>) — no more duplicate sound settings.</div>
+                                <div class="release-item">Instant Play and Skip Intro are now one setting: Off, 8 Beats or 1 MADI.</div>
+                            </div>
+
+                            <p class="release-copy" style="margin-top:22px;">Cleaner interface</p>
+                            <div class="release-list">
+                                <div class="release-item">Redrawn main menu with keyboard control, no glow effects and better contrast.</div>
+                                <div class="release-item">Editor menus reorganised into File, Edit, View, Playback, Settings and Help — every function exactly once.</div>
+                                <div class="release-item">A redesigned onboarding, a new <strong style="color:#fff;">BeatUp Night</strong> theme and a matching window frame with rounded corners and an accent border.</div>
+                                <div class="release-item">All message boxes now share one calm, consistent dialog style.</div>
+                            </div>
+
+                            <p class="release-copy" style="margin-top:22px;">One file to run</p>
+                            <div class="release-list">
+                                <div class="release-item">All graphics, fonts and sounds are now <strong style="color:#fff;">built into the executable</strong> — no <code>assets</code> folder to ship anymore.</div>
+                                <div class="release-item">Want your own look? Turn on <strong style="color:#fff;">Custom assets</strong> in Options for empty folders with a README each, then drop in your own files.</div>
+                                <div class="release-item">Add your own game backgrounds straight from Options — they are saved and ready to use.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="release-card">
-                    <h3>What's new since v0.6.1</h3>
+                    <h3>v1.0 · What's new since v0.6.1</h3>
 
                     <p class="release-copy">Scoring &amp; results</p>
                     <div class="release-list">
@@ -1510,7 +1556,13 @@
                     <h3>Version History</h3>
 
                     <div class="version-list">
-                        <!-- Datum von v1.0 beim Veroeffentlichen anpassen -->
+                        <!-- Datum von v1.0.1 beim Veroeffentlichen anpassen -->
+                        <div class="version-row">
+                            <strong>v1.0.1</strong>
+                            <span>2026</span>
+                            <p>Play your chart, music inside .bu projects, one Options window, optional Patcher, everything built into a single .exe, new BeatUp Night theme, calmer interface.</p>
+                        </div>
+
                         <div class="version-row">
                             <strong>v1.0</strong>
                             <span>2026</span>
@@ -1572,21 +1624,21 @@
                 <h2>Play BeatUp Engine.</h2>
 
                 <p>
-                    Windows 10/11 x64 · v1.0 · Portable build.<br>
-                    Keep the <code>assets/</code> folder beside the executable.
+                    Windows 10/11 x64 · v1.0.1 · Single-file portable build.<br>
+                    One <code>BeatUpEngine.exe</code> — everything is built in. Just run it.
                 </p>
 
                 <div class="download-actions">
                     <a class="cin-btn primary"
-                       href="https://github.com/bishpop/beatupengine/releases/download/v1.0/BeatUpEngine-v1.0-Windows-x64.zip"
+                       href="https://github.com/bishpop/beatupengine/releases/download/v1.0.1/BeatUpEngine-v1.0.1-Windows-x64.zip"
                        target="_blank" rel="noopener">
-                        Download v1.0
+                        Download v1.0.1
                     </a>
 
                     <a class="cin-btn green"
                        href="https://drive.google.com/uc?export=download&id=1b4bldL6xGjY1i6EPoLN0TGhU6JYqCBwh"
                        target="_blank" rel="noopener">
-                        Download Patcher
+                        Download Patcher (optional)
                     </a>
 
                     <a class="cin-btn"
@@ -1597,7 +1649,7 @@
                 </div>
 
                 <div class="download-meta">
-                    Free to play · Portable build · Offline patcher · Community driven
+                    Free to play · Single .exe · Play your own charts · Community driven
                 </div>
 
                 <details class="safety-note">
