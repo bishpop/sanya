@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BeatUp Engine — a lightweight C++ rhythm game engine, chart editor and patcher.">
-    <title>BeatUp Engine v1.0.1 — Sanya</title>
+    <meta name="description" content="BeatUp Engine — a lightweight C++ rhythm game engine, chart editor and patcher with an intelligent chart assistant.">
+    <title>BeatUp Engine v1.1 — Sanya</title>
     <link rel="icon" type="image/png" href="./assets/bears_hand.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -585,6 +585,9 @@
         .feature-card:nth-child(4) { transition-delay: .15s; }
         .feature-card:nth-child(5) { transition-delay: .2s; }
         .feature-card:nth-child(6) { transition-delay: .25s; }
+        .feature-card:nth-child(7) { transition-delay: .3s; }
+        .feature-card:nth-child(8) { transition-delay: .35s; }
+        .feature-card:nth-child(9) { transition-delay: .4s; }
 
         .feature-card.visible {
             transform: translateY(0);
@@ -1166,7 +1169,7 @@
                     <div class="hero-vignette"></div>
 
                     <div class="hero-copy" data-hero-copy>
-                        <div class="eyebrow">Latest Release · v1.0.1 · Windows x64</div>
+                        <div class="eyebrow">Latest Release · v1.1 · Windows x64</div>
 
                         <h1>BeatUp <span>Engine</span></h1>
 
@@ -1190,6 +1193,7 @@
                         <span class="meta-pill">C++ / SDL2</span>
                         <span class="meta-pill">6K + Space</span>
                         <span class="meta-pill">Chart Editor</span>
+                        <span class="meta-pill">Chart Assistant</span>
                         <span class="meta-pill">Play your chart</span>
                     </div>
 
@@ -1327,8 +1331,8 @@
                     <div class="scene-index">05 · Core Features</div>
                     <h2>Built around the chart, not around the menu.</h2>
                     <p>
-                        BeatUp Engine combines timing, gameplay, chart editing, project files, patching and
-                        visual customization into one focused toolset.
+                        BeatUp Engine combines timing, gameplay, chart editing, an intelligent chart assistant,
+                        project files, patching and visual customization into one focused toolset.
                     </p>
                 </div>
 
@@ -1386,6 +1390,33 @@
                             Challenger Mode for stricter runs.
                         </p>
                     </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">07</div>
+                        <h3>Chart Assistant</h3>
+                        <p>
+                            Detects BPM, beats and transients and proposes an editable chart draft that follows the
+                            song — Spaces on the MADI, sections by intensity. Chart on the full mix, vocals or instruments.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">08</div>
+                        <h3>Engine Diagnostics</h3>
+                        <p>
+                            Optional overlay for frame times, audio stalls, input delay, renderer and memory — with an
+                            exportable report for problems that only show up on one PC.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">09</div>
+                        <h3>Faster Workflow</h3>
+                        <p>
+                            Drag &amp; drop music, charts and projects, a built-in metronome, duplicate / cut / move
+                            selections and automatic backups.
+                        </p>
+                    </article>
                 </div>
 
                 <div class="mini-sections">
@@ -1402,8 +1433,11 @@
                                 inside your <code>.bu</code> project.
                             </p>
                             <p style="margin-top:12px;">
+                                <a href="https://github.com/bishpop/beatupengine/releases/tag/v1.1"
+                                   target="_blank" rel="noopener">Read the v1.1 release notes →</a>
+                                &nbsp;·&nbsp;
                                 <a href="https://github.com/bishpop/beatupengine/releases/tag/v1.0"
-                                   target="_blank" rel="noopener">Read the full v1.0 release notes →</a>
+                                   target="_blank" rel="noopener">v1.0 release notes →</a>
                             </p>
                         </div>
 
@@ -1425,6 +1459,12 @@
                                 <kbd>Alt+←/→</kbd> Change snap (1/4 · 1/8 · 1/16) ·
                                 <kbd>↑/↓</kbd> Jump one beat · <kbd>Shift+↑/↓</kbd> Jump one MADI ·
                                 <kbd>Ctrl+←/→</kbd> Playback speed · <kbd>Ctrl+B</kbd> Bookmark.
+                            </p>
+                            <p style="margin-top:12px;">
+                                <kbd>Ctrl+Alt+G</kbd> Chart Assistant · <kbd>Ctrl+D</kbd> Duplicate ·
+                                <kbd>Ctrl+X</kbd> Cut · <kbd>Ctrl+I</kbd> Invert selection ·
+                                <kbd>Ctrl+↑/↓</kbd> Move notes (<kbd>Shift</kbd> = 1 MADI) ·
+                                <kbd>Home</kbd>/<kbd>End</kbd> Start / end · <kbd>F10</kbd> Diagnostics.
                             </p>
                         </div>
 
@@ -1460,18 +1500,66 @@
         <section class="release-block">
             <div class="section-heading" style="max-width:1180px;margin:0 auto 34px;">
                 <div class="scene-index">07 · Release</div>
-                <h2>v1.0.1 — leaner, calmer, yours.</h2>
+                <h2>v1.1 — chart smarter, not harder.</h2>
                 <p>
-                    Play your own charts straight from a folder, one clean Options window, an optional Patcher,
-                    and a quieter, easier-to-read interface — now in a single, self-contained <code>.exe</code>.
-                    Everything from v1.0 keeps working.
+                    An intelligent chart assistant that listens to your song, automatic BPM detection on import,
+                    drag &amp; drop, a built-in metronome, an optional diagnostics mode and a faster editing workflow.
+                    Everything from v1.0.1 keeps working.
                 </p>
             </div>
 
             <div class="release-layout">
 
                 <div class="release-card" style="grid-column:1 / -1;">
-                    <h3>What's new in v1.0.1</h3>
+                    <h3>What's new in v1.1</h3>
+
+                    <div class="release-layout" style="max-width:none;gap:0 34px;">
+                        <div>
+                            <p class="release-copy">Chart Assistant</p>
+                            <div class="release-list">
+                                <div class="release-item"><strong style="color:#fff;">Automatic BPM detection</strong> when you import music: candidates appear in the dialog, and anything you type is never overwritten.</div>
+                                <div class="release-item">Reads Silencer file names (<code>artist - title_bpm_startMadi_totalMadi</code>) for the exact BPM, start MADI and chart length.</div>
+                                <div class="release-item">Proposes an <strong style="color:#fff;">editable draft</strong> that follows the song: breaks stay empty, calmer parts become 1/8 patterns, loud parts become 1/16 streams.</div>
+                                <div class="release-item">Spaces always on the first beat of a MADI, every second MADI, restarting after breaks — with Space + Finish at long breaks and at the end.</div>
+                                <div class="release-item">Draft notes are normal notes with a tint: one Undo step, <strong style="color:#fff;">Accept</strong>, <strong style="color:#fff;">Discard</strong> or <strong style="color:#fff;">Select</strong> them. Your own notes are never overwritten.</div>
+                                <div class="release-item">Chart on the <strong style="color:#fff;">full mix, vocals or instruments</strong> — or load your own stem file for the exact result.</div>
+                                <div class="release-item">New <strong style="color:#fff;">Intelligent charting</strong> option right in the import dialog; <kbd>Ctrl+Alt+G</kbd> opens the assistant any time.</div>
+                            </div>
+
+                            <p class="release-copy" style="margin-top:22px;">Drag &amp; drop</p>
+                            <div class="release-list">
+                                <div class="release-item">Drop music into the editor and the BPM dialog opens as usual.</div>
+                                <div class="release-item">Drop a <code>.slk</code> / <code>.ssc</code> chart after loading music — without music you get a reminder to load it first. <code>.bu</code> projects always load.</div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="release-copy">Engine Diagnostics (optional)</p>
+                            <div class="release-list">
+                                <div class="release-item">Turn it on in <strong style="color:#fff;">Options › General</strong>. <kbd>F10</kbd> cycles the overlay, <kbd>Shift+F10</kbd> exports a report.</div>
+                                <div class="release-item">Frame times with percentiles and the slowest frames, split into events, update, render, present and wait.</div>
+                                <div class="release-item">Audio device and buffer, estimated audio stalls, input delay, renderer details, memory trend and CPU load.</div>
+                                <div class="release-item">The report ends with plain-language findings and contains hardware data only — no names, paths or chart contents.</div>
+                            </div>
+
+                            <p class="release-copy" style="margin-top:22px;">Editor workflow</p>
+                            <div class="release-list">
+                                <div class="release-item">Pasted and duplicated notes are <strong style="color:#fff;">selected automatically</strong>, the previous selection is released.</div>
+                                <div class="release-item"><kbd>Ctrl+D</kbd> duplicate, <kbd>Ctrl+X</kbd> cut, <kbd>Ctrl+I</kbd> invert selection, <kbd>Ctrl+↑/↓</kbd> move notes, <kbd>Home</kbd>/<kbd>End</kbd> jump.</div>
+                                <div class="release-item">Right-click › <strong style="color:#fff;">Select</strong>: this MADI, from here to the end, all arrows, all spaces. Selection size and range are shown in the corner.</div>
+                                <div class="release-item"><strong style="color:#fff;">Autosave</strong> every 2 minutes after changes, restore it from <strong style="color:#fff;">File › Restore Autosave</strong>.</div>
+                            </div>
+
+                            <p class="release-copy" style="margin-top:22px;">Built-in metronome</p>
+                            <div class="release-list">
+                                <div class="release-item">The click is generated by the engine — no sound files needed. The first beat of each MADI is accented.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="release-card" style="grid-column:1 / -1;">
+                    <h3>v1.0.1 · What's new since v1.0</h3>
 
                     <div class="release-layout" style="max-width:none;gap:0 34px;">
                         <div>
@@ -1556,7 +1644,13 @@
                     <h3>Version History</h3>
 
                     <div class="version-list">
-                        <!-- Datum von v1.0.1 beim Veroeffentlichen anpassen -->
+                        <!-- Datum von v1.1 beim Veroeffentlichen anpassen -->
+                        <div class="version-row">
+                            <strong>v1.1</strong>
+                            <span>2026</span>
+                            <p>Chart Assistant with automatic BPM detection, drag &amp; drop, built-in metronome, optional Engine Diagnostics, faster editing workflow and autosave.</p>
+                        </div>
+
                         <div class="version-row">
                             <strong>v1.0.1</strong>
                             <span>2026</span>
@@ -1624,15 +1718,15 @@
                 <h2>Play BeatUp Engine.</h2>
 
                 <p>
-                    Windows 10/11 x64 · v1.0.1 · Single-file portable build.<br>
+                    Windows 10/11 x64 · v1.1 · Single-file portable build.<br>
                     One <code>BeatUpEngine.exe</code> — everything is built in. Just run it.
                 </p>
 
                 <div class="download-actions">
                     <a class="cin-btn primary"
-                       href="https://github.com/bishpop/beatupengine/releases/download/v1.0.1/BeatUpEngine-v1.0.1-Windows-x64.zip"
+                       href="https://github.com/bishpop/beatupengine/releases/download/v1.1/BeatUpEngine-v1.1-Windows-x64.zip"
                        target="_blank" rel="noopener">
-                        Download v1.0.1
+                        Download v1.1
                     </a>
 
                     <a class="cin-btn green"
