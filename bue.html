@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BeatUp Engine — a lightweight C++ rhythm game engine, chart editor and patcher with an intelligent chart assistant.">
-    <title>BeatUp Engine v1.2 — Sanya</title>
+    <meta name="description" content="BeatUp Engine v1.2, the final release — a lightweight C++ rhythm game engine, chart editor and patcher with an intelligent chart assistant and an Auditor Mode for chart quality assurance.">
+    <title>BeatUp Engine v1.2 — Final Release — Sanya</title>
     <link rel="icon" type="image/png" href="./assets/bears_hand.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1186,7 +1186,7 @@
                     <div class="hero-vignette"></div>
 
                     <div class="hero-copy" data-hero-copy>
-                        <div class="eyebrow">Latest Release · v1.2 · Windows x64</div>
+                        <div class="eyebrow">Final Release · v1.2 · Windows x64</div>
 
                         <h1>BeatUp <span>Engine</span></h1>
 
@@ -1211,6 +1211,7 @@
                         <span class="meta-pill">6K + Space</span>
                         <span class="meta-pill">Chart Editor</span>
                         <span class="meta-pill">Chart Assistant</span>
+                        <span class="meta-pill">Auditor Mode</span>
                         <span class="meta-pill">Play your chart</span>
                     </div>
 
@@ -1349,7 +1350,8 @@
                     <h2>Built around the chart, not around the menu.</h2>
                     <p>
                         BeatUp Engine combines timing, gameplay, chart editing, an intelligent chart assistant,
-                        project files, patching and visual customization into one focused toolset.
+                        an Auditor Mode for quality assurance, project files, patching and visual customization
+                        into one focused toolset.
                     </p>
                 </div>
 
@@ -1432,6 +1434,34 @@
                         <p>
                             Drag &amp; drop music, charts and projects, a built-in metronome, duplicate / cut / move
                             selections and automatic backups.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">10</div>
+                        <h3>Auditor Mode</h3>
+                        <p>
+                            Open a <code>.slk</code> or <code>.bu</code>, let the Auditor check it for errors and
+                            inconsistencies and correct them right in the editor. It opens in its own window with
+                            automatic BPM detection.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">11</div>
+                        <h3>Audit Log &amp; Compare</h3>
+                        <p>
+                            Every change lands in a <code>.csv</code> log, modified notes are marked in the editor and
+                            original and revision can be viewed side by side in one <code>.bu</code> audit project.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">12</div>
+                        <h3>Final Release</h3>
+                        <p>
+                            v1.2 completes BeatUp Engine. No new features are planned &mdash; from here on there are
+                            only bug fixes.
                         </p>
                     </article>
                 </div>
@@ -1517,18 +1547,83 @@
         <section class="release-block">
             <div class="section-heading" style="max-width:1180px;margin:0 auto 34px;">
                 <div class="scene-index">07 · Release</div>
-                <h2>v1.1 — chart smarter, not harder.</h2>
+                <h2>v1.2 — the final release.</h2>
                 <p>
-                    An intelligent chart assistant that listens to your song, automatic BPM detection on import,
-                    drag &amp; drop, a built-in metronome, an optional diagnostics mode and a faster editing workflow.
-                    Everything from v1.0.1 keeps working.
+                    The new Auditor Mode reviews, verifies and documents charts, with every change traceable.
+                    It completes the path from chart creation to quality assurance. This is the final feature
+                    release; everything from v1.1 keeps working.
                 </p>
             </div>
 
             <div class="release-layout">
 
                 <div class="release-card" style="grid-column:1 / -1;">
-                    <h3>What's new in v1.1</h3>
+                    <h3>Final release</h3>
+                    <div class="release-list">
+                        <div class="release-item"><strong style="color:#fff;">v1.2 is the last feature release</strong> of BeatUp Engine. The planned feature set is complete.</div>
+                        <div class="release-item">Development has ended. <strong style="color:#fff;">No new features will be added</strong> &mdash; only bug fixes will follow if problems are reported.</div>
+                        <div class="release-item">Your charts, <code>.bu</code> projects and settings from earlier versions keep working.</div>
+                    </div>
+                </div>
+
+                <div class="release-card" style="grid-column:1 / -1;">
+                    <h3>What's new in v1.2 · Auditor Mode</h3>
+
+                    <div class="release-layout" style="max-width:none;gap:0 34px;">
+                        <div>
+                            <p class="release-copy">Chart inspection &amp; validation</p>
+                            <div class="release-list">
+                                <div class="release-item">Start it from <strong style="color:#fff;">Main Menu › Auditor Mode</strong> or <strong style="color:#fff;">Editor › Auditor</strong> and open a <code>.slk</code> or <code>.bu</code>.</div>
+                                <div class="release-item">The Issues list reports several arrows in one row, arrow + Space in one row, Finish problems (no Space, several Finish notes, notes after the last Finish), empty charts, invalid BPM and long gaps. Click an entry to jump straight to it.</div>
+                                <div class="release-item">Corrections are made in the normal chart editor with all its tools &mdash; nothing new to learn.</div>
+                            </div>
+
+                            <p class="release-copy" style="margin-top:22px;">Automatic CSV audit log</p>
+                            <div class="release-list">
+                                <div class="release-item">Every change is written to <code>&lt;chart&gt;_audit.csv</code> next to the chart: action, note type, lane, position before and after, time in ms and the operation. Semicolon-separated UTF-8 that opens directly in Excel.</div>
+                                <div class="release-item">Moves, lane changes, BPM and offset changes, saves and exports are recorded. Undo and redo are logged too, so the history stays honest.</div>
+                            </div>
+
+                            <p class="release-copy" style="margin-top:22px;">Automatic BPM</p>
+                            <div class="release-list">
+                                <div class="release-item">A <code>.slk</code> has no BPM. After you pick the music it is detected in the background, and the chart itself helps to choose the right candidate. A BPM in a Silencer file name wins.</div>
+                                <div class="release-item">Edit it any time (type a value, press Enter) or press <strong style="color:#fff;">Auto BPM</strong>. Manual changes are logged.</div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="release-copy">Visual change tracking</p>
+                            <div class="release-list">
+                                <div class="release-item">New notes get a <strong style="color:#fff;">green frame</strong>, removed notes a <strong style="color:#fff;">red ghost</strong> with a cross &mdash; in the editor and on the minimap.</div>
+                                <div class="release-item"><strong style="color:#fff;">Prev / Next change</strong> jumps from one changed row to the next.</div>
+                            </div>
+
+                            <p class="release-copy" style="margin-top:22px;">Before-and-after comparison</p>
+                            <div class="release-list">
+                                <div class="release-item">The <strong style="color:#fff;">Compare view</strong> shows original and revision side by side with your game assets (custom assets included) and follows the playhead. Click a row to jump there.</div>
+                                <div class="release-item"><strong style="color:#fff;">Save Audit Project</strong> writes <code>&lt;chart&gt;_audit.bu</code> with the revised chart, the untouched original and the full log. Re-open it to continue. Your source file is never overwritten.</div>
+                            </div>
+
+                            <p class="release-copy" style="margin-top:22px;">Own Auditor window</p>
+                            <div class="release-list">
+                                <div class="release-item">A separate, resizable window in your theme: toolbar with Play/Pause and BPM, three resizable columns (Inspector + Issues · Compare · Changes + Log) and a status bar.</div>
+                            </div>
+
+                            <p class="release-copy" style="margin-top:22px;">Fixed</p>
+                            <div class="release-list">
+                                <div class="release-item"><strong style="color:#fff;">Play your chart</strong> always starts in game view, even if the <code>.bu</code> was saved in Split View.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p style="margin:22px 0 0;">
+                        <a href="https://github.com/bishpop/beatupengine/releases/tag/v1.2"
+                           target="_blank" rel="noopener">Open release on GitHub ↗</a>
+                    </p>
+                </div>
+
+                <div class="release-card" style="grid-column:1 / -1;">
+                    <h3>v1.1 · What's new since v1.0.1</h3>
 
                     <div class="release-layout" style="max-width:none;gap:0 34px;">
                         <div>
@@ -1661,9 +1756,14 @@
                     <h3>Version History</h3>
 
                     <div class="version-list">
-                        <!-- Datum von v1.1 beim Veroeffentlichen anpassen -->
                         <div class="version-row">
-                            <strong>v1.2</strong>
+                            <strong>v1.2 · Final</strong>
+                            <span>Oct 2026</span>
+                            <p>Final release. Auditor Mode with chart inspection, CSV audit log, change tracking, side-by-side comparison, audit projects, its own window and automatic BPM. Play your chart always starts in game view. Bug fixes only from here on.</p>
+                        </div>
+
+                        <div class="version-row">
+                            <strong>v1.1</strong>
                             <span>2026</span>
                             <p>Chart Assistant with automatic BPM detection, drag &amp; drop, built-in metronome, optional Engine Diagnostics, faster editing workflow and autosave.</p>
                         </div>
@@ -1735,7 +1835,7 @@
                 <h2>Play BeatUp Engine.</h2>
 
                 <p>
-                    Windows 10/11 x64 · v1.2 · Single-file portable build.<br>
+                    Windows 10/11 x64 · v1.2 Final Release · Single-file portable build.<br>
                     One <code>BeatUpEngine.exe</code> — everything is built in. Just run it.
                 </p>
 
@@ -1743,7 +1843,7 @@
                     <a class="cin-btn primary"
                        href="https://github.com/bishpop/beatupengine/releases/download/v1.2/BeatUpEngine-v1.2-Windows-x64.zip"
                        target="_blank" rel="noopener">
-                        Download v1.1
+                        Download v1.2 · Final Release
                     </a>
 
                     <a class="cin-btn green"
@@ -1766,7 +1866,7 @@
                 </div>
 
                 <div class="download-meta">
-                    Free to play · Single .exe · Play your own charts · Community driven
+                    Free to play · Single .exe · Play your own charts · Final release, bug fixes only
                 </div>
 
                 <details class="safety-note">
@@ -1849,7 +1949,8 @@
 
             <p class="contrib-thanks">
                 Thank you to everyone who tested builds, reported bugs, shared charts and ideas.
-                BeatUp Engine would not be what it is without you.
+                BeatUp Engine would not be what it is without you &mdash; and thank you for following
+                the project all the way to its final release.
             </p>
         </section>
 
