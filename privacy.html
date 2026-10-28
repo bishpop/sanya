@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — Sanya</title>
+<meta name="description" content="What this website does and does not do with your data.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0c0e12">
+<link rel="canonical" href="https://web.beatupengine.workers.dev/privacy">
+<link rel="icon" type="image/png" href="assets/web/mark.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sanya">
+<meta property="og:title" content="Privacy — Sanya">
+<meta property="og:description" content="What this website does and does not do with your data.">
+<meta property="og:url" content="https://web.beatupengine.workers.dev/privacy">
+<meta property="og:image" content="https://web.beatupengine.workers.dev/assets/web/og-bue.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy — Sanya">
+<meta name="twitter:description" content="What this website does and does not do with your data.">
+<meta name="twitter:image" content="https://web.beatupengine.workers.dev/assets/web/og-bue.jpg">
+<script>
+document.documentElement.classList.add('js');
+try {
+  var savedTheme = localStorage.getItem('sanya-theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
+} catch (e) { /* Dark mode remains the default when storage is unavailable. */ }
+</script>
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="container nav-in">
+    <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>Sanya</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="bue.html">BeatUp Engine</a></li>
+      <li><a href="sanconverter.html">SanConverter</a></li>
+      <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
+      <li class="nav-section-jumps">
+        <span class="nav-section-label" data-nav-en="On this page" data-nav-zh="本页内容">On this page</span>
+        <div class="nav-section-list">
+            <a href="#top"><span data-nav-en="Privacy policy" data-nav-zh="隐私政策">Privacy policy</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </li>
+      <li class="language-switch">
+        <div class="language-picker">
+          <button class="language-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Choose language" title="Choose language">
+            <span class="language-trigger-flag" aria-hidden="true">🇬🇧</span>
+            <svg class="language-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+          </button>
+          <div class="language-menu" role="group" aria-label="Language">
+            <button class="lang-btn is-active" type="button" data-lang="en" aria-pressed="true"><span class="lang-option-flag" aria-hidden="true">🇬🇧</span><span class="lang-option-name" data-en="English" data-zh="英语">English</span><span class="lang-check" aria-hidden="true">✓</span></button>
+            <button class="lang-btn" type="button" data-lang="zh" aria-pressed="false"><span class="lang-option-flag" aria-hidden="true">🇨🇳</span><span class="lang-option-name" data-en="简体中文" data-zh="简体中文">简体中文</span><span class="lang-check" aria-hidden="true">✓</span></button>
+          </div>
+        </div>
+      </li>
+      <li class="theme-item"><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme" title="Toggle light and dark theme"><span id="themeIcon" aria-hidden="true">☀️</span></button></li>
+      <li class="nav-cta"><a class="btn btn-primary btn-sm" href="bue.html#download">Download v1.2</a></li>
+    </ul>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links nav-section-menu" aria-label="Menu" title="Jump to section"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+  </div>
+  <div class="nav-quick-menu" id="nav-section-menu" aria-label="Jump to section">
+    <p class="nav-quick-title"><span data-nav-en="Jump to section" data-nav-zh="跳转到栏目">Jump to section</span></p>
+    <nav class="nav-quick-grid" aria-label="On this page">
+      <a class="nav-quick-link" href="#top"><span data-nav-en="Privacy policy" data-nav-zh="隐私政策">Privacy policy</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+  <div class="scroll-bar" aria-hidden="true"></div>
+</header>
+<main id="main">
+<section class="section" style="border-top:0;" id="top">
+  <div class="container prose">
+    <p class="label">Legal</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:24px;">Privacy</h1>
+    <p class="muted">This is a plain description of what this website does. It is not legal advice, and the fields marked below must be completed by the site operator before publishing.</p>
+
+    <h2>Controller</h2>
+    <p><span class="placeholder">[Name and contact address of the operator — to be completed]</span></p>
+
+    <h2>What this site stores</h2>
+    <ul>
+      <li>No cookies, no accounts, no forms, no analytics and no advertising.</li>
+      <li>Fonts are the ones installed on your device. No fonts are loaded from external servers.</li>
+      <li>Like any web server, the hosting provider processes technical request data (for example IP address, time and requested file) to deliver the pages. <span class="placeholder">[Hosting provider and legal basis — to be completed]</span></li>
+    </ul>
+
+    <h2>Video</h2>
+    <p>The showcase video on the BeatUp Engine page is not loaded until you press its play button. Only then your browser connects to YouTube (youtube-nocookie.com), which may process data under its own privacy policy.</p>
+
+    <h2>Downloads and external links</h2>
+    <p>Downloads are served by GitHub and, for the optional Patcher and the SanConverter PDF guide, by Google Drive. Following these links connects you to those providers. They are responsible for their own data processing.</p>
+
+    <h2>Your rights</h2>
+    <p>You can request information about, correction or deletion of personal data stored about you, and you can lodge a complaint with a data-protection authority. <span class="placeholder">[Contact address — to be completed]</span></p>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>Sanya</span></a>
+        <p style="margin-top:14px;max-width:26em;">Software and tools for rhythm-game charting, written in C++ and C#.</p>
+      </div>
+      <div><h2>Projects</h2><ul>
+        <li><a href="bue.html">BeatUp Engine</a></li>
+        <li><a href="sanconverter.html">SanConverter</a></li>
+      </ul></div>
+      <div><h2>Documentation</h2><ul>
+        <li><a href="assets/manual.pdf" target="_blank" rel="noopener">BeatUp Engine manual (PDF)</a></li>
+        <li><a href="assets/Charting%20Guide.pdf" target="_blank" rel="noopener">Charting guide (PDF)</a></li>
+      </ul></div>
+      <div><h2>Elsewhere</h2><ul>
+        <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-base"><span>© 2026 Sanya. All rights reserved.</span><a href="#top">Back to top ↑</a></div>
+  </div>
+</footer>
+<script src="js/site.js" defer></script>
+<script src="js/i18n.js" defer></script>
+</body>
+</html>

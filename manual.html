@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0c0e12">
+<title>BeatUp Engine + Silencer Manual — BeatUp Engine — BUE</title>
+<meta name="description" content="BeatUp Engine and Silencer user manual v0.6.1, including installation, options, editor controls, gameplay, patcher, timing and troubleshooting.">
+<link rel="icon" type="image/png" href="assets/web/mark.png">
+<link rel="stylesheet" href="css/site.css">
+<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('sanya-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<style>
+/* Faithful, responsive page viewer. Each page uses a full render of the source PDF,
+   while transparent hit areas preserve the source PDF's clickable links. */
+.doc-body { min-height: 100vh; background: var(--bg); }
+html[data-theme="dark"] body.doc-body {
+  background: radial-gradient(ellipse at 8% 7%, rgba(120,162,232,.09), transparent 31rem),
+              radial-gradient(ellipse at 94% 24%, rgba(179,165,246,.08), transparent 34rem), var(--bg);
+}
+html[data-theme="light"] body.doc-body {
+  background: radial-gradient(ellipse at 7% 5%, rgba(180,83,9,.12), transparent 30rem),
+              radial-gradient(ellipse at 92% 26%, rgba(15,118,110,.11), transparent 35rem),
+              linear-gradient(145deg, #FAF6EF 0%, #F1E8DC 48%, #FAF6EF 100%);
+}
+.doc-header { position: sticky; top: 0; z-index: 80; background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: var(--nav-shadow); }
+.doc-header-inner { min-height: var(--nav-h); display:flex; align-items:center; gap:18px; }
+.doc-heading { min-width:0; display:flex; flex-direction:column; gap:1px; margin-left:8px; }
+.doc-heading small { color:var(--text-3); font-size:.69rem; line-height:1.2; font-weight:750; letter-spacing:.12em; text-transform:uppercase; }
+.doc-heading strong { color:var(--text); font-size:.91rem; line-height:1.3; font-weight:650; }
+.doc-header-actions { display:flex; align-items:center; gap:9px; margin-left:auto; }
+.doc-header-actions .btn { min-height:38px; white-space:nowrap; text-decoration:none; }
+.doc-header-actions .theme-toggle { flex:none; }
+.doc-main { min-height:65vh; }
+.doc-intro { padding-block:clamp(34px,5vw,64px) 26px; }
+.doc-intro .label { color:var(--accent-2); font-size:.75rem; font-weight:750; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
+.doc-intro h1 { font-size:clamp(2rem,4vw,3.35rem); line-height:1.08; letter-spacing:-.04em; max-width:900px; }
+.doc-intro .lead { color:var(--text-2); max-width:760px; margin-top:16px; font-size:clamp(1rem,1.45vw,1.18rem); }
+.doc-meta { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-top:22px; }
+.doc-meta span,.doc-meta a { display:inline-flex; align-items:center; min-height:32px; padding:5px 11px; border:1px solid var(--line); border-radius:8px; font-size:.8rem; text-decoration:none !important; text-decoration-line:none !important; color:var(--text-2); background:var(--surface); }
+.doc-meta a { color:var(--accent); }
+.doc-meta a:hover { border-color:var(--accent); color:var(--text); }
+.doc-hint { color:var(--text-3); font-size:.85rem; margin-top:13px; max-width:760px; }
+.doc-pages { --doc-max-width:1440px; width:min(var(--doc-max-width), calc(100vw - 40px)); margin:0 auto; padding:8px 0 76px; }
+.doc-page-wrap { position:relative; width:100%; margin:0 auto 26px; overflow:hidden; border-radius:12px; background:#fff; box-shadow:0 22px 58px rgba(0,0,0,.18); isolation:isolate; }
+.doc-page-image { display:block; width:100%; height:auto; margin:0; }
+.pdf-link-hitbox { position:absolute; z-index:2; display:block; border:0; border-radius:3px; padding:0; margin:0; background:transparent; color:transparent; text-decoration:none !important; text-decoration-line:none !important; -webkit-text-decoration:none !important; outline-offset:2px; }
+.pdf-link-hitbox:hover { background:rgba(180,83,9,.10); box-shadow:inset 0 0 0 1.5px rgba(180,83,9,.48); }
+.pdf-link-hitbox:focus-visible { background:rgba(15,118,110,.14); outline:3px solid #0F766E; }
+.doc-footer { border-top:1px solid var(--line); padding:24px 0 30px; color:var(--text-3); font-size:.9rem; }
+.doc-footer-inner { display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+.doc-footer a { color:var(--text-2); text-decoration:none; }
+.doc-footer a:hover { color:var(--text); text-decoration:underline; }
+html[data-theme="light"] .doc-page-wrap { box-shadow:0 24px 65px rgba(50,43,37,.13), 0 2px 5px rgba(50,43,37,.05); }
+html[data-theme="light"] .doc-meta span, html[data-theme="light"] .doc-meta a { background:rgba(255,252,247,.84); }
+@media(max-width:650px) {
+  .doc-header-inner { gap:10px; }
+  .doc-heading { display:none; }
+  .doc-header-actions { gap:7px; }
+  .doc-header-actions .btn { padding-inline:10px; font-size:.84rem; }
+  .doc-intro { padding-top:30px; }
+  .doc-pages { width:calc(100vw - 20px); padding-bottom:42px; }
+  .doc-page-wrap { margin-bottom:14px; border-radius:7px; }
+}
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } }
+</style>
+</head>
+<body class="doc-body">
+<a class="skip" href="#main">Skip to content</a>
+<header class="doc-header">
+  <div class="container doc-header-inner">
+    <a class="brand" href="bue.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
+    <div class="doc-heading"><small>USER MANUAL</small><strong>BeatUp Engine + Silencer Manual</strong></div>
+    <div class="doc-header-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme" title="Toggle light and dark theme"><span id="themeIcon" aria-hidden="true">☀️</span></button>
+      <a class="btn btn-sm" href="bue.html">Back to BeatUp Engine</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="doc-main">
+  <section class="container doc-intro">
+    <p class="label">BeatUp Engine · Documentation</p>
+    <h1>BeatUp Engine + Silencer Manual</h1>
+    <p class="lead">Reference for the engine, chart editor, patcher and audio workflow.</p>
+    <div class="doc-meta"><span>14 pages</span><span>v0.6.1 · Windows x64</span><a href="#manual-page-2">Jump to contents ↘</a></div>
+    <p class="doc-hint">Faithful page rendering of the original PDF. Table-of-contents entries and source hyperlinks remain clickable. The page layout is kept intact on desktop and mobile.</p>
+  </section>
+  <div class="doc-pages" style="--doc-max-width:918px">
+<section class="doc-page-wrap" id="manual-page-1" aria-label="BeatUp Engine + Silencer Manual, page 1">
+  <img class="doc-page-image" src="assets/doc-manual/manual001.webp" alt="BeatUp Engine + Silencer Manual, page 1" width="1224" height="1584" loading="eager" decoding="async">
+</section>
+<section class="doc-page-wrap" id="manual-page-2" aria-label="BeatUp Engine + Silencer Manual, page 2">
+  <img class="doc-page-image" src="assets/doc-manual/manual002.webp" alt="BeatUp Engine + Silencer Manual, page 2" width="1224" height="1584" loading="eager" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-3" title="Jump to page 3" aria-label="Jump to page 3" style="left:10.24394%;top:11.70365%;width:15.54583%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-3" title="Jump to page 3" aria-label="Jump to page 3" style="left:10.24394%;top:13.85011%;width:24.60294%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-4" title="Jump to page 4" aria-label="Jump to page 4" style="left:10.24394%;top:15.99658%;width:29.08774%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-4" title="Jump to page 4" aria-label="Jump to page 4" style="left:10.24394%;top:18.14304%;width:10.87059%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-5" title="Jump to page 5" aria-label="Jump to page 5" style="left:10.24394%;top:20.28951%;width:8.29706%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-5" title="Jump to page 5" aria-label="Jump to page 5" style="left:10.24394%;top:22.43597%;width:12.68235%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-6" title="Jump to page 6" aria-label="Jump to page 6" style="left:10.24394%;top:24.58244%;width:11.53799%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-8" title="Jump to page 8" aria-label="Jump to page 8" style="left:10.24394%;top:26.72890%;width:20.40637%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-9" title="Jump to page 9" aria-label="Jump to page 9" style="left:10.24394%;top:28.87537%;width:8.29706%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-10" title="Jump to page 10" aria-label="Jump to page 10" style="left:10.24394%;top:31.02183%;width:19.16765%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-10" title="Jump to page 10" aria-label="Jump to page 10" style="left:10.24394%;top:33.16830%;width:24.31814%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-11" title="Jump to page 11" aria-label="Jump to page 11" style="left:10.24394%;top:35.31476%;width:9.53578%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-11" title="Jump to page 11" aria-label="Jump to page 11" style="left:10.24394%;top:37.46122%;width:17.25980%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-12" title="Jump to page 12" aria-label="Jump to page 12" style="left:10.24394%;top:39.60769%;width:27.17304%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-13" title="Jump to page 13" aria-label="Jump to page 13" style="left:10.24394%;top:41.75415%;width:15.64019%;height:1.59091%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-14" title="Jump to page 14" aria-label="Jump to page 14" style="left:10.24394%;top:43.90062%;width:16.11544%;height:1.59091%;"></a>
+</section>
+<section class="doc-page-wrap" id="manual-page-3" aria-label="BeatUp Engine + Silencer Manual, page 3">
+  <img class="doc-page-image" src="assets/doc-manual/manual003.webp" alt="BeatUp Engine + Silencer Manual, page 3" width="1224" height="1584" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:11.12284%;width:15.04052%;height:1.71717%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:52.73900%;width:15.04052%;height:1.71717%;"></a>
+</section>
+<section class="doc-page-wrap" id="manual-page-4" aria-label="BeatUp Engine + Silencer Manual, page 4">
+  <img class="doc-page-image" src="assets/doc-manual/manual004.webp" alt="BeatUp Engine + Silencer Manual, page 4" width="1224" height="1584" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:34.53193%;width:15.04052%;height:1.71717%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:67.20870%;width:15.04052%;height:1.71717%;"></a>
+</section>
+<section class="doc-page-wrap" id="manual-page-5" aria-label="BeatUp Engine + Silencer Manual, page 5">
+  <img class="doc-page-image" src="assets/doc-manual/manual005.webp" alt="BeatUp Engine + Silencer Manual, page 5" width="1224" height="1584" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:11.12284%;width:15.04052%;height:1.71717%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:64.32991%;width:15.04052%;height:1.71717%;"></a>
+</section>
+<section class="doc-page-wrap" id="manual-page-6" aria-label="BeatUp Engine + Silencer Manual, page 6">
+  <img class="doc-page-image" src="assets/doc-manual/manual006.webp" alt="BeatUp Engine + Silencer Manual, page 6" width="1224" height="1584" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:46.80466%;width:15.04052%;height:1.71717%;"></a>
+</section>
+<section class="doc-page-wrap" id="manual-page-7" aria-label="BeatUp Engine + Silencer Manual, page 7">
+  <img class="doc-page-image" src="assets/doc-manual/manual007.webp" alt="BeatUp Engine + Silencer Manual, page 7" width="1224" height="1584" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="manual-page-8" aria-label="BeatUp Engine + Silencer Manual, page 8">
+  <img class="doc-page-image" src="assets/doc-manual/manual008.webp" alt="BeatUp Engine + Silencer Manual, page 8" width="1224" height="1584" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:62.23395%;width:15.04052%;height:1.71717%;"></a>
+</section>
+<section class="doc-page-wrap" id="manual-page-9" aria-label="BeatUp Engine + Silencer Manual, page 9">
+  <img class="doc-page-image" src="assets/doc-manual/manual009.webp" alt="BeatUp Engine + Silencer Manual, page 9" width="1224" height="1584" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:41.75415%;width:15.04052%;height:1.71717%;"></a>
+</section>
+<section class="doc-page-wrap" id="manual-page-10" aria-label="BeatUp Engine + Silencer Manual, page 10">
+  <img class="doc-page-image" src="assets/doc-manual/manual010.webp" alt="BeatUp Engine + Silencer Manual, page 10" width="1224" height="1584" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:19.43092%;width:15.04052%;height:1.71717%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:82.23395%;width:15.04052%;height:1.71717%;"></a>
+</section>
+<section class="doc-page-wrap" id="manual-page-11" aria-label="BeatUp Engine + Silencer Manual, page 11">
+  <img class="doc-page-image" src="assets/doc-manual/manual011.webp" alt="BeatUp Engine + Silencer Manual, page 11" width="1224" height="1584" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:27.81476%;width:15.04052%;height:1.71717%;"></a>
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:78.01678%;width:15.04052%;height:1.71717%;"></a>
+</section>
+<section class="doc-page-wrap" id="manual-page-12" aria-label="BeatUp Engine + Silencer Manual, page 12">
+  <img class="doc-page-image" src="assets/doc-manual/manual012.webp" alt="BeatUp Engine + Silencer Manual, page 12" width="1224" height="1584" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:25.13799%;width:15.04052%;height:1.71717%;"></a>
+</section>
+<section class="doc-page-wrap" id="manual-page-13" aria-label="BeatUp Engine + Silencer Manual, page 13">
+  <img class="doc-page-image" src="assets/doc-manual/manual013.webp" alt="BeatUp Engine + Silencer Manual, page 13" width="1224" height="1584" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:11.12284%;width:15.04052%;height:1.71717%;"></a>
+</section>
+<section class="doc-page-wrap" id="manual-page-14" aria-label="BeatUp Engine + Silencer Manual, page 14">
+  <img class="doc-page-image" src="assets/doc-manual/manual014.webp" alt="BeatUp Engine + Silencer Manual, page 14" width="1224" height="1584" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#manual-page-2" title="Jump to page 2" aria-label="Jump to page 2" style="left:10.24394%;top:11.12284%;width:15.04052%;height:1.71717%;"></a>
+</section>
+  </div>
+</main>
+<footer class="doc-footer"><div class="container doc-footer-inner"><span>© 2026 BUE. BeatUp Engine documentation.</span><a href="bue.html">← Back to BeatUp Engine</a></div></footer>
+<script>
+(function(){
+  'use strict';
+  var button=document.getElementById('themeToggle');
+  var icon=document.getElementById('themeIcon');
+  function setTheme(mode,persist){
+    mode=mode==='light'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',mode);
+    document.documentElement.style.colorScheme=mode;
+    if(icon) icon.textContent=mode==='light'?'🌙':'☀️';
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.setAttribute('content',mode==='light'?'#FAF6EF':'#0c0e12');});
+    if(persist){try{localStorage.setItem('sanya-theme',mode);}catch(e){}}
+  }
+  setTheme(document.documentElement.getAttribute('data-theme')||'dark',false);
+  if(button)button.addEventListener('click',function(){setTheme(document.documentElement.getAttribute('data-theme')==='light'?'dark':'light',true);});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0c0e12">
+<title>Charting Guide — BeatUp Engine — BUE</title>
+<meta name="description" content="BeatUp Engine Charting Guide v1.1, covering preparation, timing, editor basics, charting, review, export and troubleshooting.">
+<link rel="icon" type="image/png" href="assets/web/mark.png">
+<link rel="stylesheet" href="css/site.css">
+<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('sanya-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<style>
+/* Faithful, responsive page viewer. Each page uses a full render of the source PDF,
+   while transparent hit areas preserve the source PDF's clickable links. */
+.doc-body { min-height: 100vh; background: var(--bg); }
+html[data-theme="dark"] body.doc-body {
+  background: radial-gradient(ellipse at 8% 7%, rgba(120,162,232,.09), transparent 31rem),
+              radial-gradient(ellipse at 94% 24%, rgba(179,165,246,.08), transparent 34rem), var(--bg);
+}
+html[data-theme="light"] body.doc-body {
+  background: radial-gradient(ellipse at 7% 5%, rgba(180,83,9,.12), transparent 30rem),
+              radial-gradient(ellipse at 92% 26%, rgba(15,118,110,.11), transparent 35rem),
+              linear-gradient(145deg, #FAF6EF 0%, #F1E8DC 48%, #FAF6EF 100%);
+}
+.doc-header { position: sticky; top: 0; z-index: 80; background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: var(--nav-shadow); }
+.doc-header-inner { min-height: var(--nav-h); display:flex; align-items:center; gap:18px; }
+.doc-heading { min-width:0; display:flex; flex-direction:column; gap:1px; margin-left:8px; }
+.doc-heading small { color:var(--text-3); font-size:.69rem; line-height:1.2; font-weight:750; letter-spacing:.12em; text-transform:uppercase; }
+.doc-heading strong { color:var(--text); font-size:.91rem; line-height:1.3; font-weight:650; }
+.doc-header-actions { display:flex; align-items:center; gap:9px; margin-left:auto; }
+.doc-header-actions .btn { min-height:38px; white-space:nowrap; text-decoration:none; }
+.doc-header-actions .theme-toggle { flex:none; }
+.doc-main { min-height:65vh; }
+.doc-intro { padding-block:clamp(34px,5vw,64px) 26px; }
+.doc-intro .label { color:var(--accent-2); font-size:.75rem; font-weight:750; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
+.doc-intro h1 { font-size:clamp(2rem,4vw,3.35rem); line-height:1.08; letter-spacing:-.04em; max-width:900px; }
+.doc-intro .lead { color:var(--text-2); max-width:760px; margin-top:16px; font-size:clamp(1rem,1.45vw,1.18rem); }
+.doc-meta { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-top:22px; }
+.doc-meta span,.doc-meta a { display:inline-flex; align-items:center; min-height:32px; padding:5px 11px; border:1px solid var(--line); border-radius:8px; font-size:.8rem; text-decoration:none !important; text-decoration-line:none !important; color:var(--text-2); background:var(--surface); }
+.doc-meta a { color:var(--accent); }
+.doc-meta a:hover { border-color:var(--accent); color:var(--text); }
+.doc-hint { color:var(--text-3); font-size:.85rem; margin-top:13px; max-width:760px; }
+.doc-pages { --doc-max-width:1440px; width:min(var(--doc-max-width), calc(100vw - 40px)); margin:0 auto; padding:8px 0 76px; }
+.doc-page-wrap { position:relative; width:100%; margin:0 auto 26px; overflow:hidden; border-radius:12px; background:#fff; box-shadow:0 22px 58px rgba(0,0,0,.18); isolation:isolate; }
+.doc-page-image { display:block; width:100%; height:auto; margin:0; }
+.pdf-link-hitbox { position:absolute; z-index:2; display:block; border:0; border-radius:3px; padding:0; margin:0; background:transparent; color:transparent; text-decoration:none !important; text-decoration-line:none !important; -webkit-text-decoration:none !important; outline-offset:2px; }
+.pdf-link-hitbox:hover { background:rgba(180,83,9,.10); box-shadow:inset 0 0 0 1.5px rgba(180,83,9,.48); }
+.pdf-link-hitbox:focus-visible { background:rgba(15,118,110,.14); outline:3px solid #0F766E; }
+.doc-footer { border-top:1px solid var(--line); padding:24px 0 30px; color:var(--text-3); font-size:.9rem; }
+.doc-footer-inner { display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+.doc-footer a { color:var(--text-2); text-decoration:none; }
+.doc-footer a:hover { color:var(--text); text-decoration:underline; }
+html[data-theme="light"] .doc-page-wrap { box-shadow:0 24px 65px rgba(50,43,37,.13), 0 2px 5px rgba(50,43,37,.05); }
+html[data-theme="light"] .doc-meta span, html[data-theme="light"] .doc-meta a { background:rgba(255,252,247,.84); }
+@media(max-width:650px) {
+  .doc-header-inner { gap:10px; }
+  .doc-heading { display:none; }
+  .doc-header-actions { gap:7px; }
+  .doc-header-actions .btn { padding-inline:10px; font-size:.84rem; }
+  .doc-intro { padding-top:30px; }
+  .doc-pages { width:calc(100vw - 20px); padding-bottom:42px; }
+  .doc-page-wrap { margin-bottom:14px; border-radius:7px; }
+}
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } }
+</style>
+</head>
+<body class="doc-body">
+<a class="skip" href="#main">Skip to content</a>
+<header class="doc-header">
+  <div class="container doc-header-inner">
+    <a class="brand" href="bue.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
+    <div class="doc-heading"><small>CHARTING GUIDE</small><strong>Charting Guide</strong></div>
+    <div class="doc-header-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme" title="Toggle light and dark theme"><span id="themeIcon" aria-hidden="true">☀️</span></button>
+      <a class="btn btn-sm" href="bue.html">Back to BeatUp Engine</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="doc-main">
+  <section class="container doc-intro">
+    <p class="label">BeatUp Engine · Documentation</p>
+    <h1>Charting Guide</h1>
+    <p class="lead">A step-by-step guide from song to finished chart.</p>
+    <div class="doc-meta"><span>30 pages</span><span>v1.1 · Silencer v1.9</span><a href="#chart-page-2">Jump to contents ↘</a></div>
+    <p class="doc-hint">Faithful page rendering of the original PDF. Table-of-contents entries and source hyperlinks remain clickable. The page layout is kept intact on desktop and mobile.</p>
+  </section>
+  <div class="doc-pages" style="--doc-max-width:1440px">
+<section class="doc-page-wrap" id="chart-page-1" aria-label="Charting Guide, page 1">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide001.webp" alt="Charting Guide, page 1" width="1920" height="1080" loading="eager" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-2" aria-label="Charting Guide, page 2">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide002.webp" alt="Charting Guide, page 2" width="1920" height="1080" loading="eager" decoding="async">
+  <a class="pdf-link-hitbox" href="#chart-page-4" title="Jump to page 4" aria-label="Jump to page 4" style="left:7.65000%;top:35.05370%;width:10.41458%;height:3.31111%;"></a>
+  <a class="pdf-link-hitbox" href="#chart-page-7" title="Jump to page 7" aria-label="Jump to page 7" style="left:38.21771%;top:35.05370%;width:6.10000%;height:3.31111%;"></a>
+  <a class="pdf-link-hitbox" href="#chart-page-12" title="Jump to page 12" aria-label="Jump to page 12" style="left:69.05729%;top:35.00926%;width:11.22812%;height:2.68889%;"></a>
+  <a class="pdf-link-hitbox" href="#chart-page-19" title="Jump to page 19" aria-label="Jump to page 19" style="left:7.57500%;top:69.41852%;width:7.58958%;height:3.35556%;"></a>
+  <a class="pdf-link-hitbox" href="#chart-page-25" title="Jump to page 25" aria-label="Jump to page 25" style="left:38.35521%;top:69.46296%;width:14.86458%;height:3.31111%;"></a>
+  <a class="pdf-link-hitbox" href="#chart-page-28" title="Jump to page 28" aria-label="Jump to page 28" style="left:68.93229%;top:69.41852%;width:8.62813%;height:3.35556%;"></a>
+</section>
+<section class="doc-page-wrap" id="chart-page-3" aria-label="Charting Guide, page 3">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide003.webp" alt="Charting Guide, page 3" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-4" aria-label="Charting Guide, page 4">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide004.webp" alt="Charting Guide, page 4" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-5" aria-label="Charting Guide, page 5">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide005.webp" alt="Charting Guide, page 5" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-6" aria-label="Charting Guide, page 6">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide006.webp" alt="Charting Guide, page 6" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-7" aria-label="Charting Guide, page 7">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide007.webp" alt="Charting Guide, page 7" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-8" aria-label="Charting Guide, page 8">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide008.webp" alt="Charting Guide, page 8" width="1920" height="1080" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="https://youtu.be/EXI1Yz0QG54" title="https://youtu.be/EXI1Yz0QG54" aria-label="https://youtu.be/EXI1Yz0QG54" style="left:16.63958%;top:85.59556%;width:6.40000%;height:2.07111%;" target="_blank" rel="noopener noreferrer"></a>
+</section>
+<section class="doc-page-wrap" id="chart-page-9" aria-label="Charting Guide, page 9">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide009.webp" alt="Charting Guide, page 9" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-10" aria-label="Charting Guide, page 10">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide010.webp" alt="Charting Guide, page 10" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-11" aria-label="Charting Guide, page 11">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide011.webp" alt="Charting Guide, page 11" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-12" aria-label="Charting Guide, page 12">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide012.webp" alt="Charting Guide, page 12" width="1920" height="1080" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="#chart-page-9" title="Jump to page 9" aria-label="Jump to page 9" style="left:5.36250%;top:40.43148%;width:22.65208%;height:1.82222%;"></a>
+</section>
+<section class="doc-page-wrap" id="chart-page-13" aria-label="Charting Guide, page 13">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide013.webp" alt="Charting Guide, page 13" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-14" aria-label="Charting Guide, page 14">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide014.webp" alt="Charting Guide, page 14" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-15" aria-label="Charting Guide, page 15">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide015.webp" alt="Charting Guide, page 15" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-16" aria-label="Charting Guide, page 16">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide016.webp" alt="Charting Guide, page 16" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-17" aria-label="Charting Guide, page 17">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide017.webp" alt="Charting Guide, page 17" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-18" aria-label="Charting Guide, page 18">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide018.webp" alt="Charting Guide, page 18" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-19" aria-label="Charting Guide, page 19">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide019.webp" alt="Charting Guide, page 19" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-20" aria-label="Charting Guide, page 20">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide020.webp" alt="Charting Guide, page 20" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-21" aria-label="Charting Guide, page 21">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide021.webp" alt="Charting Guide, page 21" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-22" aria-label="Charting Guide, page 22">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide022.webp" alt="Charting Guide, page 22" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-23" aria-label="Charting Guide, page 23">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide023.webp" alt="Charting Guide, page 23" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-24" aria-label="Charting Guide, page 24">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide024.webp" alt="Charting Guide, page 24" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-25" aria-label="Charting Guide, page 25">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide025.webp" alt="Charting Guide, page 25" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-26" aria-label="Charting Guide, page 26">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide026.webp" alt="Charting Guide, page 26" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-27" aria-label="Charting Guide, page 27">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide027.webp" alt="Charting Guide, page 27" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-28" aria-label="Charting Guide, page 28">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide028.webp" alt="Charting Guide, page 28" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-29" aria-label="Charting Guide, page 29">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide029.webp" alt="Charting Guide, page 29" width="1920" height="1080" loading="lazy" decoding="async">
+</section>
+<section class="doc-page-wrap" id="chart-page-30" aria-label="Charting Guide, page 30">
+  <img class="doc-page-image" src="assets/doc-charting-guide/guide030.webp" alt="Charting Guide, page 30" width="1920" height="1080" loading="lazy" decoding="async">
+  <a class="pdf-link-hitbox" href="https://web.beatupengine.workers.dev/bue" title="https://web.beatupengine.workers.dev/bue" aria-label="https://web.beatupengine.workers.dev/bue" style="left:13.52708%;top:51.03519%;width:26.65312%;height:2.88889%;" target="_blank" rel="noopener noreferrer"></a>
+  <a class="pdf-link-hitbox" href="https://github.com/bishpop/beatupengine" title="https://github.com/bishpop/beatupengine" aria-label="https://github.com/bishpop/beatupengine" style="left:13.51458%;top:65.70185%;width:25.82812%;height:2.89444%;" target="_blank" rel="noopener noreferrer"></a>
+  <a class="pdf-link-hitbox" href="https://github.com/bishpop/beatupengine/releases" title="https://github.com/bishpop/beatupengine/releases" aria-label="https://github.com/bishpop/beatupengine/releases" style="left:13.51458%;top:80.37407%;width:32.57812%;height:2.88815%;" target="_blank" rel="noopener noreferrer"></a>
+</section>
+  </div>
+</main>
+<footer class="doc-footer"><div class="container doc-footer-inner"><span>© 2026 BUE. BeatUp Engine documentation.</span><a href="bue.html">← Back to BeatUp Engine</a></div></footer>
+<script>
+(function(){
+  'use strict';
+  var button=document.getElementById('themeToggle');
+  var icon=document.getElementById('themeIcon');
+  function setTheme(mode,persist){
+    mode=mode==='light'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',mode);
+    document.documentElement.style.colorScheme=mode;
+    if(icon) icon.textContent=mode==='light'?'🌙':'☀️';
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.setAttribute('content',mode==='light'?'#FAF6EF':'#0c0e12');});
+    if(persist){try{localStorage.setItem('sanya-theme',mode);}catch(e){}}
+  }
+  setTheme(document.documentElement.getAttribute('data-theme')||'dark',false);
+  if(button)button.addEventListener('click',function(){setTheme(document.documentElement.getAttribute('data-theme')==='light'?'dark':'light',true);});
+})();
+</script>
+</body>
+</html>
