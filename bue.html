@@ -27,7 +27,7 @@ try {
 } catch (e) { /* Dark mode remains the default when storage is unavailable. */ }
 </script>
 <link rel="stylesheet" href="css/site.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "BeatUp Engine", "applicationCategory": "GameApplication", "operatingSystem": "Windows 10, Windows 11 (64-bit)", "softwareVersion": "1.2", "url": "https://web.beatupengine.workers.dev/bue", "downloadUrl": "https://github.com/bishpop/beatupengine/releases/download/v1.2/BeatUpEngine-v1.2-Windows-x64.zip", "description": "A rhythm-game engine with chart editor, patcher and Auditor Mode for BeatUp charts.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Sanya", "url": "https://github.com/bishpop"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "BeatUp Engine", "applicationCategory": "GameApplication", "operatingSystem": "Windows 10, Windows 11 (64-bit)", "softwareVersion": "1.2", "url": "https://web.beatupengine.workers.dev/bue", "downloadUrl": "https://github.com/bishpop/beatupengine/releases/download/v1.2/BeatUpEngine_Setup_v1.2.exe", "description": "A rhythm-game engine with chart editor, patcher and Auditor Mode for BeatUp charts.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Sanya", "url": "https://github.com/bishpop"}}</script>
 </head>
 <body class="page-bue">
 <a class="skip" href="#main">Skip to content</a>
@@ -94,7 +94,7 @@ try {
       <h1>Chart, play and verify BeatUp charts.</h1>
       <p class="lead">A rhythm-game engine with a built-in chart editor and patcher for Windows. Version 1.2 is the final release: it adds the Auditor Mode and completes the feature list.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#download"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg>Download v1.2</a>
+        <a class="btn btn-primary" href="#download"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg>Download installer</a>
         <a class="btn" href="#tour">See what is inside</a>
         <span class="status"><span class="live-dot" aria-hidden="true"></span>Windows 10/11 x64 · free</span>
       </div>
@@ -107,7 +107,7 @@ try {
     <dl class="facts" style="margin:0;">
       <div class="fact"><dt>Platform</dt><dd>Windows 10 / 11, x64</dd></div>
       <div class="fact"><dt>Built with</dt><dd>C++ and SDL2</dd></div>
-      <div class="fact"><dt>Distribution</dt><dd>Portable zip, no installer</dd></div>
+      <div class="fact"><dt>Distribution</dt><dd>Installer + portable ZIP</dd></div>
       <div class="fact"><dt>Price</dt><dd>Free</dd></div>
     </dl>
   </div>
@@ -288,7 +288,7 @@ try {
     <div>
       <p class="label"><b>07</b> · Download</p>
       <h2 id="dl-h">BeatUp Engine v1.2</h2>
-      <p class="lead" style="margin-top:18px;">Unzip and run <code>BeatUpEngine.exe</code>. All assets are built in, there is no installer.</p>
+      <p class="lead" style="margin-top:18px;">Use the installer for the easiest setup. A portable ZIP is also available if you prefer to run BeatUp Engine without installing it.</p>
       <p class="muted">Only download BeatUp Engine from this page or the official GitHub release. Never run copies from other websites or re-uploads.</p>
       <details class="note">
         <summary>Windows or your antivirus shows a warning?</summary>
@@ -303,8 +303,23 @@ try {
     <div class="dl-card">
       <p class="status"><span class="live-dot" aria-hidden="true"></span>Final release · v1.2</p>
       <div class="dl-actions">
-        <a class="btn btn-primary" href="https://github.com/bishpop/beatupengine/releases/download/v1.2/BeatUpEngine-v1.2-Windows-x64.zip" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg>Download v1.2 (.zip)</a>
+        <a class="btn btn-primary" href="https://github.com/bishpop/beatupengine/releases/download/v1.2/BeatUpEngine_Setup_v1.2.exe" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg>Download installer (.exe)</a>
         <a class="btn" href="https://drive.google.com/uc?export=download&id=1b4bldL6xGjY1i6EPoLN0TGhU6JYqCBwh" target="_blank" rel="noopener">Patcher (optional)</a>
+      </div>
+      <div class="download-integrity download-integrity--installer">
+        <span class="download-integrity-label" data-nav-en="Installer SHA-256" data-nav-zh="安装程序 SHA-256">Installer SHA-256</span>
+        <div class="download-integrity-value">
+          <code>81f05481d4008a1e9c787a967b07ddbaa3c9748536862dbacc540ecd77d15e41</code>
+          <button class="download-hash-copy" type="button" data-copy-hash="8df38a1f2aed0cd796d79cd33510b2e82a4fb10a9881a99c6cf7b75ee6c4d7df" aria-label="Copy SHA-256">Copy</button>
+        </div>
+      </div>
+      <p class="download-portable-wrap"><a class="download-portable" href="https://github.com/bishpop/beatupengine/releases/download/v1.2/BeatUpEngine-v1.2-Windows-x64.zip" target="_blank" rel="noopener"><span class="download-portable-label">Portable version (.zip)</span><span class="download-portable-note">Run without installation</span></a></p>
+      <div class="download-integrity download-integrity--portable">
+        <span class="download-integrity-label" data-nav-en="Portable SHA-256" data-nav-zh="便携版 SHA-256">Portable SHA-256</span>
+        <div class="download-integrity-value">
+          <code>071c77ebb22122c5d08b3ca0ca10c40240ff510c3c3e1c82ed0b8425a8b2b245</code>
+          <button class="download-hash-copy" type="button" data-copy-hash="071c77ebb22122c5d08b3ca0ca10c40240ff510c3c3e1c82ed0b8425a8b2b245" aria-label="Copy SHA-256">Copy</button>
+        </div>
       </div>
       <ul class="dl-meta">
         <li><span>Platform</span><span>Windows 10 / 11, x64</span></li>

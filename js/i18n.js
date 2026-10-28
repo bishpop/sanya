@@ -5,6 +5,12 @@
     'Skip to content': '跳转到正文',
     'Home': '首页',
     'Download v1.2': '下载 v1.2',
+    'Download installer': '下载安装程序',
+    'Download installer (.exe)': '下载安装程序（.exe）',
+    'Portable version (.zip)': '便携版（.zip）',
+    'Run without installation': '无需安装即可运行',
+    'Installer + portable ZIP': '安装程序 + 便携 ZIP',
+    'Use the installer for the easiest setup. A portable ZIP is also available if you prefer to run BeatUp Engine without installing it.': '建议使用安装程序以便轻松完成安装。如果你更喜欢无需安装直接运行 BeatUp Engine，也可以下载便携 ZIP。',
     'Download': '下载',
     'Privacy': '隐私',
     'Back to top ↑': '返回顶部 ↑',
@@ -361,7 +367,13 @@
     'Choose language': '选择语言',
     'Language': '语言',
     'Toggle light and dark theme': '切换明暗主题',
-    'Play the BeatUp Engine v1.0 showcase video': '播放 BeatUp Engine v1.0 展示视频'
+    'Play the BeatUp Engine v1.0 showcase video': '播放 BeatUp Engine v1.0 展示视频',
+    'Installer SHA-256': '安装程序 SHA-256',
+    'Portable SHA-256': '便携版 SHA-256',
+    'Copy': '复制',
+    'Copied': '已复制',
+    'Select hash': '选择哈希值',
+    'Copy SHA-256': '复制 SHA-256'
   };
 
   var titles = {

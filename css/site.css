@@ -530,3 +530,58 @@ html[data-theme="light"] .dl-actions .btn-primary.dl-pulse { animation-name: dl-
 .footer-grid--compact { grid-template-columns: minmax(0, 5fr) repeat(2, minmax(0, 2fr)); }
 @media (max-width: 899px) { .footer-grid--compact { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .footer-grid--compact { grid-template-columns: minmax(0, 1fr); } }
+
+
+/* Low-emphasis portable build link: installer remains the primary action. */
+.download-portable-wrap { margin: 4px 0 0; padding-top: 2px; }
+.download-portable { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 7px; max-width: 100%; color: var(--text-3); font-size: .88rem; line-height: 1.5; text-decoration: none; transition: color .18s ease, opacity .18s ease; }
+.download-portable-label { text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; }
+.download-portable-note { color: var(--text-3); font-size: .82rem; opacity: .88; }
+.download-portable::before { content: "↳"; opacity: .7; }
+.download-portable:hover, .download-portable:focus-visible { color: var(--accent); }
+.download-portable:hover .download-portable-label, .download-portable:focus-visible .download-portable-label { text-decoration-color: currentColor; }
+.download-portable:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 3px; }
+@media (max-width: 560px) { .download-portable { gap: 5px; } .download-portable-note { flex-basis: calc(100% - 18px); margin-left: 18px; } }
+
+
+/* ---------- release file checksums ---------- */
+.download-integrity {
+  display: grid; gap: 7px; min-width: 0;
+  margin: -2px 0 18px; padding: 12px 0 16px;
+  border-bottom: 1px solid var(--line);
+}
+.download-integrity-label {
+  color: var(--text-3); font-size: .69rem; font-weight: 700;
+  line-height: 1.35; letter-spacing: .075em; text-transform: uppercase;
+}
+.download-integrity-value { display: flex; align-items: flex-start; gap: 8px; min-width: 0; }
+.download-integrity-value code {
+  display: block; flex: 1 1 auto; min-width: 0; padding: 9px 10px;
+  border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg-2); color: var(--text-2);
+  font: .72rem/1.55 var(--mono); overflow-wrap: anywhere; word-break: break-all;
+  user-select: all; -webkit-user-select: all;
+}
+.download-hash-copy {
+  flex: none; min-height: 34px; padding: 0 10px;
+  border: 1px solid var(--line-2); border-radius: 6px;
+  background: transparent; color: var(--text-2);
+  font: 600 .76rem/1 var(--font); cursor: pointer;
+  transition: border-color .15s ease, color .15s ease, background-color .15s ease;
+}
+.download-hash-copy:hover, .download-hash-copy:focus-visible {
+  border-color: var(--accent); color: var(--accent); background: var(--surface-2);
+}
+.download-hash-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.download-integrity--portable {
+  margin: 8px 0 18px 18px; padding: 0; border: 0; opacity: .88;
+}
+.download-integrity--portable .download-integrity-label { font-size: .65rem; letter-spacing: .055em; }
+.download-integrity--portable .download-integrity-value code { font-size: .67rem; padding: 7px 8px; }
+.download-integrity--portable .download-hash-copy { min-height: 31px; padding-inline: 8px; font-size: .72rem; }
+@media (max-width: 560px) {
+  .download-integrity-value { gap: 6px; }
+  .download-integrity-value code { font-size: .66rem; padding: 8px; }
+  .download-hash-copy { min-height: 33px; padding-inline: 8px; }
+  .download-integrity--portable { margin-left: 18px; }
+}

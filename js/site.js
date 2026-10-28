@@ -377,4 +377,35 @@
       box.appendChild(f);
     });
   });
+  /* ---------- SHA-256 copy controls ---------- */
+  [].forEach.call(document.querySelectorAll('[data-copy-hash]'), function (button) {
+    var defaultLabel = button.textContent.trim() || 'Copy';
+    button.addEventListener('click', function () {
+      var value = button.getAttribute('data-copy-hash') || '';
+      if (!value) return;
+      function feedback(ok) {
+        button.textContent = ok ? 'Copied' : 'Select hash';
+        window.setTimeout(function () { button.textContent = defaultLabel; }, 1500);
+      }
+      function selectFallback() {
+        var code = button.parentElement && button.parentElement.querySelector('code');
+        if (!code) { feedback(false); return; }
+        var range = document.createRange();
+        range.selectNodeContents(code);
+        var selection = window.getSelection();
+        if (selection) {
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+        try { feedback(!!document.execCommand('copy')); }
+        catch (e) { feedback(false); }
+      }
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        navigator.clipboard.writeText(value).then(function () { feedback(true); }, selectFallback);
+      } else {
+        selectFallback();
+      }
+    });
+  });
+
 })();
