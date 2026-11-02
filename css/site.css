@@ -585,3 +585,8 @@ html[data-theme="light"] .dl-actions .btn-primary.dl-pulse { animation-name: dl-
   .download-hash-copy { min-height: 33px; padding-inline: 8px; }
   .download-integrity--portable { margin-left: 18px; }
 }
+
+
+/* ---------- Web Edition embed (bue-online.html) ---------- */
+.video--app { aspect-ratio: 16 / 10; }
+@media (max-width: 560px) { .video--app { aspect-ratio: 4 / 5; } }

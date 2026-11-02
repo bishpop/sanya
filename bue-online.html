@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BeatUp Engine Web Edition v1.2.0 — Play and chart in the browser — Sanya</title>
+<meta name="description" content="BeatUp Engine Web Edition: play charts, edit them and run the Auditor Mode in your browser. Nothing to install.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0c0e12">
+<link rel="canonical" href="https://web.beatupengine.workers.dev/bue-online">
+<link rel="icon" type="image/png" href="assets/web/mark.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sanya">
+<meta property="og:title" content="BeatUp Engine Web Edition v1.2.0 — Play and chart in the browser — Sanya">
+<meta property="og:description" content="BeatUp Engine Web Edition: play charts, edit them and run the Auditor Mode in your browser. Nothing to install.">
+<meta property="og:url" content="https://web.beatupengine.workers.dev/bue-online">
+<meta property="og:image" content="https://web.beatupengine.workers.dev/assets/web/og-bue.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BeatUp Engine Web Edition v1.2.0 — Play and chart in the browser — Sanya">
+<meta name="twitter:description" content="BeatUp Engine Web Edition: play charts, edit them and run the Auditor Mode in your browser. Nothing to install.">
+<meta name="twitter:image" content="https://web.beatupengine.workers.dev/assets/web/og-bue.jpg">
+<script>
+document.documentElement.classList.add('js');
+try {
+  var savedTheme = localStorage.getItem('sanya-theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
+} catch (e) { /* Dark mode remains the default when storage is unavailable. */ }
+</script>
+<link rel="stylesheet" href="css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "BeatUp Engine Web Edition", "applicationCategory": "GameApplication", "operatingSystem": "Web browser", "softwareVersion": "1.2.0", "url": "https://bueonline.pages.dev/", "description": "Play, chart and audit BeatUp charts in the browser.", "author": {"@type": "Person", "name": "Sanya", "url": "https://github.com/bishpop"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="container nav-in">
+    <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="bue.html">BeatUp Engine</a></li>
+      <li><a href="sanconverter.html">SanConverter</a></li>
+      <li><a href="bue-online.html" aria-current="page">Web Edition</a></li>
+      <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
+      <li class="nav-section-jumps">
+        <span class="nav-section-label" data-nav-en="On this page" data-nav-zh="本页内容">On this page</span>
+        <div class="nav-section-list">
+            <a href="#top"><span data-nav-en="Overview" data-nav-zh="概览">Overview</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+            <a href="#try"><span data-nav-en="Live preview" data-nav-zh="在线预览">Live preview</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+            <a href="#features"><span data-nav-en="Features" data-nav-zh="功能">Features</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+            <a href="#start"><span data-nav-en="Quick start" data-nav-zh="快速上手">Quick start</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+            <a href="#desktop"><span data-nav-en="Desktop version" data-nav-zh="桌面版">Desktop version</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </li>
+      <li class="language-switch">
+        <div class="language-picker">
+          <button class="language-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Choose language" title="Choose language">
+            <span class="language-trigger-flag" aria-hidden="true">🇬🇧</span>
+            <svg class="language-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+          </button>
+          <div class="language-menu" role="group" aria-label="Language">
+            <button class="lang-btn is-active" type="button" data-lang="en" aria-pressed="true"><span class="lang-option-flag" aria-hidden="true">🇬🇧</span><span class="lang-option-name" data-en="English" data-zh="英语">English</span><span class="lang-check" aria-hidden="true">✓</span></button>
+            <button class="lang-btn" type="button" data-lang="zh" aria-pressed="false"><span class="lang-option-flag" aria-hidden="true">🇨🇳</span><span class="lang-option-name" data-en="简体中文" data-zh="简体中文">简体中文</span><span class="lang-check" aria-hidden="true">✓</span></button>
+          </div>
+        </div>
+      </li>
+      <li class="theme-item"><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme" title="Toggle light and dark theme"><span id="themeIcon" aria-hidden="true">☀️</span></button></li>
+    </ul>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links nav-section-menu" aria-label="Menu" title="Jump to section"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+  </div>
+  <div class="nav-quick-menu" id="nav-section-menu" aria-label="Jump to section">
+    <p class="nav-quick-title"><span data-nav-en="Jump to section" data-nav-zh="跳转到栏目">Jump to section</span></p>
+    <nav class="nav-quick-grid" aria-label="On this page">
+      <a class="nav-quick-link" href="#top"><span data-nav-en="Overview" data-nav-zh="概览">Overview</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+      <a class="nav-quick-link" href="#try"><span data-nav-en="Live preview" data-nav-zh="在线预览">Live preview</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+      <a class="nav-quick-link" href="#features"><span data-nav-en="Features" data-nav-zh="功能">Features</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+      <a class="nav-quick-link" href="#start"><span data-nav-en="Quick start" data-nav-zh="快速上手">Quick start</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+      <a class="nav-quick-link" href="#desktop"><span data-nav-en="Desktop version" data-nav-zh="桌面版">Desktop version</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+  <div class="scroll-bar" aria-hidden="true"></div>
+</header>
+<main id="main">
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="container hero-grid">
+    <div>
+      <p class="label">BeatUp Engine · <b>Web Edition v1.2.0</b></p>
+      <h1>BeatUp Engine, now in your browser.</h1>
+      <p class="lead">The BeatUp Engine ported to a static website: play charts, edit them and run the Auditor Mode without installing anything.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://bueonline.pages.dev/" target="_blank" rel="noopener">Launch Web Edition <span aria-hidden="true">↗</span></a>
+        <a class="btn" href="#try">Preview it here</a>
+        <span class="status"><span class="live-dot" aria-hidden="true"></span>Runs in the browser · free</span>
+      </div>
+    </div>
+    <div class="hero-stage">
+      <figure class="frame flyin"><img src="assets/web/menu.webp" alt="The BeatUp Engine main menu with Editor, Play your chart, Patcher, Options and Exit" width="1024" height="768" decoding="async" fetchpriority="high"></figure>
+      <p class="caption">Main menu of the desktop version. The Web Edition has the same layout.</p>
+    </div>
+  </div>
+  <div class="container">
+    <dl class="facts" style="margin:0;">
+      <div class="fact"><dt>Platform</dt><dd>Web browser</dd></div>
+      <div class="fact"><dt>Version</dt><dd>v1.2.0</dd></div>
+      <div class="fact"><dt>Hosting</dt><dd>Cloudflare Pages</dd></div>
+      <div class="fact"><dt>Input</dt><dd>Keyboard (numpad or laptop keys)</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- LIVE PREVIEW -------------------------------------------------------- -->
+<section class="section" id="try" aria-labelledby="try-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>01</b> · Live preview</p><h2 id="try-h">Run it right here.</h2></div>
+      <p>The Web Edition loads inside this page only after you press the button. For the full window and fullscreen mode, open it in its own tab.</p>
+    </div>
+    <div class="video video--app reveal" id="appEmbed">
+      <img src="assets/web/gameplay.webp" alt="" width="1024" height="768" loading="lazy" decoding="async">
+      <button type="button" data-embed="https://bueonline.pages.dev/" aria-label="Load the BeatUp Engine Web Edition"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span><span>Load Web Edition</span></button>
+    </div>
+    <div class="hero-actions" style="margin-top:22px;">
+      <a class="btn btn-primary" href="https://bueonline.pages.dev/" target="_blank" rel="noopener">Open in new tab <span aria-hidden="true">↗</span></a>
+      <span class="small">If the preview stays blank, use the new-tab button. Keyboard play works best in the full window.</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES ------------------------------------------------------------ -->
+<section class="section band" id="features" aria-labelledby="features-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>02</b> · Features</p><h2 id="features-h">What you can do in it.</h2></div>
+      <p>Playing, charting, converting and reviewing, all from one page.</p>
+    </div>
+    <ol class="spec reveal">
+      <li><span class="n">01</span><h3>Play your chart</h3><p>Pick a built-in chart or drop in a .bu file. Choose a Chance mode such as Rapid, Vanishing, Wave, Inverted, Speed Up or Halfway, turn on Mirror Keys or AutoPlay, and see your rank at the end.</p></li>
+      <li><span class="n">02</span><h3>Chart editor</h3><p>Edit against the waveform in Game, Chart or Split view. Undo and redo, copy and paste, mirror and randomize arrows, bookmarks, snap grid and playback speed from 50% to 150%.</p></li>
+      <li><span class="n">03</span><h3>Import and export</h3><p>Import .slk and .ssc charts. Export .slk, verified .slk or .ssc, or save a .bu project, optionally encrypted with the music embedded.</p></li>
+      <li><span class="n">04</span><h3>Auditor Mode</h3><p>Review, verify and document a chart. Start an audit baseline while you work and export the result as a CSV file.</p></li>
+      <li><span class="n">05</span><h3>Chart assistant</h3><p>Detects the tempo of your song and offers candidates to choose from. It can place notes automatically on the full mix, the vocals or the instruments, and a pattern generator adds alternating, stair or random patterns.</p></li>
+      <li><span class="n">06</span><h3>Themes and options</h3><p>Twelve colour themes, editor backgrounds including your own image, volume and offset settings, and keybinds. Options save automatically.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- QUICK START --------------------------------------------------------- -->
+<section class="section" id="start" aria-labelledby="start-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>03</b> · Quick start</p><h2 id="start-h">From song to chart in four steps.</h2></div>
+      <p>The order matters: the music always comes first.</p>
+    </div>
+    <ol class="spec reveal">
+      <li><span class="n">01</span><h3>Open the Editor</h3><p>Launch the Web Edition and choose Editor in the main menu.</p></li>
+      <li><span class="n">02</span><h3>Load your music first</h3><p>Open an .ogg, .wav or .mp3 file. The audio dialog detects the BPM and clears any chart that was loaded before.</p></li>
+      <li><span class="n">03</span><h3>Import a chart</h3><p>Optionally import an .slk or .ssc chart onto the loaded song, or start charting from scratch.</p></li>
+      <li><span class="n">04</span><h3>Chart, play and save</h3><p>Place notes with numpad 7/4/1 and 9/6/3, or Q/A/Z and E/D/C on a laptop keyboard. Then export a chart or save a .bu project.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- DESKTOP ------------------------------------------------------------- -->
+<section class="section band" id="desktop" aria-labelledby="desktop-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>04</b> · Desktop version</p><h2 id="desktop-h">Prefer the Windows program?</h2></div>
+      <p>BeatUp Engine v1.2 is also available as an installer and a portable ZIP, including the patcher. The desktop page has the downloads, the release notes and the manual.</p>
+    </div>
+    <div class="hero-actions" style="margin-top:0;">
+      <a class="btn btn-primary" href="bue.html">BeatUp Engine for Windows</a>
+      <a class="btn" href="https://bueonline.pages.dev/" target="_blank" rel="noopener">Launch Web Edition <span aria-hidden="true">↗</span></a>
+      <a class="btn" href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid footer-grid--compact">
+      <div>
+        <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
+        <p style="margin-top:14px;max-width:26em;">Software and tools for rhythm-game charting, written in C++ and C#.</p>
+      </div>
+      <div><h2>Projects</h2><ul>
+        <li><a href="bue.html">BeatUp Engine</a></li>
+        <li><a href="sanconverter.html">SanConverter</a></li>
+        <li><a href="bue-online.html">Web Edition</a></li>
+      </ul></div>
+      <div><h2>Elsewhere</h2><ul>
+        <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-base"><span>© 2026 Sanya. All rights reserved.</span><a href="#top">Back to top ↑</a></div>
+  </div>
+</footer>
+<script>
+/* Click-to-load: the Web Edition (and its audio) is only requested after the visitor presses the button. */
+(function () {
+  var btn = document.querySelector('[data-embed]');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var box = btn.parentElement;
+    var frame = document.createElement('iframe');
+    frame.src = btn.getAttribute('data-embed');
+    frame.title = 'BeatUp Engine Web Edition';
+    frame.allow = 'fullscreen; autoplay';
+    frame.setAttribute('allowfullscreen', '');
+    box.textContent = '';
+    box.appendChild(frame);
+  });
+})();
+</script>
+<script src="js/site.js" defer></script>
+<script src="js/i18n.js" defer></script>
+</body>
+</html>
