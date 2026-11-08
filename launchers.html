@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restricted Launchers &amp; Tools — Sanya</title>
+<meta name="description" content="Technical overview of private rhythm-game tooling by Sanya: Engine Launcher, One Two Party Launcher, and Ballroom Converter. Restricted access, no public downloads.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0c0e12">
+<link rel="canonical" href="https://web.beatupengine.workers.dev/launchers">
+<link rel="icon" type="image/png" href="assets/web/mark.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sanya">
+<meta property="og:title" content="Restricted Launchers &amp; Tools — Sanya">
+<meta property="og:description" content="Technical overview of private rhythm-game tooling by Sanya: Engine Launcher, One Two Party Launcher, and Ballroom Converter. Restricted access, no public downloads.">
+<meta property="og:url" content="https://web.beatupengine.workers.dev/launchers">
+<meta property="og:image" content="https://web.beatupengine.workers.dev/assets/web/og-home.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Restricted Launchers &amp; Tools — Sanya">
+<meta name="twitter:description" content="Technical overview of private rhythm-game tooling by Sanya: Engine Launcher, One Two Party Launcher, and Ballroom Converter. Restricted access, no public downloads.">
+<meta name="twitter:image" content="https://web.beatupengine.workers.dev/assets/web/og-home.jpg">
+<script>
+document.documentElement.classList.add('js');
+try {
+  var savedTheme = localStorage.getItem('sanya-theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
+} catch (e) { /* Dark mode remains default. */ }
+</script>
+<link rel="stylesheet" href="css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Restricted Launchers & Tools", "url": "https://web.beatupengine.workers.dev/launchers", "description": "Technical overview of private rhythm-game tooling by Sanya: Engine Launcher, One Two Party Launcher, and Ballroom Converter."}</script>
+</head>
+<body class="page-launchers">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="container nav-in">
+    <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="bue.html">BeatUp Engine</a></li>
+      <li><a href="sanconverter.html">SanConverter</a></li>
+      <li><a href="bue-online.html">Web Edition</a></li>
+      <li><a href="launchers.html" aria-current="page">Launchers &amp; Tools</a></li>
+      <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
+      <li class="nav-section-jumps">
+        <span class="nav-section-label" data-nav-en="On this page" data-nav-zh="本页内容">On this page</span>
+        <div class="nav-section-list">
+          <a href="#top"><span data-nav-en="Overview" data-nav-zh="概览">Overview</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+          <a href="#engine-launcher"><span data-nav-en="Engine Launcher" data-nav-zh="引擎启动器">Engine Launcher</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+          <a href="#otp-launcher"><span data-nav-en="OTP Launcher" data-nav-zh="OTP 启动器">OTP Launcher</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+          <a href="#ballroom-converter"><span data-nav-en="Ballroom Converter" data-nav-zh="舞厅转换器">Ballroom Converter</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+          <a href="#policy"><span data-nav-en="Access Policy" data-nav-zh="访问政策">Access Policy</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </li>
+      <li class="language-switch">
+        <div class="language-picker">
+          <button class="language-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Choose language" title="Choose language">
+            <span class="language-trigger-flag" aria-hidden="true">🇬🇧</span>
+            <svg class="language-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+          </button>
+          <div class="language-menu" role="group" aria-label="Language">
+            <button class="lang-btn is-active" type="button" data-lang="en" aria-pressed="true"><span class="lang-option-flag" aria-hidden="true">🇬🇧</span><span class="lang-option-name" data-en="English" data-zh="英语">English</span><span class="lang-check" aria-hidden="true">✓</span></button>
+            <button class="lang-btn" type="button" data-lang="zh" aria-pressed="false"><span class="lang-option-flag" aria-hidden="true">🇨🇳</span><span class="lang-option-name" data-en="简体中文" data-zh="简体中文">简体中文</span><span class="lang-check" aria-hidden="true">✓</span></button>
+          </div>
+        </div>
+      </li>
+      <li class="theme-item"><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme" title="Toggle light and dark theme"><span id="themeIcon" aria-hidden="true">☀️</span></button></li>
+    </ul>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links nav-section-menu" aria-label="Menu" title="Jump to section"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+  </div>
+  <div class="nav-quick-menu" id="nav-section-menu" aria-label="Jump to section">
+    <p class="nav-quick-title"><span data-nav-en="Jump to section" data-nav-zh="跳转到栏目">Jump to section</span></p>
+    <nav class="nav-quick-grid" aria-label="On this page">
+      <a class="nav-quick-link" href="#top"><span data-nav-en="Overview" data-nav-zh="概览">Overview</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+      <a class="nav-quick-link" href="#engine-launcher"><span data-nav-en="Engine Launcher" data-nav-zh="引擎启动器">Engine Launcher</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+      <a class="nav-quick-link" href="#otp-launcher"><span data-nav-en="OTP Launcher" data-nav-zh="OTP 启动器">OTP Launcher</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+      <a class="nav-quick-link" href="#ballroom-converter"><span data-nav-en="Ballroom Converter" data-nav-zh="舞厅转换器">Ballroom Converter</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+      <a class="nav-quick-link" href="#policy"><span data-nav-en="Access Policy" data-nav-zh="访问政策">Access Policy</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+  <div class="scroll-bar" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+<section class="hero-simple" id="top">
+  <div class="container">
+    <p class="label">Sanya · Restricted Tooling</p>
+    <h1>Launchers &amp; Conversion Ecosystem.</h1>
+    <p class="lead">A technical overview of the private utilities built for client execution, network session routing, and specialized rhythm format conversion. <strong>Access is strictly restricted to private testing — no public downloads are provided.</strong></p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#policy">View Access Policy</a>
+      <a class="btn" href="bue.html#download">Public Downloads (v1.2)</a>
+      <span class="status"><span class="lock-icon" aria-hidden="true">🔒</span> Private Builds · Restricted Access</span>
+    </div>
+  </div>
+</section>
+
+<!-- ENGINE LAUNCHER -->
+<section class="section" id="engine-launcher" aria-labelledby="engine-h">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="label"><b>01</b> · Ecosystem Launcher</p>
+        <h2 id="engine-h">Engine Launcher</h2>
+      </div>
+      <p>Automated desktop manager and execution gateway for BeatUp Engine client instances. Handles delta patching, asset integrity checking, and isolated runtime profiles.</p>
+    </div>
+
+    <div class="restricted-banner">
+      <svg class="restricted-banner-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1zm3 8V5.5a3 3 0 1 0-6 0V9h6z" clip-rule="evenodd"/></svg>
+      <div>
+        <h4>Restricted Utility — No Public Download</h4>
+        <p>The Engine Launcher is maintained strictly for private development and automated integration testing with internal builds (including v1.3+). It is not distributed publicly.</p>
+      </div>
+    </div>
+
+    <ol class="spec reveal">
+      <li>
+        <span class="n">01</span>
+        <h3>Differential Delta Patching</h3>
+        <p>Instead of redownloading full multi-hundred megabyte archives, the launcher calculates binary diffs against remote manifests and applies only modified byte streams, minimizing patch bandwidth and setup delays.</p>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <h3>Runtime Integrity &amp; Verification</h3>
+        <p>Performs background SHA-256 validation across engine binaries, SDL2 dynamic libraries, sound banks, and core font packages prior to game execution to preemptively stop missing-asset crashes.</p>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <h3>Multi-Instance &amp; Profile Switching</h3>
+        <p>Facilitates simultaneous side-by-side installations of different engine iterations (such as verifying legacy v1.2 projects alongside experimental v1.3 builds) with independent configuration trees.</p>
+      </li>
+      <li>
+        <span class="n">04</span>
+        <h3>Uninstall Manager &amp; Chart Protection</h3>
+        <p>Built-in uninstall manager for all ecosystem suite tools with safety confirmation dialogs and absolute protection for user data, custom charts, and personal offset calibrations.</p>
+      </li>
+      <li>
+        <span class="n">05</span>
+        <h3>Automated Crash Telemetry</h3>
+        <p>Hooks into process exit codes to capture crash mini-dumps, memory allocations, and hardware display adapter states, generating actionable bug reports for maintainers.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ONE TWO PARTY LAUNCHER -->
+<section class="section band" id="otp-launcher" aria-labelledby="otp-h">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="label"><b>02</b> · Dedicated Launcher</p>
+        <h2 id="otp-h">One Two Party Launcher</h2>
+      </div>
+      <p>Specialized client launcher engineered exclusively for One Two Party (OTP) game sessions, competitive server routing, and rapid song pack indexing.</p>
+    </div>
+
+    <div class="restricted-banner">
+      <svg class="restricted-banner-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1zm3 8V5.5a3 3 0 1 0-6 0V9h6z" clip-rule="evenodd"/></svg>
+      <div>
+        <h4>Restricted Utility — No Public Download</h4>
+        <p>One Two Party Launcher is tailored for private tournament administration and server relay testing. Public downloads and distribution packages are not available.</p>
+      </div>
+    </div>
+
+    <ol class="spec reveal">
+      <li>
+        <span class="n">01</span>
+        <h3>Dynamic Server Routing</h3>
+        <p>Switches between dedicated game server endpoints, private testing relays, and local network nodes with single-click profiles, avoiding any manual edits to local configuration files.</p>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <h3>Display &amp; Input Buffer Tuning</h3>
+        <p>Initializes low-latency exclusive fullscreen display modes with native high-refresh rate support (60Hz, 120Hz, 144Hz+) and optimized raw input polling buffers tailored for OTP's strict rhythmic windows.</p>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <h3>Pack Linking &amp; Fast In-Memory Cache</h3>
+        <p>Mounts external song packs directly without duplication, compiling a compact in-memory metadata index that accelerates chart and audio loading times during rapid multiplayer rotations.</p>
+      </li>
+      <li>
+        <span class="n">04</span>
+        <h3>Session Isolation &amp; Engine Handshake</h3>
+        <p>Coordinates directly with OTP Engine v0.2.1: ensures 1:1 NPC/Player move synchronization (GO/YEAH), quiet UI SFX, below-player FPS overlays, and isolated keymaps.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- BALLROOM CONVERTER -->
+<section class="section" id="ballroom-converter" aria-labelledby="ballroom-h">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="label"><b>03</b> · Chart Conversion</p>
+        <h2 id="ballroom-h">Ballroom Converter</h2>
+      </div>
+      <p>High-precision chart translation tool engineered specifically for SanBallroom Studio v1.0 and Ballroom game modes, coupled arrow matrices, and sub-tick timing synchronizations.</p>
+    </div>
+
+    <div class="restricted-banner">
+      <svg class="restricted-banner-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1zm3 8V5.5a3 3 0 1 0-6 0V9h6z" clip-rule="evenodd"/></svg>
+      <div>
+        <h4>Restricted Tooling — No Public Download</h4>
+        <p>The Ballroom Converter is an internal conversion utility utilized by chart designers for specialized choreography formats. It is not distributed publicly.</p>
+      </div>
+    </div>
+
+    <ol class="spec reveal">
+      <li>
+        <span class="n">01</span>
+        <h3>Ballroom Step Matrix Mapping</h3>
+        <p>Translates intricate dual-character dance steps, synchronized directional pairs, and hold gestures that standard 4-key / 8-key BeatUp formats cannot natively accommodate.</p>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <h3>Sub-Tick Timing Preservation</h3>
+        <p>Maintains absolute micro-timing fidelity across dynamic BPM shifts, tempo slowdowns, and stop events, preventing audio-to-arrow sync drift throughout lengthy tracks.</p>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <h3>Sanity &amp; Feasibility Inspection</h3>
+        <p>Automated verification sweeps identify physical impossibilities (such as contradictory directional strikes in identical frames) and syntax discrepancies prior to <code>.slk</code> compilation.</p>
+      </li>
+      <li>
+        <span class="n">04</span>
+        <h3>Bi-Directional Schema Support</h3>
+        <p>Enables full two-way roundtripping: converts raw StepMania choreography files into Ballroom format and reverts compiled matrices back for visual inspection and audit verification.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ACCESS POLICY -->
+<section class="section band" id="policy" aria-labelledby="policy-h">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="label"><b>04</b> · Distribution Policy</p>
+        <h2 id="policy-h">Why Access Is Restricted.</h2>
+      </div>
+      <p>Clear boundaries between public, community-ready software releases and internal development utilities.</p>
+    </div>
+
+    <div class="notice-box" style="margin-bottom:32px;">
+      <h3 style="margin-top:0;">Strictly Closed Development</h3>
+      <p style="color:var(--text-2); line-height:1.6;">These three tools — along with <strong>BeatUp Engine v1.3 and onward</strong> — are developed for private testing, specialized tournament environments, and direct engine engineering. Public distribution would create fragmented versions, unintended dependency conflicts, and unsupported bug reports.</p>
+      <p style="color:var(--text-2); line-height:1.6; margin-bottom:0;"><strong>No download links, repository access, or binary distributions are provided for these utilities.</strong></p>
+    </div>
+
+    <div class="notice-box" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+      <div>
+        <span class="label" style="margin:0 0 6px; display:block;">Public Software Available</span>
+        <h3 style="margin:0 0 6px;">Looking for public tools?</h3>
+        <p style="margin:0; font-size:.95rem; color:var(--text-2);">BeatUp Engine v1.2 and SanConverter v1.4.4 are complete, free, and open for everyone to download.</p>
+      </div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-primary" href="bue.html#download">Download BeatUp Engine v1.2</a>
+        <a class="btn" href="sanconverter.html#download">Download SanConverter</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid footer-grid--compact">
+      <div>
+        <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
+        <p style="margin-top:14px;max-width:26em;">Software and tools for rhythm-game charting, written in C++ and C#.</p>
+      </div>
+      <div><h2>Projects</h2><ul>
+        <li><a href="bue.html">BeatUp Engine (v1.2)</a></li>
+        <li><a href="sanconverter.html">SanConverter</a></li>
+        <li><a href="bue-online.html">Web Edition</a></li>
+        <li><a href="launchers.html" aria-current="page">Launchers &amp; Tools</a></li>
+      </ul></div>
+      <div><h2>Elsewhere</h2><ul>
+        <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-base"><span>© 2026 Sanya. All rights reserved.</span><a href="#top">Back to top ↑</a></div>
+  </div>
+</footer>
+<script src="js/site.js" defer></script>
+<script src="js/i18n.js" defer></script>
+</body>
+</html>

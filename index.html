@@ -39,12 +39,14 @@ try {
       <li><a href="bue.html">BeatUp Engine</a></li>
       <li><a href="sanconverter.html">SanConverter</a></li>
       <li><a href="bue-online.html">Web Edition</a></li>
+      <li><a href="launchers.html">Launchers &amp; Tools</a></li>
       <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
       <li class="nav-section-jumps">
         <span class="nav-section-label" data-nav-en="On this page" data-nav-zh="本页内容">On this page</span>
         <div class="nav-section-list">
             <a href="#top"><span data-nav-en="Overview" data-nav-zh="概览">Overview</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
             <a href="#projects"><span data-nav-en="Projects" data-nav-zh="项目">Projects</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+            <a href="#restricted-suite"><span data-nav-en="Restricted Tools" data-nav-zh="限制工具">Restricted Tools</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
             <a href="#about"><span data-nav-en="About" data-nav-zh="关于">About</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
         </div>
       </li>
@@ -69,6 +71,7 @@ try {
     <nav class="nav-quick-grid" aria-label="On this page">
       <a class="nav-quick-link" href="#top"><span data-nav-en="Overview" data-nav-zh="概览">Overview</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
       <a class="nav-quick-link" href="#projects"><span data-nav-en="Projects" data-nav-zh="项目">Projects</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+      <a class="nav-quick-link" href="#restricted-suite"><span data-nav-en="Restricted Tools" data-nav-zh="限制工具">Restricted Tools</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
       <a class="nav-quick-link" href="#about"><span data-nav-en="About" data-nav-zh="关于">About</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
     </nav>
   </div>
@@ -79,10 +82,11 @@ try {
   <div class="container">
     <p class="label">Sanya · Software and tools</p>
     <h1>Tools for people who chart rhythm games.</h1>
-    <p class="lead">Two Windows programs, written in C++ and C#: a rhythm-game engine with a built-in chart editor, and a converter for chart formats.</p>
+    <p class="lead">Software and tools for rhythm-game charting: public releases for BeatUp Engine and SanConverter, alongside dedicated launchers and restricted utilities.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="bue.html">BeatUp Engine</a>
+      <a class="btn btn-primary" href="bue.html">BeatUp Engine (v1.2)</a>
       <a class="btn" href="sanconverter.html">SanConverter</a>
+      <a class="btn" href="#restricted-suite">Restricted Tooling</a>
     </div>
   </div>
 </section>
@@ -90,15 +94,15 @@ try {
 <section class="section" id="projects" aria-labelledby="projects-h">
   <div class="container">
     <div class="section-head">
-      <div><p class="label"><b>01</b> · Projects</p><h2 id="projects-h">Three projects, each with a project page.</h2></div>
-      <p>Each project page explains the software, its downloads and the current release status.</p>
+      <div><p class="label"><b>01</b> · Public Software</p><h2 id="projects-h">Public releases ready to download.</h2></div>
+      <p>BeatUp Engine v1.2 is the final public release. SanConverter and the Web Edition are freely accessible.</p>
     </div>
 
     <article class="project">
       <div class="project-copy">
-        <p class="label">Rhythm engine · <span style="color:var(--accent)">Final release v1.2</span></p>
+        <p class="label">Rhythm engine · <span class="badge badge-public">Final Public Release v1.2</span></p>
         <h3>BeatUp Engine</h3>
-        <p class="muted">A rhythm-game engine with precise timing, an integrated chart editor and a patcher. Version 1.2 is the final release and adds the Auditor Mode for reviewing and documenting charts.</p>
+        <p class="muted">A rhythm-game engine with precise timing, an integrated chart editor and a patcher. Version 1.2 is the final public release (v1.3+ builds and new launchers are under restricted access). Version 1.2 adds the Auditor Mode for reviewing and documenting charts.</p>
         <ul class="tags"><li>C++ / SDL2</li><li>Chart editor</li><li>Patcher</li><li>Auditor Mode</li></ul>
         <a class="btn btn-primary" href="bue.html">View BeatUp Engine</a>
       </div>
@@ -109,7 +113,7 @@ try {
 
     <article class="project">
       <div class="project-copy">
-        <p class="label">Chart conversion · v1.4.4</p>
+        <p class="label">Chart conversion · <span class="badge badge-public">v1.4.4</span></p>
         <h3>SanConverter</h3>
         <p class="muted">Converts Stepmania <code>.SM</code> and <code>.SSC</code> files to <code>.SLK</code> with dedicated logic for Beat Up and One-Two Party, and reverts <code>.SLK</code> files back to <code>.SSC</code>.</p>
         <ul class="tags"><li>C# / .NET 4.8</li><li>SM / SSC → SLK</li><li>Revert to SSC</li><li>Level calculator</li></ul>
@@ -122,7 +126,7 @@ try {
 
     <article class="project">
       <div class="project-copy">
-        <p class="label">Browser version · v1.2.0</p>
+        <p class="label">Browser version · <span class="badge badge-public">v1.2.0</span></p>
         <h3>BeatUp Engine Web Edition</h3>
         <p class="muted">BeatUp Engine ported to a static website. Play charts, edit them and run the Auditor Mode in your browser, with nothing to install.</p>
         <ul class="tags"><li>HTML / JavaScript</li><li>Play in the browser</li><li>Chart editor</li><li>Auditor Mode</li></ul>
@@ -135,16 +139,102 @@ try {
   </div>
 </section>
 
-<section class="section band" id="about" aria-labelledby="about-h">
+<section class="section band" id="restricted-suite" aria-labelledby="restricted-h">
   <div class="container">
     <div class="section-head">
-      <div><p class="label"><b>02</b> · About</p><h2 id="about-h">Small tools, documented properly.</h2></div>
-      <p>BeatUp Engine has reached its final release and now only receives bug fixes. SanConverter is still maintained. Both are free to use.</p>
+      <div>
+        <p class="label"><b>02</b> · Restricted Tooling</p>
+        <h2 id="restricted-h">Launchers &amp; internal utilities.</h2>
+      </div>
+      <p>Specialized launchers and conversion tooling under active private development. <strong>Access is strictly restricted to private testing — no public downloads are provided.</strong></p>
+    </div>
+
+    <div class="restricted-grid">
+      <article class="tool-card">
+        <div>
+          <div class="tool-card-head">
+            <span class="badge badge-restricted">🔒 Restricted · No Download</span>
+            <h3 class="tool-card-title">Engine Launcher</h3>
+            <p class="label" style="margin:0;">Ecosystem Manager · Closed Access</p>
+          </div>
+          <p class="tool-card-desc">Central management and launcher utility for the BeatUp engine ecosystem. Handles differential patching, game client integrity validation, and runtime configurations.</p>
+          <ul class="tags">
+            <li>Launcher</li>
+            <li>Delta Patching</li>
+            <li>Client Integrity</li>
+          </ul>
+        </div>
+        <div class="tool-card-meta">
+          <span class="status small"><span class="lock-icon" aria-hidden="true">🔒</span> Private Build · No Public Files</span>
+          <button type="button" class="btn-restricted" disabled aria-disabled="true">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" width="14" height="14"><path fill-rule="evenodd" d="M4 4v2h-.5A1.5 1.5 0 0 0 2 7.5v6A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5v-6A1.5 1.5 0 0 0 12.5 6H12V4a4 4 0 1 0-8 0zm6.5 2V4a2.5 2.5 0 0 0-5 0v2h5zM8 9a1 1 0 0 1 1 1v1.5a1 1 0 1 1-2 0V10a1 1 0 0 1 1-1z"/></svg>
+            Access Restricted · No Download
+          </button>
+          <a href="launchers.html#engine-launcher" class="small" style="text-align:center; display:block; margin-top:2px;">Read tool documentation →</a>
+        </div>
+      </article>
+
+      <article class="tool-card">
+        <div>
+          <div class="tool-card-head">
+            <span class="badge badge-restricted">🔒 Restricted · No Download</span>
+            <h3 class="tool-card-title">One Two Party Launcher</h3>
+            <p class="label" style="margin:0;">Dedicated Launcher · Closed Access</p>
+          </div>
+          <p class="tool-card-desc">Specialized launcher engineered for One Two Party (OTP). Streamlines session preparation, server routing presets, and song pack synchronization.</p>
+          <ul class="tags">
+            <li>OTP Launcher</li>
+            <li>Routing Presets</li>
+            <li>Pack Sync</li>
+          </ul>
+        </div>
+        <div class="tool-card-meta">
+          <span class="status small"><span class="lock-icon" aria-hidden="true">🔒</span> Private Build · No Public Files</span>
+          <button type="button" class="btn-restricted" disabled aria-disabled="true">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" width="14" height="14"><path fill-rule="evenodd" d="M4 4v2h-.5A1.5 1.5 0 0 0 2 7.5v6A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5v-6A1.5 1.5 0 0 0 12.5 6H12V4a4 4 0 1 0-8 0zm6.5 2V4a2.5 2.5 0 0 0-5 0v2h5zM8 9a1 1 0 0 1 1 1v1.5a1 1 0 1 1-2 0V10a1 1 0 0 1 1-1z"/></svg>
+            Access Restricted · No Download
+          </button>
+          <a href="launchers.html#otp-launcher" class="small" style="text-align:center; display:block; margin-top:2px;">Read tool documentation →</a>
+        </div>
+      </article>
+
+      <article class="tool-card">
+        <div>
+          <div class="tool-card-head">
+            <span class="badge badge-restricted">🔒 Restricted · No Download</span>
+            <h3 class="tool-card-title">Ballroom Converter</h3>
+            <p class="label" style="margin:0;">Chart Tooling · Closed Access</p>
+          </div>
+          <p class="tool-card-desc">Specialized converter tailored for Ballroom rhythm formats. Translates custom step matrices and timing markers with strict synchronization safeguards.</p>
+          <ul class="tags">
+            <li>Ballroom Format</li>
+            <li>Matrix Translation</li>
+            <li>Timing Sync</li>
+          </ul>
+        </div>
+        <div class="tool-card-meta">
+          <span class="status small"><span class="lock-icon" aria-hidden="true">🔒</span> Private Tool · No Public Files</span>
+          <button type="button" class="btn-restricted" disabled aria-disabled="true">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" width="14" height="14"><path fill-rule="evenodd" d="M4 4v2h-.5A1.5 1.5 0 0 0 2 7.5v6A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5v-6A1.5 1.5 0 0 0 12.5 6H12V4a4 4 0 1 0-8 0zm6.5 2V4a2.5 2.5 0 0 0-5 0v2h5zM8 9a1 1 0 0 1 1 1v1.5a1 1 0 1 1-2 0V10a1 1 0 0 1 1-1z"/></svg>
+            Access Restricted · No Download
+          </button>
+          <a href="launchers.html#ballroom-converter" class="small" style="text-align:center; display:block; margin-top:2px;">Read tool documentation →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about" aria-labelledby="about-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>03</b> · About</p><h2 id="about-h">Small tools, documented properly.</h2></div>
+      <p>BeatUp Engine has reached its final public release (v1.2). Future development builds (v1.3+), launchers, and Ballroom tooling are maintained under restricted private access.</p>
     </div>
     <dl class="facts" style="margin:0;">
-      <div class="fact"><dt>Languages</dt><dd>C++ and C#</dd></div>
+      <div class="fact"><dt>Public Software</dt><dd>BUE v1.2, SanConverter</dd></div>
+      <div class="fact"><dt>Restricted Tools</dt><dd>Launchers &amp; v1.3+ (Private)</dd></div>
       <div class="fact"><dt>Platform</dt><dd>Windows 10 / 11</dd></div>
-      <div class="fact"><dt>Focus</dt><dd>Rhythm-game tooling</dd></div>
       <div class="fact"><dt>Source and releases</dt><dd><a href="https://github.com/bishpop" target="_blank" rel="noopener">github.com/bishpop</a></dd></div>
     </dl>
   </div>
@@ -158,9 +248,10 @@ try {
         <p style="margin-top:14px;max-width:26em;">Software and tools for rhythm-game charting, written in C++ and C#.</p>
       </div>
       <div><h2>Projects</h2><ul>
-        <li><a href="bue.html">BeatUp Engine</a></li>
+        <li><a href="bue.html">BeatUp Engine (v1.2)</a></li>
         <li><a href="sanconverter.html">SanConverter</a></li>
-      <li><a href="bue-online.html">Web Edition</a></li>
+        <li><a href="bue-online.html">Web Edition</a></li>
+        <li><a href="launchers.html">Launchers &amp; Tools</a></li>
       </ul></div>
       <div><h2>Elsewhere</h2><ul>
         <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub</a></li>

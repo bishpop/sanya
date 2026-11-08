@@ -39,6 +39,7 @@ try {
       <li><a href="bue.html" aria-current="page">BeatUp Engine</a></li>
       <li><a href="sanconverter.html">SanConverter</a></li>
       <li><a href="bue-online.html">Web Edition</a></li>
+      <li><a href="launchers.html">Launchers &amp; Tools</a></li>
       <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
       <li class="nav-section-jumps">
         <span class="nav-section-label" data-nav-en="On this page" data-nav-zh="本页内容">On this page</span>
@@ -91,13 +92,13 @@ try {
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="container hero-grid">
     <div>
-      <p class="label">BeatUp Engine · <b>Final release</b></p>
+      <p class="label">BeatUp Engine · <b>Final Public Release (v1.2)</b></p>
       <h1>Chart, play and verify BeatUp charts.</h1>
-      <p class="lead">A rhythm-game engine with a built-in chart editor and patcher for Windows. Version 1.2 is the final release: it adds the Auditor Mode and completes the feature list.</p>
+      <p class="lead">A rhythm-game engine with a built-in chart editor and patcher for Windows. Version 1.2 is the final public release with Auditor Mode. (Version 1.3 and onward are restricted internal builds; no public downloads are available for v1.3+).</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#download"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg>Download installer</a>
-        <a class="btn" href="#tour">See what is inside</a>
-        <span class="status"><span class="live-dot" aria-hidden="true"></span>Windows 10/11 x64 · free</span>
+        <a class="btn btn-primary" href="#download"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg>Download installer (v1.2)</a>
+        <a class="btn" href="#releases">Releases &amp; v1.3 Changes</a>
+        <span class="status"><span class="live-dot" aria-hidden="true"></span>v1.2 Public · Windows 10/11 x64</span>
       </div>
     </div>
     <div class="hero-stage">
@@ -115,74 +116,159 @@ try {
 </section>
 
 <!-- TOUR ---------------------------------------------------------------- -->
-<section class="scene" id="tour" data-scene style="--scene-h:290vh" aria-labelledby="scene-editor">
-  <div class="scene-pin"><div class="scene-grid">
+<section class="scene" id="tour" data-diashow aria-labelledby="scene-editor">
+  <div class="scene-grid">
     <div class="scene-copy">
       <p class="label"><b>01</b> · Chart editor</p>
       <h2 id="scene-editor">Edit against the running game.</h2>
       <p>Editor and game share one time base, so a note you place is judged exactly as it will be played.</p>
-      <ol class="steps">
-        <li class="step" data-focus="e0"><h3>Waveform and lane grid</h3><p>A waveform strip next to the eight columns 7 · 4 · 1 · 9 · 6 · 3 · Space · Finish, with snap grid, beat and MADI markers.</p></li>
-        <li class="step" data-focus="e1"><h3>Transport and readout</h3><p>Play, pause and seek. BPM, beat, MADI, combo and maximum score update while you work.</p></li>
-        <li class="step" data-focus="e2"><h3>Live game view</h3><p>The chart runs in the real game view with judgments, score and receptors. Split View keeps editor and game side by side.</p></li>
+      <ol class="steps" role="tablist" aria-label="Editor Features">
+        <li class="step is-on" role="tab" tabindex="0" aria-selected="true" data-focus="e0">
+          <h3>Waveform and lane grid</h3>
+          <p>A waveform strip next to the eight columns 7 · 4 · 1 · 9 · 6 · 3 · Space · Finish, with snap grid, beat and MADI markers.</p>
+        </li>
+        <li class="step" role="tab" tabindex="-1" aria-selected="false" data-focus="e1">
+          <h3>Transport and readout</h3>
+          <p>Play, pause and seek. BPM, beat, MADI, combo and maximum score update while you work.</p>
+        </li>
+        <li class="step" role="tab" tabindex="-1" aria-selected="false" data-focus="e2">
+          <h3>Live game view</h3>
+          <p>The chart runs in the real game view with judgments, score and receptors. Split View keeps editor and game side by side.</p>
+        </li>
       </ol>
+      <div class="diashow-controls">
+        <button type="button" class="diashow-btn diashow-prev" aria-label="Previous step" disabled>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>Previous</span>
+        </button>
+        <div class="diashow-indicator" aria-live="polite">
+          <span class="diashow-current">1</span> / <span class="diashow-total">3</span>
+        </div>
+        <button type="button" class="diashow-btn diashow-next" aria-label="Next step">
+          <span>Next</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="diashow-dots" role="tablist" aria-label="Step selection">
+          <button type="button" class="diashow-dot is-on" role="tab" aria-label="Step 1" aria-selected="true"></button>
+          <button type="button" class="diashow-dot" role="tab" aria-label="Step 2" aria-selected="false"></button>
+          <button type="button" class="diashow-dot" role="tab" aria-label="Step 3" aria-selected="false"></button>
+        </div>
+      </div>
     </div>
     <div class="scene-stage">
-      <figure class="frame flyin" data-flyin>
+      <figure class="frame">
         <img src="assets/web/editor.webp" alt="The BeatUp Engine chart editor with waveform, lane grid and live game view" width="1024" height="736" decoding="async" loading="lazy">
-        <span class="focus" data-id="e0" style="--x:0;--y:4;--w:31.3;--h:96"></span>
+        <span class="focus is-on" data-id="e0" style="--x:0;--y:4;--w:31.3;--h:96"></span>
         <span class="focus" data-id="e1" style="--x:32.3;--y:5;--w:28;--h:15"></span>
         <span class="focus" data-id="e2" style="--x:31.3;--y:5;--w:68.7;--h:95"></span>
       </figure>
       <p class="caption">Screenshot from a v1.0.x build.</p>
     </div>
-  </div></div>
+  </div>
 </section>
 
-<section class="scene" id="gameplay" data-scene style="--scene-h:340vh" aria-labelledby="scene-play">
-  <div class="scene-pin"><div class="scene-grid">
+<section class="scene" id="gameplay" data-diashow aria-labelledby="scene-play">
+  <div class="scene-grid">
     <div class="scene-copy">
       <p class="label"><b>02</b> · Play and patch</p>
       <h2 id="scene-play">Play any chart. Keep your library tidy.</h2>
       <p>The same engine that you edit with is the one you play on.</p>
-      <ol class="steps">
-        <li class="step" data-layer="0" data-focus="m"><h3>Play your chart</h3><p>Run the charts in your charts folder straight from the main menu.</p></li>
-        <li class="step" data-layer="1" data-focus="j"><h3>Judgment, combo and score</h3><p>Perfect timing is configurable; Great, Cool, Bad and Miss follow refined rules. Chance modes such as Rapid, Vanishing and Wave change how notes arrive.</p></li>
-        <li class="step" data-layer="1" data-focus="r"><h3>Receptors and Challenger Mode</h3><p>Receptor bar and colours are themeable. The optional Challenger Mode makes runs stricter.</p></li>
-        <li class="step" data-layer="2" data-focus="p"><h3>Patcher song library</h3><p>Browse songs with rankings, check BPM, length and level, then press Play. The Patcher validates required content, downloads patches and applies each song's timing offset.</p></li>
+      <ol class="steps" role="tablist" aria-label="Gameplay and Patcher Features">
+        <li class="step is-on" role="tab" tabindex="0" aria-selected="true" data-layer="0" data-focus="m">
+          <h3>Play your chart</h3>
+          <p>Run the charts in your charts folder straight from the main menu.</p>
+        </li>
+        <li class="step" role="tab" tabindex="-1" aria-selected="false" data-layer="1" data-focus="j">
+          <h3>Judgment, combo and score</h3>
+          <p>Perfect timing is configurable; Great, Cool, Bad and Miss follow refined rules. Chance modes such as Rapid, Vanishing and Wave change how notes arrive.</p>
+        </li>
+        <li class="step" role="tab" tabindex="-1" aria-selected="false" data-layer="1" data-focus="r">
+          <h3>Receptors and Challenger Mode</h3>
+          <p>Receptor bar and colours are themeable. The optional Challenger Mode makes runs stricter.</p>
+        </li>
+        <li class="step" role="tab" tabindex="-1" aria-selected="false" data-layer="2" data-focus="p">
+          <h3>Patcher song library</h3>
+          <p>Browse songs with rankings, check BPM, length and level, then press Play. The Patcher validates required content, downloads patches and applies each song's timing offset.</p>
+        </li>
       </ol>
+      <div class="diashow-controls">
+        <button type="button" class="diashow-btn diashow-prev" aria-label="Previous step" disabled>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>Previous</span>
+        </button>
+        <div class="diashow-indicator" aria-live="polite">
+          <span class="diashow-current">1</span> / <span class="diashow-total">4</span>
+        </div>
+        <button type="button" class="diashow-btn diashow-next" aria-label="Next step">
+          <span>Next</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="diashow-dots" role="tablist" aria-label="Step selection">
+          <button type="button" class="diashow-dot is-on" role="tab" aria-label="Step 1" aria-selected="true"></button>
+          <button type="button" class="diashow-dot" role="tab" aria-label="Step 2" aria-selected="false"></button>
+          <button type="button" class="diashow-dot" role="tab" aria-label="Step 3" aria-selected="false"></button>
+          <button type="button" class="diashow-dot" role="tab" aria-label="Step 4" aria-selected="false"></button>
+        </div>
+      </div>
     </div>
     <div class="scene-stage">
-      <figure class="frame multi flyin" data-flyin>
-        <img class="layer" src="assets/web/menu.webp" alt="The BeatUp Engine main menu" width="1024" height="768" decoding="async" loading="lazy">
+      <figure class="frame multi">
+        <img class="layer is-on" src="assets/web/menu.webp" alt="The BeatUp Engine main menu" width="1024" height="768" decoding="async" loading="lazy">
         <img class="layer" src="assets/web/gameplay.webp" alt="BeatUp Engine gameplay with a Perfect judgment, combo and the score bar" width="1024" height="768" decoding="async" loading="lazy">
         <img class="layer" src="assets/web/patcher.webp" alt="The Patcher song library with rankings and a Play button" width="1024" height="768" decoding="async" loading="lazy">
-        <span class="focus" data-id="m" style="--x:31.4;--y:40.6;--w:37.2;--h:7.8"></span>
+        <span class="focus is-on" data-id="m" style="--x:31.4;--y:40.6;--w:37.2;--h:7.8"></span>
         <span class="focus" data-id="j" style="--x:36;--y:11;--w:30;--h:25"></span>
         <span class="focus" data-id="r" style="--x:0;--y:45;--w:100;--h:27"></span>
         <span class="focus" data-id="p" style="--x:4.5;--y:14.7;--w:52;--h:77"></span>
       </figure>
       <p class="caption">Screenshots from v1.0.x builds.</p>
     </div>
-  </div></div>
+  </div>
 </section>
 
-<section class="scene" id="auditor" data-scene style="--scene-h:300vh" aria-labelledby="scene-audit">
-  <div class="scene-pin"><div class="scene-grid">
+<section class="scene" id="auditor" data-diashow aria-labelledby="scene-audit">
+  <div class="scene-grid">
     <div class="scene-copy">
       <p class="label"><b>03</b> · Auditor Mode <span class="badge">New in 1.2</span></p>
       <h2 id="scene-audit">Check a chart. Show what changed.</h2>
       <p>Auditor Mode makes chart revisions traceable. It opens in its own window and detects the BPM of a <code>.slk</code> from the music and the chart.</p>
-      <ol class="steps">
-        <li class="step" data-layer="0"><h3>Inspect</h3><p>Open a <code>.slk</code> or <code>.bu</code>. The Auditor lists duplicate arrows, arrow and Space in one row, Finish problems, empty charts, invalid BPM and long gaps. Click an entry to jump to that row.</p></li>
-        <li class="step" data-layer="1"><h3>Correct and compare</h3><p>Fix the chart in the normal editor. New notes get a green frame, removed notes a red ghost. The compare view shows original and revision side by side.</p></li>
-        <li class="step" data-layer="2"><h3>Document</h3><p>Every change is written to a <code>.csv</code> log next to the chart. In an audit project the original, the revision and the log travel together in one <code>.bu</code>.</p></li>
+      <ol class="steps" role="tablist" aria-label="Auditor Features">
+        <li class="step is-on" role="tab" tabindex="0" aria-selected="true" data-layer="0">
+          <h3>Inspect</h3>
+          <p>Open a <code>.slk</code> or <code>.bu</code>. The Auditor lists duplicate arrows, arrow and Space in one row, Finish problems, empty charts, invalid BPM and long gaps. Click an entry to jump to that row.</p>
+        </li>
+        <li class="step" role="tab" tabindex="-1" aria-selected="false" data-layer="1">
+          <h3>Correct and compare</h3>
+          <p>Fix the chart in the normal editor. New notes get a green frame, removed notes a red ghost. The compare view shows original and revision side by side.</p>
+        </li>
+        <li class="step" role="tab" tabindex="-1" aria-selected="false" data-layer="2">
+          <h3>Document</h3>
+          <p>Every change is written to a <code>.csv</code> log next to the chart. In an audit project the original, the revision and the log travel together in one <code>.bu</code>.</p>
+        </li>
       </ol>
+      <div class="diashow-controls">
+        <button type="button" class="diashow-btn diashow-prev" aria-label="Previous step" disabled>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>Previous</span>
+        </button>
+        <div class="diashow-indicator" aria-live="polite">
+          <span class="diashow-current">1</span> / <span class="diashow-total">3</span>
+        </div>
+        <button type="button" class="diashow-btn diashow-next" aria-label="Next step">
+          <span>Next</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="diashow-dots" role="tablist" aria-label="Step selection">
+          <button type="button" class="diashow-dot is-on" role="tab" aria-label="Step 1" aria-selected="true"></button>
+          <button type="button" class="diashow-dot" role="tab" aria-label="Step 2" aria-selected="false"></button>
+          <button type="button" class="diashow-dot" role="tab" aria-label="Step 3" aria-selected="false"></button>
+        </div>
+      </div>
     </div>
     <div class="scene-stage">
       <!-- Illustration with example data. Replace the three panels with real screenshots (assets/auditor-*.png) when available. -->
-      <figure class="frame multi flyin" data-flyin role="img" aria-label="Illustration of the Auditor: issue list, original and revised chart side by side, and the CSV log">
-        <div class="panel">
+      <figure class="frame multi" role="img" aria-label="Illustration of the Auditor: issue list, original and revised chart side by side, and the CSV log">
+        <div class="panel is-on">
           <div class="panel-bar"><b>Auditor · Issues</b><span>2 errors · 2 warnings · 1 note</span></div>
           <div class="panel-body">
             <div class="issue"><span class="sev sev-err">ERR</span><span>M3:05</span><span>3 arrows in the same row</span></div>
@@ -216,7 +302,7 @@ try {
       </figure>
       <p class="caption">Illustration with example data, not a screenshot.</p>
     </div>
-  </div></div>
+  </div>
 </section>
 
 <!-- FEATURES ------------------------------------------------------------ -->
@@ -260,26 +346,94 @@ try {
 <section class="section" id="releases" aria-labelledby="rel-h">
   <div class="container">
     <div class="section-head">
-      <div><p class="label"><b>06</b> · Releases</p><h2 id="rel-h">v1.2 is the final release.</h2></div>
-      <p>BeatUp Engine is feature-complete. Development has ended: there will be no new features, only bug fixes if problems are reported. Projects and settings from earlier versions keep working.</p>
+      <div><p class="label"><b>06</b> · Releases</p><h2 id="rel-h">Version Releases &amp; Changelogs</h2></div>
+      <p>BeatUp Engine v1.2 is the final public release. Starting with v1.3, subsequent versions and new launcher tools are restricted internal builds with no public downloads.</p>
     </div>
-    <div class="table-wrap reveal"><table class="versions">
-      <thead><tr><th scope="col">Version</th><th scope="col">Date</th><th scope="col">Changes</th></tr></thead>
-      <tbody>
-        <tr><td><strong>v1.2 · Final</strong></td><td>Oct 2026</td><td>Final release. Auditor Mode with chart inspection, CSV audit log, change tracking, side-by-side comparison, audit projects, its own window and automatic BPM. Play your chart always starts in game view. Bug fixes only from here on.</td></tr>
-        <tr><td><strong>v1.1</strong></td><td>2026</td><td>Chart Assistant with automatic BPM detection, drag &amp; drop, built-in metronome, optional Engine Diagnostics, faster editing workflow and autosave.</td></tr>
-        <tr><td><strong>v1.0.1</strong></td><td>2026</td><td>Play your chart, music inside .bu projects, one Options window, optional Patcher, everything built into a single .exe, new BeatUp Night theme, calmer interface.</td></tr>
-        <tr><td><strong>v1.0</strong></td><td>2026</td><td>First stable release: new ranks and result card, compact score bar, snap hotkeys, Numpad Charting, bookmarks in projects.</td></tr>
-        <tr><td><strong>v0.6.1</strong></td><td>24 Sep 2026</td><td>Receptor Bar in Editor, receptor theming, per-song Patcher offsets.</td></tr>
-        <tr><td><strong>v0.6</strong></td><td>21 Sep 2026</td><td>Theme Editor, redesigned menu, onboarding, Split View and judgment rework.</td></tr>
-        <tr><td><strong>v0.5.1</strong></td><td>18 Sep 2026</td><td>Onboarding, menu/Patcher redesign, Perfect positioning and judgment refinements.</td></tr>
-        <tr><td><strong>v0.5</strong></td><td>17 Sep 2026</td><td>Challenger Mode, borderless fullscreen, 2K/4K support, DPI handling and .bu association.</td></tr>
-        <tr><td><strong>v0.4</strong></td><td>13 Sep 2026</td><td>Unified timing, animated arrows, .bu projects, colored snap grid and import/export.</td></tr>
-        <tr><td><strong>v0.3</strong></td><td>10 Sep 2026</td><td>Patch management, file validation and missing-content recovery.</td></tr>
-        <tr><td><strong>v0.2.x</strong></td><td>Sep 2026</td><td>Patch Manager, waveform, selection, copy/paste replacement, undo/redo and customization.</td></tr>
-      </tbody>
-    </table></div>
-    <p><a href="https://github.com/bishpop/beatupengine/releases/tag/v1.2" target="_blank" rel="noopener">v1.2 release notes on GitHub ↗</a> · <a href="https://github.com/bishpop/beatupengine" target="_blank" rel="noopener">Repository ↗</a></p>
+
+    <div data-tabs>
+      <div class="tabs" role="tablist" aria-label="Version changelogs">
+        <button class="tab-btn" role="tab" id="btn-rel-v12" aria-controls="tab-rel-v12" aria-selected="true" tabindex="0">v1.2 (Final Public Release)</button>
+        <button class="tab-btn" role="tab" id="btn-rel-v13" aria-controls="tab-rel-v13" aria-selected="false" tabindex="-1">v1.3 (Restricted Build · Closed Access)</button>
+      </div>
+
+      <div class="tab-panel" role="tabpanel" id="tab-rel-v12" aria-labelledby="btn-rel-v12">
+        <div class="public-release-highlight">
+          <p><strong>v1.2 is the official final public release.</strong> It is feature-complete and freely available for download below. Earlier projects and configuration settings remain fully supported.</p>
+        </div>
+        <div class="table-wrap"><table class="versions">
+          <thead><tr><th scope="col">Version</th><th scope="col">Date</th><th scope="col">Changes</th></tr></thead>
+          <tbody>
+            <tr><td><strong>v1.2 · Final Public</strong></td><td>Oct 2026</td><td>Final public release. Auditor Mode with chart inspection, CSV audit log, change tracking, side-by-side comparison, audit projects, its own window and automatic BPM. Play your chart always starts in game view.</td></tr>
+            <tr><td><strong>v1.1</strong></td><td>2026</td><td>Chart Assistant with automatic BPM detection, drag &amp; drop, built-in metronome, optional Engine Diagnostics, faster editing workflow and autosave.</td></tr>
+            <tr><td><strong>v1.0.1</strong></td><td>2026</td><td>Play your chart, music inside .bu projects, one Options window, optional Patcher, everything built into a single .exe, new BeatUp Night theme, calmer interface.</td></tr>
+            <tr><td><strong>v1.0</strong></td><td>2026</td><td>First stable release: new ranks and result card, compact score bar, snap hotkeys, Numpad Charting, bookmarks in projects.</td></tr>
+            <tr><td><strong>v0.6.1</strong></td><td>24 Sep 2026</td><td>Receptor Bar in Editor, receptor theming, per-song Patcher offsets.</td></tr>
+            <tr><td><strong>v0.6</strong></td><td>21 Sep 2026</td><td>Theme Editor, redesigned menu, onboarding, Split View and judgment rework.</td></tr>
+            <tr><td><strong>v0.5.1</strong></td><td>18 Sep 2026</td><td>Onboarding, menu/Patcher redesign, Perfect positioning and judgment refinements.</td></tr>
+            <tr><td><strong>v0.5</strong></td><td>17 Sep 2026</td><td>Challenger Mode, borderless fullscreen, 2K/4K support, DPI handling and .bu association.</td></tr>
+            <tr><td><strong>v0.4</strong></td><td>13 Sep 2026</td><td>Unified timing, animated arrows, .bu projects, colored snap grid and import/export.</td></tr>
+            <tr><td><strong>v0.3</strong></td><td>10 Sep 2026</td><td>Patch management, file validation and missing-content recovery.</td></tr>
+            <tr><td><strong>v0.2.x</strong></td><td>Sep 2026</td><td>Patch Manager, waveform, selection, copy/paste replacement, undo/redo and customization.</td></tr>
+          </tbody>
+        </table></div>
+        <p style="margin-top:20px;"><a href="https://github.com/bishpop/beatupengine/releases/tag/v1.2" target="_blank" rel="noopener">v1.2 release notes on GitHub ↗</a> · <a href="#download">Jump to v1.2 Download ↓</a></p>
+      </div>
+
+      <div class="tab-panel" role="tabpanel" id="tab-rel-v13" aria-labelledby="btn-rel-v13" hidden>
+        <div class="restricted-banner">
+          <svg class="restricted-banner-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1zm3 8V5.5a3 3 0 1 0-6 0V9h6z" clip-rule="evenodd"/></svg>
+          <div>
+            <h4>Restricted Access — No Public Download</h4>
+            <p>BeatUp Engine v1.3 is an internal development build. <strong>Access is strictly restricted to private testing and no public downloads or installer packages are provided.</strong> Version 1.2 remains the latest public release.</p>
+          </div>
+        </div>
+
+        <h3>Changes and additions in v1.3 compared to v1.2:</h3>
+        <div class="table-wrap"><table class="versions">
+          <thead><tr><th scope="col" style="width:230px;">Category</th><th scope="col" style="width:140px;">Status</th><th scope="col">Changes from v1.2 to v1.3</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Direct3D 11 Backend &amp; Flip Model</strong></td>
+              <td><span class="tag-restricted">🔒 Restricted</span></td>
+              <td>Native Direct3D 11 backend with DXGI Flip Model architecture, resolving the 290 FPS cap on modern Windows 11 and NVIDIA GeForce RTX hardware.</td>
+            </tr>
+            <tr>
+              <td><strong>Combo Caching &amp; Shaders</strong></td>
+              <td><span class="tag-restricted">🔒 Restricted</span></td>
+              <td>Zero-allocation combo text caching, single-pass foreground border/shadow rendering pipeline, and corrected diagnostics timing overlay.</td>
+            </tr>
+            <tr>
+              <td><strong>Engine Launcher Integration</strong></td>
+              <td><span class="tag-restricted">🔒 Restricted</span></td>
+              <td>Seamless handshake with the internal Engine Launcher v1.1.5, differential delta patching, automated integrity checks, and custom chart protection.</td>
+            </tr>
+            <tr>
+              <td><strong>Input &amp; Timing Pipeline</strong></td>
+              <td><span class="tag-restricted">🔒 Restricted</span></td>
+              <td>High-polling rate input handling (1000Hz+ keyboard/numpad polling), reduced input-to-draw frame latency, and sub-millisecond judgment precision.</td>
+            </tr>
+            <tr>
+              <td><strong>Auditor Telemetry 2.0</strong></td>
+              <td><span class="tag-restricted">🔒 Restricted</span></td>
+              <td>Expanded automated chart anomaly detection, background validation routines, and extended CSV telemetry export capabilities.</td>
+            </tr>
+            <tr>
+              <td><strong>Distribution Policy</strong></td>
+              <td><span class="tag-restricted">🔒 Restricted</span></td>
+              <td><strong>Closed development only.</strong> No public installer, portable ZIP or binaries are distributed. For a public stable version, please use <strong>v1.2</strong> below.</td>
+            </tr>
+          </tbody>
+        </table></div>
+
+        <div class="notice-box" style="margin-top:24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+          <div>
+            <span class="label" style="margin:0 0 4px; display:block;">Public Version Available</span>
+            <p style="margin:0; font-size:.95rem; color:var(--text-2);">Looking to download BeatUp Engine? Version 1.2 is free and open to everyone.</p>
+          </div>
+          <a class="btn btn-primary" href="#download">Download v1.2 (Final Public)</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -290,7 +444,10 @@ try {
       <p class="label"><b>07</b> · Download</p>
       <h2 id="dl-h">BeatUp Engine v1.2</h2>
       <p class="lead" style="margin-top:18px;">Use the installer for the easiest setup. A portable ZIP is also available if you prefer to run BeatUp Engine without installing it.</p>
-      <p class="muted">Only download BeatUp Engine from this page or the official GitHub release. Never run copies from other websites or re-uploads.</p>
+      <div class="notice-box" style="margin-top:18px; border-left:3px solid var(--warn);">
+        <p style="margin:0; font-size:.92rem; color:var(--text); line-height:1.5;"><strong>Notice on subsequent builds:</strong> BeatUp Engine v1.2 is the final version available for public download. Versions v1.3 and above, as well as the Engine Launcher, are restricted internal tools and not distributed publicly.</p>
+      </div>
+      <p class="muted" style="margin-top:18px;">Only download BeatUp Engine from this page or the official GitHub release. Never run copies from other websites or re-uploads.</p>
       <details class="note">
         <summary>Windows or your antivirus shows a warning?</summary>
         <div class="body">
@@ -302,9 +459,9 @@ try {
       </details>
     </div>
     <div class="dl-card">
-      <p class="status"><span class="live-dot" aria-hidden="true"></span>Final release · v1.2</p>
+      <p class="status"><span class="live-dot" aria-hidden="true"></span>Final Public Release · v1.2</p>
       <div class="dl-actions">
-        <a class="btn btn-primary" href="https://github.com/bishpop/beatupengine/releases/download/v1.2/BeatUpEngine_Setup_v1.2.exe" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg>Download installer (.exe)</a>
+        <a class="btn btn-primary" href="https://github.com/bishpop/beatupengine/releases/download/v1.2/BeatUpEngine_Setup_v1.2.exe" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg>Download installer (.exe)</a>
         <a class="btn" href="https://drive.google.com/uc?export=download&id=1b4bldL6xGjY1i6EPoLN0TGhU6JYqCBwh" target="_blank" rel="noopener">Patcher (optional)</a>
       </div>
       <div class="download-integrity download-integrity--installer">
@@ -354,9 +511,10 @@ try {
         <p style="margin-top:14px;max-width:26em;">Software and tools for rhythm-game charting, written in C++ and C#.</p>
       </div>
       <div><h2>Projects</h2><ul>
-        <li><a href="bue.html">BeatUp Engine</a></li>
+        <li><a href="bue.html">BeatUp Engine (v1.2)</a></li>
         <li><a href="sanconverter.html">SanConverter</a></li>
-      <li><a href="bue-online.html">Web Edition</a></li>
+        <li><a href="bue-online.html">Web Edition</a></li>
+        <li><a href="launchers.html">Launchers &amp; Tools</a></li>
       </ul></div>
       <div><h2>Documentation</h2><ul>
         <li><a href="manual.html">BeatUp Engine manual</a></li>
