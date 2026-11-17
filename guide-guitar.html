@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guitar Charting Guide — Sanya</title>
+<meta name="description" content="How to chart Guitar mode: Easy/Normal/Hard/Crazy levels, Strum vs No-Strum taps, Long holds, Bend sustains with Space, 8-Key right-hand notes, and Flameout Special sections.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0c0e12">
+<link rel="icon" type="image/png" href="assets/web/mark.png">
+<script>
+document.documentElement.classList.add('js');
+try {
+  var savedTheme = localStorage.getItem('sanya-theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
+} catch (e) {}
+</script>
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="container nav-in">
+    <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+
+        <li class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-pub-menu" data-nav-en="Public" data-nav-zh="公开版本">Public</button>
+          <div class="nav-popover" id="nav-pub-menu">
+            <p class="nav-popover-heading" data-nav-en="Public Releases" data-nav-zh="公开发行版">Public Releases</p>
+            <a class="nav-item" href="bue.html">
+              <span class="mod-chip mod-chip--bu" aria-hidden="true">BU</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">BeatUp Engine <span class="nav-item-pub">v1.2</span></span>
+                <span class="nav-item-sub" data-nav-en="Desktop engine, editor &amp; Auditor Mode" data-nav-zh="桌面引擎、编辑器与审核模式">Desktop engine, editor &amp; Auditor Mode</span>
+              </span>
+            </a>
+            <a class="nav-item" href="sanconverter.html">
+              <span class="mod-chip mod-chip--ac" aria-hidden="true">SC</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">SanConverter <span class="nav-item-pub">v1.4.4</span></span>
+                <span class="nav-item-sub" data-nav-en=".SM / .SSC to .SLK converter" data-nav-zh=".SM / .SSC 转 .SLK 转换器">.SM / .SSC to .SLK converter</span>
+              </span>
+            </a>
+          </div>
+        </li>
+
+        <li class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-suite-menu" data-nav-en="Suite Modules" data-nav-zh="套件模块">Suite Modules</button>
+          <div class="nav-popover nav-popover--wide" id="nav-suite-menu">
+            <div class="nav-popover-grid">
+              <div class="nav-popover-col">
+                <p class="nav-popover-heading" data-nav-en="Launcher &amp; Utilities 🔒" data-nav-zh="启动器与工具 🔒">Launcher &amp; Utilities 🔒</p>
+                <a class="nav-item" href="engine-launcher.html">
+                  <span class="mod-chip mod-chip--el" aria-hidden="true">EL</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Engine Launcher <span class="nav-item-lock">🔒 v1.3.2</span></span>
+                    <span class="nav-item-sub" data-nav-en="HWID auth gate &amp; encrypted suite hub" data-nav-zh="HWID 认证门控与加密套件中心">HWID auth gate &amp; encrypted suite hub</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="silencer.html">
+                  <span class="mod-chip mod-chip--sl" aria-hidden="true">SL</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Silencer <span class="nav-item-lock">🔒 v2.2</span></span>
+                    <span class="nav-item-sub" data-nav-en="Audio, BPM, offset &amp; LUFS prep tool" data-nav-zh="音频、BPM、偏移与 LUFS 准备工具">Audio, BPM, offset &amp; LUFS prep tool</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="au-converter.html">
+                  <span class="mod-chip mod-chip--ac" aria-hidden="true">AC</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Au Converter <span class="nav-item-lock">🔒 v1.5.1</span></span>
+                    <span class="nav-item-sub" data-nav-en="5-mode universal chart porting studio" data-nav-zh="五模式通用谱面转换工作室">5-mode universal chart porting studio</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="ballroom-converter.html">
+                  <span class="mod-chip mod-chip--bc" aria-hidden="true">BC</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Ballroom Converter <span class="nav-item-lock">🔒 v1.1</span></span>
+                    <span class="nav-item-sub" data-nav-en="SanBallroom choreography .slk builder" data-nav-zh="SanBallroom 舞厅编舞生成器">SanBallroom choreography .slk builder</span>
+                  </span>
+                </a>
+              </div>
+              <div class="nav-popover-col">
+                <p class="nav-popover-heading" data-nav-en="Engine Modules 🔒" data-nav-zh="引擎模块 🔒">Engine Modules 🔒</p>
+                <a class="nav-item" href="bue.html#releases">
+                  <span class="mod-chip mod-chip--bu" aria-hidden="true">BU</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">BeatUp Engine v1.4+ <span class="nav-item-lock">🔒 v1.4.1</span></span>
+                    <span class="nav-item-sub" data-nav-en="D3D11 Flip Model &amp; profile sync builds" data-nav-zh="D3D11 Flip 架构与配置同步版">D3D11 Flip Model &amp; profile sync builds</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="onetwo-party.html">
+                  <span class="mod-chip mod-chip--otp" aria-hidden="true">1-2</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">One-Two Party Engine <span class="nav-item-lock">🔒 v0.2.2</span></span>
+                    <span class="nav-item-sub" data-nav-en="Turn-based call &amp; response rhythm engine" data-nav-zh="回合制一二派对节奏引擎">Turn-based call &amp; response rhythm engine</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="aupiano.html">
+                  <span class="mod-chip mod-chip--ap" aria-hidden="true">AP</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">AuPiano Engine <span class="nav-item-lock">🔒 v0.1.0</span></span>
+                    <span class="nav-item-sub" data-nav-en="4K / 8K piano mode &amp; live editor" data-nav-zh="4K / 8K 钢琴模式与实时编辑器">4K / 8K piano mode &amp; live editor</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="guitar-engine.html">
+                  <span class="mod-chip mod-chip--gt" aria-hidden="true">GT</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Guitar Engine <span class="nav-item-lock">🔒 v0.1.0</span></span>
+                    <span class="nav-item-sub" data-nav-en="3D perspective highway &amp; FlameOut" data-nav-zh="3D 透视音轨与爆燃仪表">3D perspective highway &amp; FlameOut</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="shooting-star.html">
+                  <span class="mod-chip mod-chip--se" aria-hidden="true">SE</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Shooting Star Studio <span class="nav-item-lock">🔒 v0.3.0</span></span>
+                    <span class="nav-item-sub" data-nav-en="30-col _star.slk XY chain workbench" data-nav-zh="30 列 _star.slk 自由坐标工作台">30-col _star.slk XY chain workbench</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="nav-popover-footer">
+              <span class="small" data-nav-en="Restricted builds — no public downloads." data-nav-zh="受限内部版本 — 不提供公开下载。">Restricted builds — no public downloads.</span>
+              <a class="btn btn-sm" href="launchers.html" data-nav-en="Suite Hub Overview →" data-nav-zh="查看全部模块 →">Suite Hub Overview →</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown is-current-group">
+          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-guides-menu" data-nav-en="Guides" data-nav-zh="制谱指南">Guides</button>
+          <div class="nav-popover" id="nav-guides-menu">
+            <p class="nav-popover-heading" data-nav-en="Mode Charting Guides" data-nav-zh="各模式制谱指南">Mode Charting Guides</p>
+            <a class="nav-item-simple" href="guide-beatup.html"><span>BeatUp Guide</span><span class="small">6K</span></a>
+            <a class="nav-item-simple" href="guide-shooting-star.html"><span>Shooting Star Guide</span><span class="small">XY</span></a>
+            <a class="nav-item-simple" href="guide-onetwo-party.html"><span>One-Two Party Guide</span><span class="small">1-2</span></a>
+            <a class="nav-item-simple" href="guide-guitar.html" aria-current="page"><span>Guitar Guide</span><span class="small">4K/8K</span></a>
+            <a class="nav-item-simple" href="guide-piano.html"><span>Piano Guide</span><span class="small">4K/8K</span></a>
+            <a class="nav-item-simple" href="guide-ballroom.html"><span>Ballroom Guide</span><span class="small">7 Styles</span></a>
+            <div class="nav-popover-footer" style="margin-top:6px; padding-top:6px;">
+              <a class="nav-item-simple" style="flex:1;" href="manual.html"><span data-nav-en="User Manual" data-nav-zh="使用手册">User Manual</span><span class="small">PDF</span></a>
+              <a class="nav-item-simple" style="flex:1;" href="charting-guide.html"><span data-nav-en="Charting PDF" data-nav-zh="PDF 指南">Charting PDF</span><span class="small">PDF</span></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="nav-utilities">
+        <div class="nav-dropdown nav-section-jumps">
+          <button class="nav-section-label" type="button" aria-expanded="false" aria-controls="nav-jump-menu" data-nav-en="On this page" data-nav-zh="本页内容">On this page</button>
+          <div class="nav-popover nav-popover--right nav-section-list" id="nav-jump-menu">
+            <a href="#top"><span>Overview</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <a class="nav-util-link" href="https://github.com/bishpop" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="nav-util-label">GitHub</span>
+        </a>
+
+        <div class="language-picker">
+          <button class="language-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Choose language" title="Choose language">
+            <span class="language-trigger-flag" aria-hidden="true">🇬🇧</span>
+            <svg class="language-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+          </button>
+          <div class="language-menu" role="group" aria-label="Language">
+            <button class="lang-btn is-active" type="button" data-lang="en" aria-pressed="true"><span class="lang-option-flag" aria-hidden="true">🇬🇧</span><span class="lang-option-name" data-en="English" data-zh="英语">English</span><span class="lang-check" aria-hidden="true">✓</span></button>
+            <button class="lang-btn" type="button" data-lang="zh" aria-pressed="false"><span class="lang-option-flag" aria-hidden="true">🇨🇳</span><span class="lang-option-name" data-en="简体中文" data-zh="简体中文">简体中文</span><span class="lang-check" aria-hidden="true">✓</span></button>
+          </div>
+        </div>
+
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme" title="Toggle light and dark theme"><span id="themeIcon" aria-hidden="true">☀️</span></button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+      </div>
+    </nav>
+  </div>
+  <div class="scroll-bar" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+<section class="hero-simple" id="top">
+  <div class="container">
+    <p class="label">Charting Guide · Guitar Mode</p>
+    <h1>How to chart Guitar Mode.</h1>
+    <p class="lead">Guitar Mode builds rhythmic riffs across four fret highways with distinct <strong>Strum</strong>, <strong>No-Strum Tap</strong>, <strong>Long Hold</strong>, <strong>Bend</strong>, and <strong>Special Overdrive</strong> notes—scaling smoothly from Easy up to 8-Key Crazy.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#lanes">Fret Layout</a>
+      <a class="btn" href="#types">Note Types</a>
+      <a class="btn" href="index.html#guides">← All Guides</a>
+    </div>
+    <dl class="facts">
+      <div class="fact"><dt>Fret Lanes</dt><dd>4 Main Frets + Special Lane</dd></div>
+      <div class="fact"><dt>Difficulties</dt><dd>Easy · Normal · Hard · Crazy</dd></div>
+      <div class="fact"><dt>Strum Key</dt><dd>Shift (with fret) or No-Strum</dd></div>
+      <div class="fact"><dt>Fever Trigger</dt><dd>Special Lane + Left Ctrl / Up</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section band" id="lanes" aria-labelledby="lanes-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>01</b> · Frets &amp; Difficulties</p><h2 id="lanes-h">Four highway lanes, one or two hands.</h2></div>
+      <p>Every Guitar chart sits on 4 highway tracks plus a 5th <strong>Special</strong> track for overdrive phrases. Higher difficulties unlock two-handed 8-Key patterns.</p>
+    </div>
+
+    <div class="guide-cols-2">
+      <div class="guide-panel">
+        <h3>Left-Hand &amp; Right-Hand Frets</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Role</th><th>Keys</th><th>Where Used</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Main 4 Frets</strong></td><td><code>Z · X · C · V</code></td><td>Core riffs, chords, and solos across all 4 difficulties</td></tr>
+              <tr><td><strong>Right-Hand 8-Key Frets</strong></td><td><code>M · , · . · /</code></td><td>Two-handed solo sections and Crazy / advanced Hard charts</td></tr>
+              <tr><td><strong>Strum Accent</strong></td><td><code>Shift</code></td><td>Required for Strum notes &amp; Strum holds</td></tr>
+              <tr><td><strong>Bend Modifiers</strong></td><td><code>Space</code></td><td>Held during Bend sustains for pitch-bend scoring</td></tr>
+              <tr><td><strong>Special / Flameout</strong></td><td><code>Left Ctrl</code> or <code>Up</code></td><td>Fires Special Fever when gauge passes 50%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="guide-panel">
+        <h3>Pacing the 4 Difficulties</h3>
+        <ul class="plain-list">
+          <li><strong>Easy:</strong> Focus on quarter-note and half-note riffs using mainly <strong>No-Strum Taps</strong> and gentle holds.</li>
+          <li><strong>Normal:</strong> Introduce clear <strong>Strum Taps</strong> (<code>Shift</code>) on downbeats and simple power-chord holds.</li>
+          <li><strong>Hard:</strong> Add eighth-note alternating riffs, Bend holds on long guitar sustains, and deliberate strum-to-tap phrasing.</li>
+          <li><strong>Crazy:</strong> Combine fast solo phrasing, <strong>8-Key</strong> right-hand alternates, tight Bend sustains, and well-paced Special lanes.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="types" aria-labelledby="types-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>02</b> · Note Types</p><h2 id="types-h">Match the note type to how the guitar sounds.</h2></div>
+      <p>Choosing between Strum, Tap, Long, and Bend is what makes a Guitar chart actually feel like playing the riff.</p>
+    </div>
+
+    <ol class="spec">
+      <li><span class="n">01</span><h3>Strum vs. No-Strum Tap</h3><p>Use <strong>Strum</strong> notes (require <code>Shift</code>) when the guitarist picks or strums a distinct beat, chord, or accented note. Use <strong>No-Strum Taps</strong> for hammer-ons, pull-offs, legato solo runs, and fast rolling fills where pressing Shift on every 1/16 note would feel muddy.</p></li>
+      <li><span class="n">02</span><h3>Long Holds</h3><p>Use <strong>Strum Long</strong> or <strong>No-Strum Long</strong> whenever a chord or lead note rings out across beats. Leave at least a small 1/16 gap before the next note on the same lane so players can clearly release and re-press.</p></li>
+      <li><span class="n">03</span><h3>Bend Sustains</h3><p><strong>Bend Long</strong> notes ask players to hold the fret <em>and</em> Spacebar (vibrato/whammy feel). Save Bends for expressive held solo notes, chorus rings, and dramatic pitch bends rather than short quarter notes.</p></li>
+      <li><span class="n">04</span><h3>Right-Hand 8-Key Splits</h3><p>Don't switch back and forth randomly between <code>Z/X/C/V</code> and <code>M/,/./?</code> on every single beat. Group right-hand notes into clean alternating riffs or highlight dual-guitar harmonies.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section band" id="special" aria-labelledby="spec-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>03</b> · Special &amp; Flameout</p><h2 id="spec-h">Build tension, then reward players with Flameout.</h2></div>
+      <p>The 5th track carries Special sustain sections that charge excitement and reward clean execution.</p>
+    </div>
+
+    <div class="guide-cols-2">
+      <div class="guide-panel">
+        <h3>Charting Special Sections</h3>
+        <p class="muted">A <strong>Special Section</strong> sits on the 5th lane for a clear sustain window. Use Special sections before major chorus drops or climactic guitar solos—never overload the entire song with constant Special bars.</p>
+        <div class="guide-callout guide-callout--ok">
+          <strong>Give Players Gauge Time First</strong>
+          <p>Avoid placing the first Special section right in the opening 4 bars. Let players build combo and raise the gauge past <strong>50%</strong> during the intro and first verse so Flameout actually triggers cleanly on the chorus.</p>
+        </div>
+      </div>
+
+      <div class="guide-panel">
+        <h3>Comfort &amp; Sightreading Tips</h3>
+        <ul class="plain-list">
+          <li><strong>Stepwise Pitch Mapping:</strong> Map lower guitar notes toward left frets (<code>Z / X</code>) and higher solo notes toward right frets (<code>C / V</code>).</li>
+          <li><strong>Fair Chords:</strong> Stick to comfortable 2-note or 3-note power chords; avoid awkward outer spreads at high speeds unless playing Easy/Slow tempos.</li>
+          <li><strong>Consistent Motifs:</strong> If a chorus riff repeats three times, keep the same fret contour so players recognize it immediately.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="checklist" aria-labelledby="check-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>04</b> · Final Check</p><h2 id="check-h">Pre-test Guitar checklist.</h2></div>
+      <p>Playtest every difficulty you author before sharing.</p>
+    </div>
+
+    <div class="guide-panel">
+      <ul class="guide-checklist">
+        <li>BPM and waveform alignment stay exact through solos and endings.</li>
+        <li>Strum notes highlight picked accents while hammer-on runs use clean No-Strum Taps.</li>
+        <li>Long and Bend holds have a small clean release gap before the next note on the same lane.</li>
+        <li>Special sections appear after enough notes to reach 50%+ Flameout gauge.</li>
+        <li>Easy &amp; Normal difficulties omit tiring 8-Key cross-hand jumps.</li>
+        <li>Every phrase feels musically tied to the real guitar track.</li>
+      </ul>
+    </div>
+
+    <div style="margin-top:32px;">
+      <p class="label">Continue reading · All Charting Guides</p>
+      <div class="guide-switcher">
+        <a class="btn btn-sm" href="guide-beatup.html">BeatUp Guide</a>
+        <a class="btn btn-sm" href="guide-shooting-star.html">Shooting Star Guide</a>
+        <a class="btn btn-sm" href="guide-onetwo-party.html">One-Two Party Guide</a>
+        <a class="btn btn-sm" href="guide-guitar.html" aria-current="page">Guitar Guide</a>
+        <a class="btn btn-sm" href="guide-piano.html">Piano Guide</a>
+        <a class="btn btn-sm" href="guide-ballroom.html">Ballroom Guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
+        <p style="margin-top:14px;max-width:24em;">Software and tools for rhythm-game charting, written in C++ and C#.</p>
+      </div>
+      <div><h2>Public Releases</h2><ul>
+        <li><a href="bue.html">BeatUp Engine (v1.2)</a></li>
+        <li><a href="sanconverter.html">SanConverter (v1.4.4)</a></li>
+        <li><a href="manual.html">User Manual (PDF)</a></li>
+        <li><a href="charting-guide.html">Charting Guide (PDF)</a></li>
+      </ul></div>
+      <div><h2>Restricted Suite 🔒</h2><ul>
+        <li><a href="launchers.html">Suite Hub Overview</a></li>
+        <li><a href="engine-launcher.html">Engine Launcher</a></li>
+        <li><a href="silencer.html">Silencer</a></li>
+        <li><a href="au-converter.html">Au Converter</a></li>
+        <li><a href="ballroom-converter.html">Ballroom Converter</a></li>
+        <li><a href="onetwo-party.html">One-Two Party Engine</a></li>
+        <li><a href="aupiano.html">AuPiano Engine</a></li>
+        <li><a href="guitar-engine.html">Guitar Engine</a></li>
+        <li><a href="shooting-star.html">Shooting Star Studio</a></li>
+      </ul></div>
+      <div><h2>Guides &amp; Links</h2><ul>
+        <li><a href="guide-beatup.html">BeatUp Guide</a></li>
+        <li><a href="guide-shooting-star.html">Shooting Star Guide</a></li>
+        <li><a href="guide-onetwo-party.html">One-Two Party Guide</a></li>
+        <li><a href="guide-guitar.html" aria-current="page">Guitar Guide</a></li>
+        <li><a href="guide-piano.html">Piano Guide</a></li>
+        <li><a href="guide-ballroom.html">Ballroom Guide</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-base"><span>© 2026 Sanya. All rights reserved.</span><a href="#top">Back to top ↑</a></div>
+  </div>
+</footer>
+<script src="js/site.js" defer></script>
+<script src="js/i18n.js" defer></script>
+</body>
+</html>

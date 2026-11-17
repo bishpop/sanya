@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shooting Star Charting Guide — Sanya</title>
+<meta name="description" content="How to chart Shooting Star: MADI 5+ intro timing, Easy/Normal/Hard modes, alternating chains, stage bounds, orb travel speed, Space alignment, and Finish/Hidden stars.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0c0e12">
+<link rel="icon" type="image/png" href="assets/web/mark.png">
+<script>
+document.documentElement.classList.add('js');
+try {
+  var savedTheme = localStorage.getItem('sanya-theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
+} catch (e) {}
+</script>
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="container nav-in">
+    <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+
+        <li class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-pub-menu" data-nav-en="Public" data-nav-zh="公开版本">Public</button>
+          <div class="nav-popover" id="nav-pub-menu">
+            <p class="nav-popover-heading" data-nav-en="Public Releases" data-nav-zh="公开发行版">Public Releases</p>
+            <a class="nav-item" href="bue.html">
+              <span class="mod-chip mod-chip--bu" aria-hidden="true">BU</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">BeatUp Engine <span class="nav-item-pub">v1.2</span></span>
+                <span class="nav-item-sub" data-nav-en="Desktop engine, editor &amp; Auditor Mode" data-nav-zh="桌面引擎、编辑器与审核模式">Desktop engine, editor &amp; Auditor Mode</span>
+              </span>
+            </a>
+            <a class="nav-item" href="sanconverter.html">
+              <span class="mod-chip mod-chip--ac" aria-hidden="true">SC</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">SanConverter <span class="nav-item-pub">v1.4.4</span></span>
+                <span class="nav-item-sub" data-nav-en=".SM / .SSC to .SLK converter" data-nav-zh=".SM / .SSC 转 .SLK 转换器">.SM / .SSC to .SLK converter</span>
+              </span>
+            </a>
+          </div>
+        </li>
+
+        <li class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-suite-menu" data-nav-en="Suite Modules" data-nav-zh="套件模块">Suite Modules</button>
+          <div class="nav-popover nav-popover--wide" id="nav-suite-menu">
+            <div class="nav-popover-grid">
+              <div class="nav-popover-col">
+                <p class="nav-popover-heading" data-nav-en="Launcher &amp; Utilities 🔒" data-nav-zh="启动器与工具 🔒">Launcher &amp; Utilities 🔒</p>
+                <a class="nav-item" href="engine-launcher.html">
+                  <span class="mod-chip mod-chip--el" aria-hidden="true">EL</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Engine Launcher <span class="nav-item-lock">🔒 v1.3.2</span></span>
+                    <span class="nav-item-sub" data-nav-en="HWID auth gate &amp; encrypted suite hub" data-nav-zh="HWID 认证门控与加密套件中心">HWID auth gate &amp; encrypted suite hub</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="silencer.html">
+                  <span class="mod-chip mod-chip--sl" aria-hidden="true">SL</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Silencer <span class="nav-item-lock">🔒 v2.2</span></span>
+                    <span class="nav-item-sub" data-nav-en="Audio, BPM, offset &amp; LUFS prep tool" data-nav-zh="音频、BPM、偏移与 LUFS 准备工具">Audio, BPM, offset &amp; LUFS prep tool</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="au-converter.html">
+                  <span class="mod-chip mod-chip--ac" aria-hidden="true">AC</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Au Converter <span class="nav-item-lock">🔒 v1.5.1</span></span>
+                    <span class="nav-item-sub" data-nav-en="5-mode universal chart porting studio" data-nav-zh="五模式通用谱面转换工作室">5-mode universal chart porting studio</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="ballroom-converter.html">
+                  <span class="mod-chip mod-chip--bc" aria-hidden="true">BC</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Ballroom Converter <span class="nav-item-lock">🔒 v1.1</span></span>
+                    <span class="nav-item-sub" data-nav-en="SanBallroom choreography .slk builder" data-nav-zh="SanBallroom 舞厅编舞生成器">SanBallroom choreography .slk builder</span>
+                  </span>
+                </a>
+              </div>
+              <div class="nav-popover-col">
+                <p class="nav-popover-heading" data-nav-en="Engine Modules 🔒" data-nav-zh="引擎模块 🔒">Engine Modules 🔒</p>
+                <a class="nav-item" href="bue.html#releases">
+                  <span class="mod-chip mod-chip--bu" aria-hidden="true">BU</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">BeatUp Engine v1.4+ <span class="nav-item-lock">🔒 v1.4.1</span></span>
+                    <span class="nav-item-sub" data-nav-en="D3D11 Flip Model &amp; profile sync builds" data-nav-zh="D3D11 Flip 架构与配置同步版">D3D11 Flip Model &amp; profile sync builds</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="onetwo-party.html">
+                  <span class="mod-chip mod-chip--otp" aria-hidden="true">1-2</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">One-Two Party Engine <span class="nav-item-lock">🔒 v0.2.2</span></span>
+                    <span class="nav-item-sub" data-nav-en="Turn-based call &amp; response rhythm engine" data-nav-zh="回合制一二派对节奏引擎">Turn-based call &amp; response rhythm engine</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="aupiano.html">
+                  <span class="mod-chip mod-chip--ap" aria-hidden="true">AP</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">AuPiano Engine <span class="nav-item-lock">🔒 v0.1.0</span></span>
+                    <span class="nav-item-sub" data-nav-en="4K / 8K piano mode &amp; live editor" data-nav-zh="4K / 8K 钢琴模式与实时编辑器">4K / 8K piano mode &amp; live editor</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="guitar-engine.html">
+                  <span class="mod-chip mod-chip--gt" aria-hidden="true">GT</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Guitar Engine <span class="nav-item-lock">🔒 v0.1.0</span></span>
+                    <span class="nav-item-sub" data-nav-en="3D perspective highway &amp; FlameOut" data-nav-zh="3D 透视音轨与爆燃仪表">3D perspective highway &amp; FlameOut</span>
+                  </span>
+                </a>
+                <a class="nav-item" href="shooting-star.html">
+                  <span class="mod-chip mod-chip--se" aria-hidden="true">SE</span>
+                  <span class="nav-item-text">
+                    <span class="nav-item-title">Shooting Star Studio <span class="nav-item-lock">🔒 v0.3.0</span></span>
+                    <span class="nav-item-sub" data-nav-en="30-col _star.slk XY chain workbench" data-nav-zh="30 列 _star.slk 自由坐标工作台">30-col _star.slk XY chain workbench</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="nav-popover-footer">
+              <span class="small" data-nav-en="Restricted builds — no public downloads." data-nav-zh="受限内部版本 — 不提供公开下载。">Restricted builds — no public downloads.</span>
+              <a class="btn btn-sm" href="launchers.html" data-nav-en="Suite Hub Overview →" data-nav-zh="查看全部模块 →">Suite Hub Overview →</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown is-current-group">
+          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-guides-menu" data-nav-en="Guides" data-nav-zh="制谱指南">Guides</button>
+          <div class="nav-popover" id="nav-guides-menu">
+            <p class="nav-popover-heading" data-nav-en="Mode Charting Guides" data-nav-zh="各模式制谱指南">Mode Charting Guides</p>
+            <a class="nav-item-simple" href="guide-beatup.html"><span>BeatUp Guide</span><span class="small">6K</span></a>
+            <a class="nav-item-simple" href="guide-shooting-star.html" aria-current="page"><span>Shooting Star Guide</span><span class="small">XY</span></a>
+            <a class="nav-item-simple" href="guide-onetwo-party.html"><span>One-Two Party Guide</span><span class="small">1-2</span></a>
+            <a class="nav-item-simple" href="guide-guitar.html"><span>Guitar Guide</span><span class="small">4K/8K</span></a>
+            <a class="nav-item-simple" href="guide-piano.html"><span>Piano Guide</span><span class="small">4K/8K</span></a>
+            <a class="nav-item-simple" href="guide-ballroom.html"><span>Ballroom Guide</span><span class="small">7 Styles</span></a>
+            <div class="nav-popover-footer" style="margin-top:6px; padding-top:6px;">
+              <a class="nav-item-simple" style="flex:1;" href="manual.html"><span data-nav-en="User Manual" data-nav-zh="使用手册">User Manual</span><span class="small">PDF</span></a>
+              <a class="nav-item-simple" style="flex:1;" href="charting-guide.html"><span data-nav-en="Charting PDF" data-nav-zh="PDF 指南">Charting PDF</span><span class="small">PDF</span></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="nav-utilities">
+        <div class="nav-dropdown nav-section-jumps">
+          <button class="nav-section-label" type="button" aria-expanded="false" aria-controls="nav-jump-menu" data-nav-en="On this page" data-nav-zh="本页内容">On this page</button>
+          <div class="nav-popover nav-popover--right nav-section-list" id="nav-jump-menu">
+            <a href="#top"><span>Overview</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <a class="nav-util-link" href="https://github.com/bishpop" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="nav-util-label">GitHub</span>
+        </a>
+
+        <div class="language-picker">
+          <button class="language-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Choose language" title="Choose language">
+            <span class="language-trigger-flag" aria-hidden="true">🇬🇧</span>
+            <svg class="language-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+          </button>
+          <div class="language-menu" role="group" aria-label="Language">
+            <button class="lang-btn is-active" type="button" data-lang="en" aria-pressed="true"><span class="lang-option-flag" aria-hidden="true">🇬🇧</span><span class="lang-option-name" data-en="English" data-zh="英语">English</span><span class="lang-check" aria-hidden="true">✓</span></button>
+            <button class="lang-btn" type="button" data-lang="zh" aria-pressed="false"><span class="lang-option-flag" aria-hidden="true">🇨🇳</span><span class="lang-option-name" data-en="简体中文" data-zh="简体中文">简体中文</span><span class="lang-check" aria-hidden="true">✓</span></button>
+          </div>
+        </div>
+
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme" title="Toggle light and dark theme"><span id="themeIcon" aria-hidden="true">☀️</span></button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+      </div>
+    </nav>
+  </div>
+  <div class="scroll-bar" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+<section class="hero-simple" id="top">
+  <div class="container">
+    <p class="label">Charting Guide · Shooting Star</p>
+    <h1>How to chart Shooting Star.</h1>
+    <p class="lead">Shooting Star is a spatial sequence mode where a glowing guide orb travels from star to star across a 1024 &times; 768 stage. Good charting balances clean rhythm phrasing, readable screen paths, and proper intro/chain pacing.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#workflow">Start Charting</a>
+      <a class="btn" href="#rules">Critical Rules</a>
+      <a class="btn" href="index.html#guides">← All Guides</a>
+    </div>
+    <dl class="facts">
+      <div class="fact"><dt>Timing Grid</dt><dd>1 MADI = 16 Steps (1/16)</dd></div>
+      <div class="fact"><dt>First Star</dt><dd>MADI 4–5 or later</dd></div>
+      <div class="fact"><dt>Difficulties</dt><dd>Easy 2K · Normal 4K · Hard 6K</dd></div>
+      <div class="fact"><dt>Comfort Stage Area</dt><dd>Keep inside center safe zone</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section band" id="workflow" aria-labelledby="wf-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>01</b> · Workflow</p><h2 id="wf-h">From audio track to playable chart.</h2></div>
+      <p>Follow these steps in Shooting Star Studio to build a chart quickly without spending hours fixing layouts by hand.</p>
+    </div>
+    <ol class="spec">
+      <li><span class="n">01</span><h3>Set BPM &amp; Beat Offset</h3><p>Load your song and detect or enter its BPM (2–360 BPM). Shooting Star uses 16 steps per MADI (4 steps per beat). Check that beats line up cleanly with the waveform—Studio defaults Beat Offset to <code>0.70</code> beats, which you can fine-tune by ear with the metronome.</p></li>
+      <li><span class="n">02</span><h3>Pick your target difficulty first</h3><p>Select <strong>Easy 2K</strong>, <strong>Normal 4K</strong>, or <strong>Hard 6K</strong> before writing patterns. Each difficulty allows a specific set of arrow directions and decides whether Spacebar stars are allowed.</p></li>
+      <li><span class="n">03</span><h3>Begin at MADI 5 (or MADI 4+)</h3><p>Always leave the opening bars empty so the game can display <strong>READY &rarr; START &rarr; 3-2-1</strong> cleanly before the first star arrives.</p></li>
+      <li><span class="n">04</span><h3>Place arrows, Spacebars &amp; shapes</h3><p>Place directional stars on the Beat Grid and arrange their stage positions visually. Select ranges of notes and apply built-in geometric patterns (Line, Circle, Star, Wave, Spiral) with <strong>Limit Speed</strong> turned ON so the orb never teleports wildly.</p></li>
+      <li><span class="n">05</span><h3>Compile chains &amp; test in Gameplay</h3><p>Run <strong>Compile Chains</strong> so every phrase opens with an 8-step lead-in and alternates lanes cleanly. Check that the validator shows <strong>0 Errors</strong>, then press <kbd>F1</kbd> with Autoplay (<kbd>F4</kbd>) to watch the full flow before saving.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="modes" aria-labelledby="modes-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>02</b> · Difficulty Modes</p><h2 id="modes-h">Allowed keys per difficulty.</h2></div>
+      <p>Each difficulty supports only specific arrow keys. Using a Hard-only diagonal arrow inside Normal 4K causes stars to disappear in-game unless mapped back to 4K.</p>
+    </div>
+
+    <div class="guide-cols-2">
+      <div class="guide-panel">
+        <h3>Mode Overview</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Mode</th><th>Allowed Directions</th><th>Spacebar Stars?</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Easy 2K</strong></td><td>Left side (<code>4</code> / Left) &amp; Right side (<code>6</code> / Right)</td><td>No (not allowed)</td></tr>
+              <tr><td><strong>Normal 4K</strong></td><td>Strictly 4 cardinal directions: <strong>Left (4), Up (8), Down (2), Right (6)</strong>. Avoid <code>1</code> / <code>3</code> diagonals.</td><td>No (not allowed)</td></tr>
+              <tr><td><strong>Hard 6K</strong></td><td>All 6 Numpad directions: <code>7</code>, <code>4</code>, <code>1</code>, <code>3</code>, <code>6</code>, <code>9</code></td><td><strong>Yes</strong> (Spacebar / LCtrl / RCtrl)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="guide-callout guide-callout--warn">
+          <strong>Watch out when downgrading Hard to Normal</strong>
+          <p>Down-Left (<code>1</code>) and Down-Right (<code>3</code>) only render in Hard 6K. If you convert a Hard chart to Normal 4K, convert diagonals into standard Up/Down/Left/Right arrows and remove Spacebar stars.</p>
+        </div>
+      </div>
+
+      <div class="guide-panel">
+        <h3>Hard 6K + Space Numpad Layout</h3>
+        <p class="muted">Playable arrow positions match the right-hand Numpad; Spacebars can be hit with Space, Left Ctrl, or Right Ctrl.</p>
+        <div class="guide-keypad" aria-label="Shooting Star Numpad layout">
+          <div class="guide-key guide-key--active"><b>7 ↖</b><span>Up-Left</span></div>
+          <div class="guide-key guide-key--muted"><b>8 ↑</b><span>Normal 4K Up</span></div>
+          <div class="guide-key guide-key--active"><b>9 ↗</b><span>Up-Right</span></div>
+          <div class="guide-key guide-key--active"><b>4 ←</b><span>Left</span></div>
+          <div class="guide-key guide-key--muted"><b>5</b><span>Unused</span></div>
+          <div class="guide-key guide-key--active"><b>6 →</b><span>Right</span></div>
+          <div class="guide-key guide-key--active"><b>1 ↙</b><span>Down-Left</span></div>
+          <div class="guide-key guide-key--muted"><b>2 ↓</b><span>Normal 4K Down</span></div>
+          <div class="guide-key guide-key--active"><b>3 ↘</b><span>Down-Right</span></div>
+          <div class="guide-key guide-key--active guide-key--wide"><b>SPACE / LCtrl / RCtrl</b><span>Spacebar Star (Hard 6K only)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section band" id="rules" aria-labelledby="rules-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>03</b> · Must-Follow Rules</p><h2 id="rules-h">Rules that keep your chart playable in-game.</h2></div>
+      <p>Ignoring intro timing or chain spacing is the #1 reason custom Shooting Star charts fail to spawn arrows or break mid-song.</p>
+    </div>
+
+    <div class="guide-cols-2">
+      <div class="guide-panel">
+        <h3>1. Never start before MADI 4–5</h3>
+        <p class="muted">The game announces <strong>READY</strong>, then <strong>START</strong> (about 2 bars before your phrase opens), then <strong>3 - 2 - 1</strong> right before the guide orb spawns.</p>
+        <p class="muted">If you place your opening star too early (around MADI 0–2), there is not enough room for the intro countdown, and the game can stay stuck on <strong>READY</strong> without ever spawning stars.</p>
+        <div class="guide-callout guide-callout--danger">
+          <strong>Safe Opening Position</strong>
+          <p>Always start your first playable note at <strong>MADI 5</strong> (or at the very earliest MADI 4). That guarantees the 8-step approach lead-in and full countdown play reliably.</p>
+        </div>
+      </div>
+
+      <div class="guide-panel">
+        <h3>2. Phrases (Chains) &amp; Lane Alternation</h3>
+        <p class="muted">Playable stars always belong inside a closed phrase with a <strong>Start</strong> marker and an <strong>End</strong> marker. Arrow stars and Spacebar stars each use their own separate phrases.</p>
+        <ul class="plain-list">
+          <li><strong>Give a 2-beat lead-in:</strong> Place Start markers about <strong>8 steps (2 beats)</strong> before the phrase's first star, and End markers <strong>1–2 steps after</strong> the final star.</li>
+          <li><strong>Alternate Track 1 &harr; Track 2:</strong> Because the next phrase begins loading 8 steps before its first note, consecutive phrases must alternate between Lane 1 and Lane 2 so they don't overlap on the same track.</li>
+        </ul>
+        <div class="guide-callout guide-callout--ok">
+          <strong>Tip: Let the editor compile chains for you</strong>
+          <p>You can chart freely in Lane 1 and click <strong>Compile Chains</strong> (or save your chart) so Shooting Star Studio automatically inserts proper 8-step lead-ins and alternates Lane 1 &harr; Lane 2 without gaps or collisions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stage" aria-labelledby="stage-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>04</b> · Stage &amp; Pacing</p><h2 id="stage-h">Positioning stars, orb speed &amp; Spacebar sync.</h2></div>
+      <p>How smoothly players can read your chart depends directly on where stars sit on the 1024 &times; 768 stage and how fast the comet travels between them.</p>
+    </div>
+
+    <div class="guide-cols-3">
+      <div class="guide-panel">
+        <h3>Keep inside the Safe Zone</h3>
+        <p class="muted">Although the full stage is <code>1024 &times; 768</code>, edges hold the Combo display and score HUD. Keep every star within the outer limit (<code>X 24–992, Y 24–720</code>), and aim for the <strong>Comfort Zone</strong> (<code>X 120–884, Y 115–615</code>) so approach rings never clip off-screen.</p>
+      </div>
+      <div class="guide-panel">
+        <h3>Control Orb Travel Speed</h3>
+        <p class="muted">Avoid placing two consecutive fast 1/16 or 1/8 stars on opposite sides of the screen. As a rule of thumb, keep step distance proportional to timing (about <strong>32 px per 1/16 step max</strong>). Leave <strong>Limit Speed</strong> enabled when using shape generators.</p>
+      </div>
+      <div class="guide-panel">
+        <h3>Simultaneous Arrow + Space</h3>
+        <p class="muted">When an Arrow star and a Spacebar star share the exact same beat, give them the <strong>exact same horizontal (X) position</strong> and separate them cleanly vertically (<strong>at least 64–96 px apart</strong>) so neither star covers the other.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section band" id="special" aria-labelledby="special-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>05</b> · Special Stars &amp; Speed Tips</p><h2 id="special-h">Finish, Hidden, Auto &amp; fast Studio shortcuts.</h2></div>
+      <p>Use special star types purposefully to highlight choruses and climax beats without blinding the player.</p>
+    </div>
+
+    <div class="guide-cols-2">
+      <div class="guide-panel">
+        <h3>Special Star Types</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Type</th><th>When &amp; How to Use</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Finish (F)</strong></td><td>Highlights climax phrases with golden visuals and bonus points. Attach Finish to <strong>Arrow stars</strong> (not standalone Spacebars) and give the first Finish note at least half a bar from song start so its intro sound plays cleanly once per Finish span.</td></tr>
+              <tr><td><strong>Hidden (H)</strong></td><td>Hides the arrow direction until right before impact. Use sparingly on predictable musical paths so players aren't ambushed mid-stream.</td></tr>
+              <tr><td><strong>Auto (A)</strong></td><td>Automatically hits without breaking combo—handy for decorative visual transitions or orb rest beats.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="guide-panel">
+        <h3>Fast Charting Shortcuts</h3>
+        <ul class="plain-list">
+          <li><strong>Numpad + Shift:</strong> Place a star direction and jump forward by your current Snap step automatically.</li>
+          <li><strong>Mouse Wheel over Stage:</strong> Hover any placed star (or the stage) and scroll to rotate its arrow direction instantly.</li>
+          <li><strong>Middle-Click a Star:</strong> Jump playback cursor straight to that star's beat.</li>
+          <li><strong>Right-Click a Star:</strong> Cycle quickly between Normal, Finish, Hidden, and Auto.</li>
+          <li><strong>Tab Range + Patterns tab:</strong> Press <kbd>Tab</kbd> at start &amp; end of a phrase, then shape all notes cleanly into a Circle, Wave, Line, or Star with one click.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="checklist" aria-labelledby="check-h">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="label"><b>06</b> · Final Check</p><h2 id="check-h">Pre-release Shooting Star checklist.</h2></div>
+      <p>Run through these six checks in Gameplay Preview (<kbd>F1</kbd> + <kbd>F4</kbd>) before sharing your chart.</p>
+    </div>
+
+    <div class="guide-panel">
+      <ul class="guide-checklist">
+        <li>First playable star sits at <strong>MADI 4–5 or later</strong> so READY &rarr; START &rarr; 3-2-1 completes cleanly.</li>
+        <li>Validator shows <strong>0 Errors</strong> with all arrow and Spacebar phrases properly closed.</li>
+        <li>All stars stay inside the screen comfort zone without clipping HUD counters.</li>
+        <li>Fast sections use natural short distances so the guide orb stays smooth and readable.</li>
+        <li>Any simultaneous Arrow + Space pair shares the same X position with clear vertical spacing.</li>
+        <li>Normal 4K and Easy 2K charts avoid Hard-only diagonals and contain no Spacebar stars.</li>
+      </ul>
+    </div>
+
+    <div style="margin-top:32px;">
+      <p class="label">Continue reading · All Charting Guides</p>
+      <div class="guide-switcher">
+        <a class="btn btn-sm" href="guide-beatup.html">BeatUp Guide</a>
+        <a class="btn btn-sm" href="guide-shooting-star.html" aria-current="page">Shooting Star Guide</a>
+        <a class="btn btn-sm" href="guide-onetwo-party.html">One-Two Party Guide</a>
+        <a class="btn btn-sm" href="guide-guitar.html">Guitar Guide</a>
+        <a class="btn btn-sm" href="guide-piano.html">Piano Guide</a>
+        <a class="btn btn-sm" href="guide-ballroom.html">Ballroom Guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
+        <p style="margin-top:14px;max-width:24em;">Software and tools for rhythm-game charting, written in C++ and C#.</p>
+      </div>
+      <div><h2>Public Releases</h2><ul>
+        <li><a href="bue.html">BeatUp Engine (v1.2)</a></li>
+        <li><a href="sanconverter.html">SanConverter (v1.4.4)</a></li>
+        <li><a href="manual.html">User Manual (PDF)</a></li>
+        <li><a href="charting-guide.html">Charting Guide (PDF)</a></li>
+      </ul></div>
+      <div><h2>Restricted Suite 🔒</h2><ul>
+        <li><a href="launchers.html">Suite Hub Overview</a></li>
+        <li><a href="engine-launcher.html">Engine Launcher</a></li>
+        <li><a href="silencer.html">Silencer</a></li>
+        <li><a href="au-converter.html">Au Converter</a></li>
+        <li><a href="ballroom-converter.html">Ballroom Converter</a></li>
+        <li><a href="onetwo-party.html">One-Two Party Engine</a></li>
+        <li><a href="aupiano.html">AuPiano Engine</a></li>
+        <li><a href="guitar-engine.html">Guitar Engine</a></li>
+        <li><a href="shooting-star.html">Shooting Star Studio</a></li>
+      </ul></div>
+      <div><h2>Guides &amp; Links</h2><ul>
+        <li><a href="guide-beatup.html">BeatUp Guide</a></li>
+        <li><a href="guide-shooting-star.html" aria-current="page">Shooting Star Guide</a></li>
+        <li><a href="guide-onetwo-party.html">One-Two Party Guide</a></li>
+        <li><a href="guide-guitar.html">Guitar Guide</a></li>
+        <li><a href="guide-piano.html">Piano Guide</a></li>
+        <li><a href="guide-ballroom.html">Ballroom Guide</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-base"><span>© 2026 Sanya. All rights reserved.</span><a href="#top">Back to top ↑</a></div>
+  </div>
+</footer>
+<script src="js/site.js" defer></script>
+<script src="js/i18n.js" defer></script>
+</body>
+</html>

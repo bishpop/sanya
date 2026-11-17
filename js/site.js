@@ -37,37 +37,169 @@
   window.addEventListener('scroll', updateScroll, { passive: true });
   updateScroll();
 
-  /* ---------- Navigation & Mobile Toggle ---------- */
+  /* ---------- Navigation, Accessible Dropdowns & Mobile Drawer ---------- */
   var toggle = document.querySelector('.nav-toggle');
   var links = document.getElementById('nav-links');
-  var quickMenu = document.getElementById('nav-section-menu');
+  var dropdowns = Array.from(document.querySelectorAll('.nav-dropdown, .nav-section-jumps'));
+  var hoverCapable = window.matchMedia('(hover: hover)');
+  var mobileNavQuery = window.matchMedia('(max-width: 960px)');
 
-  function closeNav() {
-    if (links) links.classList.remove('open');
-    if (quickMenu) quickMenu.classList.remove('open');
-    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  function getDropdownParts(dd) {
+    var trigger = dd.querySelector('.nav-trigger, .nav-section-label');
+    var panel = dd.querySelector('.nav-popover, .nav-section-list');
+    return { trigger: trigger, panel: panel };
   }
 
+  function closeDropdowns(restoreFocus, except) {
+    dropdowns.forEach(function (dd) {
+      if (dd === except) return;
+      if (dd._closeTimer) {
+        window.clearTimeout(dd._closeTimer);
+        dd._closeTimer = 0;
+      }
+      var wasPinned = dd.classList.contains('is-pinned');
+      dd.classList.remove('open', 'is-pinned');
+      var parts = getDropdownParts(dd);
+      if (parts.trigger) {
+        parts.trigger.setAttribute('aria-expanded', 'false');
+        if (restoreFocus && wasPinned) parts.trigger.focus();
+      }
+    });
+  }
+
+  function closeNav(restoreToggleFocus) {
+    if (links) links.classList.remove('open');
+    if (toggle) {
+      var wasOpen = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', 'false');
+      if (restoreToggleFocus && wasOpen) toggle.focus();
+    }
+    closeDropdowns(false);
+  }
+
+  function alignPopoverToViewport(panel) {
+    if (!panel || mobileNavQuery.matches || panel.classList.contains('nav-popover--right')) return;
+    panel.removeAttribute('data-align');
+    var rect = panel.getBoundingClientRect();
+    if (rect.right > window.innerWidth - 16) {
+      panel.setAttribute('data-align', 'end');
+    }
+  }
+
+  dropdowns.forEach(function (dd) {
+    var parts = getDropdownParts(dd);
+    var trigger = parts.trigger;
+    var panel = parts.panel;
+    if (!trigger || !panel) return;
+
+    trigger.setAttribute('aria-expanded', 'false');
+    // Fallback class if CSS :has() is not used or for explicit state
+    if (panel.querySelector('[aria-current="page"]')) {
+      dd.classList.add('is-current-group');
+    }
+
+    function openDropdown(pin) {
+      if (dd._closeTimer) {
+        window.clearTimeout(dd._closeTimer);
+        dd._closeTimer = 0;
+      }
+      closeDropdowns(false, dd);
+      dd.classList.add('open');
+      if (pin) dd.classList.add('is-pinned');
+      trigger.setAttribute('aria-expanded', 'true');
+      alignPopoverToViewport(panel);
+    }
+
+    function scheduleClose() {
+      if (dd.classList.contains('is-pinned')) return;
+      if (dd._closeTimer) window.clearTimeout(dd._closeTimer);
+      dd._closeTimer = window.setTimeout(function () {
+        if (!dd.classList.contains('is-pinned')) {
+          dd.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      }, 220);
+    }
+
+    trigger.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var shouldPin = !(dd.classList.contains('open') && (dd.classList.contains('is-pinned') || mobileNavQuery.matches));
+      if (shouldPin) openDropdown(true);
+      else {
+        dd.classList.remove('open', 'is-pinned');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    trigger.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        var isOpen = dd.classList.contains('open') && dd.classList.contains('is-pinned');
+        if (!isOpen) openDropdown(true);
+        else {
+          dd.classList.remove('open', 'is-pinned');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        openDropdown(true);
+        var firstItem = panel.querySelector('a, button');
+        if (firstItem) firstItem.focus();
+      }
+    });
+
+    dd.addEventListener('pointerenter', function (e) {
+      if (mobileNavQuery.matches || !hoverCapable.matches || e.pointerType === 'touch') return;
+      openDropdown(false);
+    });
+
+    dd.addEventListener('pointerleave', function (e) {
+      if (mobileNavQuery.matches || !hoverCapable.matches || e.pointerType === 'touch') return;
+      scheduleClose();
+    });
+
+    dd.addEventListener('focusout', function (e) {
+      if (e.relatedTarget && !dd.contains(e.relatedTarget) && !dd.classList.contains('is-pinned')) {
+        dd.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    panel.addEventListener('click', function (e) {
+      if (e.target.closest('a')) {
+        closeNav(false);
+      }
+    });
+  });
+
   if (toggle) {
-    toggle.addEventListener('click', function () {
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
       var isOpen = links && links.classList.contains('open');
+      closeDropdowns(false);
       if (links) links.classList.toggle('open', !isOpen);
       toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
     });
   }
 
   document.addEventListener('click', function (e) {
-    if (e.target.closest('.nav-toggle, .nav-links, .nav-quick-menu')) return;
-    closeNav();
+    if (!e.target.closest('.nav-dropdown, .nav-section-jumps')) closeDropdowns(false);
+    if (e.target.closest('.nav-toggle, .nav-links, .nav-dropdown, .nav-section-jumps')) return;
+    closeNav(false);
   });
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeNav();
+    if (e.key === 'Escape') {
+      closeDropdowns(true);
+      if (links && links.classList.contains('open')) closeNav(true);
+    }
   });
 
   if (links) {
     links.addEventListener('click', function (e) {
-      if (e.target.closest('a')) closeNav();
+      if (e.target.closest('.nav-trigger, .nav-section-label')) return;
+      if (e.target.closest('a')) closeNav(false);
     });
   }
 
@@ -290,7 +422,7 @@
       },
       { rootMargin: '0px 0px -6% 0px' }
     );
-    document.querySelectorAll('.reveal:not([data-flyin]):not([data-fly-scroll])').forEach(function (el) {
+    document.querySelectorAll('.reveal, .flyin').forEach(function (el) {
       observer.observe(el);
     });
   }
