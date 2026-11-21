@@ -1,209 +1,228 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SanConverter v1.4.4 — Chart converter — Sanya</title>
-<meta name="description" content="SanConverter v1.4.4 converts Stepmania SM and SSC charts to SLK for Beat Up and One-Two Party and reverts SLK back to SSC. Documentation and download.">
-<meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#0c0e12">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<script>
+try {
+  var s = localStorage.getItem('color-scheme');
+  if (s === 'light' || s === 'dark') {
+    document.querySelector('meta[name="color-scheme"]').content = s;
+  }
+} catch (e) {}
+</script>
+<meta name="theme-color" content="#eff1f5">
+<title>SanConverter v1.4.4 — Private Build — Sanya</title>
+<meta name="description" content="SanConverter v1.4.4 private chart converter documentation: StepMania SM/SSC to SLK conversion rules for Beat Up and One-Two Party, plus lossless SLK to SSC revert.">
 <link rel="canonical" href="https://web.beatupengine.workers.dev/sanconverter">
 <link rel="icon" type="image/png" href="assets/web/mark.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sanya">
-<meta property="og:title" content="SanConverter v1.4.4 — Chart converter — Sanya">
-<meta property="og:description" content="SanConverter v1.4.4 converts Stepmania SM and SSC charts to SLK for Beat Up and One-Two Party and reverts SLK back to SSC. Documentation and download.">
+<meta property="og:title" content="SanConverter v1.4.4 — Private Build — Sanya">
+<meta property="og:description" content="SanConverter v1.4.4 private chart converter specification for Beat Up and One-Two Party.">
 <meta property="og:url" content="https://web.beatupengine.workers.dev/sanconverter">
 <meta property="og:image" content="https://web.beatupengine.workers.dev/assets/web/og-san.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SanConverter v1.4.4 — Chart converter — Sanya">
-<meta name="twitter:description" content="SanConverter v1.4.4 converts Stepmania SM and SSC charts to SLK for Beat Up and One-Two Party and reverts SLK back to SSC. Documentation and download.">
+<meta name="twitter:title" content="SanConverter v1.4.4 — Private Build — Sanya">
+<meta name="twitter:description" content="SanConverter v1.4.4 private chart converter specification for Beat Up and One-Two Party.">
 <meta name="twitter:image" content="https://web.beatupengine.workers.dev/assets/web/og-san.jpg">
-<script>
-document.documentElement.classList.add('js');
-try {
-  var savedTheme = localStorage.getItem('sanya-theme');
-  if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
-} catch (e) { /* Dark mode remains the default when storage is unavailable. */ }
-</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap">
 <link rel="stylesheet" href="css/site.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "SanConverter", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows 10, Windows 11 (64-bit), .NET Framework 4.8", "softwareVersion": "1.4.4", "url": "https://web.beatupengine.workers.dev/sanconverter", "description": "Converts Stepmania SM and SSC charts to SLK for Beat Up and One-Two Party, and reverts SLK to SSC.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Sanya", "url": "https://github.com/bishpop"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"SanConverter","applicationCategory":"UtilitiesApplication","operatingSystem":"Windows 10, Windows 11 (64-bit), .NET Framework 4.8","softwareVersion":"1.4.4","url":"https://web.beatupengine.workers.dev/sanconverter","description":"Private converter for StepMania SM and SSC charts to SLK for Beat Up and One-Two Party, with SLK to SSC revert.","author":{"@type":"Person","name":"Sanya","url":"https://github.com/bishpop"}}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="nav">
-  <div class="container nav-in">
-    <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
-    <nav class="site-nav" aria-label="Primary">
-      <ul class="nav-links" id="nav-links">
-        <li><a href="index.html">Home</a></li>
 
-        <li class="nav-dropdown is-current-group">
-          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-pub-menu" data-nav-en="Public" data-nav-zh="公开版本">Public</button>
-          <div class="nav-popover" id="nav-pub-menu">
-            <p class="nav-popover-heading" data-nav-en="Public Releases" data-nav-zh="公开发行版">Public Releases</p>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="assets/web/mark.png" alt="" width="28" height="28">
+      <span>Sanya</span>
+      <span class="brand-tag">Workshop</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="nav-links" id="site-menu" popover="auto">
+        <li><a href="index.html" data-nav-en="Index" data-nav-zh="索引">Index</a></li>
+
+        <li class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-engines-menu" popovertarget="nav-engines-menu" data-nav-en="Engines" data-nav-zh="引擎">Engines</button>
+          <div class="nav-popover" id="nav-engines-menu">
+            <p class="nav-popover-heading" data-nav-en="Private Rhythm Engines" data-nav-zh="私有节奏引擎">Private Rhythm Engines</p>
             <a class="nav-item" href="bue.html">
               <span class="mod-chip mod-chip--bu" aria-hidden="true">BU</span>
               <span class="nav-item-text">
-                <span class="nav-item-title">BeatUp Engine <span class="nav-item-pub">v1.2</span></span>
-                <span class="nav-item-sub" data-nav-en="Desktop engine, editor &amp; Auditor Mode" data-nav-zh="桌面引擎、编辑器与审核模式">Desktop engine, editor &amp; Auditor Mode</span>
+                <span class="nav-item-title">BeatUp Engine <span class="nav-item-ver">v1.4.1</span></span>
+                <span class="nav-item-sub" data-nav-en="D3D11 engine, chart editor &amp; Auditor Mode" data-nav-zh="D3D11 引擎、谱面编辑器与审核模式">D3D11 engine, chart editor &amp; Auditor Mode</span>
+              </span>
+            </a>
+            <a class="nav-item" href="onetwo-party.html">
+              <span class="mod-chip mod-chip--otp" aria-hidden="true">1-2</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">One-Two Party Engine <span class="nav-item-ver">v0.2.2</span></span>
+                <span class="nav-item-sub" data-nav-en="Turn-based call &amp; response rhythm engine" data-nav-zh="回合制一二派对节奏引擎">Turn-based call &amp; response rhythm engine</span>
+              </span>
+            </a>
+            <a class="nav-item" href="aupiano.html">
+              <span class="mod-chip mod-chip--ap" aria-hidden="true">AP</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">AuPiano Engine <span class="nav-item-ver">v0.1.0</span></span>
+                <span class="nav-item-sub" data-nav-en="4K / 8K piano mode &amp; live editor" data-nav-zh="4K / 8K 钢琴模式与实时编辑器">4K / 8K piano mode &amp; live editor</span>
+              </span>
+            </a>
+            <a class="nav-item" href="guitar-engine.html">
+              <span class="mod-chip mod-chip--gt" aria-hidden="true">GT</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">Guitar Engine <span class="nav-item-ver">v0.1.0</span></span>
+                <span class="nav-item-sub" data-nav-en="3D perspective highway &amp; FlameOut" data-nav-zh="3D 透视音轨与爆燃仪表">3D perspective highway &amp; FlameOut</span>
+              </span>
+            </a>
+            <a class="nav-item" href="shooting-star.html">
+              <span class="mod-chip mod-chip--se" aria-hidden="true">SE</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">Shooting Star Studio <span class="nav-item-ver">v0.3.0</span></span>
+                <span class="nav-item-sub" data-nav-en="30-col _star.slk XY chain workbench" data-nav-zh="30 列 _star.slk 自由坐标工作台">30-col _star.slk XY chain workbench</span>
+              </span>
+            </a>
+          </div>
+        </li>
+
+        <li class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-tools-menu" popovertarget="nav-tools-menu" data-nav-en="Tools" data-nav-zh="工具">Tools</button>
+          <div class="nav-popover" id="nav-tools-menu">
+            <p class="nav-popover-heading" data-nav-en="Hub, Audio DSP &amp; Converters" data-nav-zh="启动器、音频处理与转换器">Hub, Audio DSP &amp; Converters</p>
+            <a class="nav-item" href="engine-launcher.html">
+              <span class="mod-chip mod-chip--el" aria-hidden="true">EL</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">Engine Launcher <span class="nav-item-ver">v1.3.2</span></span>
+                <span class="nav-item-sub" data-nav-en="HWID auth gate &amp; encrypted suite hub" data-nav-zh="HWID 认证门控与加密套件中心">HWID auth gate &amp; encrypted suite hub</span>
+              </span>
+            </a>
+            <a class="nav-item" href="silencer.html">
+              <span class="mod-chip mod-chip--sl" aria-hidden="true">SL</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">Silencer <span class="nav-item-ver">v2.2.0</span></span>
+                <span class="nav-item-sub" data-nav-en="Audio, BPM, offset &amp; LUFS prep tool" data-nav-zh="音频、BPM、偏移与 LUFS 准备工具">Audio, BPM, offset &amp; LUFS prep tool</span>
+              </span>
+            </a>
+            <a class="nav-item" href="au-converter.html">
+              <span class="mod-chip mod-chip--ac" aria-hidden="true">AC</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">Au Converter <span class="nav-item-ver">v1.5.1</span></span>
+                <span class="nav-item-sub" data-nav-en="5-mode universal chart porting studio" data-nav-zh="五模式通用谱面转换工作室">5-mode universal chart porting studio</span>
+              </span>
+            </a>
+            <a class="nav-item" href="ballroom-converter.html">
+              <span class="mod-chip mod-chip--bc" aria-hidden="true">BC</span>
+              <span class="nav-item-text">
+                <span class="nav-item-title">Ballroom Converter <span class="nav-item-ver">v1.1.0</span></span>
+                <span class="nav-item-sub" data-nav-en="SanBallroom choreography .slk builder" data-nav-zh="SanBallroom 舞厅编舞生成器">SanBallroom choreography .slk builder</span>
               </span>
             </a>
             <a class="nav-item" href="sanconverter.html" aria-current="page">
-              <span class="mod-chip mod-chip--ac" aria-hidden="true">SC</span>
+              <span class="mod-chip mod-chip--sc" aria-hidden="true">SC</span>
               <span class="nav-item-text">
-                <span class="nav-item-title">SanConverter <span class="nav-item-pub">v1.4.4</span></span>
-                <span class="nav-item-sub" data-nav-en=".SM / .SSC to .SLK converter" data-nav-zh=".SM / .SSC 转 .SLK 转换器">.SM / .SSC to .SLK converter</span>
+                <span class="nav-item-title">SanConverter <span class="nav-item-ver">v1.4.4</span></span>
+                <span class="nav-item-sub" data-nav-en="Classic .SM / .SSC ↔ .SLK converter" data-nav-zh="经典 .SM / .SSC ↔ .SLK 转换器">Classic .SM / .SSC ↔ .SLK converter</span>
               </span>
             </a>
-          </div>
-        </li>
-
-        <li class="nav-dropdown">
-          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-suite-menu" data-nav-en="Suite Modules" data-nav-zh="套件模块">Suite Modules</button>
-          <div class="nav-popover nav-popover--wide" id="nav-suite-menu">
-            <div class="nav-popover-grid">
-              <div class="nav-popover-col">
-                <p class="nav-popover-heading" data-nav-en="Launcher &amp; Utilities 🔒" data-nav-zh="启动器与工具 🔒">Launcher &amp; Utilities 🔒</p>
-                <a class="nav-item" href="engine-launcher.html">
-                  <span class="mod-chip mod-chip--el" aria-hidden="true">EL</span>
-                  <span class="nav-item-text">
-                    <span class="nav-item-title">Engine Launcher <span class="nav-item-lock">🔒 v1.3.2</span></span>
-                    <span class="nav-item-sub" data-nav-en="HWID auth gate &amp; encrypted suite hub" data-nav-zh="HWID 认证门控与加密套件中心">HWID auth gate &amp; encrypted suite hub</span>
-                  </span>
-                </a>
-                <a class="nav-item" href="silencer.html">
-                  <span class="mod-chip mod-chip--sl" aria-hidden="true">SL</span>
-                  <span class="nav-item-text">
-                    <span class="nav-item-title">Silencer <span class="nav-item-lock">🔒 v2.2</span></span>
-                    <span class="nav-item-sub" data-nav-en="Audio, BPM, offset &amp; LUFS prep tool" data-nav-zh="音频、BPM、偏移与 LUFS 准备工具">Audio, BPM, offset &amp; LUFS prep tool</span>
-                  </span>
-                </a>
-                <a class="nav-item" href="au-converter.html">
-                  <span class="mod-chip mod-chip--ac" aria-hidden="true">AC</span>
-                  <span class="nav-item-text">
-                    <span class="nav-item-title">Au Converter <span class="nav-item-lock">🔒 v1.5.1</span></span>
-                    <span class="nav-item-sub" data-nav-en="5-mode universal chart porting studio" data-nav-zh="五模式通用谱面转换工作室">5-mode universal chart porting studio</span>
-                  </span>
-                </a>
-                <a class="nav-item" href="ballroom-converter.html">
-                  <span class="mod-chip mod-chip--bc" aria-hidden="true">BC</span>
-                  <span class="nav-item-text">
-                    <span class="nav-item-title">Ballroom Converter <span class="nav-item-lock">🔒 v1.1</span></span>
-                    <span class="nav-item-sub" data-nav-en="SanBallroom choreography .slk builder" data-nav-zh="SanBallroom 舞厅编舞生成器">SanBallroom choreography .slk builder</span>
-                  </span>
-                </a>
-              </div>
-              <div class="nav-popover-col">
-                <p class="nav-popover-heading" data-nav-en="Engine Modules 🔒" data-nav-zh="引擎模块 🔒">Engine Modules 🔒</p>
-                <a class="nav-item" href="bue.html#releases">
-                  <span class="mod-chip mod-chip--bu" aria-hidden="true">BU</span>
-                  <span class="nav-item-text">
-                    <span class="nav-item-title">BeatUp Engine v1.4+ <span class="nav-item-lock">🔒 v1.4.1</span></span>
-                    <span class="nav-item-sub" data-nav-en="D3D11 Flip Model &amp; profile sync builds" data-nav-zh="D3D11 Flip 架构与配置同步版">D3D11 Flip Model &amp; profile sync builds</span>
-                  </span>
-                </a>
-                <a class="nav-item" href="onetwo-party.html">
-                  <span class="mod-chip mod-chip--otp" aria-hidden="true">1-2</span>
-                  <span class="nav-item-text">
-                    <span class="nav-item-title">One-Two Party Engine <span class="nav-item-lock">🔒 v0.2.2</span></span>
-                    <span class="nav-item-sub" data-nav-en="Turn-based call &amp; response rhythm engine" data-nav-zh="回合制一二派对节奏引擎">Turn-based call &amp; response rhythm engine</span>
-                  </span>
-                </a>
-                <a class="nav-item" href="aupiano.html">
-                  <span class="mod-chip mod-chip--ap" aria-hidden="true">AP</span>
-                  <span class="nav-item-text">
-                    <span class="nav-item-title">AuPiano Engine <span class="nav-item-lock">🔒 v0.1.0</span></span>
-                    <span class="nav-item-sub" data-nav-en="4K / 8K piano mode &amp; live editor" data-nav-zh="4K / 8K 钢琴模式与实时编辑器">4K / 8K piano mode &amp; live editor</span>
-                  </span>
-                </a>
-                <a class="nav-item" href="guitar-engine.html">
-                  <span class="mod-chip mod-chip--gt" aria-hidden="true">GT</span>
-                  <span class="nav-item-text">
-                    <span class="nav-item-title">Guitar Engine <span class="nav-item-lock">🔒 v0.1.0</span></span>
-                    <span class="nav-item-sub" data-nav-en="3D perspective highway &amp; FlameOut" data-nav-zh="3D 透视音轨与爆燃仪表">3D perspective highway &amp; FlameOut</span>
-                  </span>
-                </a>
-                <a class="nav-item" href="shooting-star.html">
-                  <span class="mod-chip mod-chip--se" aria-hidden="true">SE</span>
-                  <span class="nav-item-text">
-                    <span class="nav-item-title">Shooting Star Studio <span class="nav-item-lock">🔒 v0.3.0</span></span>
-                    <span class="nav-item-sub" data-nav-en="30-col _star.slk XY chain workbench" data-nav-zh="30 列 _star.slk 自由坐标工作台">30-col _star.slk XY chain workbench</span>
-                  </span>
-                </a>
-              </div>
-            </div>
             <div class="nav-popover-footer">
-              <span class="small" data-nav-en="Restricted builds — no public downloads." data-nav-zh="受限内部版本 — 不提供公开下载。">Restricted builds — no public downloads.</span>
-              <a class="btn btn-sm" href="launchers.html" data-nav-en="Suite Hub Overview →" data-nav-zh="查看全部模块 →">Suite Hub Overview →</a>
+              <span class="small" data-nav-en="All builds private" data-nav-zh="全部为私有构建">All builds private</span>
+              <a class="btn btn-sm" href="launchers.html" data-nav-en="Suite Architecture →" data-nav-zh="套件架构 →">Suite Architecture →</a>
             </div>
           </div>
         </li>
 
         <li class="nav-dropdown">
-          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-guides-menu" data-nav-en="Guides" data-nav-zh="制谱指南">Guides</button>
+          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-guides-menu" popovertarget="nav-guides-menu" data-nav-en="Guides" data-nav-zh="制谱指南">Guides</button>
           <div class="nav-popover" id="nav-guides-menu">
-            <p class="nav-popover-heading" data-nav-en="Mode Charting Guides" data-nav-zh="各模式制谱指南">Mode Charting Guides</p>
+            <p class="nav-popover-heading" data-nav-en="Open Mode Charting Guides" data-nav-zh="公开模式制谱指南">Open Mode Charting Guides</p>
             <a class="nav-item-simple" href="guide-beatup.html"><span>BeatUp Guide</span><span class="small">6K</span></a>
-            <a class="nav-item-simple" href="guide-shooting-star.html"><span>Shooting Star Guide</span><span class="small">XY</span></a>
+            <a class="nav-item-simple" href="guide-shooting-star.html"><span>Shooting Star Guide</span><span class="small">v0.6</span></a>
             <a class="nav-item-simple" href="guide-onetwo-party.html"><span>One-Two Party Guide</span><span class="small">1-2</span></a>
             <a class="nav-item-simple" href="guide-guitar.html"><span>Guitar Guide</span><span class="small">4K/8K</span></a>
             <a class="nav-item-simple" href="guide-piano.html"><span>Piano Guide</span><span class="small">4K/8K</span></a>
             <a class="nav-item-simple" href="guide-ballroom.html"><span>Ballroom Guide</span><span class="small">7 Styles</span></a>
-            <div class="nav-popover-footer" style="margin-top:6px; padding-top:6px;">
-              <a class="nav-item-simple" style="flex:1;" href="manual.html"><span data-nav-en="User Manual" data-nav-zh="使用手册">User Manual</span><span class="small">PDF</span></a>
-              <a class="nav-item-simple" style="flex:1;" href="charting-guide.html"><span data-nav-en="Charting PDF" data-nav-zh="PDF 指南">Charting PDF</span><span class="small">PDF</span></a>
+            <div class="nav-popover-footer">
+              <a class="nav-item-simple" href="manual.html"><span data-nav-en="User Manual" data-nav-zh="使用手册">User Manual</span><span class="small">14p</span></a>
+              <a class="nav-item-simple" href="charting-guide.html"><span data-nav-en="Charting PDF" data-nav-zh="制谱 PDF">Charting PDF</span><span class="small">30p</span></a>
             </div>
           </div>
         </li>
       </ul>
 
       <div class="nav-utilities">
-        <div class="nav-dropdown nav-section-jumps">
-          <button class="nav-section-label" type="button" aria-expanded="false" aria-controls="nav-jump-menu" data-nav-en="On this page" data-nav-zh="本页内容">On this page</button>
-          <div class="nav-popover nav-popover--right nav-section-list" id="nav-jump-menu">
-            <a href="#top"><span>Overview</span><span class="nav-section-arrow" aria-hidden="true">↗</span></a>
-          </div>
+        <button class="nav-util-btn" type="button" popovertarget="nav-jump-menu" aria-expanded="false" aria-controls="nav-jump-menu" data-nav-en="Sections" data-nav-zh="本页">Sections</button>
+        <div class="util-popover" id="nav-jump-menu" popover="auto">
+          <p class="nav-popover-heading" data-nav-en="On this page" data-nav-zh="本页目录">On this page</p>
+          <a class="nav-item-simple" href="#top"><span>Overview</span><span class="small">00</span></a>
+          <a class="nav-item-simple" href="#whatsnew"><span>v1.4.4 Highlights</span><span class="small">01</span></a>
+          <a class="nav-item-simple" href="#logic"><span>Charting Logic</span><span class="small">02</span></a>
+          <a class="nav-item-simple" href="#legacy"><span>Legacy Conversion</span><span class="small">03</span></a>
+          <a class="nav-item-simple" href="#access"><span>Private Access</span><span class="small">04</span></a>
         </div>
 
-        <a class="nav-util-link" href="https://github.com/bishpop" target="_blank" rel="noopener" aria-label="GitHub">
+        <button class="nav-util-btn" type="button" popovertarget="lang-popover" aria-expanded="false" aria-controls="lang-popover" aria-label="Choose language">
+          <span class="lang-code">EN</span>
+        </button>
+        <div class="util-popover" id="lang-popover" popover="auto" role="group" aria-label="Language">
+          <button class="lang-btn is-active" type="button" data-lang="en" aria-pressed="true"><span class="lang-option-name" data-en="English" data-zh="English">English</span><span class="lang-check" aria-hidden="true">✓</span></button>
+          <button class="lang-btn" type="button" data-lang="zh" aria-pressed="false"><span class="lang-option-name" data-en="简体中文" data-zh="简体中文">简体中文</span><span class="lang-check" aria-hidden="true">✓</span></button>
+        </div>
+
+        <button class="nav-util-btn theme-toggle" id="themeToggle" type="button" aria-label="Toggle color scheme">
+          <span class="theme-icon-dark" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+          <span class="theme-icon-light" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/></svg>
+          </span>
+        </button>
+
+        <a class="nav-util-btn" href="https://github.com/bishpop" target="_blank" rel="noopener" aria-label="GitHub">
           <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-          <span class="nav-util-label">GitHub</span>
         </a>
 
-        <div class="language-picker">
-          <button class="language-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Choose language" title="Choose language">
-            <span class="language-trigger-flag" aria-hidden="true">🇬🇧</span>
-            <svg class="language-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
-          </button>
-          <div class="language-menu" role="group" aria-label="Language">
-            <button class="lang-btn is-active" type="button" data-lang="en" aria-pressed="true"><span class="lang-option-flag" aria-hidden="true">🇬🇧</span><span class="lang-option-name" data-en="English" data-zh="英语">English</span><span class="lang-check" aria-hidden="true">✓</span></button>
-            <button class="lang-btn" type="button" data-lang="zh" aria-pressed="false"><span class="lang-option-flag" aria-hidden="true">🇨🇳</span><span class="lang-option-name" data-en="简体中文" data-zh="简体中文">简体中文</span><span class="lang-check" aria-hidden="true">✓</span></button>
-          </div>
-        </div>
-
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme" title="Toggle light and dark theme"><span id="themeIcon" aria-hidden="true">☀️</span></button>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+        <button class="menu-button" type="button" popovertarget="site-menu" popovertargetaction="toggle" aria-controls="site-menu" aria-label="Menu">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+          <span>Menu</span>
+        </button>
       </div>
     </nav>
   </div>
   <div class="scroll-bar" aria-hidden="true"></div>
 </header>
+
 <main id="main">
 <section class="hero" id="top">
   <div class="container hero-grid">
     <div>
-      <p class="label">SanConverter · <b>v1.4.4</b></p>
+      <p class="label">SanConverter · <span class="badge-private">Private Build · v1.4.4</span></p>
       <h1>A converter built around the chart.</h1>
-      <p class="lead">Converts <code>.SM</code> and <code>.SSC</code> files to <code>.SLK</code>, with dedicated logic for Beat Up and One-Two Party, and reverts <code>.SLK</code> files to clean <code>.SSC</code>.</p>
+      <p class="lead">Converts <code>.SM</code> and <code>.SSC</code> files to <code>.SLK</code>, with dedicated logic for Beat Up and One-Two Party, and reverts <code>.SLK</code> files to clean <code>.SSC</code>. Maintained privately alongside its successor Au Converter.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://github.com/bishpop/san-converter-storage/releases/download/v0.0.1/SanInstaller.exe" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg>Download SanInstaller</a>
-        <a class="btn" href="#logic">Charting logic</a>
-        <span class="status"><span class="live-dot" aria-hidden="true"></span>Windows x64 · .NET 4.8</span>
+        <button type="button" class="btn-restricted" disabled aria-disabled="true">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" width="14" height="14"><path fill-rule="evenodd" d="M4 4v2h-.5A1.5 1.5 0 0 0 2 7.5v6A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5v-6A1.5 1.5 0 0 0 12.5 6H12V4a4 4 0 1 0-8 0zm6.5 2V4a2.5 2.5 0 0 0-5 0v2h5zM8 9a1 1 0 0 1 1 1v1.5a1 1 0 1 1-2 0V10a1 1 0 0 1 1-1z"/></svg>
+          Private · No Public Download
+        </button>
+        <a class="btn btn-primary" href="#logic">Inspect Charting Logic</a>
+        <a class="btn" href="au-converter.html">View Au Converter v1.5.1</a>
       </div>
     </div>
     <div class="hero-stage">
-      <figure class="frame flyin"><img src="assets/web/sanconverter.webp" alt="The SanConverter interface" width="1000" height="650" decoding="async" fetchpriority="high"></figure>
+      <div class="studio-monitor">
+        <div class="studio-monitor-bar">
+          <span class="studio-monitor-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <b>SanConverter · v1.4.4</b>
+          <span>.NET 4.8</span>
+        </div>
+        <figure class="studio-monitor-media">
+          <img src="assets/web/sanconverter.webp" alt="The SanConverter interface" width="1000" height="650" decoding="async" fetchpriority="high">
+        </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -211,24 +230,22 @@ try {
 <section class="section" id="whatsnew" aria-labelledby="new-h">
   <div class="container">
     <div class="section-head">
-      <div><p class="label"><b>01</b> · v1.4.4</p><h2 id="new-h">What is new in v1.4.4.</h2></div>
-      <p>The overhauled level calculator, new eye-care themes, SLK utilities and analyzer fixes. The converter workflow stays familiar.</p>
+      <div><p class="label"><b>01</b> · v1.4.4 Highlights</p><h2 id="new-h">What is inside v1.4.4.</h2></div>
+      <p>The overhauled level calculator, eye-care themes, SLK utilities, and analyzer fixes that preceded the multi-mode Au Converter architecture.</p>
     </div>
     <ol class="spec reveal">
-      <li><span class="n">01</span><h3>Level calculation overhaul</h3><p>Fair scaling with <code>Math.Min</code> caps, TotalMadi integration for structural speed logic and an incremental +0.4 bonus for every 10% of stair patterns.</p></li>
-      <li><span class="n">02</span><h3>10+ new designs</h3><p>Cherry Blossom, Cobalt Sky, Cool Revival and eye-care themes such as Nord, Gruvbox, Solarized Dark and Zen Matcha.</p></li>
-      <li><span class="n">03</span><h3>SLK duplicate remover</h3><p>One-click cleanup for overlapping <code>n</code> notes, automatic row shifting and safe <code>_fixed.slk</code> output.</p></li>
-      <li><span class="n">04</span><h3>Analyzer and bug fixes</h3><p>Accurate Total Keys metrics, corrected UniformGrid overlap and a better balance between long and short song pattern ratios.</p></li>
+      <li><span class="n">01</span><h3>Level calculation overhaul</h3><p>Fair scaling with <code>Math.Min</code> caps, TotalMadi integration for structural speed logic, and an incremental +0.4 bonus for every 10% of stair patterns.</p></li>
+      <li><span class="n">02</span><h3>10+ new designs</h3><p>Cherry Blossom, Cobalt Sky, Cool Revival, and eye-care themes such as Nord, Gruvbox, Solarized Dark, and Zen Matcha.</p></li>
+      <li><span class="n">03</span><h3>SLK duplicate remover</h3><p>One-click cleanup for overlapping <code>n</code> notes, automatic row shifting, and safe <code>_fixed.slk</code> output.</p></li>
+      <li><span class="n">04</span><h3>Analyzer and bug fixes</h3><p>Accurate Total Keys metrics, corrected UniformGrid overlap, and a better balance between long and short song pattern ratios.</p></li>
     </ol>
-    <div class="notice-box" style="margin-top:28px;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-        <span class="badge badge-restricted" style="margin:0;">🔒 Restricted Tooling</span>
-        <h3 style="margin:0; font-size:1.05rem;">Au Converter &amp; Ballroom Converter</h3>
-      </div>
-      <p style="margin:0; font-size:.92rem; color:var(--text-muted); line-height:1.55;">While SanConverter v1.4.4 remains public and open, newer internal tooling — <strong>Au Converter v1.5.1</strong> (adds Block Beat &amp; SanPiano porting) and <strong>Ballroom Converter v1.1</strong> — are maintained exclusively inside the restricted Engine Launcher.</p>
-      <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:10px;">
-        <a href="au-converter.html" class="small">Read Au Converter details →</a>
-        <a href="ballroom-converter.html" class="small">Read Ballroom Converter details →</a>
+    <div class="notice-box" style="margin-block-start:24px;">
+      <p class="label" style="margin-block-end:6px;">Suite Successors · Private Tools</p>
+      <h3 style="margin-block:0 6px;">Au Converter v1.5.1 &amp; Ballroom Converter v1.1</h3>
+      <p class="muted" style="margin-block:0 12px;">Within the private Engine Launcher suite, <strong>Au Converter v1.5.1</strong> expands SanConverter's core into 5 modes (adding Block Beat &amp; SanPiano), while <strong>Ballroom Converter v1.1</strong> generates Ballroom choreography.</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a href="au-converter.html" class="btn btn-sm">Inspect Au Converter →</a>
+        <a href="ballroom-converter.html" class="btn btn-sm">Inspect Ballroom Converter →</a>
       </div>
     </div>
   </div>
@@ -238,126 +255,129 @@ try {
   <div class="container">
     <div class="section-head">
       <div><p class="label"><b>02</b> · Charting logic</p><h2 id="logic-h">Know exactly what the converter writes.</h2></div>
-      <p><code>.SM</code> and <code>.SSC</code> convert to <code>.SLK</code>. The converter also reverts Audition Beat Up and One-Two Party <code>.slk</code> files to clean Stepmania <code>.SSC</code>.</p>
+      <p><code>.SM</code> and <code>.SSC</code> convert to <code>.SLK</code>. The converter also reverts Audition Beat Up and One-Two Party <code>.slk</code> files to clean StepMania <code>.SSC</code>.</p>
     </div>
     <div data-tabs>
       <div class="tabs" role="tablist" aria-label="Charting logic">
-        <button class="tab-btn" role="tab" id="btn-tab-bu8" aria-controls="tab-bu8" aria-selected="true" tabindex="0">Beat Up 8</button>
-        <button class="tab-btn" role="tab" id="btn-tab-bu4" aria-controls="tab-bu4" aria-selected="false" tabindex="-1">Beat Up 4</button>
-        <button class="tab-btn" role="tab" id="btn-tab-otp4" aria-controls="tab-otp4" aria-selected="false" tabindex="-1">OTP 4</button>
-        <button class="tab-btn" role="tab" id="btn-tab-otp8" aria-controls="tab-otp8" aria-selected="false" tabindex="-1">OTP 8</button>
-        <button class="tab-btn" role="tab" id="btn-tab-revert" aria-controls="tab-revert" aria-selected="false" tabindex="-1">Revert logic</button>
+        <button class="tab-btn" type="button" role="tab" id="btn-tab-bu8" aria-controls="tab-bu8" aria-selected="true" tabindex="0">Beat Up 8</button>
+        <button class="tab-btn" type="button" role="tab" id="btn-tab-bu4" aria-controls="tab-bu4" aria-selected="false" tabindex="-1">Beat Up 4</button>
+        <button class="tab-btn" type="button" role="tab" id="btn-tab-otp4" aria-controls="tab-otp4" aria-selected="false" tabindex="-1">OTP 4</button>
+        <button class="tab-btn" type="button" role="tab" id="btn-tab-otp8" aria-controls="tab-otp8" aria-selected="false" tabindex="-1">OTP 8</button>
+        <button class="tab-btn" type="button" role="tab" id="btn-tab-revert" aria-controls="tab-revert" aria-selected="false" tabindex="-1">Revert logic</button>
       </div>
+
       <div class="tab-panel" role="tabpanel" id="tab-bu8" aria-labelledby="btn-tab-bu8">
+        <div class="tab-panel-inner">
+          <h3>Beat Up 8 Structure</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Arrow Vortex Key</th><th>Beat Up .SLK Key</th><th>Comment</th></tr></thead>
+              <tbody>
+                <tr><td>1, 2, 3</td><td>7, 4, 1</td><td>Specific Note assignment</td></tr>
+                <tr><td>4, 5, 6</td><td>9, 6, 3</td><td>Specific Note assignment</td></tr>
+                <tr><td>8</td><td>s</td><td>Space</td></tr>
+                <tr><td>M*</td><td>Finish Move</td><td>Shift + 8 (Mine on 8th Lane)</td></tr>
+                <tr><td>7 + 8</td><td>f</td><td>Finish Move without Space</td></tr>
+                <tr><td>n* + 7 + 8</td><td>Note + Finish</td><td>Note Array {1,3,4,6,7,9}</td></tr>
+                <tr><td>n + M</td><td>Double Note (hidden)</td><td>M on lane 7</td></tr>
+                <tr><td>n + M + M</td><td>Triple Note (hidden)</td><td>M on lane 7 &amp; 8</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="plain-list">
+            <li><b>Random Key:</b> A note stated as <code>n</code> in the .slk which Audition can read, randomly generated using a no Jack-Logic.</li>
+            <li><b>M:</b> Mine.</li>
+          </ul>
 
-                        <h3>Beat Up 8 Structure</h3>
-                        <div class="table-wrap">
-                            <table>
-                                <thead><tr><th>Arrow Vortex Key</th><th>Beat Up .SLK Key</th><th>Comment</th></tr></thead>
-                                <tbody>
-                                    <tr><td>1, 2, 3</td><td>7, 4, 1</td><td>Specific Note assignment</td></tr>
-                                    <tr><td>4, 5, 6</td><td>9, 6, 3</td><td>Specific Note assignment</td></tr>
-                                    <tr><td>8</td><td>s</td><td>Space</td></tr>
-                                    <tr><td>M*</td><td>Finish Move</td><td>Shift + 8 (Mine on 8th Lane)</td></tr>
-                                    <tr><td>7 + 8</td><td>f</td><td>Finish Move without Space</td></tr>
-                                    <tr><td>n* + 7 + 8</td><td>Note + Finish</td><td>Note Array {1,3,4,6,7,9}</td></tr>
-                                    <tr><td>n + M</td><td>Double Note (hidden)</td><td>M on lane 7</td></tr>
-                                    <tr><td>n + M + M</td><td>Triple Note (hidden)</td><td>M on lane 7 &amp; 8</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <ul class="plain-list">
-                            <li><b>Random Key:</b> A note stated as <code>n</code> in the .slk which Audition can read, randomly generated using a no Jack-Logic.</li>
-                            <li><b>M:</b> Mine.</li>
-                        </ul>
-
-                        <h3>Hold &amp; Roll Logic (Lane 7)</h3>
-                        <p>Lane 7 (index 6) acts as a state marker. If a hold/roll is active here, standard key assignments are overridden.</p>
-                        <div class="table-wrap">
-                            <table>
-                                <thead><tr><th>State</th><th>Active Lane</th><th>Key Pool</th><th>Constraint</th></tr></thead>
-                                <tbody>
-                                    <tr><td><code>2</code> (Hold)</td><td>Lane 1 (Left)</td><td><code>{7, 4, 1}</code></td><td>Max 2 jacks in a row</td></tr>
-                                    <tr><td><code>2</code> (Hold)</td><td>Lane 2 (Right)</td><td><code>{9, 6, 3}</code></td><td>Max 2 jacks in a row</td></tr>
-                                    <tr><td><code>2</code> (Hold)</td><td>Lane 1 + 2</td><td><code>{7,4,1,9,6,3}</code></td><td>Max 2 jacks in a row</td></tr>
-                                    <tr><td><code>4</code> (Roll)</td><td>Lane 1 (Left)</td><td><code>{7, 4, 1}</code></td><td>No direct repeat (no Jacks)</td></tr>
-                                    <tr><td><code>4</code> (Roll)</td><td>Lane 2 (Right)</td><td><code>{9, 6, 3}</code></td><td>No direct repeat (no Jacks)</td></tr>
-                                    <tr><td><code>3</code> (End)</td><td>—</td><td>Resets to BU8</td><td>—</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    
+          <h3 style="margin-block-start:26px;">Hold &amp; Roll Logic (Lane 7)</h3>
+          <p class="muted">Lane 7 (index 6) acts as a state marker. If a hold/roll is active here, standard key assignments are overridden.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>State</th><th>Active Lane</th><th>Key Pool</th><th>Constraint</th></tr></thead>
+              <tbody>
+                <tr><td><code>2</code> (Hold)</td><td>Lane 1 (Left)</td><td><code>{7, 4, 1}</code></td><td>Max 2 jacks in a row</td></tr>
+                <tr><td><code>2</code> (Hold)</td><td>Lane 2 (Right)</td><td><code>{9, 6, 3}</code></td><td>Max 2 jacks in a row</td></tr>
+                <tr><td><code>2</code> (Hold)</td><td>Lane 1 + 2</td><td><code>{7,4,1,9,6,3}</code></td><td>Max 2 jacks in a row</td></tr>
+                <tr><td><code>4</code> (Roll)</td><td>Lane 1 (Left)</td><td><code>{7, 4, 1}</code></td><td>No direct repeat (no Jacks)</td></tr>
+                <tr><td><code>4</code> (Roll)</td><td>Lane 2 (Right)</td><td><code>{9, 6, 3}</code></td><td>No direct repeat (no Jacks)</td></tr>
+                <tr><td><code>3</code> (End)</td><td>—</td><td>Resets to BU8</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div class="tab-panel" role="tabpanel" id="tab-bu4" aria-labelledby="btn-tab-bu4" hidden>
 
-                        <h3>Beat Up 4 Structure</h3>
-                        <div class="table-wrap">
-                            <table>
-                                <thead><tr><th>Arrow Vortex Key</th><th>Beat Up .SLK Key</th><th>Comment</th></tr></thead>
-                                <tbody>
-                                    <tr><td>1</td><td>n</td><td>Random Generated Note</td></tr>
-                                    <tr><td>2</td><td>s</td><td>Space</td></tr>
-                                    <tr><td>3</td><td>Random Left</td><td>Hold*</td></tr>
-                                    <tr><td>3</td><td>Random Left no Jacks</td><td>Roll*</td></tr>
-                                    <tr><td>4</td><td>Random Right</td><td>Hold</td></tr>
-                                    <tr><td>4</td><td>Random Right no Jacks</td><td>Roll</td></tr>
-                                    <tr><td>3 + 4</td><td>Random Left-Right</td><td>Hold 3+4 (Random Left-Right Pattern)</td></tr>
-                                    <tr><td>3 + 4</td><td>Random No Repeat</td><td>Roll 3+4 (Random no repeat Pattern)</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <ul class="plain-list">
-                            <li><b>Hold:</b> Holding the key for the amount of arrows you want on a specific side.</li>
-                            <li><b>Roll:</b> A rolled Hold.</li>
-                        </ul>
-                    
+      <div class="tab-panel" role="tabpanel" id="tab-bu4" aria-labelledby="btn-tab-bu4" hidden="until-found">
+        <div class="tab-panel-inner">
+          <h3>Beat Up 4 Structure</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Arrow Vortex Key</th><th>Beat Up .SLK Key</th><th>Comment</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>n</td><td>Random Generated Note</td></tr>
+                <tr><td>2</td><td>s</td><td>Space</td></tr>
+                <tr><td>3</td><td>Random Left</td><td>Hold*</td></tr>
+                <tr><td>3</td><td>Random Left no Jacks</td><td>Roll*</td></tr>
+                <tr><td>4</td><td>Random Right</td><td>Hold</td></tr>
+                <tr><td>4</td><td>Random Right no Jacks</td><td>Roll</td></tr>
+                <tr><td>3 + 4</td><td>Random Left-Right</td><td>Hold 3+4 (Random Left-Right Pattern)</td></tr>
+                <tr><td>3 + 4</td><td>Random No Repeat</td><td>Roll 3+4 (Random no repeat Pattern)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="plain-list">
+            <li><b>Hold:</b> Holding the key for the amount of arrows you want on a specific side.</li>
+            <li><b>Roll:</b> A rolled Hold.</li>
+          </ul>
+        </div>
       </div>
-      <div class="tab-panel" role="tabpanel" id="tab-otp4" aria-labelledby="btn-tab-otp4" hidden>
 
-                        <h3>One Two Party 4 Logic</h3>
-                        <p>One-Two Party is a very sensitive gamemode; this converter supports all rules from charting lvl 1 to lvl 9.</p>
-                        <div class="table-wrap">
-                            <table>
-                                <thead><tr><th>Arrow Vortex Key</th><th>OTP .SLK Key</th><th>Comment</th></tr></thead>
-                                <tbody>
-                                    <tr><td>1</td><td>n</td><td>Note</td></tr>
-                                    <tr><td>2</td><td>c</td><td>Change</td></tr>
-                                    <tr><td>3</td><td>d</td><td>Dance</td></tr>
-                                    <tr><td>4</td><td>s</td><td>Space</td></tr>
-                                    <tr><td>1 + 2 + 3 + 4</td><td>r</td><td>Rotation</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    
+      <div class="tab-panel" role="tabpanel" id="tab-otp4" aria-labelledby="btn-tab-otp4" hidden="until-found">
+        <div class="tab-panel-inner">
+          <h3>One Two Party 4 Logic</h3>
+          <p class="muted">One-Two Party is a very sensitive gamemode; this converter supports all rules from charting lvl 1 to lvl 9.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Arrow Vortex Key</th><th>OTP .SLK Key</th><th>Comment</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>n</td><td>Note</td></tr>
+                <tr><td>2</td><td>c</td><td>Change</td></tr>
+                <tr><td>3</td><td>d</td><td>Dance</td></tr>
+                <tr><td>4</td><td>s</td><td>Space</td></tr>
+                <tr><td>1 + 2 + 3 + 4</td><td>r</td><td>Rotation</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div class="tab-panel" role="tabpanel" id="tab-otp8" aria-labelledby="btn-tab-otp8" hidden>
 
-                        <h3>One Two Party 8 Logic</h3>
-                        <p>Fully supports all rules from charting lvl 1 to lvl 9.</p>
-                        <div class="table-wrap">
-                            <table>
-                                <thead><tr><th>Arrow Vortex Key</th><th>OTP .SLK Key</th><th>Comment</th></tr></thead>
-                                <tbody>
-                                    <tr><td>1</td><td>n</td><td>Note</td></tr>
-                                    <tr><td>2</td><td>c</td><td>Change</td></tr>
-                                    <tr><td>3</td><td>s</td><td>Space</td></tr>
-                                    <tr><td>4</td><td>n</td><td>Note</td></tr>
-                                    <tr><td>5</td><td>c</td><td>Change</td></tr>
-                                    <tr><td>6</td><td>s</td><td>Space</td></tr>
-                                    <tr><td>7</td><td>d</td><td>Dance</td></tr>
-                                    <tr><td>8</td><td>r</td><td>Rotate</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    
+      <div class="tab-panel" role="tabpanel" id="tab-otp8" aria-labelledby="btn-tab-otp8" hidden="until-found">
+        <div class="tab-panel-inner">
+          <h3>One Two Party 8 Logic</h3>
+          <p class="muted">Fully supports all rules from charting lvl 1 to lvl 9.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Arrow Vortex Key</th><th>OTP .SLK Key</th><th>Comment</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>n</td><td>Note</td></tr>
+                <tr><td>2</td><td>c</td><td>Change</td></tr>
+                <tr><td>3</td><td>s</td><td>Space</td></tr>
+                <tr><td>4</td><td>n</td><td>Note</td></tr>
+                <tr><td>5</td><td>c</td><td>Change</td></tr>
+                <tr><td>6</td><td>s</td><td>Space</td></tr>
+                <tr><td>7</td><td>d</td><td>Dance</td></tr>
+                <tr><td>8</td><td>r</td><td>Rotate</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div class="tab-panel" role="tabpanel" id="tab-revert" aria-labelledby="btn-tab-revert" hidden>
 
-                        <h3>Revert Logic</h3>
-                        <p>
-                            The Converter features a powerful revert function. It accurately reverts all Audition BeatUp <code>.slk</code> and all Audition One-Two Party <code>.slk</code> files back into a clean Stepmania <code>.SSC</code> file, preserving patterns and BPM data.
-                        </p>
-                    
+      <div class="tab-panel" role="tabpanel" id="tab-revert" aria-labelledby="btn-tab-revert" hidden="until-found">
+        <div class="tab-panel-inner">
+          <h3>Revert Logic</h3>
+          <p class="muted">The converter accurately reverts Audition BeatUp <code>.slk</code> and One-Two Party <code>.slk</code> files back into clean StepMania <code>.SSC</code> files, preserving patterns and BPM data.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -370,83 +390,103 @@ try {
       <p>This optional mode detects specific Arrow Vortex combinations to generate highly controlled random patterns. All other patterns are processed normally.</p>
     </div>
     <div class="table-wrap">
-                        <table>
-                            <thead><tr><th>Arrow Vortex Key</th><th>Beat Up .SLK Key</th><th>Pattern Logic (Muster)</th></tr></thead>
-                            <tbody>
-                                <tr><td><code>7</code></td><td>n</td><td>Random key — max. 2 Jacks</td></tr>
-                                <tr><td><code>7 + 1</code></td><td>n</td><td>Random LEFT (7,4,1) — max. 3 Jacks</td></tr>
-                                <tr><td><code>7 + 2</code></td><td>n</td><td>Random RIGHT (9,6,3) — max. 3 Jacks</td></tr>
-                                <tr><td><code>7 + 3</code></td><td>n</td><td>Random — no repeat (No Jacks)</td></tr>
-                                <tr><td><code>7 + 4</code></td><td>n</td><td>Only Jacks — same random key spam max. 6</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
+      <table>
+        <thead><tr><th>Arrow Vortex Key</th><th>Beat Up .SLK Key</th><th>Pattern Logic</th></tr></thead>
+        <tbody>
+          <tr><td><code>7</code></td><td>n</td><td>Random key — max. 2 Jacks</td></tr>
+          <tr><td><code>7 + 1</code></td><td>n</td><td>Random LEFT (7,4,1) — max. 3 Jacks</td></tr>
+          <tr><td><code>7 + 2</code></td><td>n</td><td>Random RIGHT (9,6,3) — max. 3 Jacks</td></tr>
+          <tr><td><code>7 + 3</code></td><td>n</td><td>Random — no repeat (No Jacks)</td></tr>
+          <tr><td><code>7 + 4</code></td><td>n</td><td>Only Jacks — same random key spam max. 6</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
-<section class="section band" id="download" aria-labelledby="dl-h">
+<section class="section band" id="access" aria-labelledby="access-h">
   <div class="container download">
     <div>
-      <p class="label"><b>04</b> · Download</p>
-      <h2 id="dl-h">SanConverter v1.4.4</h2>
-      <p class="lead" style="margin-top:18px;">Download the SanInstaller, run it, and let the installer retrieve the latest SanConverter deployment from GitHub.</p>
-      <p class="muted">This tool is free to download and use. Reverse engineering, decompiling or redistributing modified versions of the executable is strictly prohibited.</p>
+      <p class="label"><b>04</b> · Private Archive</p>
+      <h2 id="access-h">SanConverter v1.4.4</h2>
+      <p class="lead">SanConverter is now maintained strictly as a private build with no public installer or binary downloads. Active converter development continues privately in Au Converter v1.5.1.</p>
+      <div class="restricted-banner">
+        <svg class="restricted-banner-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1zm3 8V5.5a3 3 0 1 0-6 0V9h6z" clip-rule="evenodd"/></svg>
+        <div>
+          <h4>Private Tool — No Public Download</h4>
+          <p>All projects in this workshop are private. Reverse engineering, decompiling, or redistributing private builds is strictly prohibited.</p>
+        </div>
+      </div>
     </div>
     <div class="dl-card">
-      <p class="status"><span class="live-dot" aria-hidden="true"></span>Latest · v1.4.4</p>
+      <p class="status"><span class="live-dot" aria-hidden="true"></span>Private Archive · v1.4.4</p>
       <div class="dl-actions">
-        <a class="btn btn-primary" href="https://github.com/bishpop/san-converter-storage/releases/download/v0.0.1/SanInstaller.exe" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg>Download SanInstaller</a>
-        <a class="btn" href="https://github.com/bishpop/san-converter-storage" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-primary" href="au-converter.html">Inspect Au Converter v1.5.1 →</a>
+        <a class="btn" href="launchers.html">Suite Architecture</a>
       </div>
       <ul class="dl-meta">
         <li><span>Platform</span><span>Windows 64-bit</span></li>
-        <li><span>Requires</span><span>.NET Framework 4.8</span></li>
-        <li><span>Price</span><span>Free</span></li>
-        <li><span>PDF guide</span><span><a href="https://drive.google.com/file/d/1WPG8JNApXb5hm2z1aH_Or6Bbe0liBLtV/view" target="_blank" rel="noopener">Open</a></span></li>
-        <li><span>Tutorial</span><span><a href="https://www.youtube.com/watch?v=B5WxZ9Asc3M" target="_blank" rel="noopener">YouTube</a></span></li>
+        <li><span>Runtime</span><span>.NET Framework 4.8</span></li>
+        <li><span>Status</span><span>Private · No Download</span></li>
+        <li><span>Guides</span><span><a href="guide-beatup.html">BeatUp</a> · <a href="guide-onetwo-party.html">OTP</a></span></li>
       </ul>
     </div>
   </div>
 </section>
 </main>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a class="brand" href="index.html"><img src="assets/web/mark.png" alt="" width="28" height="28"><span>BUE</span></a>
-        <p style="margin-top:14px;max-width:24em;">Software and tools for rhythm-game charting, written in C++ and C#.</p>
+        <a class="brand" href="index.html">
+          <img src="assets/web/mark.png" alt="" width="28" height="28">
+          <span>Sanya</span>
+        </a>
+        <p class="muted" style="margin-block-start:14px; max-inline-size:28ch; font-size:0.9rem;">Private desktop software suite for rhythm-game charting and audio prep, written in C++17 and C#.</p>
       </div>
-      <div><h2>Public Releases</h2><ul>
-        <li><a href="bue.html">BeatUp Engine (v1.2)</a></li>
-        <li><a href="sanconverter.html" aria-current="page">SanConverter (v1.4.4)</a></li>
-        <li><a href="manual.html">User Manual (PDF)</a></li>
-        <li><a href="charting-guide.html">Charting Guide (PDF)</a></li>
-      </ul></div>
-      <div><h2>Restricted Suite 🔒</h2><ul>
-        <li><a href="launchers.html">Suite Hub Overview</a></li>
-        <li><a href="engine-launcher.html">Engine Launcher</a></li>
-        <li><a href="silencer.html">Silencer</a></li>
-        <li><a href="au-converter.html">Au Converter</a></li>
-        <li><a href="ballroom-converter.html">Ballroom Converter</a></li>
-        <li><a href="onetwo-party.html">One-Two Party Engine</a></li>
-        <li><a href="aupiano.html">AuPiano Engine</a></li>
-        <li><a href="guitar-engine.html">Guitar Engine</a></li>
-        <li><a href="shooting-star.html">Shooting Star Studio</a></li>
-      </ul></div>
-      <div><h2>Guides &amp; Links</h2><ul>
-        <li><a href="guide-beatup.html">BeatUp Guide</a></li>
-        <li><a href="guide-shooting-star.html">Shooting Star Guide</a></li>
-        <li><a href="guide-onetwo-party.html">One-Two Party Guide</a></li>
-        <li><a href="guide-guitar.html">Guitar Guide</a></li>
-        <li><a href="guide-piano.html">Piano Guide</a></li>
-        <li><a href="guide-ballroom.html">Ballroom Guide</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-        <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub</a></li>
-      </ul></div>
+      <div>
+        <h2>Rhythm Engines</h2>
+        <ul>
+          <li><a href="bue.html">BeatUp Engine</a></li>
+          <li><a href="onetwo-party.html">One-Two Party Engine</a></li>
+          <li><a href="aupiano.html">AuPiano Engine</a></li>
+          <li><a href="guitar-engine.html">Guitar Engine</a></li>
+          <li><a href="shooting-star.html">Shooting Star Studio</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Hub &amp; Tools</h2>
+        <ul>
+          <li><a href="launchers.html">Suite Architecture</a></li>
+          <li><a href="engine-launcher.html">Engine Launcher</a></li>
+          <li><a href="silencer.html">Silencer</a></li>
+          <li><a href="au-converter.html">Au Converter</a></li>
+          <li><a href="ballroom-converter.html">Ballroom Converter</a></li>
+          <li><a href="sanconverter.html" aria-current="page">SanConverter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Guides &amp; Manuals</h2>
+        <ul>
+          <li><a href="guide-beatup.html">BeatUp Guide</a></li>
+          <li><a href="guide-shooting-star.html">Shooting Star Guide</a></li>
+          <li><a href="guide-onetwo-party.html">One-Two Party Guide</a></li>
+          <li><a href="guide-guitar.html">Guitar Guide</a></li>
+          <li><a href="guide-piano.html">Piano Guide</a></li>
+          <li><a href="guide-ballroom.html">Ballroom Guide</a></li>
+          <li><a href="manual.html">User Manual (14p)</a></li>
+          <li><a href="charting-guide.html">Charting Guide (30p)</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-base"><span>© 2026 Sanya. All rights reserved.</span><a href="#top">Back to top ↑</a></div>
+    <div class="footer-base">
+      <span>© 2026 Sanya. All software builds are private.</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
   </div>
 </footer>
+
 <script src="js/site.js" defer></script>
 <script src="js/i18n.js" defer></script>
 </body>

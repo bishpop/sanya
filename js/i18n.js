@@ -571,28 +571,63 @@
     '3D Guitar Highway': '3D 吉他轨道',
     '30-Col XY Chains': '30 列 XY 连锁',
     'Restricted · Engine Launcher': '受限 · Engine Launcher',
-    'Private Build · Restricted': '内部构建 · 访问受限'
+    'Private Build · Restricted': '私有构建 · 访问受限',
+    'Index': '索引',
+    'Engines': '引擎',
+    'Tools': '工具',
+    'Guides': '制谱指南',
+    'Private Software Suite': '私有软件套件',
+    'Precision desktop tools for rhythm-game charting.': '面向节奏游戏制谱的精密桌面工具。',
+    'All projects in this workshop are private builds — no public downloads exist. Documentation and mode charting guides remain open to read.': '本工作室的所有项目均为私有内部构建，不提供公开下载。文档与各模式制谱指南保持公开阅读。',
+    'Browse Software Index': '浏览软件索引',
+    'Read Charting Guides': '阅读制谱指南',
+    'Suite Architecture': '套件架构',
+    'All 10 Software Builds': '全部 10 款私有软件',
+    'Rhythm Engines': '节奏引擎',
+    'Audio & Converters': '音频与转换工具',
+    'Core Hub': '核心启动器',
+    'Private · No Public Downloads': '私有项目 · 无公开下载',
+    'Private Build': '私有构建',
+    'Private · HWID Access': '私有 · HWID 认证访问',
+    'Production Pipeline': '制谱工作流',
+    'From raw audio to verified chart.': '从原始音频到完成校验的谱面。',
+    'Software Index': '软件目录',
+    'Every project is private.': '所有项目均为私有。',
+    'Open Documentation': '公开文档',
+    'Mode guides and reference manuals.': '各模式制谱指南与参考手册。',
+    'Studio Colophon': '工作室说明',
+    'Private software, open craft.': '私有软件，开放工艺文档。',
+    'Related Documentation': '相关文档资源',
+    'All software builds are private.': '所有软件构建均为私有。',
+    'Read the open mode charting guides and reference manuals, or inspect the full Engine Suite architecture.': '阅读公开的模式制谱指南与参考手册，或查看完整的 Engine Suite 套件架构。',
+    'Open Charting Guides': '查看制谱指南',
+    'Inspect Module': '查看详情',
+    'Download Online Installer': '下载在线安装程序',
+    'Download Online Installer (.exe)': '下载在线安装程序 (.exe)',
+    'Engine Launcher Online Setup.': 'Engine Launcher 在线安装程序。',
+    'Online Installer & Details →': '在线安装程序与详情 →'
   };
 
   var titles = {
-    'index.html': 'Sanya — 节奏游戏谱面工具',
-    'bue.html': 'BeatUp Engine v1.2 — 最终版本 — Sanya',
-    'sanconverter.html': 'SanConverter v1.4.4 — 谱面转换工具 — Sanya',
-    'launchers.html': '受限引擎套件中心 — Sanya',
-    'engine-launcher.html': 'Engine Launcher v1.3.2.0 — 受限模块 — Sanya',
-    'silencer.html': 'Silencer v2.2.0 — 受限模块 — Sanya',
-    'au-converter.html': 'Au Converter v1.5.1 — 受限模块 — Sanya',
-    'ballroom-converter.html': 'Ballroom Converter v1.1.0 — 受限模块 — Sanya',
-    'onetwo-party.html': 'One-Two Party Engine v0.2.2.0 — 受限模块 — Sanya',
-    'aupiano.html': 'AuPiano Engine v0.1.0 — 受限模块 — Sanya',
-    'guitar-engine.html': 'Guitar Engine v0.1.0.0 — 受限模块 — Sanya',
-    'shooting-star.html': 'Shooting Star Studio v0.3.0.0 — 受限模块 — Sanya',
+    'index.html': 'Sanya — 私有节奏游戏软件与制谱指南',
+    'bue.html': 'BeatUp Engine v1.4.1 — 私有构建 — Sanya',
+    'sanconverter.html': 'SanConverter v1.4.4 — 私有构建 — Sanya',
+    'launchers.html': '私有引擎套件架构 — Sanya',
+    'engine-launcher.html': 'Engine Launcher v1.3.2.0 — 私有模块 — Sanya',
+    'silencer.html': 'Silencer v2.2.0 — 私有模块 — Sanya',
+    'au-converter.html': 'Au Converter v1.5.1 — 私有模块 — Sanya',
+    'ballroom-converter.html': 'Ballroom Converter v1.1.0 — 私有模块 — Sanya',
+    'onetwo-party.html': 'One-Two Party Engine v0.2.2.0 — 私有模块 — Sanya',
+    'aupiano.html': 'AuPiano Engine v0.1.0 — 私有模块 — Sanya',
+    'guitar-engine.html': 'Guitar Engine v0.1.0.0 — 私有模块 — Sanya',
+    'shooting-star.html': 'Shooting Star Studio v0.3.0.0 — 私有模块 — Sanya',
     'guide-beatup.html': 'BeatUp 制谱指南 — Sanya',
     'guide-shooting-star.html': 'Shooting Star 制谱指南 — Sanya',
     'guide-onetwo-party.html': 'One-Two Party 制谱指南 — Sanya',
     'guide-guitar.html': 'Guitar 制谱指南 — Sanya',
     'guide-piano.html': 'Piano 制谱指南 — Sanya',
-    'guide-ballroom.html': 'Ballroom 制谱指南 — Sanya'
+    'guide-ballroom.html': 'Ballroom 制谱指南 — Sanya',
+    'privacy.html': '隐私说明 — Sanya'
   };
   var textNodes = [];
   var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -644,23 +679,11 @@
       btn.classList.toggle('is-active', active);
       btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
-    document.querySelectorAll('.language-trigger-flag').forEach(function (flag) {
-      flag.textContent = lang === 'zh' ? '🇨🇳' : '🇬🇧';
+    document.querySelectorAll('.lang-code').forEach(function (code) {
+      code.textContent = lang === 'zh' ? '中文' : 'EN';
     });
     document.querySelectorAll('.lang-option-name').forEach(function (label) {
       label.textContent = lang === 'zh' ? (label.getAttribute('data-zh') || label.getAttribute('data-en') || '') : (label.getAttribute('data-en') || '');
-    });
-    document.querySelectorAll('.language-switch').forEach(function (wrap) {
-      var trigger = wrap.querySelector('.language-trigger');
-      if (trigger) {
-        trigger.setAttribute('aria-label', lang === 'zh' ? '选择语言' : 'Choose language');
-        trigger.setAttribute('title', lang === 'zh' ? '选择语言' : 'Choose language');
-      }
-      var menu = wrap.querySelector('.language-menu');
-      if (menu) menu.setAttribute('aria-label', lang === 'zh' ? '语言' : 'Language');
-    });
-    document.querySelectorAll('.nav-toggle').forEach(function (button) {
-      button.setAttribute('title', lang === 'zh' ? '跳转到栏目' : 'Jump to section');
     });
     try { localStorage.setItem('sanya-language', lang); } catch (e) { /* Storage may be disabled. */ }
   }
@@ -672,79 +695,7 @@
   document.querySelectorAll('.lang-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       applyLanguage(btn.getAttribute('data-lang') === 'zh' ? 'zh' : 'en');
-      var picker = btn.closest('.language-picker');
-      if (picker) {
-        picker.classList.remove('open');
-        var trigger = picker.querySelector('.language-trigger');
-        if (trigger) trigger.setAttribute('aria-expanded', 'false');
-      }
     });
   });
-
-  /* Compact emoji language dropdown: click, outside click and Escape all behave naturally. */
-  document.querySelectorAll('.language-picker').forEach(function (picker) {
-    var trigger = picker.querySelector('.language-trigger');
-    if (!trigger) return;
-    trigger.addEventListener('click', function () {
-      var open = !picker.classList.contains('open');
-      document.querySelectorAll('.language-picker.open').forEach(function (other) {
-        other.classList.remove('open');
-        var otherTrigger = other.querySelector('.language-trigger');
-        if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
-      });
-      picker.classList.toggle('open', open);
-      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  });
-  document.addEventListener('click', function (event) {
-    if (event.target.closest('.language-picker')) return;
-    document.querySelectorAll('.language-picker.open').forEach(function (picker) {
-      picker.classList.remove('open');
-      var trigger = picker.querySelector('.language-trigger');
-      if (trigger) trigger.setAttribute('aria-expanded', 'false');
-    });
-  });
-  document.addEventListener('keydown', function (event) {
-    if (event.key !== 'Escape') return;
-    document.querySelectorAll('.language-picker.open').forEach(function (picker) {
-      picker.classList.remove('open');
-      var trigger = picker.querySelector('.language-trigger');
-      if (trigger) { trigger.setAttribute('aria-expanded', 'false'); trigger.focus(); }
-    });
-  });
-
-  /* Persistent themes; light mode is deliberately low-glare and uses no blur. */
-  function applyTheme(theme) {
-    var mode = theme === 'light' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', mode);
-    document.documentElement.style.colorScheme = mode;
-    document.querySelectorAll('#themeIcon').forEach(function (icon) {
-      icon.textContent = mode === 'light' ? '🌙' : '☀️';
-    });
-    document.querySelectorAll('.theme-toggle').forEach(function (button) {
-      var label = document.documentElement.lang === 'zh-CN' ? '切换明暗主题' : 'Toggle light and dark theme';
-      button.setAttribute('aria-label', label);
-      button.setAttribute('title', label);
-    });
-    document.querySelectorAll('meta[name="theme-color"]').forEach(function (meta) {
-      meta.setAttribute('content', mode === 'light' ? '#FAF6EF' : '#0c0e12');
-    });
-    document.querySelectorAll('meta[name="color-scheme"]').forEach(function (meta) {
-      meta.setAttribute('content', mode);
-    });
-    try { localStorage.setItem('sanya-theme', mode); } catch (e) { /* Storage may be disabled. */ }
-  }
-  var savedTheme = 'dark';
-  try {
-    var storedTheme = localStorage.getItem('sanya-theme');
-    if (storedTheme === 'light' || storedTheme === 'dark') savedTheme = storedTheme;
-  } catch (e) { /* Dark mode remains the default. */ }
-  document.querySelectorAll('.theme-toggle').forEach(function (button) {
-    button.addEventListener('click', function () {
-      var current = document.documentElement.getAttribute('data-theme') || 'dark';
-      applyTheme(current === 'light' ? 'dark' : 'light');
-    });
-  });
-  applyTheme(savedTheme);
   applyLanguage(initial);
 })();
