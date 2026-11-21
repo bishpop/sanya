@@ -717,45 +717,50 @@
     }
   }
 
-  /* Footer */
+  /* Clean Minimal Footer */
   .footer {
-    border-block-start: 1px solid var(--border-strong);
-    background-color: var(--surface);
-    padding-block: clamp(48px, 6vw, 72px) 32px;
+    border-block-start: 1px solid var(--border);
+    background-color: var(--bg-band);
+    padding-block: 36px 28px;
   }
 
-  .footer-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr));
-    gap: clamp(24px, 3vw, 48px);
-    padding-block-end: 36px;
+  .footer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px 32px;
+    padding-block-end: 22px;
     border-block-end: 1px solid var(--border);
+  }
 
-    h2 {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-      margin-block: 0 14px;
-    }
+  .footer-brand-wrap {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
 
-    ul {
-      list-style: none;
+    p {
       margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 7px;
+      font-size: 0.86rem;
+      color: var(--text-dim);
     }
+  }
 
-    li a {
+  .footer-nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 500;
 
       &:hover {
         color: var(--accent);
@@ -767,14 +772,6 @@
         font-weight: 700;
       }
     }
-
-    @media (max-width: 900px) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    @media (max-width: 560px) {
-      grid-template-columns: 1fr;
-    }
   }
 
   .footer-base {
@@ -782,10 +779,10 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 14px;
-    padding-block-start: 22px;
+    gap: 12px;
+    padding-block-start: 18px;
     font-family: var(--mono);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: var(--text-dim);
 
     a {
@@ -949,6 +946,213 @@
     border-color: color-mix(in oklab, var(--ok), transparent 55%);
     background-color: var(--ok-bg);
     color: var(--ok);
+  }
+
+  /* Real Program App Icons (Matching Engine Launcher) */
+  .app-icon {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 40px;
+    block-size: 40px;
+    padding: 4px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    corner-shape: squircle;
+    background-color: var(--surface-raised);
+    border: 1px solid var(--border);
+    overflow: hidden;
+
+    img {
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: contain;
+      border-radius: 7px;
+    }
+  }
+
+  .app-icon--sm {
+    inline-size: 34px;
+    block-size: 34px;
+    padding: 3px;
+    border-radius: 10px;
+  }
+
+  .app-icon--lg {
+    inline-size: 52px;
+    block-size: 52px;
+    padding: 5px;
+    border-radius: 15px;
+  }
+
+  /* Structured Suite Category Groups */
+  .suite-groups {
+    display: grid;
+    gap: 34px;
+  }
+
+  .suite-group[hidden] {
+    display: none;
+  }
+
+  .suite-group-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-block-end: 16px;
+    padding-block-end: 10px;
+    border-block-end: 1px solid var(--border);
+
+    h3 {
+      margin: 0;
+      font-size: 1.02rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  .suite-app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 14px;
+  }
+
+  .suite-app-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    padding: 18px;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    corner-shape: squircle;
+    text-decoration: none;
+    color: var(--text);
+    box-shadow: var(--shadow);
+    transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+
+    &:hover {
+      border-color: var(--accent);
+      background-color: var(--surface-raised);
+      transform: translateY(-2px);
+      text-decoration: none;
+      color: var(--text);
+
+      .suite-app-arrow {
+        transform: translateX(3px);
+        color: var(--accent);
+      }
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .suite-app-body {
+    display: grid;
+    gap: 4px;
+    min-inline-size: 0;
+  }
+
+  .suite-app-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .suite-app-name {
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--text);
+  }
+
+  .suite-app-ver {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent);
+    padding-block: 2px;
+    padding-inline: 8px;
+    background-color: var(--accent-soft);
+    border-radius: var(--radius-pill);
+  }
+
+  .suite-app-desc {
+    margin: 2px 0 0;
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    line-height: 1.48;
+  }
+
+  .suite-app-meta {
+    margin-block-start: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  .suite-app-arrow {
+    font-weight: 700;
+    transition: transform var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  }
+
+  /* Inline PDF Showcase Strip (BeatUp Engine Charting Guide PDF) */
+  .pdf-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+
+    @media (max-width: 860px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .pdf-showcase-card {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 18px;
+    padding: 20px;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    align-items: start;
+
+    @media (max-width: 520px) {
+      grid-template-columns: 1fr;
+    }
+
+    img {
+      inline-size: 120px;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background-color: #fff;
+    }
+
+    h3 {
+      margin: 8px 0 6px;
+      font-size: 1.15rem;
+    }
+
+    p {
+      margin: 0 0 14px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+  }
+
+  .pdf-showcase-card--landscape img {
+    aspect-ratio: 16 / 10;
   }
 
   .mod-chip {
@@ -3629,8 +3833,10 @@
       .flyin,
       .pipeline-step,
       .suite-card,
+      .suite-app-card,
       .dossier-feature,
       .manual-card,
+      .pdf-showcase-card,
       .ss-step-card,
       .ss-mistake-card,
       .ss-final-item {

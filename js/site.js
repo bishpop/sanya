@@ -277,7 +277,7 @@
   /* ---------- 5. Scroll Reveal Fallback (only if CSS view() unsupported) ---------- */
   var supportsViewTimeline = window.CSS && CSS.supports && CSS.supports('(animation-timeline: view()) and (animation-range: entry)');
   if (!supportsViewTimeline && 'IntersectionObserver' in window && motionAllowed.matches) {
-    var targets = document.querySelectorAll('.reveal, .flyin, .pipeline-step, .suite-card, .dossier-feature, .manual-card, .ss-step-card, .ss-mistake-card, .ss-final-item');
+    var targets = document.querySelectorAll('.reveal, .flyin, .pipeline-step, .suite-card, .suite-app-card, .dossier-feature, .manual-card, .pdf-showcase-card, .ss-step-card, .ss-mistake-card, .ss-final-item');
     targets.forEach(function (el) { el.classList.add('js-io-reveal'); });
 
     var revealObs = new IntersectionObserver(function (entries) {
@@ -353,6 +353,7 @@
   if (filterRoot) {
     var filterTabs = Array.from(filterRoot.querySelectorAll('[role="tab"]'));
     var cards = Array.from(document.querySelectorAll('[data-catalog-item]'));
+    var groups = Array.from(document.querySelectorAll('[data-catalog-group]'));
     var countEl = document.querySelector('[data-catalog-count]');
 
     function applyFilter(category, focusBtn) {
@@ -363,6 +364,10 @@
           var match = category === 'all' || cat === category;
           card.hidden = !match;
           if (match) visible++;
+        });
+        groups.forEach(function (group) {
+          var gcat = group.getAttribute('data-catalog-group') || '';
+          group.hidden = !(category === 'all' || gcat === category);
         });
         filterTabs.forEach(function (btn) {
           var active = btn.getAttribute('data-filter') === category;

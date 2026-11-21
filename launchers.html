@@ -12,15 +12,15 @@ try {
   }
 } catch (e) {}
 </script>
-<meta name="theme-color" content="#eff1f5">
-<title>Private Engine Suite Architecture — Sanya</title>
-<meta name="description" content="Complete directory of all ten private Windows applications in the Sanya Engine Suite: Engine Launcher, five rhythm engines, audio DSP, and chart converters.">
+<meta name="theme-color" content="#09090f">
+<title>Suite Hub — Engine Launcher Suite</title>
+<meta name="description" content="Organized directory of all private Windows applications in the Engine Launcher Suite: Core Hub, five rhythm engines, and three production tools.">
 <link rel="canonical" href="https://web.beatupengine.workers.dev/launchers">
-<link rel="icon" type="image/png" href="assets/web/mark.png">
+<link rel="icon" type="image/png" href="assets/web/icons/el.png">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Sanya">
-<meta property="og:title" content="Private Engine Suite Architecture — Sanya">
-<meta property="og:description" content="Complete directory of all private Engine Suite modules and HWID distribution policies.">
+<meta property="og:site_name" content="Engine Launcher Suite">
+<meta property="og:title" content="Suite Hub — Engine Launcher Suite">
+<meta property="og:description" content="Organized directory of all private Engine Suite modules and HWID distribution policies.">
 <meta property="og:image" content="https://web.beatupengine.workers.dev/assets/web/og-home.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,52 +33,49 @@ try {
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="index.html">
-      <img src="assets/web/mark.png" alt="" width="28" height="28">
-      <span>Sanya</span>
-      <span class="brand-tag">Workshop</span>
+      <img src="assets/web/icons/el.png" alt="" width="28" height="28">
+      <span data-nav-en="Home" data-nav-zh="首页">Home</span>
     </a>
 
     <nav class="site-nav" aria-label="Primary">
       <ul class="nav-links" id="site-menu" popover="auto">
-        <li><a href="index.html" data-nav-en="Index" data-nav-zh="索引">Index</a></li>
-
         <li class="nav-dropdown">
           <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-engines-menu" popovertarget="nav-engines-menu" data-nav-en="Engines" data-nav-zh="引擎">Engines</button>
           <div class="nav-popover" id="nav-engines-menu">
-            <p class="nav-popover-heading" data-nav-en="Private Rhythm Engines" data-nav-zh="私有节奏引擎">Private Rhythm Engines</p>
+            <p class="nav-popover-heading" data-nav-en="Rhythm Engines (5)" data-nav-zh="节奏引擎 (5)">Rhythm Engines (5)</p>
             <a class="nav-item" href="bue.html">
-              <span class="mod-chip mod-chip--bu" aria-hidden="true">BU</span>
+              <span class="app-icon app-icon--sm"><img src="assets/web/icons/bu.png" alt="" width="28" height="28"></span>
               <span class="nav-item-text">
-                <span class="nav-item-title">BeatUp Engine <span class="nav-item-ver">v1.4.1</span></span>
-                <span class="nav-item-sub" data-nav-en="D3D11 engine, chart editor &amp; Auditor Mode" data-nav-zh="D3D11 引擎、谱面编辑器与审核模式">D3D11 engine, chart editor &amp; Auditor Mode</span>
+                <span class="nav-item-title">BeatUp Engine <span class="nav-item-ver">v1.5.1</span></span>
+                <span class="nav-item-sub">6K D3D11 engine, chart editor &amp; Auditor</span>
               </span>
             </a>
             <a class="nav-item" href="onetwo-party.html">
-              <span class="mod-chip mod-chip--otp" aria-hidden="true">1-2</span>
+              <span class="app-icon app-icon--sm"><img src="assets/web/icons/otp.png" alt="" width="28" height="28"></span>
               <span class="nav-item-text">
-                <span class="nav-item-title">One-Two Party Engine <span class="nav-item-ver">v0.2.2</span></span>
-                <span class="nav-item-sub" data-nav-en="Turn-based call &amp; response rhythm engine" data-nav-zh="回合制一二派对节奏引擎">Turn-based call &amp; response rhythm engine</span>
+                <span class="nav-item-title">One-Two Party Engine <span class="nav-item-ver">v0.2.3</span></span>
+                <span class="nav-item-sub">Turn-based call &amp; response rhythm engine</span>
               </span>
             </a>
             <a class="nav-item" href="aupiano.html">
-              <span class="mod-chip mod-chip--ap" aria-hidden="true">AP</span>
+              <span class="app-icon app-icon--sm"><img src="assets/web/icons/ap.png" alt="" width="28" height="28"></span>
               <span class="nav-item-text">
-                <span class="nav-item-title">AuPiano Engine <span class="nav-item-ver">v0.1.0</span></span>
-                <span class="nav-item-sub" data-nav-en="4K / 8K piano mode &amp; live editor" data-nav-zh="4K / 8K 钢琴模式与实时编辑器">4K / 8K piano mode &amp; live editor</span>
+                <span class="nav-item-title">AuPiano Engine <span class="nav-item-ver">v1.0.1</span></span>
+                <span class="nav-item-sub">4K / 8K piano mode &amp; live editor</span>
               </span>
             </a>
             <a class="nav-item" href="guitar-engine.html">
-              <span class="mod-chip mod-chip--gt" aria-hidden="true">GT</span>
+              <span class="app-icon app-icon--sm"><img src="assets/web/icons/gt.png" alt="" width="28" height="28"></span>
               <span class="nav-item-text">
-                <span class="nav-item-title">Guitar Engine <span class="nav-item-ver">v0.1.0</span></span>
-                <span class="nav-item-sub" data-nav-en="3D perspective highway &amp; FlameOut" data-nav-zh="3D 透视音轨与爆燃仪表">3D perspective highway &amp; FlameOut</span>
+                <span class="nav-item-title">Guitar Engine <span class="nav-item-ver">v0.1.1</span></span>
+                <span class="nav-item-sub">3D perspective highway &amp; FlameOut</span>
               </span>
             </a>
             <a class="nav-item" href="shooting-star.html">
-              <span class="mod-chip mod-chip--se" aria-hidden="true">SE</span>
+              <span class="app-icon app-icon--sm"><img src="assets/web/icons/se.png" alt="" width="28" height="28"></span>
               <span class="nav-item-text">
-                <span class="nav-item-title">Shooting Star Studio <span class="nav-item-ver">v0.3.0</span></span>
-                <span class="nav-item-sub" data-nav-en="30-col _star.slk XY chain workbench" data-nav-zh="30 列 _star.slk 自由坐标工作台">30-col _star.slk XY chain workbench</span>
+                <span class="nav-item-title">Shooting Star Studio <span class="nav-item-ver">v0.6.0</span></span>
+                <span class="nav-item-sub">12-col sequencer &amp; _star.slk XY workbench</span>
               </span>
             </a>
           </div>
@@ -87,45 +84,38 @@ try {
         <li class="nav-dropdown">
           <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-tools-menu" popovertarget="nav-tools-menu" data-nav-en="Tools" data-nav-zh="工具">Tools</button>
           <div class="nav-popover" id="nav-tools-menu">
-            <p class="nav-popover-heading" data-nav-en="Hub, Audio DSP &amp; Converters" data-nav-zh="启动器、音频处理与转换器">Hub, Audio DSP &amp; Converters</p>
+            <p class="nav-popover-heading" data-nav-en="Hub &amp; Production Tools (4)" data-nav-zh="启动器与工具 (4)">Hub &amp; Production Tools (4)</p>
             <a class="nav-item" href="engine-launcher.html">
-              <span class="mod-chip mod-chip--el" aria-hidden="true">EL</span>
+              <span class="app-icon app-icon--sm"><img src="assets/web/icons/el.png" alt="" width="28" height="28"></span>
               <span class="nav-item-text">
-                <span class="nav-item-title">Engine Launcher <span class="nav-item-ver">v1.3.2</span></span>
-                <span class="nav-item-sub" data-nav-en="HWID auth gate &amp; encrypted suite hub" data-nav-zh="HWID 认证门控与加密套件中心">HWID auth gate &amp; encrypted suite hub</span>
+                <span class="nav-item-title">Engine Launcher <span class="nav-item-ver">v1.3.3</span></span>
+                <span class="nav-item-sub">Online Setup, HWID auth &amp; suite hub</span>
               </span>
             </a>
             <a class="nav-item" href="silencer.html">
-              <span class="mod-chip mod-chip--sl" aria-hidden="true">SL</span>
+              <span class="app-icon app-icon--sm"><img src="assets/web/icons/sl.png" alt="" width="28" height="28"></span>
               <span class="nav-item-text">
-                <span class="nav-item-title">Silencer <span class="nav-item-ver">v2.2.0</span></span>
-                <span class="nav-item-sub" data-nav-en="Audio, BPM, offset &amp; LUFS prep tool" data-nav-zh="音频、BPM、偏移与 LUFS 准备工具">Audio, BPM, offset &amp; LUFS prep tool</span>
+                <span class="nav-item-title">Silencer <span class="nav-item-ver">v2.2.1</span></span>
+                <span class="nav-item-sub">Audio, BPM, offset &amp; LUFS prep tool</span>
               </span>
             </a>
             <a class="nav-item" href="au-converter.html">
-              <span class="mod-chip mod-chip--ac" aria-hidden="true">AC</span>
+              <span class="app-icon app-icon--sm"><img src="assets/web/icons/ac.png" alt="" width="28" height="28"></span>
               <span class="nav-item-text">
-                <span class="nav-item-title">Au Converter <span class="nav-item-ver">v1.5.1</span></span>
-                <span class="nav-item-sub" data-nav-en="5-mode universal chart porting studio" data-nav-zh="五模式通用谱面转换工作室">5-mode universal chart porting studio</span>
+                <span class="nav-item-title">Au Converter <span class="nav-item-ver">v1.5.2</span></span>
+                <span class="nav-item-sub">5-mode chart porting (successor to SanConverter)</span>
               </span>
             </a>
             <a class="nav-item" href="ballroom-converter.html">
-              <span class="mod-chip mod-chip--bc" aria-hidden="true">BC</span>
+              <span class="app-icon app-icon--sm"><img src="assets/web/icons/bc.png" alt="" width="28" height="28"></span>
               <span class="nav-item-text">
-                <span class="nav-item-title">Ballroom Converter <span class="nav-item-ver">v1.1.0</span></span>
-                <span class="nav-item-sub" data-nav-en="SanBallroom choreography .slk builder" data-nav-zh="SanBallroom 舞厅编舞生成器">SanBallroom choreography .slk builder</span>
-              </span>
-            </a>
-            <a class="nav-item" href="sanconverter.html">
-              <span class="mod-chip mod-chip--sc" aria-hidden="true">SC</span>
-              <span class="nav-item-text">
-                <span class="nav-item-title">SanConverter <span class="nav-item-ver">v1.4.4</span></span>
-                <span class="nav-item-sub" data-nav-en="Classic .SM / .SSC ↔ .SLK converter" data-nav-zh="经典 .SM / .SSC ↔ .SLK 转换器">Classic .SM / .SSC ↔ .SLK converter</span>
+                <span class="nav-item-title">Ballroom Converter <span class="nav-item-ver">v1.1.1</span></span>
+                <span class="nav-item-sub">SanBallroom choreography .slk builder</span>
               </span>
             </a>
             <div class="nav-popover-footer">
-              <span class="small" data-nav-en="All builds private" data-nav-zh="全部为私有构建">All builds private</span>
-              <a class="btn btn-sm" href="launchers.html" aria-current="page" data-nav-en="Suite Architecture →" data-nav-zh="套件架构 →">Suite Architecture →</a>
+              <span class="small">All modules private</span>
+              <a class="btn btn-sm" href="launchers.html" aria-current="page">Suite Hub →</a>
             </div>
           </div>
         </li>
@@ -133,7 +123,7 @@ try {
         <li class="nav-dropdown">
           <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-guides-menu" popovertarget="nav-guides-menu" data-nav-en="Guides" data-nav-zh="制谱指南">Guides</button>
           <div class="nav-popover" id="nav-guides-menu">
-            <p class="nav-popover-heading" data-nav-en="Open Mode Charting Guides" data-nav-zh="公开模式制谱指南">Open Mode Charting Guides</p>
+            <p class="nav-popover-heading" data-nav-en="Mode Charting Guides" data-nav-zh="各模式制谱指南">Mode Charting Guides</p>
             <a class="nav-item-simple" href="guide-beatup.html"><span>BeatUp Guide</span><span class="small">6K</span></a>
             <a class="nav-item-simple" href="guide-shooting-star.html"><span>Shooting Star Guide</span><span class="small">v0.6</span></a>
             <a class="nav-item-simple" href="guide-onetwo-party.html"><span>One-Two Party Guide</span><span class="small">1-2</span></a>
@@ -141,8 +131,8 @@ try {
             <a class="nav-item-simple" href="guide-piano.html"><span>Piano Guide</span><span class="small">4K/8K</span></a>
             <a class="nav-item-simple" href="guide-ballroom.html"><span>Ballroom Guide</span><span class="small">7 Styles</span></a>
             <div class="nav-popover-footer">
-              <a class="nav-item-simple" href="manual.html"><span data-nav-en="User Manual" data-nav-zh="使用手册">User Manual</span><span class="small">14p</span></a>
-              <a class="nav-item-simple" href="charting-guide.html"><span data-nav-en="Charting PDF" data-nav-zh="制谱 PDF">Charting PDF</span><span class="small">30p</span></a>
+              <a class="nav-item-simple" href="charting-guide.html"><span>BeatUp Charting PDF</span><span class="small">PDF</span></a>
+              <a class="nav-item-simple" href="manual.html"><span>User Manual</span><span class="small">PDF</span></a>
             </div>
           </div>
         </li>
@@ -151,27 +141,21 @@ try {
       <div class="nav-utilities">
         <button class="nav-util-btn" type="button" popovertarget="nav-jump-menu" aria-expanded="false" aria-controls="nav-jump-menu" data-nav-en="Sections" data-nav-zh="本页">Sections</button>
         <div class="util-popover" id="nav-jump-menu" popover="auto">
-          <p class="nav-popover-heading" data-nav-en="On this page" data-nav-zh="本页目录">On this page</p>
+          <p class="nav-popover-heading">On this page</p>
           <a class="nav-item-simple" href="#top"><span>Overview</span><span class="small">00</span></a>
           <a class="nav-item-simple" href="#modules"><span>All Modules</span><span class="small">01</span></a>
           <a class="nav-item-simple" href="#policy"><span>Access Policy</span><span class="small">02</span></a>
         </div>
 
-        <button class="nav-util-btn" type="button" popovertarget="lang-popover" aria-expanded="false" aria-controls="lang-popover" aria-label="Choose language">
-          <span class="lang-code">EN</span>
-        </button>
+        <button class="nav-util-btn" type="button" popovertarget="lang-popover" aria-expanded="false" aria-controls="lang-popover" aria-label="Choose language"><span class="lang-code">EN</span></button>
         <div class="util-popover" id="lang-popover" popover="auto" role="group" aria-label="Language">
           <button class="lang-btn is-active" type="button" data-lang="en" aria-pressed="true"><span class="lang-option-name" data-en="English" data-zh="English">English</span><span class="lang-check" aria-hidden="true">✓</span></button>
           <button class="lang-btn" type="button" data-lang="zh" aria-pressed="false"><span class="lang-option-name" data-en="简体中文" data-zh="简体中文">简体中文</span><span class="lang-check" aria-hidden="true">✓</span></button>
         </div>
 
         <button class="nav-util-btn theme-toggle" id="themeToggle" type="button" aria-label="Toggle color scheme">
-          <span class="theme-icon-dark" aria-hidden="true">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          </span>
-          <span class="theme-icon-light" aria-hidden="true">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/></svg>
-          </span>
+          <span class="theme-icon-dark" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="theme-icon-light" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/></svg></span>
         </button>
 
         <a class="nav-util-btn" href="https://github.com/bishpop" target="_blank" rel="noopener" aria-label="GitHub">
@@ -179,7 +163,7 @@ try {
         </a>
 
         <button class="menu-button" type="button" popovertarget="site-menu" popovertargetaction="toggle" aria-controls="site-menu" aria-label="Menu">
-          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
           <span>Menu</span>
         </button>
       </div>
@@ -191,13 +175,13 @@ try {
 <main id="main">
 <section class="hero-simple" id="top">
   <div class="container">
-    <p class="label">Sanya · <span class="badge-private">Private Suite Architecture</span></p>
+    <p class="label"><span class="badge-private">Private Suite Hub</span></p>
     <h1>The Engine Suite Ecosystem.</h1>
-    <p class="lead">Every desktop application in the Sanya workshop — the Engine Launcher hub, five dedicated rhythm engines, audio DSP preparation, and all chart converters — is maintained as a private build. <strong>Zero public downloads are provided.</strong></p>
+    <p class="lead">One central launcher, five dedicated rhythm engines, and three audio &amp; chart conversion tools. Every module is delivered privately through Engine Launcher once your HWID account is approved.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="engine-launcher.html">Inspect Engine Launcher →</a>
-      <a class="btn" href="#modules">Browse All Modules</a>
-      <a class="btn" href="index.html#guides">Open Charting Guides</a>
+      <a class="btn btn-primary" href="engine-launcher.html#access">Online Installer &amp; Details →</a>
+      <a class="btn" href="#modules">Browse Modules</a>
+      <a class="btn" href="index.html#guides">Charting Guides</a>
     </div>
   </div>
 </section>
@@ -207,151 +191,128 @@ try {
     <div class="section-head">
       <div>
         <p class="label"><b>01</b> · Suite Directory</p>
-        <h2 id="modules-h">One Launcher. Nine Specialized Tools.</h2>
+        <h2 id="modules-h">One Launcher. Eight Managed Modules.</h2>
       </div>
-      <p>Select any module below to inspect its workflow, supported chart and audio formats, shortcuts, and suite integration.</p>
+      <p>Grouped cleanly by category. Select any application to inspect workflows, formats, shortcuts, and technical details.</p>
     </div>
 
-    <div class="suite-launcher-feature">
-      <div>
-        <div style="display:flex; align-items:center; gap:12px; margin-block-end:14px;">
-          <span class="mod-chip mod-chip--lg mod-chip--el" aria-hidden="true">EL</span>
+    <div class="suite-groups">
+      <div class="suite-group">
+        <div class="suite-group-head">
+          <h3>Core Hub <span class="badge">1 App</span></h3>
+          <span class="small">Online Setup &amp; HWID Gate</span>
+        </div>
+        <div class="suite-launcher-feature" style="margin-block-end:0;">
           <div>
-            <span class="badge-private">Private Core Hub · v1.3.2.0</span>
-            <h3 style="margin:6px 0 0;">Engine Launcher</h3>
+            <div style="display:flex; align-items:center; gap:14px; margin-block-end:14px;">
+              <span class="app-icon app-icon--lg"><img src="assets/web/icons/el.png" alt="" width="44" height="44"></span>
+              <div>
+                <span class="suite-app-ver">v1.3.3</span>
+                <h3 style="margin:5px 0 0;">Engine Launcher</h3>
+              </div>
+            </div>
+            <p class="muted" style="max-inline-size:48ch;">Hardware-locked WPF hub (<code>EngineLauncher.exe</code>) managing HWID approval, per-tool access requests, encrypted <code>.enc</code> package deployment, Theme Studio, and shared <code>.bue_session</code> SSO.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+              <a class="btn btn-primary btn-sm" href="engine-launcher.html#access">Online Installer &amp; Details →</a>
+              <span class="small">HWID Approval Required to Unlock Modules</span>
+            </div>
+          </div>
+          <div class="suite-launcher-stats">
+            <div class="suite-mini-stat"><b>Encrypted Delivery</b><span>Verified .enc payloads</span></div>
+            <div class="suite-mini-stat"><b>HWID Gate</b><span>Per-tool whitelist</span></div>
+            <div class="suite-mini-stat"><b>SSO Session</b><span>Shared .bue_session</span></div>
+            <div class="suite-mini-stat"><b>Self-Updater</b><span>Live versions.json sync</span></div>
           </div>
         </div>
-        <p class="muted" style="max-inline-size:48ch;">Hardware-locked WPF hub (<code>EngineLauncher.exe</code>) managing Sign-In &amp; HWID approval, encrypted <code>.enc</code> remote package deployment via <code>versions.json</code>, Theme Studio presets, and shared <code>.bue_session</code> SSO across the suite.</p>
-        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
-          <a class="btn btn-primary" href="engine-launcher.html#access">Online Installer &amp; Details →</a>
-          <span class="small">HWID Approval Required to Unlock Modules</span>
+      </div>
+
+      <div class="suite-group">
+        <div class="suite-group-head">
+          <h3>Rhythm Engines <span class="badge">5 Apps</span></h3>
+          <span class="small">Native C++17 gameplay &amp; chart editors</span>
+        </div>
+        <div class="suite-app-grid">
+          <a class="suite-app-card" href="bue.html">
+            <span class="app-icon"><img src="assets/web/icons/bu.png" alt="" width="34" height="34"></span>
+            <div class="suite-app-body">
+              <div class="suite-app-top"><span class="suite-app-name">BeatUp Engine</span><span class="suite-app-ver">v1.5.1</span></div>
+              <p class="suite-app-desc">6K D3D11 Flip Model engine, Split View chart editor, Auditor Mode, and BeatUp Charting Guide PDF.</p>
+              <div class="suite-app-meta"><span>C++17 / D3D11</span><span class="suite-app-arrow" aria-hidden="true">→</span></div>
+            </div>
+          </a>
+
+          <a class="suite-app-card" href="onetwo-party.html">
+            <span class="app-icon"><img src="assets/web/icons/otp.png" alt="" width="34" height="34"></span>
+            <div class="suite-app-body">
+              <div class="suite-app-top"><span class="suite-app-name">One-Two Party Engine</span><span class="suite-app-ver">v0.2.3</span></div>
+              <p class="suite-app-desc">Turn-based call &amp; response rhythm engine with NPC Demo sync, GO!/YEAH! cues, and SLK export.</p>
+              <div class="suite-app-meta"><span>C++17</span><span class="suite-app-arrow" aria-hidden="true">→</span></div>
+            </div>
+          </a>
+
+          <a class="suite-app-card" href="aupiano.html">
+            <span class="app-icon"><img src="assets/web/icons/ap.png" alt="" width="34" height="34"></span>
+            <div class="suite-app-body">
+              <div class="suite-app-top"><span class="suite-app-name">AuPiano Engine</span><span class="suite-app-ver">v1.0.1</span></div>
+              <p class="suite-app-desc">1000 FPS CleanUI 4K/8K piano engine with live Record, anti-jack shuffling, and 7-column SLK export.</p>
+              <div class="suite-app-meta"><span>C++17</span><span class="suite-app-arrow" aria-hidden="true">→</span></div>
+            </div>
+          </a>
+
+          <a class="suite-app-card" href="guitar-engine.html">
+            <span class="app-icon"><img src="assets/web/icons/gt.png" alt="" width="34" height="34"></span>
+            <div class="suite-app-body">
+              <div class="suite-app-top"><span class="suite-app-name">Guitar Engine</span><span class="suite-app-ver">v0.1.1</span></div>
+              <p class="suite-app-desc">3D perspective highway with 192-tick editor, Strum/Bend notes, FlameOut overdrive, and Dual-Track AutoPlay.</p>
+              <div class="suite-app-meta"><span>C++17</span><span class="suite-app-arrow" aria-hidden="true">→</span></div>
+            </div>
+          </a>
+
+          <a class="suite-app-card" href="shooting-star.html">
+            <span class="app-icon"><img src="assets/web/icons/se.png" alt="" width="34" height="34"></span>
+            <div class="suite-app-body">
+              <div class="suite-app-top"><span class="suite-app-name">Shooting Star Studio</span><span class="suite-app-ver">v0.6.0</span></div>
+              <p class="suite-app-desc">12-column L1/L2/Space/FX sequencer, XY stage shapes, <code>.star</code> project files, and 30-col SLK export.</p>
+              <div class="suite-app-meta"><span>C++17</span><span class="suite-app-arrow" aria-hidden="true">→</span></div>
+            </div>
+          </a>
         </div>
       </div>
-      <div class="suite-launcher-stats">
-        <div class="suite-mini-stat"><b>Encrypted Delivery</b><span>Verified .enc payloads</span></div>
-        <div class="suite-mini-stat"><b>HWID Gate</b><span>MachineGuid + CPUID lock</span></div>
-        <div class="suite-mini-stat"><b>SSO Session</b><span>Shared .bue_session profile</span></div>
-        <div class="suite-mini-stat"><b>Self-Updater</b><span>Differential versions.json</span></div>
+
+      <div class="suite-group">
+        <div class="suite-group-head">
+          <h3>Audio &amp; Chart Converters <span class="badge">3 Apps</span></h3>
+          <span class="small">Audio DSP &amp; multi-mode chart porting</span>
+        </div>
+        <div class="suite-app-grid">
+          <a class="suite-app-card" href="silencer.html">
+            <span class="app-icon"><img src="assets/web/icons/sl.png" alt="" width="34" height="34"></span>
+            <div class="suite-app-body">
+              <div class="suite-app-top"><span class="suite-app-name">Silencer</span><span class="suite-app-ver">v2.2.1</span></div>
+              <p class="suite-app-desc">C++17 non-causal BPM, Measure 0 offset, −8.0 LUFS normalization, MADI detection, and Vorbis prep.</p>
+              <div class="suite-app-meta"><span>C++17 / WPF</span><span class="suite-app-arrow" aria-hidden="true">→</span></div>
+            </div>
+          </a>
+
+          <a class="suite-app-card" href="au-converter.html">
+            <span class="app-icon"><img src="assets/web/icons/ac.png" alt="" width="34" height="34"></span>
+            <div class="suite-app-body">
+              <div class="suite-app-top"><span class="suite-app-name">Au Converter</span><span class="suite-app-ver">v1.5.2</span></div>
+              <p class="suite-app-desc">New generation of SanConverter: converts <code>.SM/.SSC</code> to 5 modes plus lossless <code>.SLK → .SSC</code> revert.</p>
+              <div class="suite-app-meta"><span>C# / WPF</span><span class="suite-app-arrow" aria-hidden="true">→</span></div>
+            </div>
+          </a>
+
+          <a class="suite-app-card" href="ballroom-converter.html">
+            <span class="app-icon"><img src="assets/web/icons/bc.png" alt="" width="34" height="34"></span>
+            <div class="suite-app-body">
+              <div class="suite-app-top"><span class="suite-app-name">Ballroom Converter</span><span class="suite-app-ver">v1.1.1</span></div>
+              <p class="suite-app-desc">Audition Ballroom <code>_s.slk</code> generator across 7 verified move pools with Classic vs. Couple line parity.</p>
+              <div class="suite-app-meta"><span>C# / WPF</span><span class="suite-app-arrow" aria-hidden="true">→</span></div>
+            </div>
+          </a>
+        </div>
       </div>
-    </div>
-
-    <div class="suite-grid">
-      <article class="suite-card">
-        <div class="suite-card-top">
-          <span class="mod-chip mod-chip--bu" aria-hidden="true">BU</span>
-          <span class="suite-card-ver">PRIVATE · v1.4.1</span>
-        </div>
-        <h3>BeatUp Engine</h3>
-        <p class="suite-card-cat">6K Rhythm Engine &amp; Editor</p>
-        <p>DX11 Flip Model rendering, native refresh rate Auditor Mode, Delete <code>.bu</code> inline action, and Launcher Profile Pill sync.</p>
-        <div class="suite-card-foot">
-          <a class="btn btn-sm" href="bue.html">Inspect BeatUp Engine →</a>
-        </div>
-      </article>
-
-      <article class="suite-card">
-        <div class="suite-card-top">
-          <span class="mod-chip mod-chip--sl" aria-hidden="true">SL</span>
-          <span class="suite-card-ver">PRIVATE · v2.2.0</span>
-        </div>
-        <h3>Silencer</h3>
-        <p class="suite-card-cat">Audio &amp; BPM Prep</p>
-        <p>WPF workstation with C++17 non-causal BPM, Offset, LUFS (−8.0), MADI detection, Silence WAV→OGG routing, and 1/16 timing editor.</p>
-        <div class="suite-card-foot">
-          <a class="btn btn-sm" href="silencer.html">Inspect Silencer →</a>
-        </div>
-      </article>
-
-      <article class="suite-card">
-        <div class="suite-card-top">
-          <span class="mod-chip mod-chip--ac" aria-hidden="true">AC</span>
-          <span class="suite-card-ver">PRIVATE · v1.5.1</span>
-        </div>
-        <h3>Au Converter</h3>
-        <p class="suite-card-cat">Universal Porting</p>
-        <p>Converts <code>.SM/.SSC</code> to BeatUp 4K/8K, OTP 4, Block Beat, and SanPiano, plus lossless <code>.SLK → .SSC</code> revert and 21+ themes.</p>
-        <div class="suite-card-foot">
-          <a class="btn btn-sm" href="au-converter.html">Inspect Au Converter →</a>
-        </div>
-      </article>
-
-      <article class="suite-card">
-        <div class="suite-card-top">
-          <span class="mod-chip mod-chip--sc" aria-hidden="true">SC</span>
-          <span class="suite-card-ver">PRIVATE · v1.4.4</span>
-        </div>
-        <h3>SanConverter</h3>
-        <p class="suite-card-cat">Classic Chart Converter</p>
-        <p>Dedicated Beat Up and One-Two Party converter with lane-7 hold/roll logic, SLK duplicate cleanup, and stair-aware difficulty scoring.</p>
-        <div class="suite-card-foot">
-          <a class="btn btn-sm" href="sanconverter.html">Inspect SanConverter →</a>
-        </div>
-      </article>
-
-      <article class="suite-card">
-        <div class="suite-card-top">
-          <span class="mod-chip mod-chip--bc" aria-hidden="true">BC</span>
-          <span class="suite-card-ver">PRIVATE · v1.1.0</span>
-        </div>
-        <h3>Ballroom Converter</h3>
-        <p class="suite-card-cat">Dance Choreography</p>
-        <p>Audition Ballroom <code>_s.slk</code> generator across 7 verified move pools with Classic vs. Couple line parity and side-by-side SLK inspector.</p>
-        <div class="suite-card-foot">
-          <a class="btn btn-sm" href="ballroom-converter.html">Inspect Ballroom →</a>
-        </div>
-      </article>
-
-      <article class="suite-card">
-        <div class="suite-card-top">
-          <span class="mod-chip mod-chip--otp" aria-hidden="true">1-2</span>
-          <span class="suite-card-ver">PRIVATE · v0.2.2</span>
-        </div>
-        <h3>One-Two Party Engine</h3>
-        <p class="suite-card-cat">Call &amp; Response</p>
-        <p>Turn-based One-Two Party rhythm engine with NPC Demo sync, GO!/YEAH! cues, A26 watermarks, and 1:1 BeatUp SLK interoperability.</p>
-        <div class="suite-card-foot">
-          <a class="btn btn-sm" href="onetwo-party.html">Inspect OTP Engine →</a>
-        </div>
-      </article>
-
-      <article class="suite-card">
-        <div class="suite-card-top">
-          <span class="mod-chip mod-chip--ap" aria-hidden="true">AP</span>
-          <span class="suite-card-ver">PRIVATE · v0.1.0</span>
-        </div>
-        <h3>AuPiano Engine</h3>
-        <p class="suite-card-cat">4K &amp; 8K Piano</p>
-        <p>1000 FPS CleanUI piano engine featuring live Record, Random 4K/8K anti-jack shuffling, Pattern Generator, and 7-column SLK export.</p>
-        <div class="suite-card-foot">
-          <a class="btn btn-sm" href="aupiano.html">Inspect AuPiano →</a>
-        </div>
-      </article>
-
-      <article class="suite-card">
-        <div class="suite-card-top">
-          <span class="mod-chip mod-chip--gt" aria-hidden="true">GT</span>
-          <span class="suite-card-ver">PRIVATE · v0.1.0</span>
-        </div>
-        <h3>Guitar Engine</h3>
-        <p class="suite-card-cat">3D Guitar Highway</p>
-        <p>Native C++17 3D perspective highway with 192-tick editor, Strum/Bend notes, FlameOut overdrive, v300 CSV, and Dual-Track AutoPlay.</p>
-        <div class="suite-card-foot">
-          <a class="btn btn-sm" href="guitar-engine.html">Inspect Guitar Engine →</a>
-        </div>
-      </article>
-
-      <article class="suite-card">
-        <div class="suite-card-top">
-          <span class="mod-chip mod-chip--se" aria-hidden="true">SE</span>
-          <span class="suite-card-ver">PRIVATE · v0.3.0</span>
-        </div>
-        <h3>Shooting Star Studio</h3>
-        <p class="suite-card-cat">30-Col XY Chains</p>
-        <p>Free 1024×768 spatial canvas with 1–8 MADI chain cadences, Heart/Diamond/Flower/Butterfly shapes, and lossless 30-col <code>_star.slk</code> export.</p>
-        <div class="suite-card-foot">
-          <a class="btn btn-sm" href="shooting-star.html">Inspect Shooting Star →</a>
-        </div>
-      </article>
     </div>
   </div>
 </section>
@@ -361,28 +322,16 @@ try {
     <div class="section-head">
       <div>
         <p class="label"><b>02</b> · Distribution Policy</p>
-        <h2 id="policy-h">100% Private Software Distribution.</h2>
+        <h2 id="policy-h">Private Modules, Single Installer.</h2>
       </div>
-      <p>Every binary in the Sanya catalog is privately maintained. Documentation and mode charting guides remain open for study.</p>
+      <p>Install Engine Launcher once via the Online Setup; individual modules stay encrypted and HWID-locked.</p>
     </div>
 
     <div class="restricted-banner">
       <svg class="restricted-banner-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1zm3 8V5.5a3 3 0 1 0-6 0V9h6z" clip-rule="evenodd"/></svg>
       <div>
-        <h4>Strictly Closed HWID &amp; Encrypted Delivery</h4>
-        <p>All suite builds are delivered solely as encrypted <code>.enc</code> archives through the Engine Launcher once an account and PC Hardware ID are approved. <strong>No standalone ZIPs, installers, mirrors, or public binaries are provided for any project.</strong></p>
-      </div>
-    </div>
-
-    <div class="notice-box" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
-      <div>
-        <span class="label" style="margin-block-end:6px;">Open Documentation</span>
-        <h3 style="margin:0 0 6px;">Explore Mode Charting Guides &amp; Manuals</h3>
-        <p class="muted" style="margin:0;">All six mode charting guides and both illustrated PDF reference manuals are openly accessible online.</p>
-      </div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn btn-primary" href="index.html#guides">Open Charting Guides →</a>
-        <a class="btn" href="manual.html">User Manual (14p)</a>
+        <h4>Encrypted HWID Delivery</h4>
+        <p>All eight suite modules are delivered solely as encrypted <code>.enc</code> payloads inside Engine Launcher once an account and PC Hardware ID are approved. <strong>No standalone module downloads exist.</strong></p>
       </div>
     </div>
   </div>
@@ -391,51 +340,24 @@ try {
 
 <footer class="footer">
   <div class="container">
-    <div class="footer-grid">
-      <div>
+    <div class="footer-top">
+      <div class="footer-brand-wrap">
         <a class="brand" href="index.html">
-          <img src="assets/web/mark.png" alt="" width="28" height="28">
-          <span>Sanya</span>
+          <img src="assets/web/icons/el.png" alt="" width="26" height="26">
+          <span>Home</span>
         </a>
-        <p class="muted" style="margin-block-start:14px; max-inline-size:28ch; font-size:0.9rem;">Private desktop software suite for rhythm-game charting and audio prep, written in C++17 and C#.</p>
+        <p>Private desktop rhythm-game suite for Windows.</p>
       </div>
-      <div>
-        <h2>Rhythm Engines</h2>
-        <ul>
-          <li><a href="bue.html">BeatUp Engine</a></li>
-          <li><a href="onetwo-party.html">One-Two Party Engine</a></li>
-          <li><a href="aupiano.html">AuPiano Engine</a></li>
-          <li><a href="guitar-engine.html">Guitar Engine</a></li>
-          <li><a href="shooting-star.html">Shooting Star Studio</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Hub &amp; Tools</h2>
-        <ul>
-          <li><a href="launchers.html" aria-current="page">Suite Architecture</a></li>
-          <li><a href="engine-launcher.html">Engine Launcher</a></li>
-          <li><a href="silencer.html">Silencer</a></li>
-          <li><a href="au-converter.html">Au Converter</a></li>
-          <li><a href="ballroom-converter.html">Ballroom Converter</a></li>
-          <li><a href="sanconverter.html">SanConverter</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Guides &amp; Manuals</h2>
-        <ul>
-          <li><a href="guide-beatup.html">BeatUp Guide</a></li>
-          <li><a href="guide-shooting-star.html">Shooting Star Guide</a></li>
-          <li><a href="guide-onetwo-party.html">One-Two Party Guide</a></li>
-          <li><a href="guide-guitar.html">Guitar Guide</a></li>
-          <li><a href="guide-piano.html">Piano Guide</a></li>
-          <li><a href="guide-ballroom.html">Ballroom Guide</a></li>
-          <li><a href="manual.html">User Manual (14p)</a></li>
-          <li><a href="charting-guide.html">Charting Guide (30p)</a></li>
-        </ul>
-      </div>
+      <ul class="footer-nav" aria-label="Footer navigation">
+        <li><a href="launchers.html" aria-current="page">Suite Hub</a></li>
+        <li><a href="engine-launcher.html">Engine Launcher</a></li>
+        <li><a href="bue.html">BeatUp Engine</a></li>
+        <li><a href="index.html#guides">Guides</a></li>
+        <li><a href="https://github.com/bishpop" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
     </div>
     <div class="footer-base">
-      <span>© 2026 Sanya. All software builds are private.</span>
+      <span>© 2026 Engine Launcher Suite · All modules private.</span>
       <a href="#top">Back to top ↑</a>
     </div>
   </div>
